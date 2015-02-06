@@ -38,6 +38,11 @@ class Mapa_bordo_ct extends CI_Controller {
                 'rules' => 'required'
             ),
             array(
+                'field' => 'petre',
+                'label' => 'Petrecho',
+                'rules' => 'required'
+            ),
+            array(
                 'field' => 'data_saida',
                 'label' => 'Data de Saída',
                 'rules' => 'required'

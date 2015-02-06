@@ -107,9 +107,8 @@
                     <label for="barco" class="col-md-4 control-label">
                         Barco </label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="barco" name="barco"
-                               value="field_name"
-                               placeholder="Nome da embarcação">
+                        <input type="text" class="form-control" id="barco" name="barco" placeholder="Nome da embarcação"
+                               value="<?php echo set_value('barco');?>">
                     </div>
                 </div>
             </div>
@@ -118,8 +117,8 @@
                     <label for="mestre" class="col-md-4 control-label">
                         Mestre</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="mestre"
-                               id="mestre" placeholder="Nome do mestre">
+                        <input type="text" class="form-control" id="mestre" name="mestre" placeholder="Nome do mestre"
+                               value="<?php echo set_value('mestre');?>">
                     </div>
                 </div>
             </div>
@@ -129,11 +128,11 @@
                         Petrecho</label>
                     <div class="col-md-8">
                         <label class="radio-inline">
-                            <input type="radio" name="petre" value="esp_sup">
+                            <input type="radio" name="petre" value="esp_sup"<?php echo set_radio('petre', 'esp_sup');?>>
                             Espinhel de superfície
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="petre" value="esp_fun">
+                            <input type="radio" name="petre" value="esp_fun"<?php echo set_radio('petre', 'esp_fun');?>>
                             Espinhel de fundo
                         </label>
                     </div>
