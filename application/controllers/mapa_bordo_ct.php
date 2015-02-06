@@ -26,7 +26,31 @@ class Mapa_bordo_ct extends CI_Controller {
 
         $mapa_bordo->setBarco($this->input->post("barco"));
 
-        $this->form_validation->set_rules("barco", "Embarcação", "required|min_length[5]");
+        $config = array(
+            array(
+                'field' => 'barco',
+                'label' => 'Embarcação',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'mestre',
+                'label' => 'Mestre',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'data_saida',
+                'label' => 'Data de Saída',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'data_chegada',
+                'label' => 'Data de Chegada',
+                'rules' => 'required'
+            )
+        );
+
+        $this->form_validation->set_rules($config);
+
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("mapa_bordo/new");

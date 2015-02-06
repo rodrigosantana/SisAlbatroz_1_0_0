@@ -1,6 +1,6 @@
 <?php
 
-$lang['required']			= "O campo <strong>%s</strong> é obrigatório.";
+$lang['required']			= "O campo <strong style='color:#FE0000'>%s</strong> é obrigatório.";
 $lang['isset']				= "The %s field must have a value.";
 $lang['valid_email']		= "The %s field must contain a valid email address.";
 $lang['valid_emails']		= "The %s field must contain all valid email addresses.";

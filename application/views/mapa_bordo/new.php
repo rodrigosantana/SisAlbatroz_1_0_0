@@ -108,7 +108,7 @@
                         Barco </label>
                     <div class="col-md-8">
                         <input type="text" class="form-control" id="barco" name="barco"
-                               value=""
+                               value="field_name"
                                placeholder="Nome da embarcação">
                     </div>
                 </div>
