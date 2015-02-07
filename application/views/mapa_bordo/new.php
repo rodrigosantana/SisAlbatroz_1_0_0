@@ -18,34 +18,12 @@
     <img src="<?php echo base_url();?>assets/img/banner.jpg" alt="banner">
 </header>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="http://www.projetoalbatroz.org.br">
-                Projeto Albatroz
-            </a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="">Início</a></li>
-                <li><a href="">Basilares</a></li>
-                <li><a href="">Mapa de Bordo</a></li>
-                <li><a href="">Sair</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
 <!-- Início do corpo da página -->
 <div class="container-fluid">
     <?php if (isset($mensagem)): ?>
         <div class="alert alert-success text-center" role="alert"><strong><?php echo $mensagem ?></strong></div>
     <?php endif;?>
+    <br>
     <div class="col-sm-12 col-lg-12">
         <h1 class="text-left titulo">Mapa de Bordo</h1>
     </div>
@@ -53,6 +31,7 @@
     <?php echo validation_errors();?>
     <div class="col-sm-12 col-lg-12">
         <h2 class="text-center titulo"> Dados Gerais </h2>
+        <hr>
     </div>
     <form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/mapa_bordo_ct/salva"
           method="post">
@@ -127,6 +106,7 @@
         </div>
         <div class="row lancamento" id="lancamento1">
             <h2 class="text-center titulo">Dados do Lançamento</h2>
+            <hr>
             <h4 id="reference" class="heading-reference titulo"> Lançamento #1 </h4>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
@@ -303,6 +283,7 @@
             <input type="hidden" name="count" id="count" value="1" />
             <div class="col-sm-12 col-lg-12">
                 <h2 class="text-center titulo">Dados de Captura de Aves</h2>
+                <hr>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="form-group">

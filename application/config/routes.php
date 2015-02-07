@@ -43,8 +43,8 @@ $route['404_override'] = '';
 // Nova rota criada para verificar se existe URL
 // rota com atributo no fim
 $route['mapa_bordo_ct/index'] = "mapa_bordo_ct/index";
-$rout['mapa_bordo_ct/novo'] = "mapa_bordo_ct/novo";
-
+$route['mapa_bordo_ct/novo'] = "mapa_bordo_ct/novo";
+$route['mapa_bordo_ct/cad-barco'] = "mapa_bordo_ct/cad-mestre";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
