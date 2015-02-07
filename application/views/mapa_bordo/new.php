@@ -34,6 +34,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="">Início</a></li>
+                <li><a href="">Basilares</a></li>
                 <li><a href="">Mapa de Bordo</a></li>
                 <li><a href="">Sair</a></li>
             </ul>
@@ -50,51 +51,6 @@
     </div>
     <!-- Visualizar erros de validação de form do CI    -->
     <?php echo validation_errors();?>
-    <div class="col-sm-12 col-lg-12">
-        <h3> Responsável pelo preenchimento </h3>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-lg-2">
-            <div class="form-group">
-                <label for="base" class="col-md-3 control-label">
-                    Base
-                </label>
-                <div class="col-md-9">
-                    <select name="base" class="form-control base" id="base">
-                        <option value =""          >Selecione      </option>
-                        <option value ="itajai"    >Itajaí - SC    </option>
-                        <option value ="santos"    >Santos - SP    </option>
-                        <option value ="rio_grande">Rio Grande - RS</option>
-                        <option value ="cabo_frio" >Cabod Frio - RJ</option>
-                        <option value ="itaipava"  >Itaipava - ES  </option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-2">
-            <div class="form-group">
-                <label for="user" class="col-md-3 control-label">
-                    Usuário
-                </label>
-                <div class="col-md-9">
-                    <select name="resp" class="form-control user" id="resp">
-                        <option class =""           value =""       >Selecione</option>
-                        <option class ="itajai"     value ="andre"  >André    </option>
-                        <option class ="itajai"     value ="rodrigo">Rodrigo  </option>
-                        <option class ="itajai"     value ="iasmin" >Iasmin   </option>
-                        <option class ="santos"     value ="tatiana">Tatiana  </option>
-                        <option class ="santos"     value ="fabiano">Fabiano  </option>
-                        <option class ="santos"     value ="juliana">Juliana  </option>
-                        <option class ="rio_grande" value ="augusto">Augusto  </option>
-                        <option class ="cabo_frio"  value ="celeste">Celeste  </option>
-                        <option class ="cabo_frio"  value ="pimenta">Pimenta  </option>
-                        <option class ="itaipava"   value ="vitor"  >Vitor    </option>
-                        <option class ="itaipava"   value ="paula"  >Paula    </option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-sm-12 col-lg-12">
         <h2 class="text-center titulo"> Dados Gerais </h2>
     </div>

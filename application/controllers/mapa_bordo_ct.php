@@ -14,16 +14,21 @@ class Mapa_bordo_ct extends CI_Controller {
         $this->load->view("mapa_bordo/index", array("mapas"=>$mapas));
     }
 
-    // Gera nova entrada vazia no BD
+    // Gera nova entrada vazia para ser enviado ao BD
     public function novo(){
         $this->load->view("mapa_bordo/new", array("mapa_bordo"=> new Mapa_bordo()));
     }
 
     public function salva(){
+//      Carrega a biblioteca de validação
         $this->load->library('form_validation');
+//      Modifica os delimitadores da msg de erro de <p></p>
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $mapa_bordo = new Mapa_bordo();
+//      Chama mensagem de sucesso de envio
         $mensagem = $this->lang->line("salva_sucesso");
 
+//      Salva variáveis enviados por POST do form
         $mapa_bordo->setBarco($this->input->post("barco"));
 
         $config = array(
