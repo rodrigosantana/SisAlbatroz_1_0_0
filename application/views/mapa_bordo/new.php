@@ -24,6 +24,7 @@
     <?php if (isset($mensagem)): ?>
         <div class="alert alert-success text-center" role="alert"><strong><?php echo $mensagem ?></strong></div>
     <?php endif;?>
+    <br>
     <div class="col-sm-12 col-lg-12">
         <h1 class="text-left titulo">Mapa de Bordo</h1>
     </div>
@@ -31,6 +32,7 @@
     <?php echo validation_errors();?>
     <div class="col-sm-12 col-lg-12">
         <h2 class="text-center titulo"> Dados Gerais </h2>
+        <hr>
     </div>
     <form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/mapa_bordo_ct/salva"
           method="post">
@@ -105,6 +107,7 @@
         </div>
         <div class="row lancamento" id="lancamento1">
             <h2 class="text-center titulo">Dados do Lançamento</h2>
+            <hr>
             <h4 id="reference" class="heading-reference titulo"> Lançamento #1 </h4>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
@@ -281,6 +284,7 @@
             <input type="hidden" name="count" id="count" value="1" />
             <div class="col-sm-12 col-lg-12">
                 <h2 class="text-center titulo">Dados de Captura de Aves</h2>
+                <hr>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="form-group">

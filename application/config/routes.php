@@ -44,10 +44,7 @@ $route['404_override'] = '';
 // rota com atributo no fim
 $route['mapa_bordo_ct/index'] = "mapa_bordo_ct/index";
 $route['mapa_bordo_ct/novo'] = "mapa_bordo_ct/novo";
-$route['basilar_barco_ct/index'] = "basilar_barco_ct/index";
-$route['entrevista_ct/index'] = "entrevista_ct/index";
-
-
+$route['mapa_bordo_ct/cad-barco'] = "mapa_bordo_ct/cad-mestre";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

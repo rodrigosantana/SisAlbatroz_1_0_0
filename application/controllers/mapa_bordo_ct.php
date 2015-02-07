@@ -16,8 +16,54 @@ class Mapa_bordo_ct extends CI_Controller {
 
     // Gera nova entrada vazia para ser enviado ao BD
     public function novo(){
-        $this->load->view("mapa_bordo/new", array("mapa_bordo"=> new Mapa_bordo()));
+        #$this->load->view("mapa_bordo/new", array("mapa_bordo"=> new Mapa_bordo()));
+        $data['menu']=$this->load->view('menu');
+        $this->load->view("mapa_bordo/new", $data);
     }
+
+    // Cadastro de mestres
+    public function cadmestre(){
+        #$this->load->view("mapa_bordo/cad-mestre", array("mapa_bordo"=> new Mapa_bordo()));
+        $data['menu']=$this->load->view('menu');
+        $this->load->view("mapa_bordo/cad-mestre", $data);
+    }
+
+    public function salvamestre(){
+//      Carrega a biblioteca de validação
+        $this->load->library('form_validation');
+//      Modifica os delimitadores da msg de erro de <p></p>
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        $mapa_bordo = new Mapa_bordo();
+//      Chama mensagem de sucesso de envio
+        $mensagem = $this->lang->line("salva_sucesso");
+
+//      Salva variáveis enviados por POST do form
+        $mapa_bordo->setMestre($this->input->post("mestre"));
+
+        $config = array(
+            array(
+                'field' => 'mestre',
+                'label' => 'Mestre',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'apelido',
+                'label' => 'Apelido',
+                'rules' => ''
+            )
+        );
+
+        $this->form_validation->set_rules($config);
+
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view("mapa_bordo/cad-mestre");
+        } else {
+            $this->doctrine->em->persist($mapa_bordo);
+            $this->doctrine->em->flush();
+            $this->load->view("mapa_bordo/cad-mestre", array("mapa_bordo"=>$mapa_bordo, "mensagem"=>$mensagem));
+    }
+}
 
     public function salva(){
 //      Carrega a biblioteca de validação
