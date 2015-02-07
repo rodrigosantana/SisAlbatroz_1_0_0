@@ -33,7 +33,7 @@
     <h2 class="text-center titulo"> Cadastro de Mestre </h2>
     <hr>
 </div>
-<form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/mapa_bordo_ct/salvamestre"
+<form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/cad_mestre_ct/salvamestre"
       method="post">
     <input type="hidden" id="id_mb" name="id_mb" value="">
     <div class="row">

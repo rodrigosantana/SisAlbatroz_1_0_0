@@ -19,7 +19,7 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Espécies</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Embarcações</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="cadmestre">Mestres</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="cad_mestre_ct/cadmestre">Mestres</a></li>
                     </ul>
                 </li>
                 <li><a href="">Mapa de Bordo</a></li>

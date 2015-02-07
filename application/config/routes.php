@@ -42,9 +42,9 @@ $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 // Nova rota criada para verificar se existe URL
 // rota com atributo no fim
-$route['mapa_bordo_ct/index'] = "mapa_bordo_ct/index";
-$route['mapa_bordo_ct/novo'] = "mapa_bordo_ct/novo";
-$route['mapa_bordo_ct/cad-barco'] = "mapa_bordo_ct/cad-mestre";
+#$route['mapa_bordo_ct/index'] = "mapa_bordo_ct/index";
+#$route['mapa_bordo_ct/novo'] = "mapa_bordo_ct/novo";
+#$route['cad_mestre_ct/cadmestre'] = "cad_mestre_ct/cadmestre";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
