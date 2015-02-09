@@ -5,27 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27bba3fd-7fac-4519-92a4-b1c13b9e77eb" name="Default" comment="System update">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/models/cad_ave.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_ave.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/controllers/cad_ave_ct.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/models/cad_barco.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/models/cad_empresa.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/controllers/cad_empresa_ct.php" />
-      <change type="DELETED" beforePath="C:\wamp\www\SisMBAlbatroz\application\controllers\entrevista_ct.php" afterPath="" />
-      <change type="MOVED" beforePath="C:\wamp\www\SisMBAlbatroz\application\controllers\basilar_barco_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_barco_ct.php" />
-      <change type="MOVED" beforePath="C:\wamp\www\SisMBAlbatroz\application\views\basilares\barco.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_barco.php" />
-      <change type="MOVED" beforePath="C:\wamp\www\SisMBAlbatroz\application\views\entrevistas\entrevista.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_empresa.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/autoload.php" afterPath="$PROJECT_DIR$/application/config/autoload.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cad_mestre.php" afterPath="$PROJECT_DIR$/application/models/cad_mestre.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_mestre.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_mestre.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_mestre_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_mestre_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/portuguese/form_validation_lang.php" afterPath="$PROJECT_DIR$/application/language/portuguese/form_validation_lang.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/portuguese/i18n_lang.php" afterPath="$PROJECT_DIR$/application/language/portuguese/i18n_lang.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/mapa_bordo_ct.php" afterPath="$PROJECT_DIR$/application/controllers/mapa_bordo_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/menu.php" afterPath="$PROJECT_DIR$/application/views/menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/new.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/new.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/style.css" afterPath="$PROJECT_DIR$/assets/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="C:\wamp\www\SisMBAlbatroz\application\controllers\basilar_barco_ct.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\SisMBAlbatroz\application\views\basilares\barco.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\SisMBAlbatroz\application\views\entrevistas\entrevista.php" afterPath="" />
     </list>
     <ignored path="SisMBAlbatroz_CI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -109,8 +91,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="width" value="2560" />
-    <option name="height" value="1080" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="2576" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -380,7 +364,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="2560" height="1080" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287234" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
