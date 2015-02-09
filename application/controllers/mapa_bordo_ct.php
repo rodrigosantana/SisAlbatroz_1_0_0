@@ -44,21 +44,21 @@ class Mapa_bordo_ct extends CI_Controller {
                 'label' => 'Mestre',
                 'rules' => 'required'
             ),
-//            array(
-//                'field' => 'petre',
-//                'label' => 'Petrecho',
-//                'rules' => 'required'
-//            ),
-//            array(
-//                'field' => 'data_saida',
-//                'label' => 'Data de Saída',
-//                'rules' => 'required'
-//            ),
-//            array(
-//                'field' => 'data_chegada',
-//                'label' => 'Data de Chegada',
-//                'rules' => 'required'
-//            )
+            array(
+                'field' => 'petre',
+                'label' => 'Petrecho',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'data_saida',
+                'label' => 'Data de Saída',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'data_chegada',
+                'label' => 'Data de Chegada',
+                'rules' => 'required'
+            ),
             array(
                 'field' => 'L1_lance',
                 'label' => 'L#1 Lance',
@@ -115,25 +115,42 @@ class Mapa_bordo_ct extends CI_Controller {
                 'rules' => 'required'
             ),
         );
-//      Roda a validação de acordo com as regras do array
+//      Validação de acordo com as regras do array
         $this->form_validation->set_rules($config);
 
-//      todo validar para no mínimo 1 espécie, não sendo necessário para as 4
-//      Validação condicional de espécie quando ave capturada = sim
+//      todo validar para no mínimo 1 captura e quantidade apenas
+//      Validação condicional de espécie e quant quando ave capturada = sim
         if ($this->input->post('L1_ave_capt') == 's'){
-            $this->form_validation->set_rules('L1_capt_spp[]', 'L#1 Espécie', 'required');
+            $config2 = array(
+                array(
+                    'field' => 'L1_capt_spp[]',
+                    'label' => 'L#1 Espécie',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'L1_capt_quant[]',
+                    'label' => 'L#1 Quantidade',
+                    'rules' => 'required'
+                )
+            );
+            $this->form_validation->set_rules($config2);
         }else {
-            $this->form_validation->set_rules('L1_capt_spp[]', 'L#1 Espécie', '');
+            $config3 = array(
+                array(
+                    'field' => 'L1_capt_spp[]',
+                    'label' => 'L#1 Espécie',
+                    'rules' => ''
+                ),
+                array(
+                    'field' => 'L1_capt_quant[]',
+                    'label' => 'L#1 Quantidade',
+                    'rules' => ''
+                )
+            );
+            $this->form_validation->set_rules($config3);
         };
-//      Validação condicional de quantida quando houver alguma espécie selecionada
-//        if ($this->input->post('L1_capt_spp[]') != ''){
-//            $this->form_validation->set_rules('L1_capt_quant[]', 'L#1 Quantidade', 'required');
-//        }else {
-//            $this->form_validation->set_rules('L1_capt_quant[]', 'L#1 Quantidade', '');
-//        };
 
-
-
+//      Efetiva a validação e retorna os resultados
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("mapa_bordo/new");
         } else {

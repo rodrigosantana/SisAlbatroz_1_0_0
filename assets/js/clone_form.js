@@ -22,13 +22,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-// Função de adicionar campo de formulário - Adiciona novo lance
+// Função para adicionar campo de formulário - Adiciona novo lance
 $(document).ready(function() {
     $(function () {
         $('#btnAdd').click(function () {
-            // Verifica quantos clones existe, cria variável de incremento
-            // identifica e clona o elemento com novos atributos e ID de
-            // incremento
+            /* Verifica quantos clones existe, cria variável de incremento identifica e clona o elemento com novos
+               atributos e ID de incremento.
+            */
             var num     = $('.lancamento').length, 
                 newNum  = new Number(num + 1),      
                 newElem = $('#lancamento' + num).clone().attr('id', 'lancamento' + newNum).fadeIn('slow'); 
@@ -37,9 +37,10 @@ $(document).ready(function() {
             Below are examples of what forms elements you can clone, but not the only ones.
             There are 2 basic structures below: one for an H2, and one for form elements.
             To make more, you can copy the one for form elements and simply update the classes for its label and input.
-            Keep in mind that the .val() method is what clears the element when it gets cloned. Radio and checkboxes need .val([]) instead of .val('').
+            Keep in mind that the .val() method is what clears the element when it gets cloned. Radio and checkboxes
+            need .val([]) instead of .val('').
         */
-            // H4 - cabeçalho da quantidade de lances
+            // H4 - Cabeçalho da quantidade de lances
             newElem.find('.heading-reference').attr('id', 'ID' + newNum + '_reference').attr('name', 'ID' + newNum + '_reference').html('Lançamento #' + newNum);
             
             // Contagem do número de lances
@@ -98,39 +99,38 @@ $(document).ready(function() {
             
         // Insere o novo elemento logo após o novo item duplicado
             $('#lancamento' + num).after(newElem);
-        // Coloca o foco do no elemento
 
-        // Enable the "remove" button. This only shows once you have a duplicated section.
+        // Ativa o botão de "-Lance". Ativa apenas quando tiver seção clonada
             $('#btnDel').attr('disabled', false);
 
-        // // Right now you can only add 4 sections, for a total of 5. Change '5' below to the max number of sections you want to allow.
+        // Limitador da quantidade de clones. Ao atingir o limite desativa o lotão "+Lance"
         //     if (newNum == 5)
-        //     $('#btnAdd').attr('disabled', true).prop('value', "You've reached the limit"); // value here updates the text in the 'add' button when the limit is reached 
+        //     $('#btnAdd').attr('disabled', true).prop('value', "Você atingiu o limite de Lances");
         });
 
         $('#btnDel').click(function () {
-        // Confirmation dialog box. Works on all desktop browsers and iPhone.
+        // Caixa de confirmação de deleção de clone.
             if (confirm("Tem certeza que quer excluir o útlimo lançamento"))
                 {
                     var num = $('.lancamento').length;
-                    // how many "duplicatable" input fields we currently have
+                    // Quantos clones exitem no momento
                     $('#lancamento' + num).slideUp('slow', function () {$(this).remove();
-                    // if only one element remains, disable the "remove" button
+                    // Quando apenas 1 campo exitir, desativa o botão "-Lance"
                         if (num -1 === 1)
                     $('#btnDel').attr('disabled', true);
-                    // enable the "add" button
+                    // Ativa o botão "+Lance"
                     $('#btnAdd').attr('disabled', false).prop('value', "+ Lance");});
                 }
-            return false; // Removes the last section you added
+            return false;
         });
-        // Enable the "add" button
+        // Ativa o botão "+Lance"
         $('#btnAdd').attr('disabled', false);
-        // Disable the "remove" button
+        // Desativa o botão "-Lance"
         $('#btnDel').attr('disabled', true);
     });    
 });
 
-
+// todo Ainda não está funcionando. Deixar para outro momento.
 // // Função de adição de ave capturada
 // $(function () {
 //     $('#btnAddAve').click(function () {

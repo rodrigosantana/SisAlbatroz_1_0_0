@@ -19,7 +19,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('mapa_bordo/new');
+		$this->load->view('index');
 	}
 }
 

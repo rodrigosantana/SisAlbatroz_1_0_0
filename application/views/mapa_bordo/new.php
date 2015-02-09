@@ -261,7 +261,7 @@
                     <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
                     <div class="col-md-8">
                         <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
-                            <option value="">Selecione</option>
+                            <option value="v"<?php echo set_select('L1_capt_spp[]', 'v');?>>Selecione</option>
                             <option value="teste"<?php echo set_select('L1_capt_spp[]', 'teste');?>>Teste</option>
                         </select>
                     </div>

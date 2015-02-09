@@ -13,21 +13,21 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="">Início</a></li>
+                <li class="active"><a href="<?php echo base_url();?>index.php">Início</a></li>
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Basilares <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="cad_ave_ct/cadave">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_ave_ct/cadave">
                                 Espécies</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="cad_barco_ct/cadbarco">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_barco_ct/cadbarco">
                                 Embarcações</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="cad_mestre_ct/cadmestre">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_mestre_ct/cadmestre">
                                 Mestres</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="cad_empresa_ct/cadempresa">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_empresa_ct/cadempresa">
                                 Empresas</a></li>
                     </ul>
                 </li>
-                <li><a href="mapa_bordo_ct/novo">Mapa de Bordo</a></li>
+                <li><a href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">Mapa de Bordo</a></li>
                 <li><a href="">Sair</a></li>
             </ul>
         </div><!--/.nav-collapse -->
