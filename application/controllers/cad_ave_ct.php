@@ -1,10 +1,11 @@
 <?php
+// Todo Adaptar e arrumar
 
-class Cad_mestre_ct extends CI_Controller {
+class Cad_ave_ct extends CI_Controller {
     // Cadastro de mestres
-    public function cadmestre(){
+    public function cadave(){
         $data['menu']=$this->load->view('menu');
-        $this->load->view("mapa_bordo/cad_mestre", $data);
+        $this->load->view("mapa_bordo/cad_ave", $data);
     }
 
     public function salva(){
@@ -12,7 +13,7 @@ class Cad_mestre_ct extends CI_Controller {
         $this->load->library('form_validation');
 //      Modifica os delimitadores da msg de erro de <p></p>
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-        $cad_mestre = new Cad_mestre();
+        $cad_ave = new Cad_ave();
 //      Chama mensagem de sucesso de envio
         $mensagem = $this->lang->line("salva_sucesso");
 
@@ -29,30 +30,25 @@ class Cad_mestre_ct extends CI_Controller {
                 'rules' => 'required'
             ),
             array(
-                'field' => 'apelido',
-                'label' => 'Apelido',
-                'rules' => ''
+                'field' => 'nome_us',
+                'label' => 'Nome em Inglês',
+                'rules' => 'required'
             ),
             array(
-                'field' => 'telefone',
-                'label' => 'Telefone',
-                'rules' => 'numeric'
-            ),
-            array(
-                'field' => 'email',
-                'label' => 'E-mail',
-                'rules' => 'valid_email'
+                'field' => 'spp',
+                'label' => 'Nome Científico',
+                'rules' => 'required'
             )
         );
 
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("mapa_bordo/cad_mestre");
+            $this->load->view("mapa_bordo/cad_ave");
         } else {
-            $this->doctrine->em->persist($cad_mestre);
+            $this->doctrine->em->persist($cad_ave);
             $this->doctrine->em->flush();
-            $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=>$cad_mestre, "mensagem"=>$mensagem));
+            $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>$cad_ave, "mensagem"=>$mensagem));
         }
     }
 }

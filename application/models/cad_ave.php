@@ -6,7 +6,7 @@
  * @Table(name="mb_geral")
  * @Entity
  */
-class Cad_mestre {
+class Cad_ave {
     /**
      *@var integer $id_mb
      *

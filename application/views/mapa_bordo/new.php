@@ -40,67 +40,66 @@
         <div class="row">
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="barco" class="col-md-4 control-label">
-                        Barco </label>
+                    <label for="barco" class="col-md-4 control-label">Barco</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="barco" name="barco" placeholder="Nome da embarcação"
-                               value="<?php echo set_value('barco');?>">
+                        <select class="form-control" id="barco" name="barco">
+                            <option value="" >Selecione</option>
+                            <option value ="teste"<?php echo set_select('barco','teste');?>>Teste</option>
+                        </select>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="mestre" class="col-md-4 control-label">
-                        Mestre</label>
+                    <label for="mestre" class="col-md-4 control-label">Mestre</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="mestre" name="mestre" placeholder="Nome do mestre"
-                               value="<?php echo set_value('mestre');?>">
+                        <select class="form-control" id="mestre" name="mestre">
+                            <option value="" >Selecione</option>
+                            <option value ="teste"<?php echo set_select('mestre','teste');?>>Teste</option>
+                        </select>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="petre">
-                        Petrecho</label>
+                    <label class="col-md-4 control-label" for="petre">Petrecho</label>
                     <div class="col-md-8">
                         <label class="radio-inline">
                             <input type="radio" name="petre" value="esp_sup"<?php echo set_radio('petre', 'esp_sup');?>>
-                            Espinhel de superfície
+                            Espinhel de Superfície
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="petre" value="esp_fun"<?php echo set_radio('petre', 'esp_fun');?>>
-                            Espinhel de fundo
+                            Espinhel de Fundo
                         </label>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="data_saida" class="col-md-4 control-label">
-                        Data de saída</label>
+                    <label for="data_saida" class="col-md-4 control-label">Data de Saída</label>
                     <div class="col-md-8">
-                        <input type="date" class="form-control" id="data_saida"
-                               name="data_saida">
+                        <input type="date" class="form-control" id="data_saida" name="data_saida"
+                               value="<?php echo set_value('data_saida');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="data_chegada" class="col-md-4 control-label">
-                        Data de chegada</label>
+                    <label for="data_chegada" class="col-md-4 control-label">Data de Chegada</label>
                     <div class="col-md-8">
-                        <input type="date" class="form-control" id="data_chegada"
-                               name="data_chegada">
+                        <input type="date" class="form-control" id="data_chegada" name="data_chegada"
+                               value="<?php echo set_value('data_chegada');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="obs" class="col-md-4 control-label">
-                        Observações </label>
+                    <label for="obs" class="col-md-4 control-label">Observações</label>
                     <div class="col-md-8">
                         <textarea class="form-control" id="obs" rows="2" name="obs"
-                                  placeholder="Limite de 500 caracteres"></textarea>
+                                  placeholder="Limite de 500 caracteres">
+                        </textarea>
                     </div>
                 </div>
             </div>
@@ -111,136 +110,108 @@
             <h4 id="reference" class="heading-reference titulo"> Lançamento #1 </h4>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="lance" class="col-md-4 control-label lb_lance">
-                        Lance
-                    </label>
+                    <label for="lance" class="col-md-4 control-label lb_lance">Lance</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control lance"
-                               id="lance" name="L1_lance"
-                               placeholder="Identificador do lance">
+                        <input type="number" class="form-control lance" id="lance" name="L1_lance"
+                               placeholder="Identificador do lance" value="<?php echo set_value('L1_lance');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
                     <label for="data_lance"
-                           class="col-md-4 control-label lb_data_lance"> Data
-                    </label>
+                           class="col-md-4 control-label lb_data_lance">Data</label>
                     <div class="col-md-8">
-                        <input type="date" class="form-control lance_data"
-                               id="lance_data" name="L1_lance_data">
+                        <input type="date" class="form-control lance_data" id="lance_data" name="L1_lance_data"
+                               value="<?php echo set_value('L1_lance_data');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="anzois" class="col-md-4 control-label lb_anzois">
-                        Anzois
-                    </label>
+                    <label for="anzois" class="col-md-4 control-label lb_anzois">Anzois</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control anzois"
-                               id="anzois" name="L1_anzois">
+                        <input type="number" class="form-control anzois" id="anzois" name="L1_anzois"
+                               value="<?php echo set_value('L1_anzois');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="lance_lat"
-                           class="col-md-4 control-label lb_lance_lat">
-                        Latitude (decimal)
-                    </label>
+                    <label for="lance_lat" class="col-md-4 control-label lb_lance_lat">Latitude (decimal)</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control lance_lat"
-                               id="lance_lat" name="L1_lance_lat" step="any">
+                        <input type="number" class="form-control lance_lat" id="lance_lat" name="L1_lance_lat"
+                               value="<?php echo set_value('L1_lance_lat');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="lance_long"
-                           class="col-md-4 control-label lb_lance_long">
-                        Longitude (decimal)
-                    </label>
+                    <label for="lance_long" class="col-md-4 control-label lb_lance_long">Longitude (decimal)</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control lance_long"
-                               id="lance_long" name="L1_lance_long" step="any">
+                        <input type="number" class="form-control lance_long"id="lance_long" name="L1_lance_long"
+                               value="<?php echo set_value('L1_lance_long');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="isca" class="col-md-4 control-label lb_isca">Isca
-                    </label>
+                    <label for="isca" class="col-md-4 control-label lb_isca">Isca</label>
                     <div class="col-md-8">
                         <label class="checkbox-inline" for="isca_0">
-                            <input type="checkbox" class="isca_check"
-                                   value="lula" id="isca_0" name="L1_isca[]"> Lula
+                            <input type="checkbox" class="isca_check" id="isca_0" name="L1_isca[]"
+                                   value="lula"<?php echo set_checkbox('L1_isca[]', 'lula'); ?>>Lula
                         </label>
                         <label class="checkbox-inline" for="isca_1">
-                            <input type="checkbox" class="isca_check"
-                                   value="cavalinha" id="isca_1" name="L1_isca[]">
-                            Cavalinha
+                            <input type="checkbox" class="isca_check" id="isca_1" name="L1_isca[]"
+                                   value="cavalinha"<?php echo set_checkbox('L1_isca[]', 'cavalinha'); ?>>Cavalinha
                         </label>
                         <label class="checkbox-inline" for="isca_2">
-                            <input type="checkbox" class="isca_check"
-                                   value="bonito" id="isca_2" name="L1_isca[]">
-                            Bonito
+                            <input type="checkbox" class="isca_check" id="isca_2" name="L1_isca[]"
+                                   value="bonito"<?php echo set_checkbox('L1_isca[]', 'bonito'); ?>>Bonito
                         </label>
                         <label class="checkbox-inline" for="isca_3">
-                            <input type="checkbox" class="isca_check"
-                                   value="sardinha" id="isca_3" name="L1_isca[]">
-                            Sardinha
+                            <input type="checkbox" class="isca_check" id="isca_3" name="L1_isca[]"
+                                   value="sardinha"<?php echo set_checkbox('L1_isca[]','sardinha')?>>Sardinha
                         </label>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="lance_hora_ini"
-                           class="col-md-4 control-label lb_hora_ini">
-                        Hora início do lance
-                    </label>
+                    <label for="lance_hora_ini" class="col-md-4 control-label lb_hora_ini">Hora Início do Lance</label>
                     <div class="col-md-8">
-                        <input type="time" class="form-control lance_hora_ini"
-                               id="lance_hora_ini" name="L1_lance_hora_ini">
+                        <input type="time" class="form-control lance_hora_ini" id="lance_hora_ini"
+                               name="L1_lance_hora_ini" value="<?php echo set_value('L1_lance_hora_ini');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="lance_hora_fin"
-                           class="col-md-4 control-label lb_hora_fin">
-                        Hora final do lance
-                    </label>
+                    <label for="lance_hora_fin" class="col-md-4 control-label lb_hora_fin">Hora Final do Lance</label>
                     <div class="col-md-8">
-                        <input type="time" class="form-control lance_hora_fin"
-                               id="lance_hora_fin" name="L1_lance_hora_fin">
+                        <input type="time" class="form-control lance_hora_fin" id="lance_hora_fin"
+                               name="L1_lance_hora_fin" value="<?php echo set_value('L1_lance_hora_fin');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="mm_tipo"
-                           class="col-md-4 control-label lb_mm_tipo">
-                        Medida mitigatória
-                    </label>
+                    <label for="mm_tipo" class="col-md-4 control-label lb_mm_tipo">Medida Mitigatória </label>
                     <div class="col-md-8">
                         <label class="checkbox-inline" for="mm_tipo_0">
-                            <input type="checkbox" class="mm_check"
-                                   value="toriline" id="mm_tipo_0"
-                                   name="L1_mm_tipo[]">
+                            <input type="checkbox" class="mm_check"  id="mm_tipo_0" name="L1_mm_tipo[]"
+                                   value="toriline"<?php echo set_checkbox('L1_mm_tipo[]', 'toriline'); ?>>
                             Toriline
                         </label>
                         <label class="checkbox-inline" for="mm_tipo_1">
-                            <input type="checkbox" class="mm_check"
-                                   value="larg_noturna" id="mm_tipo_1"
-                                   name="L1_mm_tipo[]">
+                            <input type="checkbox" class="mm_check"  id="mm_tipo_1" name="L1_mm_tipo[]"
+                                   value="larg_noturna"<?php echo set_checkbox('L1_mm_tipo[]', 'larg_noturna'); ?>>
                             Largada noturna
                         </label>
                         <label class="checkbox-inline" for="mm_tipo_2">
-                            <input type="checkbox" class="mm_check"
-                                   value="reg_peso" id="mm_tipo_2"
-                                   name="L1_mm_tipo[]">
+                            <input type="checkbox" class="mm_check" value="reg_peso" id="mm_tipo_2" name="L1_mm_tipo[]"
+                                   value="reg_peso"<?php echo set_checkbox('L1_mm_tipo[]', 'reg_peso'); ?>>
                             Regime de peso
                         </label>
                     </div>
@@ -248,35 +219,34 @@
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="mm_uso" class="col-md-4 control-label lb_mm_uso">
-                        Uso da mm
-                    </label>
+                    <label for="mm_uso" class="col-md-4 control-label lb_mm_uso">Uso da MM</label>
                     <div class="col-md-8">
                         <label class="radio-inline lb_radio" for="mm_uso-0">
-                            <input type="radio" class="mm_uso_radio" name="L1_mm_uso"
-                                   id="mm_uso-0" value="total">Total
+                            <input type="radio" class="mm_uso_radio" name="L1_mm_uso"id="mm_uso-0"
+                                   value="total"<?php echo set_radio('L1_mm_uso', 'total')?>>
+                            Total
                         </label>
                         <label class="radio-inline lb_radio" for="mm_uso-1">
-                            <input type="radio" class="mm_uso_radio" name="L1_mm_uso"
-                                   id="mm_uso-1" value="parcial">Parcial
+                            <input type="radio" class="mm_uso_radio" name="L1_mm_uso" id="mm_uso-1"
+                                   value="parcial"<?php echo set_radio('L1_mm_uso', 'parcial')?>>
+                            Parcial
                         </label>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="ave_capt"
-                           class="col-md-4 control-label lb_ave_capt">
-                        Ave capturada
-                    </label>
+                    <label for="ave_capt" class="col-md-4 control-label lb_ave_capt">Ave Capturada</label>
                     <div class="col-md-8">
                         <label class="radio-inline" for="ave_capt_0">
-                            <input type="radio" class="ave_capt" name="L1_ave_capt"
-                                   id="ave_capt_0" value="s">Sim
+                            <input type="radio" class="ave_capt" name="L1_ave_capt" id="ave_capt_0"
+                                   value="s"<?php echo set_radio('L1_ave_capt', 's')?>>
+                            Sim
                         </label>
                         <label class="radio-inline" for="ave_capt_1">
-                            <input type="radio" class="ave_capt" name="L1_ave_capt"
-                                   id="ave_capt_0" value="n">Não
+                            <input type="radio" class="ave_capt" name="L1_ave_capt" id="ave_capt_0"
+                                   value="n"<?php echo set_radio('L1_ave_capt', 'n')?>>
+                            Não
                         </label>
                     </div>
                 </div>
@@ -288,12 +258,32 @@
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="form-group">
-                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">
-                        Espécie</label>
+                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control capt_spp"
-                               id="ID1_capt_spp" name="L1_capt_spp[]"
-                               placeholder="Nome popular da ave captura">
+                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
+                            <option value="">Selecione</option>
+                            <option value="teste"<?php echo set_select('L1_capt_spp[]', 'teste');?>>Teste</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="form-group">
+                    <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">Quantidade</label>
+                    <div class="col-md-8">
+                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant[]"
+                               value="<?php echo set_value('L1_capt_quant[]');?>">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="form-group">
+                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
+                    <div class="col-md-8">
+                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
+                            <option value="">Selecione</option>
+                            <option value="teste2"<?php echo set_select('L1_capt_spp[]', 'teste2');?>>Teste2</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -302,40 +292,19 @@
                     <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
                         Quantidade</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant"
-                               id="ID1_capt_quant" name="L1_capt_quant[]">
+                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant[]"
+                               value="<?php echo set_value('L1_capt_quant[]');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="form-group">
-                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">
-                        Espécie</label>
+                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control capt_spp"
-                               id="ID1_capt_spp" name="L1_capt_spp[]"
-                               placeholder="Nome popular da ave captura">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
-                        Quantidade</label>
-                    <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant"
-                               id="ID1_capt_quant" name="L1_capt_quant[]">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">
-                        Espécie</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control capt_spp"
-                               id="ID1_capt_spp" name="L1_capt_spp[]"
-                               placeholder="Nome popular da ave captura">
+                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
+                            <option value="">Selecione</option>
+                            <option value="teste3"<?php echo set_select('L1_capt_spp[]', 'teste3');?>>Teste3</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -344,19 +313,19 @@
                     <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
                         Quantidade</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant"
-                               id="ID1_capt_quant" name="L1_capt_quant[]">
+                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant[]"
+                               value="<?php echo set_value('L1_capt_quant[]');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="form-group">
-                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">
-                        Espécie</label>
+                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control capt_spp"
-                               id="ID1_capt_spp" name="L1_capt_spp[]"
-                               placeholder="Nome popular da ave captura">
+                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
+                            <option value="">Selecione</option>
+                            <option value="teste4"<?php echo set_select('L1_capt_spp[]', 'teste4');?>>Teste4</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -365,26 +334,22 @@
                     <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
                         Quantidade</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant"
-                               id="ID1_capt_quant" name="L1_capt_quant[]">
+                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant[]"
+                               value="<?php echo set_value('L1_capt_quant[]');?>">
                     </div>
                 </div>
             </div>
         </div>
         <div class="btn-group col-sm-12 col-md-12 text-rigth" role="group" >
-            <button type="button" id="btnAdd" name="btnAdd"
-                    class="btn btn-info">+ Lance
-            </button>
-            <button type="button" id="btnDel" name="btnDel"
-                    class="btn btn-danger">- Lance
-            </button>
+            <button type="button" id="btnAdd" name="btnAdd" class="btn btn-info">+ Lance</button>
+            <button type="button" id="btnDel" name="btnDel" class="btn btn-danger">- Lance</button>
         </div>
         <div class="col-sm-12 col-md-12 text-right">
-            <button type="submit" id="btnSub" name="btnSub"
-                    class="btn btn-success btn-lg btn_sub" >Submeter</button>
+            <button type="submit" id="btnSub" name="btnSub" class="btn btn-success btn-lg btn_sub" >Submeter</button>
         </div>
     </form>
 </div>
+<br>
 <footer class="footer">
     <div class="container">
         <p class="text-muted">

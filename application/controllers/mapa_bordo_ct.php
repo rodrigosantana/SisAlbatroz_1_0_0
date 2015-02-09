@@ -44,24 +44,94 @@ class Mapa_bordo_ct extends CI_Controller {
                 'label' => 'Mestre',
                 'rules' => 'required'
             ),
+//            array(
+//                'field' => 'petre',
+//                'label' => 'Petrecho',
+//                'rules' => 'required'
+//            ),
+//            array(
+//                'field' => 'data_saida',
+//                'label' => 'Data de Saída',
+//                'rules' => 'required'
+//            ),
+//            array(
+//                'field' => 'data_chegada',
+//                'label' => 'Data de Chegada',
+//                'rules' => 'required'
+//            )
             array(
-                'field' => 'petre',
-                'label' => 'Petrecho',
+                'field' => 'L1_lance',
+                'label' => 'L#1 Lance',
+                'rules' => 'required|numeric'
+            ),
+            array(
+                'field' => 'L1_lance_data',
+                'label' => 'L#1 Data',
                 'rules' => 'required'
             ),
             array(
-                'field' => 'data_saida',
-                'label' => 'Data de Saída',
+                'field' => 'L1_anzois',
+                'label' => 'L#1 Anzois',
+                'rules' => 'required|numeric'
+            ),
+            array(
+                'field' => 'L1_lance_lat',
+                'label' => 'L#1 Latitude',
                 'rules' => 'required'
             ),
             array(
-                'field' => 'data_chegada',
-                'label' => 'Data de Chegada',
+                'field' => 'L1_lance_long',
+                'label' => 'L#1 Longitude',
                 'rules' => 'required'
-            )
+            ),
+            array(
+                'field' => 'L1_isca[]',
+                'label' => 'L#1 Isca',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'L1_lance_hora_ini',
+                'label' => 'L#1 Hora Início do Lance',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'L1_lance_hora_fin',
+                'label' => 'L#1 Hora Final do Lance',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'L1_mm_tipo[]',
+                'label' => 'L#1 Medida Mitigatória',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'L1_mm_uso',
+                'label' => 'L#1 Uso da MM',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'L1_ave_capt',
+                'label' => 'L#1 Ave Capturada',
+                'rules' => 'required'
+            ),
         );
-
+//      Roda a validação de acordo com as regras do array
         $this->form_validation->set_rules($config);
+
+//      todo validar para no mínimo 1 espécie, não sendo necessário para as 4
+//      Validação condicional de espécie quando ave capturada = sim
+        if ($this->input->post('L1_ave_capt') == 's'){
+            $this->form_validation->set_rules('L1_capt_spp[]', 'L#1 Espécie', 'required');
+        }else {
+            $this->form_validation->set_rules('L1_capt_spp[]', 'L#1 Espécie', '');
+        };
+//      Validação condicional de quantida quando houver alguma espécie selecionada
+//        if ($this->input->post('L1_capt_spp[]') != ''){
+//            $this->form_validation->set_rules('L1_capt_quant[]', 'L#1 Quantidade', 'required');
+//        }else {
+//            $this->form_validation->set_rules('L1_capt_quant[]', 'L#1 Quantidade', '');
+//        };
+
 
 
         if ($this->form_validation->run() == FALSE) {

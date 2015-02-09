@@ -1,12 +1,11 @@
 <?php
-# LEMBRETE: Necessario editar
-# todo o arquivo conforme a estrutura do BD.
+# TODO LEMBRETE: Necessario editar o arquivo conforme a estrutura do BD.
 
 /**
  * @Table(name="mb_geral")
  * @Entity
  */
-class Cad_mestre {
+class Cad_barco {
     /**
      *@var integer $id_mb
      *

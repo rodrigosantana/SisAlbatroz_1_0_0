@@ -1,3 +1,4 @@
+<!-- TODO revisar e adaptar para o cadastro de aves-->
 <!-- Definindo o tipo de arquivo que vai ser -->
 <!DOCTYPE html PUBLIC>
 <!-- Abre o arquivo html e define a linguagem padrão -->
@@ -6,7 +7,7 @@
 <head>
     <!-- Informações sobre o texto e caracteres -->
     <meta http-equiv="Content-type" content="text/hetml; charset=UTF-8">
-    <title> Cadastro de Mestre </title>
+    <title> Cadastro de Aves Marinhas </title>
     <!-- carregando css, js e outros -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css"/>
@@ -25,48 +26,39 @@
 <?php endif;?>
 <br>
 <div class="col-sm-12 col-lg-12">
-    <h1 class="text-left titulo">Cadastro de Mestre</h1>
+    <h1 class="text-left titulo">Cadastro de Aves Marinhas</h1>
     <hr>
 </div>
 <!-- Visualizar erros de validação de form do CI    -->
 <?php echo validation_errors();?>
-<form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/cad_mestre_ct/salva"
+<form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/cad_ave_ct/salva"
       method="post">
     <input type="hidden" id="id_mb" name="id_mb" value="">
     <div class="row">
         <div class="col-sm-6 col-lg-4">
             <div class="form-group">
-                <label for="mestre" class="col-md-4 control-label">Nome:</label>
+                <label for="nome" class="col-md-4 control-label">Nome:</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" id="mestre" name="mestre" placeholder="Nome do mestre"
-                           value="<?php echo set_value('mestre');?>">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome popular"
+                           value="<?php echo set_value('nome');?>">
                 </div>
             </div>
         </div>
         <div class="col-sm-6 col-lg-4">
             <div class="form-group">
-                <label for="apelido" class="col-md-4 control-label">Apelido: </label>
+                <label for="nome_us" class="col-md-4 control-label">Nome em Inglês: </label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" id="apelido" name="apelido" placeholder="Apelido"
-                           value="<?php echo set_value('apelido');?>">
+                    <input type="text" class="form-control" id="nome_us" name="nome_us"
+                           placeholder="Nome popular em inglês" value="<?php echo set_value('nome_us');?>">
                 </div>
             </div>
         </div>
         <div class="col-sm-6 col-lg-4">
             <div class="form-group">
-                <label for="telefone" class="col-md-4 control-label">Telefone:</label>
+                <label for="spp" class="col-md-4 control-label">Nome Científico:</label>
                 <div class="col-md-8">
-                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Telefone"
-                           value="<?php echo set_value('telefone');?>">
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-            <div class="form-group">
-                <label for="email" class="col-md-4 control-label">E-mail:</label>
-                <div class="col-md-8">
-                    <input type="email" class="form-control" id="email" name="email"
-                           value="<?php echo set_value('email');?>">
+                    <input type="text" class="form-control" id="spp" name="spp" placeholder="Atenção a ortografia"
+                           value="<?php echo set_value('spp');?>">
                 </div>
             </div>
         </div>
