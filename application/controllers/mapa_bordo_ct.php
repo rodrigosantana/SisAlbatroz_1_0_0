@@ -118,17 +118,16 @@ class Mapa_bordo_ct extends CI_Controller {
 //      Validação de acordo com as regras do array
         $this->form_validation->set_rules($config);
 
-//      todo validar para no mínimo 1 captura e quantidade apenas
 //      Validação condicional de espécie e quant quando ave capturada = sim
         if ($this->input->post('L1_ave_capt') == 's'){
             $config2 = array(
                 array(
-                    'field' => 'L1_capt_spp[]',
+                    'field' => 'L1_capt_spp1[]',
                     'label' => 'L#1 Espécie',
                     'rules' => 'required'
                 ),
                 array(
-                    'field' => 'L1_capt_quant[]',
+                    'field' => 'L1_capt_quant1[]',
                     'label' => 'L#1 Quantidade',
                     'rules' => 'required'
                 )
@@ -152,6 +151,7 @@ class Mapa_bordo_ct extends CI_Controller {
 
 //      Efetiva a validação e retorna os resultados
         if ($this->form_validation->run() == FALSE) {
+            $this->load->view("menu");
             $this->load->view("mapa_bordo/new");
         } else {
             $this->doctrine->em->persist($mapa_bordo);

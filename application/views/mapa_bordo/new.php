@@ -260,8 +260,8 @@
                 <div class="form-group">
                     <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
                     <div class="col-md-8">
-                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
-                            <option value="v"<?php echo set_select('L1_capt_spp[]', 'v');?>>Selecione</option>
+                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp1[]">
+                            <option value="">Selecione</option>
                             <option value="teste"<?php echo set_select('L1_capt_spp[]', 'teste');?>>Teste</option>
                         </select>
                     </div>
@@ -271,7 +271,7 @@
                 <div class="form-group">
                     <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">Quantidade</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant[]"
+                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant1[]"
                                value="<?php echo set_value('L1_capt_quant[]');?>">
                     </div>
                 </div>
@@ -280,7 +280,7 @@
                 <div class="form-group">
                     <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
                     <div class="col-md-8">
-                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
+                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp2[]">
                             <option value="">Selecione</option>
                             <option value="teste2"<?php echo set_select('L1_capt_spp[]', 'teste2');?>>Teste2</option>
                         </select>
@@ -292,7 +292,7 @@
                     <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
                         Quantidade</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant[]"
+                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant2[]"
                                value="<?php echo set_value('L1_capt_quant[]');?>">
                     </div>
                 </div>
@@ -301,7 +301,7 @@
                 <div class="form-group">
                     <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
                     <div class="col-md-8">
-                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
+                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp3[]">
                             <option value="">Selecione</option>
                             <option value="teste3"<?php echo set_select('L1_capt_spp[]', 'teste3');?>>Teste3</option>
                         </select>
@@ -313,7 +313,7 @@
                     <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
                         Quantidade</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant[]"
+                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant3[]"
                                value="<?php echo set_value('L1_capt_quant[]');?>">
                     </div>
                 </div>
@@ -322,7 +322,7 @@
                 <div class="form-group">
                     <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
                     <div class="col-md-8">
-                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp[]">
+                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp4[]">
                             <option value="">Selecione</option>
                             <option value="teste4"<?php echo set_select('L1_capt_spp[]', 'teste4');?>>Teste4</option>
                         </select>
@@ -334,7 +334,7 @@
                     <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
                         Quantidade</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant[]"
+                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant4[]"
                                value="<?php echo set_value('L1_capt_quant[]');?>">
                     </div>
                 </div>
