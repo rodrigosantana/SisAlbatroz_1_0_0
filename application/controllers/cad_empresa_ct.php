@@ -1,82 +1,74 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Santoro
- * Date: 27/01/2015
- * Time: 07:52
- */
 
-class Cad_empresa_ct extends CI_Controller {
+class Cad_empresa_ct extends CI_Controller
+{
 //    Cadastro de empresas
-    public function cadempresa(){
+
+    public function cadempresa()
+    {
         $this->load->view("menu");
         $this->load->view("mapa_bordo/cad_empresa", array("cad_empresa" => new Cad_empresa()));
     }
 
-    public function salva(){
+//--------------------------------------------------------------------------------------------------------------------//
+
+    public function salva()
+    {
+
 //      Carrega a biblioteca de validação
         $this->load->library('form_validation');
 //      Modifica os delimitadores da msg de erro de <p></p>
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-// TODO Descrever melhor essa variável Cria um novo array do cadastro de embarcação com todas as variáveis
+
         $cad_empresa = new Cad_empresa();
 //      Chama mensagem de sucesso de envio
         $mensagem = $this->lang->line("salva_sucesso");
 
-//        TODO adicionar vars POST
 //      Salva variáveis enviados por POST do form
-//      $cad_barco->setNome($this->input->post("nome"));
-//      $cad_barco->setAuto($this->input->post("aut_pesca"));
-//      $cad_barco->setReg($this->input->post("registro"));
-//      $cad_barco->setRGP($this->input->post("rgp"));
-//      $cad_barco->setComp($this->input->post("comp"));
-//      $cad_barco->setArq($this->input->post("arq_bruta"));
-//      $cad_barco->setFab($this->input->post("fabricacao"));
-//      $cad_barco->setMat($this->input->post("material"));
-//      $cad_barco->setTrip($this->input->post("nome"));
-//      $cad_barco->setUf($this->input->post("nome"));
+        $cad_empresa->setNome($this->input->post("nome"));
+        $cad_empresa->SetCidade($this->input->post("cidade"));
+        $cad_empresa->setEnd($this->input->post("endereco"));
+        $cad_empresa->setContato($this->input->post("contato"));
+        $cad_empresa->setCargo($this->input->post("cargo"));
+        $cad_empresa->setTel($this->input->post("telefone"));
+        $cad_empresa->setEmail($this->input->post("email"));
 
 //      Array com as variáveis e as regras de validação
         $config = array(
             array(
                 'field' => 'nome',
                 'label' => 'Nome',
-                'rules' => 'required'
-            ),
-            array(
-                'field' => 'cnpj',
-                'label' => 'CNPJ',
-                'rules' => ''
+                'rules' => 'required|callback_checkNome|max_length[50]'
             ),
             array(
                 'field' => 'cidade',
                 'label' => 'Cidade',
-                'rules' => 'required'
+                'rules' => 'required|max_length[30]'
             ),
             array(
-                'field' => 'end',
+                'field' => 'endereco',
                 'label' => 'Endereço',
-                'rules' => 'required'
+                'rules' => 'required|max_length[225]'
             ),
             array(
                 'field' => 'contato',
                 'label' => 'Contato',
-                'rules' => ''
+                'rules' => 'max_length[50]'
             ),
             array(
                 'field' => 'cargo',
                 'label' => 'Cargo',
-                'rules' => ''
+                'rules' => 'max_length[50]'
             ),
             array(
                 'field' => 'tel',
                 'label' => 'Telefone',
-                'rules' => ''
+                'rules' => 'max_length[11]'
             ),
             array(
                 'field' => 'email',
                 'label' => 'E-mail',
-                'rules' => ''
+                'rules' => 'max_length[100]'
             )
         );
 
@@ -84,13 +76,30 @@ class Cad_empresa_ct extends CI_Controller {
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
+            $this->load->view("menu");
             $this->load->view("mapa_bordo/cad_empresa");
         } else {
             $this->doctrine->em->persist($cad_empresa);
             $this->doctrine->em->flush();
-            $this->load->view("mapa_bordo/cad_empresa", array("cad_empresa"=>$cad_empresa, "mensagem"=>$mensagem));
+            $this->load->view("menu");
+            $this->load->view("mapa_bordo/cad_empresa", array("cad_empresa" => $cad_empresa, "mensagem" => $mensagem));
         }
-
     }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    // Função para checar se a espécie já existe no BD
+    public function checkNome($check)
+    {
+
+        $checkNome = $this->doctrine->em->getRepository("Cad_empresa")->findOneBy(array("nome" => $check));
+        if ($checkNome == null) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkNome',
+                '<strong style="color:#FE0000">Essa empresa já foi cadastrada.</strong>');
+            return FALSE;
+        }
+    }
+//--------------------------------------------------------------------------------------------------------------------//
 
 }

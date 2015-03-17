@@ -29,47 +29,31 @@
     </div>
     <!-- Visualizar erros de validação de form do CI    -->
     <?php echo validation_errors();?>
-    <form class="form-horizontal" role="form" id="form" method="post"
-          action="<?php echo base_url();?>index.php/cad_empresa_ct/salva">
+    </br>
+    <form class="form-horizontal" role="form" id="form" method="post" action="<?php echo base_url();?>index.php/cad_empresa_ct/salva">
         <input type="hidden" id="id_empresa" name="id_empresa" value="">
         <div class="row">
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="nome" class="col-md-4 control-label">
-                        Nome: </label>
+                    <label for="nome" class="col-md-4 control-label">Nome:</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="nome" name="nome"
-                               value="<?php echo set_value('nome');?>">
+                        <input type="text" class="form-control" id="nome" name="nome" value="<?php echo set_value('nome');?>" placeholder="Nome completo da empresa">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="cnpj" class="col-md-4 control-label">
-                        CNPJ:</label>
+                    <label for="cidade" class="col-md-4 control-label">Cidade:</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="cnpj" name="cnpj" placeholder="Apenas números"
-                               value="<?php echo set_value('cnpj');?>">
+                        <input type="text" class="form-control" id="cidade" name="cidade" value="<?php echo set_value('cidade');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="cidade" class="col-md-4 control-label">
-                        Cidade:</label>
+                    <label for="end" class="col-md-4 control-label">Endereço:</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="cidade" name="cidade"
-                               value="<?php echo set_value('cidade');?>">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="end" class="col-md-4 control-label">
-                        Endereço:</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" id="end" name="end"
-                               value="<?php echo set_value('end');?>">
+                        <input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo set_value('endereco');?>">
                     </div>
                 </div>
             </div>
@@ -77,38 +61,31 @@
                 <div class="form-group">
                     <label for="contato" class="col-md-4 control-label">Contato:</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="contato" name="contato" placeholder="Pessoa"
-                               value="<?php echo set_value('contato');?>">
+                        <input type="text" class="form-control" id="contato" name="contato" placeholder="Pessoa de contato na empresa" value="<?php echo set_value('contato');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="cargo" class="col-md-4 control-label">
-                        Cargo:</label>
+                    <label for="cargo" class="col-md-4 control-label">Cargo:</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="cargo" name="cargo"
-                               placeholder="Ex: RH, Segurança, Secretária" value="<?php echo set_value('cargo');?>">
+                        <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Ex: RH, Segurança, Secretária" value="<?php echo set_value('cargo');?>">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="tel" class="col-md-4 control-label">
-                        Telefone:</label>
+                    <label for="tel" class="col-md-4 control-label">Telefone:</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="tel" name="tel"
-                            value="<?php echo set_value('tel');?>">
+                        <input type="number" class="form-control" id="telefone" name="telefone" value="<?php echo set_value('telefone');?>" placeholder="">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="email" class="col-md-4 control-label">
-                        E-mail:</label>
+                    <label for="email" class="col-md-4 control-label">E-mail:</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="email" name="email"
-                               value="<?php echo set_value('email');?>">
+                        <input type="text" class="form-control" id="email" name="email" value="<?php echo set_value('email');?>">
                     </div>
                 </div>
             </div>
@@ -122,9 +99,7 @@
 <footer class="footer">
     <div class="container">
         <p class="text-muted">
-            Projeto Albatroz -
-            Base Regional de Santa Catarina -
-            Itajaí - SC -
+            Projeto Albatroz - Base Regional de Santa Catarina - Itajaí - SC -
             Endereço: Universidade do Vale do Itajaí (Univali)
             Rua Uruguai, 458, bloco D6 - sala 145 - Centro
             CEP 88302-202 - Telefone: (13) 99753-5620 -

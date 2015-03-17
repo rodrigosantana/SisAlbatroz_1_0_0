@@ -109,7 +109,7 @@ $autoload['language'] = array('i18n');
 |
 */
 
-$autoload['model'] = array('Mapa_bordo','Cad_barco','Cad_mestre','Cad_empresa','Cad_ave','Usuarios');
+$autoload['model'] = array('Mapa_bordo','Cad_barco','Cad_mestre','Cad_empresa','Cad_ave','Users','AutorizPesca');
 
 
 /* End of file autoload.php */

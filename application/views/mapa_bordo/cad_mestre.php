@@ -30,6 +30,7 @@
 </div>
 <!-- Visualizar erros de validação de form do CI    -->
 <?php echo validation_errors();?>
+</br>
 <form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/cad_mestre_ct/salva"
       method="post">
     <input type="hidden" id="id_mb" name="id_mb" value="">
@@ -38,8 +39,8 @@
             <div class="form-group">
                 <label for="mestre" class="col-md-4 control-label">Nome:</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" id="mestre" name="mestre" placeholder="Nome do mestre"
-                           value="<?php echo set_value('mestre');?>">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do mestre"
+                           value="<?php echo set_value('nome');?>">
                 </div>
             </div>
         </div>
@@ -47,7 +48,7 @@
             <div class="form-group">
                 <label for="apelido" class="col-md-4 control-label">Apelido: </label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" id="apelido" name="apelido" placeholder="Apelido"
+                    <input type="text" class="form-control" id="apelido" name="apelido" placeholder="Caso não tenha, repetir no nome"
                            value="<?php echo set_value('apelido');?>">
                 </div>
             </div>
@@ -56,7 +57,7 @@
             <div class="form-group">
                 <label for="telefone" class="col-md-4 control-label">Telefone:</label>
                 <div class="col-md-8">
-                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Telefone"
+                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Ex: 4797444182"
                            value="<?php echo set_value('telefone');?>">
                 </div>
             </div>

@@ -1,16 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Santoro
- * Date: 29/01/2015
- * Time: 23:46
- */
-
-/**
  * @Table(name="mb_geral")
  * @Entity
  */
 class Mapa_bordo {
+
     /**
     *@var integer $id_mb
     *
@@ -66,6 +60,4 @@ class Mapa_bordo {
     {
         return $this->barco;
     }
-
-
 }

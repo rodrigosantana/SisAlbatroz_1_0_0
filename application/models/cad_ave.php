@@ -1,66 +1,100 @@
 <?php
-# LEMBRETE: Necessario editar
-# todo o arquivo conforme a estrutura do BD.
+
+// Criação da entidade para a tabela de aves
 
 /**
- * @Table(name="mb_geral")
+ * @Table(name="cad_aves")
  * @Entity
  */
 class Cad_ave {
+
+    // Definindo as varáveis da tabela e suas propriedade
     /**
-     *@var integer $id_mb
+     *@var integer $id_aves
      *
-     *@Column(name="id_mb", type="integer")
+     *@Column(name="id_aves", type="integer")
      *@Id
      *@GeneratedValue(strategy="SEQUENCE")
-     *@SequenceGenerator(sequenceName="mb_id_seq", allocationSize=1, initialValue=1)
+     *@SequenceGenerator(sequenceName="cad_aves_seq", allocationSize=1, initialValue=1)
      */
-    private $id_mb;
+    private $id_aves;
 
     /**
-     *@var string $barco
+     *@var string $nome_br
      *
-     *@Column(name="barco", type="string", length=50)
+     *@Column(name="nome_comum_br", type="string", length=50)
      */
-    private $barco;
-
-//    /**
-//    *@var string $mestre
-//    *
-//    *@Column(name="mestre", type="string", length=50)
-//    */
-//    private $mestre;
+    private $nome_br;
 
     /**
-     * Get id_mb
+    *@var string $nome_en
+    *
+    *@Column(name="nome_comum_en", type="string", length=50)
+    */
+    private $nome_en;
+
+    /**
+    *@var string $nome_cient
+    *
+    *@Column(name="nome_cientifico", type="string", length=50)
+    */
+    private $nome_cient;
+
+    // Definindo funções para as variáveis da tabela
+    /**
+     * Get id_aves
      *
-     *@return string
+     *@return integer
      */
-    public function getId_mb()
+    public function getId_aves()
     {
-        return $this->id_mb;
+        return $this->id_aves;
     }
 
     /**
-     *Set barco
+     *Set nome_comum_br
      *
-     *@param string $barco
-     *@return Mapa_bordo
+     *@param string $nome_br
+     *@return Cad_ave
      */
-    public function setBarco($barco)
+    public function setNomeBr($nome_br)
     {
-        $this->barco = $barco;
+        $this->nome_br=$nome_br;
         return $this;
     }
 
     /**
-     * Get barco
+     *Set nome_comum_en
+     *
+     *@param string $nome_en
+     *@return Cad_ave
+     */
+    public function setNomeEn($nome_en)
+    {
+        $this->nome_en=$nome_en;
+        return $this;
+    }
+
+    /**
+     *Set nome_cientifico
+     *
+     *@param string $nome_cient
+     *@return Cad_ave
+     */
+    public function setNomeCient($nome_cient)
+    {
+        $this->nome_cient=$nome_cient;
+        return $this;
+    }
+
+    /**
+     * Get ave
      *
      *@return string
      */
-    public function getBarco()
+    public function getAve()
     {
-        return $this->barco;
+        return $this->nome_br;
     }
 
 

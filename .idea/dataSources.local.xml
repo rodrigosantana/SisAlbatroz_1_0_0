@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="PostgreSQL - SisAlbatroz@localhost" uuid="465ad762-2c5a-4eb6-a6fc-3249cf348187">
+    <data-source name="PostgreSQL - SisMBAlbatroz@localhost" uuid="c4f36a92-f8ef-4e04-afc9-513ef1e74a05">
       <secret-storage>master_key</secret-storage>
       <user-name>postgres</user-name>
-      <schema-pattern>SisAlbatroz.pg_catalog SisAlbatroz.public</schema-pattern>
-      <default-schemas>SisAlbatroz.pg_catalog SisAlbatroz.public</default-schemas>
+      <schema-pattern>SisMBAlbatroz.pg_catalog SisMBAlbatroz.public</schema-pattern>
+      <default-schemas>SisMBAlbatroz.pg_catalog SisMBAlbatroz.public</default-schemas>
     </data-source>
   </component>
 </project>

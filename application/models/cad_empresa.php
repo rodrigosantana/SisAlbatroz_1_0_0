@@ -1,66 +1,166 @@
 <?php
-# TODO LEMBRETE: Necessario editar o arquivo conforme a estrutura do BD.
 
 /**
- * @Table(name="mb_geral")
+ * @Table(name="cad_empresa")
  * @Entity
  */
 class Cad_empresa {
     /**
-     *@var integer $id_mb
+     *@var integer $id_empresa
      *
-     *@Column(name="id_mb", type="integer")
+     *@Column(name="id_empresa", type="integer")
      *@Id
      *@GeneratedValue(strategy="SEQUENCE")
-     *@SequenceGenerator(sequenceName="mb_id_seq", allocationSize=1, initialValue=1)
+     *@SequenceGenerator(sequenceName="cad_empresa_seq", allocationSize=1, initialValue=1)
      */
-    private $id_mb;
+    private $id_empresa;
+
+//--------------------------------------------------------------------------------------------------------------------//
+    /**
+     *@var string $nome
+     *
+     *@Column(name="nome", type="string", length=50)
+     */
+    private $nome;
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     *@var string $barco
-     *
-     *@Column(name="barco", type="string", length=50)
-     */
-    private $barco;
-
-//    /**
-//    *@var string $mestre
-//    *
-//    *@Column(name="mestre", type="string", length=50)
-//    */
-//    private $mestre;
+    *@var string $cidade
+    *
+    *@Column(name="cidade", type="string", length=30)
+    */
+    private $cidade;
+//--------------------------------------------------------------------------------------------------------------------////--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Get id_mb
+    *@var string $end
+    *
+    *@Column(name="endereco", type="string", length=225)
+    */
+    private $end;
+//--------------------------------------------------------------------------------------------------------------------////--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+    *@var string $contato
+    *
+    *@Column(name="contato", type="string", length=50)
+    */
+    private $contato;
+//--------------------------------------------------------------------------------------------------------------------////--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+    *@var string $cargo
+    *
+    *@Column(name="cargo", type="string", length=20)
+    */
+    private $cargo;
+//--------------------------------------------------------------------------------------------------------------------////--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+    *@var string $tel
+    *
+    *@Column(name="telefone", type="string", length=11)
+    */
+    private $tel;
+//--------------------------------------------------------------------------------------------------------------------////--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+    *@var string $email
+    *
+    *@Column(name="email", type="string", length=100)
+    */
+    private $email;
+//--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     *Set nome
      *
-     *@return string
+     *@param string $nome
+     *@return Cad_empresa
      */
-    public function getId_mb()
+    public function setNome($nome)
     {
-        return $this->id_mb;
-    }
-
-    /**
-     *Set barco
-     *
-     *@param string $barco
-     *@return Mapa_bordo
-     */
-    public function setBarco($barco)
-    {
-        $this->barco = $barco;
+        $this->nome=$nome;
         return $this;
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Get barco
+     *Set cidade
      *
-     *@return string
+     *@param string $cidade
+     *@return Cad_empresa
      */
-    public function getBarco()
+    public function setCidade($cidade)
     {
-        return $this->barco;
+        $this->cidade=$cidade;
+        return $this;
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
+    /**
+     *Set endereco
+     *
+     *@param string $end
+     *@return Cad_empresa
+     */
+    public function setEnd($end)
+    {
+        $this->end=$end;
+        return $this;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     *Set contato
+     *
+     *@param string $contato
+     *@return Cad_empresa
+     */
+    public function setContato($contato)
+    {
+        $this->contato=$contato;
+        return $this;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     *Set cargo
+     *
+     *@param string $cargo
+     *@return Cad_empresa
+     */
+    public function setCargo($cargo)
+    {
+        $this->cargo=$cargo;
+        return $this;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     *Set telefone
+     *
+     *@param string $tel
+     *@return Cad_empresa
+     */
+    public function setTel($tel)
+    {
+        $this->tel=$tel;
+        return $this;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     *Set email
+     *
+     *@param string $email
+     *@return Cad_empresa
+     */
+    public function setEmail($email)
+    {
+        $this->email=$email;
+        return $this;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
 
 }

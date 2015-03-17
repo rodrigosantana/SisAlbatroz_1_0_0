@@ -29,27 +29,28 @@
     </div>
     <!-- Visualizar erros de validação de form do CI    -->
     <?php echo validation_errors();?>
+    </br>
     <form class="form-horizontal" role="form" id="form" method="post"
           action="<?php echo base_url();?>index.php/cad_barco_ct/salva">
         <input type="hidden" id="id_barco" name="id_barco" value="">
         <div class="row">
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="nome" class="col-md-4 control-label">
-                        Nome: </label>
+                    <label for="nome" class="col-md-4 control-label">Nome: </label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex: Marbella I"
-                               value="<?php echo set_value('nome');?>">
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex: Marbella I" value="<?php echo set_value('nome');?>">
                     </div>
                 </div>
             </div>
-            <!--            Todo select do basilar de petrechos -->
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
                     <label for="aut_pesca" class="col-md-4 control-label"> Autorização de Pesca:</label>
                     <div class="col-md-8">
                         <select class="form-control base" name="aut_pesca" id="aut_pesca">
-                            <option value =""           >Selecione     </option>
+                            <option value ="">Selecione     </option>
+                            <?php foreach ($auto_pesca as $autorizPesca): ?>
+                                <option value="<?php echo $autorizPesca->getModalidade()?>"><?php echo $autorizPesca->getDescricao()?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
                 </div>
@@ -59,8 +60,7 @@
                     <label for="registro" class="col-md-4 control-label">
                         Registro da Marinha:</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="registro" name="registro"
-                               value="<?php echo set_value('registro');?>">
+                        <input type="number" class="form-control" id="reg_marinha" name="reg_marinha" value="<?php echo set_value('reg_marinha');?>">
                     </div>
                 </div>
             </div>
@@ -69,8 +69,7 @@
                     <label for="rgp" class="col-md-4 control-label">
                         Número do RGP:</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="rgp" name="rgp"
-                               value="<?php echo set_value('rgp');?>">
+                        <input type="number" class="form-control" id="reg_mpa" name="reg_mpa" value="<?php echo set_value('reg_mpa');?>">
                     </div>
                 </div>
             </div>
@@ -78,8 +77,7 @@
                 <div class="form-group">
                     <label for="Comprimento" class="col-md-4 control-label">Comprimento (m):</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="comp" name="comp" placeholder="Ex:18,23"
-                               value="<?php echo set_value('comp');?>">
+                        <input type="number" class="form-control" id="comp_barco" name="comp_barco" placeholder="Ex:18,23" value="<?php echo set_value('comp_barco');?>">
                     </div>
                 </div>
             </div>
@@ -88,8 +86,7 @@
                     <label for="arq_bruta" class="col-md-4 control-label">
                         Arqueação Bruta:</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="arq_bruta" name="arq_bruta"
-                            placeholder="Não possui unidade" value="<?php echo set_value('arq_bruta');?>">
+                        <input type="number" class="form-control" id="arq_bruta" name="arq_bruta" placeholder="Não possui unidade" value="<?php echo set_value('arq_bruta');?>">
                     </div>
                 </div>
             </div>
@@ -98,8 +95,7 @@
                     <label for="fabricacao" class="col-md-4 control-label">
                         Ano de Fabricação:</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="fabricacao" name="fabricacao"
-                               placeholder="ex: 1990" value="<?php echo set_value('fabricacao');?>">
+                        <input type="number" class="form-control" id="ano_fab" name="ano_fab" placeholder="ex: 1990" value="<?php echo set_value('ano_fab');?>">
                     </div>
                 </div>
             </div>
@@ -107,12 +103,11 @@
                 <div class="form-group">
                     <label for="base" class="col-md-4 control-label"> Material do Caso:</label>
                     <div class="col-md-8">
-                        <select class="form-control base" name="material" id="material">
+                        <select class="form-control base" name="mat_casco" id="mat_casco">
                             <option value =""           >Selecione     </option>
-                            <option value ="aço"<?php echo set_select('material','aço');?>        >Aço</option>
-                            <option value ="fibra_vidro"<?php echo set_select('material','fibra_vidro');?>
-                                >Fibra de Vidro</option>
-                            <option value ="madeira"<?php echo set_select('material','madeira');?>>Madeira</option>
+                            <option value ="aço"<?php echo set_select('mat_casco','aço');?>>Aço</option>
+                            <option value ="fibra_vidro"<?php echo set_select('mat_casco','fibr_vidro');?>>Fibra de Vidro</option>
+                            <option value ="madeira"<?php echo set_select('mat_casco','madeira');?>>Madeira</option>
                          </select>
                     </div>
                 </div>
@@ -121,9 +116,9 @@
                 <div class="form-group">
                     <label for="propul" class="col-md-4 control-label">Propulsão:</label>
                     <div class="col-md-8">
-                        <select class="form-control base" name="propul" id="propul">
+                        <select class="form-control base" name="propulsao" id="propulsao">
                             <option value =""           >Selecione     </option>
-                            <option value ="motor"<?php echo set_select('propul','motor');?>>Motor</option>
+                            <option value ="motor"<?php echo set_select('propulsao','motor');?>>Motor</option>
                         </select>
                     </div>
                 </div>
@@ -132,8 +127,7 @@
                 <div class="form-group">
                     <label for="potenc" class="col-md-4 control-label">Potência do Motor (hp):</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="potenc" name="potenc"
-                            value="<?php echo set_value('potenc');?>">
+                        <input type="number" class="form-control" id="pot_motor" name="pot_motor" value="<?php echo set_value('pot_motor');?>">
                     </div>
                 </div>
             </div>
@@ -141,18 +135,29 @@
                 <div class="form-group">
                     <label for="tripulacao" class="col-md-4 control-label">Tripulação Máxima:</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="tripulacao" name="tripulacao"
-                            value="<?php echo set_value('tripulacao');?>">
+                        <input type="number" class="form-control" id="tripulacao" name="tripulacao" value="<?php echo set_value('tripulacao');?>">
                     </div>
                 </div>
             </div>
 <!--            Todo select do basilar a partir do RGP -->
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="base" class="col-md-4 control-label"> UF - Município:</label>
+                    <label for="base" class="col-md-4 control-label">Município:</label>
+                    <div class="col-md-8">
+                        <select class="form-control base" name="municipio" id="municipio">
+                            <option value =""           >Selecione     </option>
+                            <option value ="Itajai">Itajaí</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="form-group">
+                    <label for="base" class="col-md-4 control-label">UF:</label>
                     <div class="col-md-8">
                         <select class="form-control base" name="uf" id="uf">
                             <option value =""           >Selecione     </option>
+                            <option value ="SC"           >SC     </option>
                         </select>
                     </div>
                 </div>

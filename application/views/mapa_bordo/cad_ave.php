@@ -1,4 +1,3 @@
-<!-- TODO revisar e adaptar para o cadastro de aves-->
 <!-- Definindo o tipo de arquivo que vai ser -->
 <!DOCTYPE html PUBLIC>
 <!-- Abre o arquivo html e define a linguagem padrão -->
@@ -14,6 +13,7 @@
     <script src="<?php echo base_url();?>assets/js/jquery-1.11.2.js"></script>
     <script src="<?php echo base_url();?>assets/js/clone_form.js"></script>
     <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.js"></script>
+<!--    <script src="--><?php //echo base_url();?><!--assets/js/validate_ave.js"></script>-->
 </head>
 <header id="header" class="masthead">
     <img src="<?php echo base_url();?>assets/img/banner.jpg" alt="banner">
@@ -29,27 +29,25 @@
     <h1 class="text-left titulo">Cadastro de Aves Marinhas</h1>
     <hr>
 </div>
-<!-- Visualizar erros de validação de form do CI    -->
 <?php echo validation_errors();?>
+</br>
 <form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/cad_ave_ct/salva"
       method="post">
-    <input type="hidden" id="id_mb" name="id_mb" value="">
+    <input type="hidden" id="id_ave" name="id_ave" value="">
     <div class="row">
         <div class="col-sm-6 col-lg-4">
             <div class="form-group">
-                <label for="nome" class="col-md-4 control-label">Nome:</label>
+                <label for="nome" class="col-md-4 control-label">Nome comum:</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome popular"
-                           value="<?php echo set_value('nome');?>">
+                    <input type="text" class="form-control" id="nome_br" name="nome_br" placeholder="Nome popular" value="<?php echo set_value('nome_br');?>">
                 </div>
             </div>
         </div>
         <div class="col-sm-6 col-lg-4">
             <div class="form-group">
-                <label for="nome_us" class="col-md-4 control-label">Nome em Inglês: </label>
+                <label for="nome_us" class="col-md-4 control-label">Nome comum em  inglês: </label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" id="nome_us" name="nome_us"
-                           placeholder="Nome popular em inglês" value="<?php echo set_value('nome_us');?>">
+                    <input type="text" class="form-control" id="nome_en" name="nome_en" placeholder="Nome popular em inglês" value="<?php echo set_value('nome_en');?>">
                 </div>
             </div>
         </div>
@@ -57,8 +55,7 @@
             <div class="form-group">
                 <label for="spp" class="col-md-4 control-label">Nome Científico:</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control" id="spp" name="spp" placeholder="Atenção a ortografia"
-                           value="<?php echo set_value('spp');?>">
+                    <input type="text" class="form-control" id="nome_cient" name="nome_cient" placeholder="Atenção a ortografia" value="<?php echo set_value('nome_cient');?>">
                 </div>
             </div>
         </div>

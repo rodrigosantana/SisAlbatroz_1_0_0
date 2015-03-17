@@ -1,66 +1,118 @@
 <?php
-# LEMBRETE: Necessario editar
-# todo o arquivo conforme a estrutura do BD.
+
+// Criação da entidade para a tabela de aves
 
 /**
- * @Table(name="mb_geral")
+ * @Table(name="cad_mestre")
  * @Entity
  */
 class Cad_mestre {
+
+    // Definindo as varáveis da tabela e suas propriedade
     /**
-     *@var integer $id_mb
+     *@var integer $id_mestre
      *
-     *@Column(name="id_mb", type="integer")
+     *@Column(name="id_mestre", type="integer")
      *@Id
      *@GeneratedValue(strategy="SEQUENCE")
-     *@SequenceGenerator(sequenceName="mb_id_seq", allocationSize=1, initialValue=1)
+     *@SequenceGenerator(sequenceName="cad_mestre_seq", allocationSize=1, initialValue=1)
      */
-    private $id_mb;
+    private $id_mestre;
+
+//--------------------------------------------------------------------------------------------------------------------//
+    /**
+     *@var string $nome
+     *
+     *@Column(name="nome", type="string", length=50)
+     */
+    private $nome;
+
+//--------------------------------------------------------------------------------------------------------------------//
+    /**
+     *@var string $apelido
+     *
+     *@Column(name="apelido", type="string", length=50)
+     */
+    private $apelido;
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     *@var string $barco
+     *@var string $telefone
      *
-     *@Column(name="barco", type="string", length=50)
+     *@Column(name="telefone", type="string", length=11)
      */
-    private $barco;
-
-//    /**
-//    *@var string $mestre
-//    *
-//    *@Column(name="mestre", type="string", length=50)
-//    */
-//    private $mestre;
+    private $telefone;
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Get id_mb
+     *@var string $email
      *
-     *@return string
+     *@Column(name="email", type="string", length=100)
      */
-    public function getId_mb()
+    private $email;
+//--------------------------------------------------------------------------------------------------------------------//
+
+    // Definindo funções para as variáveis da tabela
+    /**
+     * Get id_mestre
+     *
+     *@return integer
+     */
+    public function getId_mestre()
     {
-        return $this->id_mb;
+        return $this->id_mestre;
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     *Set barco
+     *Set nome
      *
-     *@param string $barco
-     *@return Mapa_bordo
+     *@param string $nome
+     *@return Cad_mestre
      */
-    public function setBarco($barco)
+    public function setNome($nome)
     {
-        $this->barco = $barco;
+        $this->nome=$nome;
         return $this;
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Get barco
+     *Set apelido
      *
-     *@return string
+     *@param string $apelido
+     *@return Cad_mestre
      */
-    public function getBarco()
+    public function setApel($apelido)
     {
-        return $this->barco;
+        $this->apelido=$apelido;
+        return $this;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     *Set telefone
+     *
+     *@param string $tel
+     *@return Cad_ave
+     */
+    public function setTel($tel)
+    {
+        $this->telefone=$tel;
+        return $this;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     *Set email
+     *
+     *@param string $email
+     *@return Cad_ave
+     */
+    public function setEmail($email)
+    {
+        $this->email=$email;
+        return $this;
     }
 
 
