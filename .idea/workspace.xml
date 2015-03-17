@@ -4,27 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27bba3fd-7fac-4519-92a4-b1c13b9e77eb" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\wamp\www\SisMBAlbatroz\application\models\usuarios.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/autoload.php" afterPath="$PROJECT_DIR$/application/config/autoload.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cad_ave.php" afterPath="$PROJECT_DIR$/application/models/cad_ave.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_ave.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_ave.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_ave_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_ave_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cad_barco.php" afterPath="$PROJECT_DIR$/application/models/cad_barco.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_barco.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_barco.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_barco_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_barco_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cad_empresa.php" afterPath="$PROJECT_DIR$/application/models/cad_empresa.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_empresa.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_empresa.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_empresa_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_empresa_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cad_mestre.php" afterPath="$PROJECT_DIR$/application/models/cad_mestre.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_mestre.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_mestre.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_mestre_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_mestre_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/mapa_bordo.php" afterPath="$PROJECT_DIR$/application/models/mapa_bordo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/mapa_bordo_ct.php" afterPath="$PROJECT_DIR$/application/controllers/mapa_bordo_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/new.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/new.php" />
+    <list default="true" id="27bba3fd-7fac-4519-92a4-b1c13b9e77eb" name="Default" comment=" System update AS">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SisMBAlbatroz_CI.iws" />
@@ -376,7 +356,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426602696655</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=" System update AS">
+      <created>1426603378262</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1426603378262</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -403,6 +389,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287234" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287234" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -418,7 +405,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -813,6 +799,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6936">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
