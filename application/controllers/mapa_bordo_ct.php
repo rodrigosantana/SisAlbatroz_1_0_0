@@ -8,21 +8,40 @@
 
 class Mapa_bordo_ct extends CI_Controller {
 
+//--------------------------------------------------------------------------------------------------------------------//
+
     public function index(){
 //        $mapas = $this->doctrine->em->getRepository("Mapa_bordo")->findAll();
 //        $this->load->view("mapa_bordo/index", array("mapas"=>$mapas));
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     // Gera nova entrada vazia para ser enviado ao BD
     public function novo(){
-        // Consulta o BD e traz todos os dados
-//        $mapas = $this->doctrine->em->getRepository("Mapa_bordo")->findAll();
+        // Consulta o BD e traz dados das tabelas
+        $barcos = $this->doctrine->em->getRepository("cad_barco")->findBy(
+            array(),
+            array('nome'=>'ASC')
+        );
+        $mestres = $this->doctrine->em->getRepository("cad_mestre")->findBy(
+            array(),
+            array('apelido'=>'ASC')
+        );
+        $aves = $this->doctrine->em->getRepository("cad_ave")->findBy(
+            array(),
+            array('nome_br'=>'ASC')
+        );
 
-        #$this->load->view("mapa_bordo/new", array("mapa_bordo"=> new Mapa_bordo()));
         $this->load->view('menu');
-        // Carrega a página com os dados do BD
-        $this->load->view("mapa_bordo/new");
+        $this->load->view("mapa_bordo/new", array(
+            "mapa_bordo"=> new Mapa_bordo(),
+            "barcos"=> $barcos,
+            "mestres"=> $mestres,
+            "aves"=> $aves
+            )
+        );
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     public function salva(){
 //      Carrega a biblioteca de validação
@@ -34,34 +53,40 @@ class Mapa_bordo_ct extends CI_Controller {
         $mensagem = $this->lang->line("salva_sucesso");
 
 //      Salva variáveis enviados por POST do form
-//        $mapa_bordo->setBarco($this->input->post("barco"));
+        $mapa_bordo->setBarco($this->input->post("barco"));
+        $mapa_bordo->setMestre($this->input->post("mestre"));
+        $mapa_bordo->setPetrecho($this->input->post("petre"));
+        $mapa_bordo->setDataSaida($this->input->post("data_saida"));
+        $mapa_bordo->setDataChegada($this->input->post("data_chegada"));
+        $mapa_bordo->setObserv($this->input->post("observ"));
 
-//         $config = array(
-//             array(
-//                 'field' => 'barco',
-//                 'label' => 'Embarcação',
-//                 'rules' => 'required'
-//             ),
-//             array(
-//                 'field' => 'mestre',
-//                 'label' => 'Mestre',
-//                 'rules' => 'required'
-//             ),
-//             array(
-//                 'field' => 'petre',
-//                 'label' => 'Petrecho',
-//                 'rules' => 'required'
-//             ),
-//             array(
-//                 'field' => 'data_saida',
-//                 'label' => 'Data de Saída',
-//                 'rules' => 'required'
-//             ),
-//             array(
-//                 'field' => 'data_chegada',
-//                 'label' => 'Data de Chegada',
-//                 'rules' => 'required'
-//             ),
+//        Regras de validação do form
+         $config = array(
+             array(
+                 'field' => 'barco',
+                 'label' => 'Embarcação',
+                 'rules' => 'required'
+             ),
+             array(
+                 'field' => 'mestre',
+                 'label' => 'Mestre',
+                 'rules' => 'required'
+             ),
+             array(
+                 'field' => 'petre',
+                 'label' => 'Petrecho',
+                 'rules' => 'required'
+             ),
+             array(
+                 'field' => 'data_saida',
+                 'label' => 'Data de Saída',
+                 'rules' => 'required'
+             ),
+             array(
+                 'field' => 'data_chegada',
+                 'label' => 'Data de Chegada',
+                 'rules' => 'required'
+             ),
 //             array(
 //                 'field' => 'L1_lance',
 //                 'label' => 'L#1 Lance',
@@ -116,10 +141,10 @@ class Mapa_bordo_ct extends CI_Controller {
 //                 'field' => 'L1_ave_capt',
 //                 'label' => 'L#1 Ave Capturada',
 //                 'rules' => 'required'
-//             ),
-//         );
-// //      Validação de acordo com as regras do array
-//         $this->form_validation->set_rules($config);
+//             )
+         );
+ //      Validação de acordo com as regras definidas acima
+         $this->form_validation->set_rules($config);
 
 // //      Validação condicional de espécie e quant quando ave capturada = sim
 //         if ($this->input->post('L1_ave_capt') == 's'){
@@ -155,7 +180,7 @@ class Mapa_bordo_ct extends CI_Controller {
 //      Efetiva a validação e retorna os resultados
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/new");
+            $this->load->view("mapa_bordo/new", array("mapa_bordo"=>$mapa_bordo));
         } else {
             $this->doctrine->em->persist($mapa_bordo);
             $this->doctrine->em->flush();
@@ -163,13 +188,28 @@ class Mapa_bordo_ct extends CI_Controller {
         }
 
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
-    public function exclui(){
-        $mapa_bordo = $this->doctrine->em->find("Mapa_bordo", $this->input->get("id_mb"));
-        $this->doctrine->em->remove($mapa_bordo);
-        $this->doctrine->em->flush();
-        $this->index("Mapa de Bordo excluído com sucesso!");
-    }
+//    // Função para checar se a espécie já existe no BD
+//    public function checkNome($check){
+//
+//        $checkNome = $this->doctrine->em->getRepository("Cad_ave")->findOneBy(array("nome_cient" => $check));
+//        if ($checkNome == null){
+//            return TRUE;
+//        } else {
+//            $this->form_validation->set_message('checkNome',
+//                '<strong style="color:#FE0000">Essa espécie já foi cadastrada.</strong>');
+//            return FALSE;
+//        }
+//    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+//    public function exclui(){
+//        $mapa_bordo = $this->doctrine->em->find("Mapa_bordo", $this->input->get("id_mb"));
+//        $this->doctrine->em->remove($mapa_bordo);
+//        $this->doctrine->em->flush();
+//        $this->index("Mapa de Bordo excluído com sucesso!");
+//    }
 
 
 }

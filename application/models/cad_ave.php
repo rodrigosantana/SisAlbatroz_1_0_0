@@ -7,6 +7,7 @@
  * @Entity
  */
 class Cad_ave {
+//--------------------------------------------------------------------------------------------------------------------//
 
     // Definindo as varáveis da tabela e suas propriedade
     /**
@@ -18,6 +19,7 @@ class Cad_ave {
      *@SequenceGenerator(sequenceName="cad_aves_seq", allocationSize=1, initialValue=1)
      */
     private $id_aves;
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
      *@var string $nome_br
@@ -25,6 +27,7 @@ class Cad_ave {
      *@Column(name="nome_comum_br", type="string", length=50)
      */
     private $nome_br;
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
     *@var string $nome_en
@@ -32,6 +35,7 @@ class Cad_ave {
     *@Column(name="nome_comum_en", type="string", length=50)
     */
     private $nome_en;
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
     *@var string $nome_cient
@@ -39,6 +43,7 @@ class Cad_ave {
     *@Column(name="nome_cientifico", type="string", length=50)
     */
     private $nome_cient;
+//--------------------------------------------------------------------------------------------------------------------//
 
     // Definindo funções para as variáveis da tabela
     /**
@@ -50,6 +55,7 @@ class Cad_ave {
     {
         return $this->id_aves;
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
      *Set nome_comum_br
@@ -62,6 +68,7 @@ class Cad_ave {
         $this->nome_br=$nome_br;
         return $this;
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
      *Set nome_comum_en
@@ -74,6 +81,7 @@ class Cad_ave {
         $this->nome_en=$nome_en;
         return $this;
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
      *Set nome_cientifico
@@ -86,16 +94,26 @@ class Cad_ave {
         $this->nome_cient=$nome_cient;
         return $this;
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Get ave
+     * Get aveId
      *
-     *@return string
+     * @return string
      */
-    public function getAve()
-    {
+    public function getAveId(){
+        return $this->id_aves;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Get aveNome
+     *
+     * @return string
+     */
+    public function getAveNome(){
         return $this->nome_br;
     }
-
+//--------------------------------------------------------------------------------------------------------------------//
 
 }

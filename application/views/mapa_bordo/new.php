@@ -26,7 +26,7 @@
     <!-- JS dos campos dinâmicos do formulário    -->
     <script src="<?php echo base_url();?>assets/js/clone_form.js"></script>
     <!-- JS para vaidação do formulário    -->
-    <script src="<?php echo base_url();?>assets/js/validate.js"></script>
+<!--    <script src="--><?php //echo base_url();?><!--assets/js/validate.js"></script>-->
 </head>
 <header id="header" class="masthead">
     <img src="<?php echo base_url();?>assets/img/banner.jpg" alt="banner">
@@ -59,8 +59,9 @@
                     <div class="col-md-8">
                         <select class="form-control" id="barco" name="barco">
                             <option value="">Selecione</option>
-                            <option value="teste1">Teste1</option>
-
+                            <?php foreach ($barcos as $cad_barco): ?>
+                                <option value="<?php echo $cad_barco->getBarcoId()?>"><?php echo $cad_barco->getBarcoNome()?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
                 </div>
@@ -71,7 +72,9 @@
                     <div class="col-md-8">
                         <select class="form-control" id="mestre" name="mestre">
                             <option value="" >Selecione</option>
-                            <option value ="teste">Teste</option>
+                            <?php foreach ($mestres as $cad_mestre): ?>
+                                <option value="<?php echo $cad_mestre->getMestreId()?>"><?php echo $cad_mestre->getMestreApel()?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
                 </div>
@@ -111,7 +114,7 @@
                 <div class="form-group">
                     <label for="obs" class="col-md-4 control-label">Observações</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" id="obs" rows="2" name="obs" placeholder="Limite de 500 caracteres"></textarea>
+                        <textarea class="form-control" id="observ" rows="2" name="observ" placeholder="Limite de 500 caracteres"></textarea>
                     </div>
                 </div>
             </div>
@@ -261,7 +264,9 @@
                     <div class="col-md-8">
                         <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp1[]">
                             <option value="">Selecione</option>
-                            <option value="teste">Teste</option>
+                            <?php foreach ($aves as $cad_ave): ?>
+                                <option value="<?php echo $cad_ave->getAveId()?>"><?php echo $cad_ave->getAveNome()?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
                 </div>
