@@ -127,7 +127,7 @@
                 <div class="form-group">
                     <label for="lance" class="col-md-4 control-label lb_lance">Lance</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control lance" id="lance" name="L1_lance"
+                        <input type="number" class="form-control lance" id="lance" name="lance"
                                placeholder="Identificador do lance" value="">
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                     <label for="data_lance"
                            class="col-md-4 control-label lb_data_lance">Data</label>
                     <div class="col-md-8">
-                        <input type="date" class="form-control lance_data" id="lance_data" name="L1_lance_data"
+                        <input type="date" class="form-control lance_data" id="lance_data" name="data"
                                value="">
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                 <div class="form-group">
                     <label for="anzois" class="col-md-4 control-label lb_anzois">Anzois</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control anzois" id="anzois" name="L1_anzois"
+                        <input type="number" class="form-control anzois" id="anzois" name="anzois"
                                value="">
                     </div>
                 </div>
@@ -155,8 +155,7 @@
                 <div class="form-group">
                     <label for="lance_lat" class="col-md-4 control-label lb_lance_lat">Latitude (decimal)</label>
                     <div class="col-md-8">
-                        <input type="number" step="any" class="form-control lance_lat" id="lance_lat" name="L1_lance_lat"
-                               value="">
+                        <input type="number" step="any" class="form-control lance_lat" id="lance_lat" name="lat" value="">
                     </div>
                 </div>
             </div>
@@ -165,8 +164,7 @@
                     <label for="lance_long" class="col-md-4 control-label lb_lance_long">Longitude(decimal)
                     </label>
                     <div class="col-md-8">
-                        <input type="number" step="any" class="form-control lance_long" id="lance_long"
-                               name="L1_lance_long" value="">
+                        <input type="number" step="any" class="form-control lance_long" id="lance_long" name="long" value="">
                     </div>
                 </div>
             </div>
@@ -197,8 +195,7 @@
                 <div class="form-group">
                     <label for="lance_hora_ini" class="col-md-4 control-label lb_hora_ini">Hora Início do Lance</label>
                     <div class="col-md-8">
-                        <input type="time" class="form-control lance_hora_ini" id="lance_hora_ini"
-                               name="L1_lance_hora_ini" value="">
+                        <input type="time" class="form-control lance_hora_ini" id="lance_hora_ini" name="hora_ini" value="">
                     </div>
                 </div>
             </div>
@@ -206,8 +203,7 @@
                 <div class="form-group">
                     <label for="lance_hora_fin" class="col-md-4 control-label lb_hora_fin">Hora Final do Lance</label>
                     <div class="col-md-8">
-                        <input type="time" class="form-control lance_hora_fin" id="lance_hora_fin"
-                               name="L1_lance_hora_fin" value="">
+                        <input type="time" class="form-control lance_hora_fin" id="lance_hora_fin" name="hora_fin" value="">
                     </div>
                 </div>
             </div>
@@ -232,10 +228,10 @@
                     <label for="mm_uso" class="col-md-4 control-label lb_mm_uso">Uso da MM</label>
                     <div class="col-md-8">
                         <label class="radio-inline lb_radio" for="mm_uso-0">
-                            <input type="radio" class="mm_uso_radio" name="L1_mm_uso" id="mm_uso-0" value="total">Total
+                            <input type="radio" class="mm_uso_radio" name="mm_uso" id="mm_uso-0" value="total">Total
                         </label>
                         <label class="radio-inline lb_radio" for="mm_uso-1">
-                            <input type="radio" class="mm_uso_radio" name="L1_mm_uso" id="mm_uso-1" value="parcial">Parcial
+                            <input type="radio" class="mm_uso_radio" name="mm_uso" id="mm_uso-1" value="parcial">Parcial
                         </label>
                     </div>
                 </div>
@@ -245,10 +241,10 @@
                     <label for="ave_capt" class="col-md-4 control-label lb_ave_capt">Ave Capturada</label>
                     <div class="col-md-8">
                         <label class="radio-inline" for="ave_capt_0">
-                            <input type="radio" class="ave_capt" name="L1_ave_capt" id="ave_capt" value="s">Sim
+                            <input type="radio" class="ave_capt" name="ave_capt" id="ave_capt" value="s">Sim
                         </label>
                         <label class="radio-inline" for="ave_capt_1">
-                            <input type="radio" class="ave_capt" name="L1_ave_capt" id="ave_capt" value="n">Não
+                            <input type="radio" class="ave_capt" name="ave_capt" id="ave_capt" value="n">Não
                         </label>
                     </div>
                 </div>

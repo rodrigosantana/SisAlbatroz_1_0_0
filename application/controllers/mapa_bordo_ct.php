@@ -35,6 +35,7 @@ class Mapa_bordo_ct extends CI_Controller {
         $this->load->view('menu');
         $this->load->view("mapa_bordo/new", array(
             "mapa_bordo"=> new Mapa_bordo(),
+            "mb_lance"=> new Mb_lance(),
             "barcos"=> $barcos,
             "mestres"=> $mestres,
             "aves"=> $aves
@@ -48,7 +49,23 @@ class Mapa_bordo_ct extends CI_Controller {
         $this->load->library('form_validation');
 //      Modifica os delimitadores da msg de erro de <p></p>
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        $barcos = $this->doctrine->em->getRepository("cad_barco")->findBy(
+            array(),
+            array('nome'=>'ASC')
+        );
+        $mestres = $this->doctrine->em->getRepository("cad_mestre")->findBy(
+            array(),
+            array('apelido'=>'ASC')
+        );
+        $aves = $this->doctrine->em->getRepository("cad_ave")->findBy(
+            array(),
+            array('nome_br'=>'ASC')
+        );
+
         $mapa_bordo = new Mapa_bordo();
+        $mb_lance = new Mb_lance();
+
 //      Chama mensagem de sucesso de envio
         $mensagem = $this->lang->line("salva_sucesso");
 
@@ -59,6 +76,19 @@ class Mapa_bordo_ct extends CI_Controller {
         $mapa_bordo->setDataSaida($this->input->post("data_saida"));
         $mapa_bordo->setDataChegada($this->input->post("data_chegada"));
         $mapa_bordo->setObserv($this->input->post("observ"));
+
+
+        $mb_lance->setLance($this->input->post("lance"));
+        $mb_lance->setData($this->input->post("data"));
+        $mb_lance->setAnzois($this->input->post("anzois"));
+        $mb_lance->setLatitude($this->input->post("lat"));
+        $mb_lance->setLongitude($this->input->post("long"));
+        $mb_lance->setHoraInicial($this->input->post("hora_ini"));
+        $mb_lance->setHoraFinal($this->input->post("hora_fin"));
+        $mb_lance->setMmUso($this->input->post("mm_uso"));
+        $mb_lance->setAveCapt($this->input->post("ave_capt"));
+
+        var_dump($mapa_bordo,$mb_lance);
 
 //        Regras de validação do form
          $config = array(
@@ -180,12 +210,31 @@ class Mapa_bordo_ct extends CI_Controller {
 //      Efetiva a validação e retorna os resultados
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/new", array("mapa_bordo"=>$mapa_bordo));
+            $this->load->view("mapa_bordo/new", array(
+                "mapa_bordo"=> new Mapa_bordo(),
+                "mb_lance"=> new Mb_lance(),
+                "barcos"=> $barcos,
+                "mestres"=> $mestres,
+                "aves"=> $aves
+                )
+            );
         } else {
             $this->doctrine->em->persist($mapa_bordo);
             $this->doctrine->em->flush();
-            $this->load->view("mapa_bordo/new", array("mapa_bordo"=>$mapa_bordo, "mensagem"=>$mensagem));
+            $this->load->view("mapa_bordo/new", array(
+                "mapa_bordo"=> new Mapa_bordo(),
+                "mb_lance"=> new Mb_lance(),
+                "barcos"=> $barcos,
+                "mestres"=> $mestres,
+                "aves"=> $aves,
+                "mensagem"=>$mensagem
+                )
+            );
         }
+        var_dump($mapa_bordo);
+
+        Doctrine\Common\Util\Debug::dump($mapa_bordo);
+        echo "ID MB" . $mapa_bordo->getIdMb() . "\n";
 
     }
 //--------------------------------------------------------------------------------------------------------------------//

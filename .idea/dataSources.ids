@@ -1678,13 +1678,32 @@
       <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
     </table>
+    <table name="mb_captura" schema="public" catalog="SisMBAlbatroz" type="TABLE">
+      <column name="id_capt" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWJfY2FwdHVyYV9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="id_lance" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="aves" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="quantidade" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="pk_capt" columns="id_capt"/>
+    </table>
+    <table name="mb_captura_seq" schema="public" catalog="SisMBAlbatroz" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
     <table name="mb_geral" schema="public" catalog="SisMBAlbatroz" type="TABLE">
       <column name="id_mb" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWJfZ2VyYWxfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
       <column name="barco" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="mestre" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="petrecho" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <column name="data_saida" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
-      <column name="data_chegda" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="data_chegada" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
       <column name="observacao" sqlType="varchar" precision="500" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="pk_mb" columns="id_mb"/>
     </table>
@@ -1699,6 +1718,68 @@
       <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
       <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="mb_isca" schema="public" catalog="SisMBAlbatroz" type="TABLE">
+      <column name="id_isca" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWJfZ2VyYWxfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="id_lance" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="isca" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="pk_isca" columns="id_isca"/>
+    </table>
+    <table name="mb_isca_seq" schema="public" catalog="SisMBAlbatroz" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="mb_lance" schema="public" catalog="SisMBAlbatroz" type="TABLE">
+      <column name="id_lance" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWJfbGFuY2Vfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="id_mb" sqlType="varchar" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="lance" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="data" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="anzois" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="latitude" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="longitude" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="hora_inicial" sqlType="varchar" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="hora_final" sqlType="varchar" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="mm_uso" sqlType="varchar" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ave_capt" sqlType="varchar" precision="1" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="pk_lance" columns="id_lance"/>
+    </table>
+    <table name="mb_lance_seq" schema="public" catalog="SisMBAlbatroz" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="mb_medmit_seq" schema="public" catalog="SisMBAlbatroz" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="mb_mitiga" schema="public" catalog="SisMBAlbatroz" type="TABLE">
+      <column name="id_mm" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWJfbWVkbWl0X3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="id_lance" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="medida_mitigatoria" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="pk_mm" columns="id_mm"/>
     </table>
     <table name="users" schema="public" catalog="SisMBAlbatroz" type="TABLE">
       <column name="id_users" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgndXNlcnNfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>

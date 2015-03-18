@@ -41,19 +41,19 @@ class Mapa_bordo {
     */
     private $petrecho;
 //-------------------------------------------------------------------------------------------------------------------//
-
+//TODO rever o tipo de var para ser data
     /**
     *@var string $data_saida
     *
-    *@Column(name="data_saida", type="date", length=50)
+    *@Column(name="data_saida", type="string", length=50)
     */
     private $data_saida;
 //-------------------------------------------------------------------------------------------------------------------//
-
+//TODO mudar tipo de var para data
     /**
     *@var string $data_chegada
     *
-    *@Column(name="data_chegada", type="date", length=50)
+    *@Column(name="data_chegada", type="string", length=50)
     */
     private $data_chegada;
 //-------------------------------------------------------------------------------------------------------------------//
@@ -144,4 +144,16 @@ class Mapa_bordo {
     }
 //-------------------------------------------------------------------------------------------------------------------//
 
+    /**
+     * Get Id_mb
+     *
+     * @return string
+     */
+    public function getIdMb(){
+        return $this->id_mb;
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
 }
+
+
