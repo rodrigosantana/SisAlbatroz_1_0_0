@@ -19,6 +19,14 @@ class Mapa_bordo {
 //-------------------------------------------------------------------------------------------------------------------//
 
     /**
+    *@var integer $observ
+    *
+    *@Column(name="observador", type="string", length=50)
+    */
+    private $observ;
+//-------------------------------------------------------------------------------------------------------------------//
+
+    /**
     *@var integer $barco
     *
     *@Column(name="barco", type="integer")
@@ -65,6 +73,18 @@ class Mapa_bordo {
     */
     private $observacao;
 //-------------------------------------------------------------------------------------------------------------------//
+
+    /**
+    *Set observador
+    *
+    *@param string $observ
+    *@return Mapa_bordo
+    */
+    public function setObserv($observ)
+    {
+        $this->observ = $observ;
+        return $this;
+    }//-------------------------------------------------------------------------------------------------------------------//
 
     /**
     *Set barco
@@ -137,7 +157,7 @@ class Mapa_bordo {
     *@param string $observacao
     *@return Mapa_bordo
     */
-    public function setObserv($observacao)
+    public function setObs($observacao)
     {
         $this->observacao = $observacao;
         return $this;
@@ -151,6 +171,56 @@ class Mapa_bordo {
      */
     public function getIdMb(){
         return $this->id_mb;
+    }
+//-------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Get observador
+     *
+     * @return string
+     */
+    public function getObserv(){
+        return $this->observ;
+    }
+//-------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Get barco
+     *
+     * @return string
+     */
+    public function getBarco(){
+        return $this->barco;
+    }
+//-------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Get mestre
+     *
+     * @return string
+     */
+    public function getMestre(){
+        return $this->mestre;
+    }
+//-------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Get data_saida
+     *
+     * @return string
+     */
+    public function getDataSaida(){
+        return $this->data_saida;
+    }
+//-------------------------------------------------------------------------------------------------------------------//
+
+    /**
+     * Get data_chegada
+     *
+     * @return string
+     */
+    public function getDataChegada(){
+        return $this->data_chegada;
     }
 //--------------------------------------------------------------------------------------------------------------------//
 

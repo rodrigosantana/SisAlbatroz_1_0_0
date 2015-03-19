@@ -36,40 +36,62 @@
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Basilares <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Espécies</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Embarcações</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mestres</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_ave_ct/cadave">Espécies</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_barco_ct/cadbarco">Embarcações</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_mestre_ct/cadmestre">Mestres</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_empresa_ct/cadempresa">Empresas</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_observ_ct/cadobserv">Observadores</a></li>
                     </ul>
                 </li>
-                <li><a href="">Mapa de Bordo</a></li>
+                <li class="dropdown">
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle">Mapa de Bordo <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/index">Consulta</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">Cadastro</a></li>
+                    </ul>
+                </li>
                 <li><a href="">Sair</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </div>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Código</th>
-        <th>barco</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($mapas as $mapa_bordo): ?>
+<body>
+    <div class="container">
+        <div class="table-responsive">
+            <h2>Mapas de Bordo</h2>
+            <p>Listagem dos últimos 10 Mapas de Bordo digitados</p>
+            <table class="table table-striped table-condensed table-hover">
+        <thead>
         <tr>
-            <td> <?php echo $mapa_bordo->getId_mb()?> </td>
-            <td> <?php echo $mapa_bordo->getBarco()?> </td>
-            <td>
-                <div class="btn-group" role="group" aria-label="...">
-                    <a href="<?php echo base_url(); ?>index.php/marcact/exclui?id_mb=<?php echo $mapa_bordo->getId_mb()?>" class="btn btn-default">Excluir</a>
-                </div>
-            </td>
+            <th class="text-center">Código</th>
+            <th class="text-center">Observador</th>
+            <th class="text-center">Barco</th>
+            <th class="text-center">Mestre</th>
+            <th class="text-center">Data de Saída</th>
+            <th class="text-center">Data de Chegada</th>
         </tr>
-    <?php endforeach;?>
-    </tbody>
-</table>
-
-
+        </thead>
+        <tbody>
+        <?php foreach ($mapas as $mapa_bordo): ?>
+            <tr>
+                <td class="text-center"> <?php echo $mapa_bordo->getIdMb()?> </td>
+                <td class="text-center"> <?php echo $mapa_bordo->getObserv()?> </td>
+                <td class="text-center"> <?php echo $mapa_bordo->getBarco()?> </td>
+                <td class="text-center"> <?php echo $mapa_bordo->getMestre()?> </td>
+                <td class="text-center"> <?php echo $mapa_bordo->getDataSaida()?> </td>
+                <td class="text-center"> <?php echo $mapa_bordo->getDataChegada()?> </td>
+                <td class="text-center">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a href="<?php echo base_url(); ?>index.php/marcact/edita?id_mb=<?php echo $mapa_bordo->getIdMb()?>" class="btn btn-default">Editar</a>
+                    </div>
+                </td>
+            </tr>
+        <?php endforeach;?>
+        </tbody>
+    </table>
+        </div>
+    </div>
+</body>
 <footer class="footer">
     <div class="container">
         <p class="text-muted">

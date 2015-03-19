@@ -1,24 +1,26 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Santoro
- * Date: 27/01/2015
- * Time: 07:52
- */
 
 class Mapa_bordo_ct extends CI_Controller {
 
 //--------------------------------------------------------------------------------------------------------------------//
 
     public function index(){
-//        $mapas = $this->doctrine->em->getRepository("Mapa_bordo")->findAll();
-//        $this->load->view("mapa_bordo/index", array("mapas"=>$mapas));
+        $mapas = $this->doctrine->em->getRepository("Mapa_bordo")->findBy(
+            array(),
+            array('id_mb'=>'ASC'),
+            10
+        );
+        $this->load->view("mapa_bordo/index", array("mapas"=>$mapas));
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
     // Gera nova entrada vazia para ser enviado ao BD
     public function novo(){
         // Consulta o BD e traz dados das tabelas
+        $obs = $this->doctrine->em->getRepository("cad_observador")->findBy(
+            array(),
+            array('nome'=>'ASC')
+        );
         $barcos = $this->doctrine->em->getRepository("cad_barco")->findBy(
             array(),
             array('nome'=>'ASC')
@@ -36,6 +38,7 @@ class Mapa_bordo_ct extends CI_Controller {
         $this->load->view("mapa_bordo/new", array(
             "mapa_bordo"=> new Mapa_bordo(),
             "mb_lance"=> new Mb_lance(),
+            "obs"=> $obs,
             "barcos"=> $barcos,
             "mestres"=> $mestres,
             "aves"=> $aves
@@ -50,6 +53,10 @@ class Mapa_bordo_ct extends CI_Controller {
 //      Modifica os delimitadores da msg de erro de <p></p>
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
+        $observ = $this->doctrine->em->getRepository("cad_observador")->findBy(
+            array(),
+            array('nome'=>'ASC')
+        );
         $barcos = $this->doctrine->em->getRepository("cad_barco")->findBy(
             array(),
             array('nome'=>'ASC')
@@ -70,13 +77,13 @@ class Mapa_bordo_ct extends CI_Controller {
         $mensagem = $this->lang->line("salva_sucesso");
 
 //      Salva variáveis enviados por POST do form
+        $mapa_bordo->setObserv($this->input->post("observador"));
         $mapa_bordo->setBarco($this->input->post("barco"));
         $mapa_bordo->setMestre($this->input->post("mestre"));
         $mapa_bordo->setPetrecho($this->input->post("petre"));
         $mapa_bordo->setDataSaida($this->input->post("data_saida"));
         $mapa_bordo->setDataChegada($this->input->post("data_chegada"));
-        $mapa_bordo->setObserv($this->input->post("observ"));
-
+        $mapa_bordo->setObs($this->input->post("obs"));
 
         $mb_lance->setLance($this->input->post("lance"));
         $mb_lance->setData($this->input->post("data"));
@@ -87,8 +94,6 @@ class Mapa_bordo_ct extends CI_Controller {
         $mb_lance->setHoraFinal($this->input->post("hora_fin"));
         $mb_lance->setMmUso($this->input->post("mm_uso"));
         $mb_lance->setAveCapt($this->input->post("ave_capt"));
-
-        var_dump($mapa_bordo,$mb_lance);
 
 //        Regras de validação do form
          $config = array(
@@ -213,6 +218,7 @@ class Mapa_bordo_ct extends CI_Controller {
             $this->load->view("mapa_bordo/new", array(
                 "mapa_bordo"=> new Mapa_bordo(),
                 "mb_lance"=> new Mb_lance(),
+                "observ"=> $observ,
                 "barcos"=> $barcos,
                 "mestres"=> $mestres,
                 "aves"=> $aves
@@ -221,9 +227,11 @@ class Mapa_bordo_ct extends CI_Controller {
         } else {
             $this->doctrine->em->persist($mapa_bordo);
             $this->doctrine->em->flush();
+            $this->load->view("menu");
             $this->load->view("mapa_bordo/new", array(
                 "mapa_bordo"=> new Mapa_bordo(),
                 "mb_lance"=> new Mb_lance(),
+                "observ"=> $observ,
                 "barcos"=> $barcos,
                 "mestres"=> $mestres,
                 "aves"=> $aves,
@@ -231,11 +239,6 @@ class Mapa_bordo_ct extends CI_Controller {
                 )
             );
         }
-        var_dump($mapa_bordo);
-
-        Doctrine\Common\Util\Debug::dump($mapa_bordo);
-        echo "ID MB" . $mapa_bordo->getIdMb() . "\n";
-
     }
 //--------------------------------------------------------------------------------------------------------------------//
 

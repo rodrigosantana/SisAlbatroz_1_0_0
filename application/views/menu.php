@@ -17,17 +17,20 @@
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Basilares <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_ave_ct/cadave">
-                                Espécies</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_barco_ct/cadbarco">
-                                Embarcações</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_mestre_ct/cadmestre">
-                                Mestres</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_empresa_ct/cadempresa">
-                                Empresas</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_ave_ct/cadave">Espécies</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_barco_ct/cadbarco">Embarcações</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_mestre_ct/cadmestre">Mestres</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_empresa_ct/cadempresa">Empresas</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_observ_ct/cadobserv">Observadores</a></li>
                     </ul>
                 </li>
-                <li><a href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">Mapa de Bordo</a></li>
+                <li class="dropdown">
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle">Mapa de Bordo <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/index">Consulta</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">Cadastro</a></li>
+                    </ul>
+                </li>
                 <li><a href="<?php echo base_url();?>index.php">Sair</a></li>
             </ul>
         </div><!--/.nav-collapse -->

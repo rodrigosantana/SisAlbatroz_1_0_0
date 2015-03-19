@@ -54,6 +54,19 @@
         <div class="row">
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
+                    <label for="observador" class="col-md-4 control-label">Observador</label>
+                    <div class="col-md-8">
+                        <select class="form-control" id="observador" name="observador">
+                            <option value="">Selecione</option>
+                            <?php foreach ($obs as $cad_observador): ?>
+                                <option value="<?php echo $cad_observador->getObservId()?>"><?php echo $cad_observador->getObservNome()?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="form-group">
                     <label for="barco" class="col-md-4 control-label">Barco</label>
                     <div class="col-md-8">
                         <select class="form-control" id="barco" name="barco">
@@ -113,7 +126,7 @@
                 <div class="form-group">
                     <label for="obs" class="col-md-4 control-label">Observações</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" id="observ" rows="2" name="observ" placeholder="Limite de 500 caracteres"></textarea>
+                        <textarea class="form-control" id="obs" rows="2" name="obs" placeholder="Limite de 500 caracteres"></textarea>
                     </div>
                 </div>
             </div>

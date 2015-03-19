@@ -129,3 +129,37 @@ CREATE TABLE mb_lance (
 
 ALTER TABLE ONLY mb_lance
     ADD CONSTRAINT pk_lance PRIMARY KEY (id_lance);
+
+-------------------------------------------------------------------------
+
+CREATE SEQUENCE cad_observ_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+
+CREATE TABLE cad_observador (
+    id_observ integer DEFAULT nextval('cad_observ_seq'::regclass) NOT NULL,
+    nome character varying(50) NOT NULL,
+    cpf character varying(50) NOT NULL,
+    rg character varying(50) NOT NULL,
+    email character varying(100) NOT NULL,
+    telefone character varying(11) NOT NULL,
+    skype character varying(50) NOT NULL,
+    endereco character varying(200) NOT NULL,
+    cidade character varying(50) NOT NULL,
+    uf character varying(3) NOT NULL
+    
+);
+
+ALTER TABLE ONLY cad_observador
+    ADD CONSTRAINT pk_observ PRIMARY KEY (id_observ);
+
+-------------------------------------------------------------------------
