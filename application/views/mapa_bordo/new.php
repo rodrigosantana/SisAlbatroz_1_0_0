@@ -49,8 +49,7 @@
         <h5> Os campos (<span class="glyphicon glyphicon-asterisk"></span>) são obrigatórios! </h5>
         <hr>
     </div>
-    <form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/mapa_bordo_ct/salva"
-          method="post">
+    <form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/mapa_bordo_ct/salva" method="post">
         <input type="hidden" id="id_mb" name="id_mb" value="">
         <div class="row">
             <div class="col-sm-6 col-lg-4">

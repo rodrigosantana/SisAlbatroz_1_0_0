@@ -28,7 +28,7 @@
                     </ul>
                 </li>
                 <li><a href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">Mapa de Bordo</a></li>
-                <li><a href="">Sair</a></li>
+                <li><a href="<?php echo base_url();?>index.php">Sair</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
