@@ -71,12 +71,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Acesso ao Sistema</h4>
+                <h4 class="modal-title">Autenticação</h4>
             </div>
 
             <div class="modal-body">
                 <!-- The form is placed inside the body of modal -->
-                <form id="loginForm" method="post" class="form-horizontal" action="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">
+                <form id="loginForm" method="post" class="form-horizontal" action="<?php echo base_url();?>index.php/sistema_ct/sistema">
                     <div class="form-group">
                         <label class="col-xs-3 control-label">Usuário</label>
                         <div class="col-xs-5">
@@ -93,7 +93,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-5 col-xs-offset-3">
-                            <button type="submit" class="btn btn-default">Login</button>
+                            <button type="submit" class="btn btn-success">Login</button>
                         </div>
                     </div>
                 </form>
@@ -148,3 +148,4 @@
         </p>
     </div>
 </footer>
+</html>
