@@ -4,13 +4,13 @@ class Mapa_bordo_ct extends CI_Controller {
 
 //--------------------------------------------------------------------------------------------------------------------//
 
-    public function index(){
+    public function consulta(){
         $mapas = $this->doctrine->em->getRepository("Mapa_bordo")->findBy(
             array(),
             array('id_mb'=>'ASC'),
             10
         );
-        $this->load->view("mapa_bordo/index", array("mapas"=>$mapas));
+        $this->load->view("mapa_bordo/consulta", array("mapas"=>$mapas));
     }
 //--------------------------------------------------------------------------------------------------------------------//
 

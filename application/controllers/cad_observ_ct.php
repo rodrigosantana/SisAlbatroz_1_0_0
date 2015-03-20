@@ -47,7 +47,12 @@ class Cad_observ_ct extends CI_Controller {
             array(
                 'field' => 'cpf',
                 'label' => 'CPF',
-                'rules' => 'required|integer|max_length[9]|callback_checkCpf'
+                'rules' => 'required|integer|max_length[11]|callback_checkCpf'
+            ),
+            array(
+                'field' => 'rg',
+                'label' => 'RG',
+                'rules' => 'required|integer|max_length[11]'
             ),
             array(
                 'field' => 'email',
@@ -62,7 +67,7 @@ class Cad_observ_ct extends CI_Controller {
             array(
                 'field' => 'skype',
                 'label' => 'Skype',
-                'rules' => 'required|max_length[50]'
+                'rules' => 'max_length[50]'
             ),
             array(
                 'field' => 'end',

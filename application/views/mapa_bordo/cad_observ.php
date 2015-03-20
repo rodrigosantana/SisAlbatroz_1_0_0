@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label for="rg" class="col-md-4 control-label">RG:</label>
                 <div class="col-md-8">
-                    <input type="number" class="form-control" id="rg" name="rg"  value="<?php echo set_value('rg');?>" placeholder="Apenas dígitos">
+                    <input type="number" class="form-control" id="rg" name="rg" placeholder="Apenas dígitos" value="<?php echo set_value('rg');?>">
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
             <div class="form-group">
                 <label for="end" class="col-md-4 control-label">Endereço</label>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="end" rows="2" name="end" placeholder="Limite de 200 caracteres" value="<?php echo set_value('end');?>"></textarea>
+                    <textarea class="form-control" id="end" rows="2" name="end" placeholder="Limite de 200 caracteres" ><?php echo set_value('end');?></textarea>
                 </div>
             </div>
         </div>

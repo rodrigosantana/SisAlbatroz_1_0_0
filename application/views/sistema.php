@@ -49,7 +49,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-2 col-md-2">
-                <a href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo" class="thumbnail logo">
+                <a href="<?php echo base_url();?>index.php/mapa_bordo_ct/consulta" class="thumbnail logo">
                     <img src="<?php echo base_url();?>assets/img/PA_logo.jpg" alt="Mapa de Bordo">
                 </a>
 

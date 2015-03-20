@@ -13,7 +13,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo base_url();?>index.php">Início</a></li>
+                <li class="active"><a href="<?php echo base_url();?>sistema.php">Início</a></li>
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Basilares <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -27,7 +27,7 @@
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Mapa de Bordo <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/index">Consulta</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/consulta">Consulta</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">Cadastro</a></li>
                     </ul>
                 </li>
