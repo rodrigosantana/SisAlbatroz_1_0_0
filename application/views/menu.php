@@ -7,9 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://www.projetoalbatroz.org.br">
-                Projeto Albatroz
-            </a>
+            <a class="navbar-brand" href="http://www.projetoalbatroz.org.br">Projeto Albatroz</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -26,7 +24,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Mapa de Bordo <b class="caret"></b></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/consulta">Consulta</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">Cadastro</a></li>
                     </ul>

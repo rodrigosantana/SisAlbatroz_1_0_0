@@ -15,7 +15,6 @@ class Mapa_bordo_ct extends CI_Controller {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
-    // Gera nova entrada vazia para ser enviado ao BD
     public function novo(){
         // Consulta o BD e traz dados das tabelas
         $obs = $this->doctrine->em->getRepository("cad_observador")->findBy(
