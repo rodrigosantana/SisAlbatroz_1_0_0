@@ -75,8 +75,9 @@
             </div>
 
             <div class="modal-body">
+                <?php echo validation_errors();?>
                 <!-- The form is placed inside the body of modal -->
-                <form id="loginForm" method="post" class="form-horizontal" action="<?php echo base_url();?>index.php/sistema_ct/sistema">
+                <form id="loginForm" method="post" class="form-horizontal" action="<?php echo base_url();?>index.php/login_ct/login">
                     <div class="form-group">
                         <label class="col-xs-3 control-label">Usuário</label>
                         <div class="col-xs-5">

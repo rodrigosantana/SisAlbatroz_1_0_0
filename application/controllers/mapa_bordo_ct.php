@@ -10,6 +10,7 @@ class Mapa_bordo_ct extends CI_Controller {
             array('id_mb'=>'ASC'),
             10
         );
+        $this->load->view("menu");
         $this->load->view("mapa_bordo/consulta", array("mapas"=>$mapas));
     }
 //--------------------------------------------------------------------------------------------------------------------//

@@ -13,7 +13,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo base_url();?>sistema.php">Início</a></li>
+                <li class="active"><a href="<?php echo base_url();?>index.php/sistema_ct/sistema">Início</a></li>
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Basilares <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
