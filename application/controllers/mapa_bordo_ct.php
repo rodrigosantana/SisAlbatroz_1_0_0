@@ -5,7 +5,7 @@ class Mapa_bordo_ct extends CI_Controller {
 //--------------------------------------------------------------------------------------------------------------------//
 
     public function consulta(){
-        $mapas = $this->doctrine->em->getRepository("Mapa_bordo")->findBy(
+        $mapas = $this->doctrine->em->getRepository("Mb_geral")->findBy(
             array(),
             array('id_mb'=>'ASC'),
             10
@@ -17,11 +17,11 @@ class Mapa_bordo_ct extends CI_Controller {
 
     public function novo(){
         // Consulta o BD e traz dados das tabelas
-        $obs = $this->doctrine->em->getRepository("cad_observador")->findBy(
+        $observadores = $this->doctrine->em->getRepository("cad_observador")->findBy(
             array(),
             array('nome'=>'ASC')
         );
-        $barcos = $this->doctrine->em->getRepository("cad_barco")->findBy(
+        $embarcacoes = $this->doctrine->em->getRepository("cad_embarcacao")->findBy(
             array(),
             array('nome'=>'ASC')
         );
@@ -36,10 +36,10 @@ class Mapa_bordo_ct extends CI_Controller {
 
         $this->load->view('menu');
         $this->load->view("mapa_bordo/new", array(
-            "mapa_bordo"=> new Mapa_bordo(),
+            "mb_geral"=> new Mb_geral(),
             "mb_lance"=> new Mb_lance(),
-            "obs"=> $obs,
-            "barcos"=> $barcos,
+            "observadores"=> $observadores,
+            "embarcacoes"=> $embarcacoes,
             "mestres"=> $mestres,
             "aves"=> $aves
             )
@@ -53,11 +53,11 @@ class Mapa_bordo_ct extends CI_Controller {
 //      Modifica os delimitadores da msg de erro de <p></p>
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
-        $observ = $this->doctrine->em->getRepository("cad_observador")->findBy(
+        $observadores = $this->doctrine->em->getRepository("cad_observador")->findBy(
             array(),
             array('nome'=>'ASC')
         );
-        $barcos = $this->doctrine->em->getRepository("cad_barco")->findBy(
+        $embarcacoes = $this->doctrine->em->getRepository("cad_embarcacao")->findBy(
             array(),
             array('nome'=>'ASC')
         );
@@ -70,21 +70,20 @@ class Mapa_bordo_ct extends CI_Controller {
             array('nome_br'=>'ASC')
         );
 
-        $mapa_bordo = new Mapa_bordo();
+        $mb_geral = new Mb_geral();
         $mb_lance = new Mb_lance();
 
 //      Chama mensagem de sucesso de envio
         $mensagem = $this->lang->line("salva_sucesso");
 
 //      Salva variáveis enviados por POST do form
-        $mapa_bordo->setObserv($this->input->post("observador"));
-        $mapa_bordo->setBarco($this->input->post("barco"));
-        $mapa_bordo->setMestre($this->input->post("mestre"));
-        $mapa_bordo->setPetrecho($this->input->post("petre"));
-        $mapa_bordo->setDataSaida($this->input->post("data_saida"));
-        $mapa_bordo->setDataChegada($this->input->post("data_chegada"));
-        $mapa_bordo->setObs($this->input->post("obs"));
-
+        $mb_geral->setObservador($this->input->post("observador"));
+        $mb_geral->setEmbarcacao($this->input->post("embarcacao"));
+        $mb_geral->setMestre($this->input->post("mestre"));
+        $mb_geral->setPetrecho($this->input->post("petre"));
+        $mb_geral->setDataSaida($this->input->post("data_saida"));
+        $mb_geral->setDataChegada($this->input->post("data_chegada"));
+        $mb_geral->setObs($this->input->post("obs"));
 
         $mb_lance->setLance($this->input->post("lance"));
         $mb_lance->setData($this->input->post("data"));
@@ -99,7 +98,7 @@ class Mapa_bordo_ct extends CI_Controller {
 //        Regras de validação do form
          $config = array(
              array(
-                 'field' => 'barco',
+                 'field' => 'embarcacao',
                  'label' => 'Embarcação',
                  'rules' => 'required'
              ),
@@ -217,23 +216,23 @@ class Mapa_bordo_ct extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("menu");
             $this->load->view("mapa_bordo/new", array(
-                "mapa_bordo"=> new Mapa_bordo(),
+                "mapa_bordo"=> new Mb_geral(),
                 "mb_lance"=> new Mb_lance(),
-                "observ"=> $observ,
-                "barcos"=> $barcos,
+                "observadores"=> $observadores,
+                "embarcacoes"=> $embarcacoes,
                 "mestres"=> $mestres,
                 "aves"=> $aves
                 )
             );
         } else {
-            $this->doctrine->em->persist($mapa_bordo);
+            $this->doctrine->em->persist($mb_geral);
             $this->doctrine->em->flush();
             $this->load->view("menu");
             $this->load->view("mapa_bordo/new", array(
-                "mapa_bordo"=> new Mapa_bordo(),
+                "mapa_bordo"=> new Mb_geral(),
                 "mb_lance"=> new Mb_lance(),
-                "observ"=> $observ,
-                "barcos"=> $barcos,
+                "observadores"=> $observadores,
+                "embarcacoes"=> $embarcacoes,
                 "mestres"=> $mestres,
                 "aves"=> $aves,
                 "mensagem"=>$mensagem

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="PostgreSQL - SisMBAlbatroz@localhost" uuid="f11a92a7-78b8-4a3d-9675-7d95c567ce53">
+  <data-source name="PostgreSQL - SisMBAlbatroz@localhost" uuid="8746ef2a-2e1e-45be-800d-1d0720505e75">
     <database-info product="PostgreSQL" version="9.4.0" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.3 JDBC4 (build 1100)">
       <identifier-quote-string>&quot;</identifier-quote-string>
     </database-info>
@@ -1612,7 +1612,7 @@
       <column name="autorizacao_pesca" sqlType="varchar" precision="150" scale="0" nullable="false" jdbcType="12" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRvIHRpcG8gZGUgYXV0b3JpemHDp8OjbyBkZSBwZXNjYSBkYSBFbWJhcmNhw6fDo28gZGUgUGVzY2Eu"/>
       <column name="reg_marinha" sqlType="varchar" precision="30" scale="0" nullable="false" jdbcType="12" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRvIG7Dum1lcm8gZGUgcmVnaXN0cm8gZGEgbWFyaW5oYSBkYSBFbWJhcmNhw6fDo28gZGUgUGVzY2Eu"/>
       <column name="reg_mpa" sqlType="varchar" precision="30" scale="0" nullable="false" jdbcType="12" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRvIG7Dum1lcm8gZG8gcmVnaXN0cm8gZ2VyYWwgZGEgcGVzY2EgKE1QQSkgZGEgRW1iYXJjYcOnw6NvLg=="/>
-      <column name="comprim_barco" sqlType="numeric" precision="2" scale="0" nullable="true" jdbcType="2" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRvIGNvbXByaW1lbnRvIGRhIEVtYmFyY2HDp8OjbyBkZSBQZXNjYSBlbSBtZXRyb3Mu"/>
+      <column name="comprimento" sqlType="numeric" precision="2" scale="0" nullable="true" jdbcType="2" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRvIGNvbXByaW1lbnRvIGRhIEVtYmFyY2HDp8OjbyBkZSBQZXNjYSBlbSBtZXRyb3Mu"/>
       <column name="arqueacao_bruta" sqlType="numeric" precision="2" scale="0" nullable="true" jdbcType="2" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRhIHRvbmVsYWdlbSBkZSBhcnF1ZWHDp8OjbyBicnV0YSBkYSBFbWJhcmNhw6fDo28gZGUgUGVzY2Eu"/>
       <column name="ano_fabricacao" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRvIGFubyBkZSBmYWJyaWNhw6fDo28gZGEgRW1iYXJjYcOnw6NvIGRlIFBlc2NhLg=="/>
       <column name="mat_casco" sqlType="varchar" precision="10" scale="0" nullable="true" jdbcType="12" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRvIG1hdGVyaWFsIGRvIGNhc2NvIGRhIEVtYmFyY2HDp8OjbyBkZSBQZXNjYS4="/>
@@ -1622,6 +1622,7 @@
       <column name="municipio" sqlType="varchar" precision="20" scale="0" nullable="true" jdbcType="12" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRvIG5vbWUgZG8gbXVuaWPDrXBpbyBlbSBxdWUgYSBFbWJhcmNhw6fDo28gZGEgUGVzY2EgZXN0YSB2aW5jdWxhZGEu"/>
       <column name="uf" sqlType="varchar" precision="3" scale="0" nullable="true" jdbcType="12" remarks="Q2FtcG8gcGFyYSBpbnNlcsOnw6NvIGRhIFVuaWRhZGUgZGEgRmVkZXJhw6fDo28gZW0gcXVlIGEgRW1iYXJjYcOnw6NvIGRlIFBlc2NhIGVzdMOhIHZpbmN1bGFkYS4="/>
       <primary-key name="pk_embarcacao" columns="id_embarcacao"/>
+      <exported-key name="fk_embarcacao" table="mb_geral" schema="public" catalog="SisMBAlbatroz" columns="embarcacao"/>
     </table>
     <table name="cad_embarcacao_seq" schema="public" catalog="SisMBAlbatroz" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
@@ -1724,7 +1725,7 @@
     </table>
     <table name="mb_geral" schema="public" catalog="SisMBAlbatroz" type="TABLE">
       <column name="id_mb" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnbWJfZ2VyYWxfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
-      <column name="barco" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="embarcacao" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="mestre" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="petrecho" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
       <column name="data_saida" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
@@ -1732,6 +1733,7 @@
       <column name="observacao" sqlType="varchar" precision="500" scale="0" nullable="false" jdbcType="12"/>
       <column name="observador" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="pk_mb" columns="id_mb"/>
+      <foreign-key name="fk_embarcacao" columns="embarcacao" ref-table="cad_embarcacao" ref-schema="public" ref-catalog="" ref-columns="id_embarcacao" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="mb_geral_seq" schema="public" catalog="SisMBAlbatroz" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>

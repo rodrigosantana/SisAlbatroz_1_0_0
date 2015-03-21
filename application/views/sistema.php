@@ -48,11 +48,25 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-xs-2 col-md-2">
+            <div class="col-xs-3 col-md-3">
                 <a href="<?php echo base_url();?>index.php/mapa_bordo_ct/consulta" class="thumbnail logo">
-                    <img src="<?php echo base_url();?>assets/img/PA_logo.jpg" alt="Mapa de Bordo">
+                    <img src="<?php echo base_url();?>assets/img/PA_logo_mb.jpg" alt="Mapa de Bordo">
                 </a>
-
+            </div>
+            <div class="col-xs-3 col-md-3">
+                <a href="#" class="thumbnail logo">
+                    <img src="<?php echo base_url();?>assets/img/PA_logo_ec.jpg" alt="Entrevista de Cais">
+                </a>
+            </div>
+            <div class="col-xs-3 col-md-3">
+                <a href="#" class="thumbnail logo">
+                    <img src="<?php echo base_url();?>assets/img/PA_logo_ob.jpg" alt="Observador de Bordo">
+                </a>
+            </div>
+            <div class="col-xs-3 col-md-3">
+                <a href="#" class="thumbnail logo">
+                    <img src="<?php echo base_url();?>assets/img/PA_logo_mc.jpg" alt="Medicina da Conservação">
+                </a>
             </div>
         </div>
     </div>

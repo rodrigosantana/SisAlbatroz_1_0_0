@@ -1,17 +1,18 @@
 <?php
-class Cad_barco_ct extends CI_Controller {
+class Cad_embarcacao_ct extends CI_Controller {
 
 //    Cadastro de embarcações
-    public function cadbarco(){
+    public function cadembarcacao(){
         // Carrega o BD de modalidades de pesca
         $auto_pesca = $this->doctrine->em->getRepository("AutorizPesca")->findAll();
         $this->load->view("menu");
-        $this->load->view("mapa_bordo/cad_barco", array(
-            "cad_barco" => new Cad_barco(),
+        $this->load->view("mapa_bordo/cad_embarcacao", array(
+            "cad_embarcacao" => new Cad_embarcacao(),
             "auto_pesca" => $auto_pesca
             )
         );
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     public function salva(){
 //      Carrega a biblioteca de validação
@@ -22,24 +23,24 @@ class Cad_barco_ct extends CI_Controller {
         // Carrega o BD de modalidades de pesca
         $auto_pesca = $this->doctrine->em->getRepository("AutorizPesca")->findAll();
 
-        $cad_barco = new Cad_barco();
+        $cad_embarcacao = new Cad_embarcacao();
 //      Chama mensagem de sucesso de envio
         $mensagem = $this->lang->line("salva_sucesso");
 
 //      Salva variáveis enviados por POST do form
-      $cad_barco->setNome($this->input->post("nome"));
-      $cad_barco->setAutoPesca($this->input->post("aut_pesca"));
-      $cad_barco->setRegMarinha($this->input->post("reg_marinha"));
-      $cad_barco->setRegMpa($this->input->post("reg_mpa"));
-      $cad_barco->setCompBarco($this->input->post("comp_barco"));
-      $cad_barco->setArqBruta($this->input->post("arq_bruta"));
-      $cad_barco->setAnoFab($this->input->post("ano_fab"));
-      $cad_barco->setMatCasco($this->input->post("mat_casco"));
-      $cad_barco->setPropulsao($this->input->post("propulsao"));
-      $cad_barco->setPotMotor($this->input->post("pot_motor"));
-      $cad_barco->setTripulacao($this->input->post("tripulacao"));
-      $cad_barco->setMunicipio($this->input->post("municipio"));
-      $cad_barco->setUf($this->input->post("uf"));
+      $cad_embarcacao->setNome($this->input->post("nome"));
+      $cad_embarcacao->setAutoPesca($this->input->post("aut_pesca"));
+      $cad_embarcacao->setRegMarinha($this->input->post("reg_marinha"));
+      $cad_embarcacao->setRegMpa($this->input->post("reg_mpa"));
+      $cad_embarcacao->setComprimento($this->input->post("comprimento"));
+      $cad_embarcacao->setArqBruta($this->input->post("arq_bruta"));
+      $cad_embarcacao->setAnoFab($this->input->post("ano_fab"));
+      $cad_embarcacao->setMatCasco($this->input->post("mat_casco"));
+      $cad_embarcacao->setPropulsao($this->input->post("propulsao"));
+      $cad_embarcacao->setPotMotor($this->input->post("pot_motor"));
+      $cad_embarcacao->setTripulacao($this->input->post("tripulacao"));
+      $cad_embarcacao->setMunicipio($this->input->post("municipio"));
+      $cad_embarcacao->setUf($this->input->post("uf"));
 
 //      Array com as variáveis e as regras de validação
         $config = array(
@@ -64,7 +65,7 @@ class Cad_barco_ct extends CI_Controller {
                 'rules' => 'required|callback_checkRegMpa|max_length[30]'
             ),
             array(
-                'field' => 'comp_barco',
+                'field' => 'comprimento',
                 'label' => 'Comprimento',
                 'rules' => 'required|numeric|max_length[2]'
             ),
@@ -115,17 +116,17 @@ class Cad_barco_ct extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_barco", array(
-                "cad_barco"=>$cad_barco,
+            $this->load->view("mapa_bordo/cad_embarcacao", array(
+                "cad_embarcacao"=>$cad_embarcacao,
                 "auto_pesca" => $auto_pesca
                 )
             );
         } else {
-            $this->doctrine->em->persist($cad_barco);
+            $this->doctrine->em->persist($cad_embarcacao);
             $this->doctrine->em->flush();
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_barco", array(
-                "cad_barco"=>$cad_barco,
+            $this->load->view("mapa_bordo/cad_embarcacao", array(
+                "cad_embarcacao"=>$cad_embarcacao,
                 "auto_pesca" => $auto_pesca,
                 "mensagem"=>$mensagem
                 )
@@ -139,7 +140,7 @@ class Cad_barco_ct extends CI_Controller {
     public function checkRegMpa($check)
     {
 
-        $checkNome = $this->doctrine->em->getRepository("Cad_barco")->findOneBy(array("reg_mpa" => $check));
+        $checkNome = $this->doctrine->em->getRepository("Cad_embarcacao")->findOneBy(array("reg_mpa" => $check));
         if ($checkNome == null) {
             return TRUE;
         } else {

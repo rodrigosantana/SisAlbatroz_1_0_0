@@ -3,7 +3,7 @@
  * @Table(name="mb_geral")
  * @Entity
  */
-class Mapa_bordo {
+class Mb_geral {
 
 //--------------------------------------------------------------------------------------------------------------------//
 
@@ -19,20 +19,20 @@ class Mapa_bordo {
 //-------------------------------------------------------------------------------------------------------------------//
 
     /**
-    *@var integer $observ
+    *@var integer $observadpr
     *
     *@Column(name="observador", type="string", length=50)
     */
-    private $observ;
+    private $observador;
 //-------------------------------------------------------------------------------------------------------------------//
 
     /**
-    *@var integer $barco
+    *@var $embarcacao
     *
-    *@ManyToOne
-    *@Column(name="embarcacao", type="integer")
+    *@Column(name="embarcacao", type="string", length=50)
+    *
     */
-    private $barco;
+    private $embarcacao;
 //-------------------------------------------------------------------------------------------------------------------//
 
     /**
@@ -78,24 +78,24 @@ class Mapa_bordo {
     /**
     *Set observador
     *
-    *@param string $observ
-    *@return Mapa_bordo
+    *@param string $observador
+    *@return Mb_geral
     */
-    public function setObserv($observ)
+    public function setObservador($observador)
     {
-        $this->observ = $observ;
+        $this->observador = $observador;
         return $this;
     }//-------------------------------------------------------------------------------------------------------------------//
 
     /**
-    *Set barco
+    *Set embarcacao
     *
-    *@param string $barco
-    *@return Mapa_bordo
+    *@param string $embarcacao
+    *@return Mb_geral
     */
-    public function setBarco($barco)
+    public function setEmbarcacao($embarcacao)
     {
-        $this->barco = $barco;
+        $this->embarcacao = $embarcacao;
         return $this;
     }
 //-------------------------------------------------------------------------------------------------------------------//
@@ -104,7 +104,7 @@ class Mapa_bordo {
     *Set mestre
     *
     *@param string $mestre
-    *@return Mapa_bordo
+    *@return Mb_geral
     */
     public function setMestre($mestre)
     {
@@ -117,7 +117,7 @@ class Mapa_bordo {
     *Set petrecho
     *
     *@param string $petrecho
-    *@return Mapa_bordo
+    *@return Mb_geral
     */
     public function setPetrecho($petrecho)
     {
@@ -130,7 +130,7 @@ class Mapa_bordo {
     *Set data_saida
     *
     *@param string $data_saida
-    *@return Mapa_bordo
+    *@return Mb_geral
     */
     public function setDataSaida($data_saida)
     {
@@ -143,7 +143,7 @@ class Mapa_bordo {
     *Set data_chegada
     *
     *@param string $data_chegada
-    *@return Mapa_bordo
+    *@return Mb_geral
     */
     public function setDataChegada($data_chegada)
     {
@@ -155,8 +155,8 @@ class Mapa_bordo {
     /**
     *Set observacao
     *
-    *@param string $observacao
-    *@return Mapa_bordo
+    *@param string $obs
+    *@return Mb_geral
     */
     public function setObs($observacao)
     {
@@ -181,17 +181,17 @@ class Mapa_bordo {
      * @return string
      */
     public function getObserv(){
-        return $this->observ;
+        return $this->observador;
     }
 //-------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Get barco
+     * Get embarcacao
      *
      * @return string
      */
-    public function getBarco(){
-        return $this->barco;
+    public function getEmbarcacao(){
+        return $this->embarcacao;
     }
 //-------------------------------------------------------------------------------------------------------------------//
 

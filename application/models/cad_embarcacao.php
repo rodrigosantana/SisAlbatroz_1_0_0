@@ -3,7 +3,7 @@
  * @Table(name="cad_embarcacao")
  * @Entity
  */
-class Cad_barco {
+class Cad_embarcacao {
 
     /**
      *@var integer $id_embarcacao
@@ -49,11 +49,11 @@ class Cad_barco {
 //--------------------------------------------------------------------------------------------------------------------//
 //TODO rever o tipo de var (numeric)
     /**
-     *@var string $comp_barco
+     *@var string $comprimento
      *
-     *@Column(name="comprim_barco", type="string", length=2)
+     *@Column(name="comprimento", type="string", length=2)
      */
-    private $comp_barco;
+    private $comprimento;
 //--------------------------------------------------------------------------------------------------------------------//
 //TODO rever o tipo de var (numeric)
     /**
@@ -124,7 +124,7 @@ class Cad_barco {
      * set nome
      *
      * @param string $nome
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setNome($nome){
         $this->nome=$nome;
@@ -136,7 +136,7 @@ class Cad_barco {
      * set autorizacao_pesca
      *
      * @param string $auto_pesca
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setAutoPesca($auto_pesca){
         $this->auto_pesca=$auto_pesca;
@@ -148,7 +148,7 @@ class Cad_barco {
      * set reg_marinha
      *
      * @param string $reg_marinha
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setRegMarinha($reg_marinha){
         $this->reg_marinha=$reg_marinha;
@@ -160,7 +160,7 @@ class Cad_barco {
      * set reg_mpa
      *
      * @param string $reg_mpa
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setRegMpa($reg_mpa){
         $this->reg_mpa=$reg_mpa;
@@ -169,13 +169,13 @@ class Cad_barco {
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * set comprim_barco
+     * set comprimento
      *
-     * @param string $comp_barco
-     * @return Cad_barco
+     * @param string $comprimento
+     * @return Cad_embarcacao
      */
-    public function setCompBarco($comp_barco){
-        $this->comp_barco=$comp_barco;
+    public function setComprimento($comprimento){
+        $this->comprimento=$comprimento;
         return $this;
     }
 //--------------------------------------------------------------------------------------------------------------------//
@@ -184,7 +184,7 @@ class Cad_barco {
      * set arqueacao_bruta
      *
      * @param string $arq_bruta
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setArqBruta($arq_bruta){
         $this->arq_bruta=$arq_bruta;
@@ -196,7 +196,7 @@ class Cad_barco {
      * set ano_fabricacao
      *
      * @param string $ano_fab
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setAnoFab($ano_fab){
         $this->ano_fab=$ano_fab;
@@ -208,7 +208,7 @@ class Cad_barco {
      * set mat_casco
      *
      * @param string $mat_casco
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setMatCasco($mat_casco){
         $this->mat_casco=$mat_casco;
@@ -220,7 +220,7 @@ class Cad_barco {
      * set propulsao
      *
      * @param string $propulsao
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setPropulsao($propulsao){
         $this->propulsao=$propulsao;
@@ -232,7 +232,7 @@ class Cad_barco {
      * set potencia_motor
      *
      * @param string $pot_motor
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setPotMotor($pot_motor){
         $this->pot_motor=$pot_motor;
@@ -244,7 +244,7 @@ class Cad_barco {
      * set tripulacao
      *
      * @param string $tripulacao
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setTripulacao($tripulacao){
         $this->tripulacao=$tripulacao;
@@ -256,7 +256,7 @@ class Cad_barco {
      * set municipio
      *
      * @param string $municipio
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setMunicipio($municipio){
         $this->municipio=$municipio;
@@ -268,7 +268,7 @@ class Cad_barco {
      * set uf
      *
      * @param string $uf
-     * @return Cad_barco
+     * @return Cad_embarcacao
      */
     public function setUf($uf){
         $this->uf=$uf;
@@ -277,21 +277,21 @@ class Cad_barco {
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Get barcoId
+     * Get Embarcacao Id
      *
      * @return string
      */
-    public function getBarcoId(){
+    public function getEmbarcacaoId(){
         return $this->id_embarcacao;
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * Get barcoNome
+     * Get Embarcacao Nome
      *
      * @return string
      */
-    public function getBarcoNome(){
+    public function getEmbarcacaoNome(){
         return $this->nome;
     }
 //--------------------------------------------------------------------------------------------------------------------//

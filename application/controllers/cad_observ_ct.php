@@ -8,7 +8,7 @@ class Cad_observ_ct extends CI_Controller {
     public function cadobserv(){
         $this->load->view('menu');
         // Cad_ave se refere a classe do model Cad_ave.php
-        $this->load->view("mapa_bordo/cad_observ", array("cad_observ"=>new Cad_observador()));
+        $this->load->view("mapa_bordo/cad_observador", array("cad_observador"=>new Cad_observador()));
         // Debugger
         //$this->output->enable_profiler(true);
     }
@@ -22,21 +22,21 @@ class Cad_observ_ct extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
         // Prepara um novo form par ser enviado ao banco
-        $cad_observ = new Cad_observador();
+        $cad_observador = new Cad_observador();
 
         //Chama mensagem de sucesso de envio
         $mensagem = $this->lang->line("salva_sucesso");
 
         //Salva variáveis enviados por POST do form
-        $cad_observ ->setNome($this->input->post("nome"));
-        $cad_observ ->setCpf($this->input->post("cpf"));
-        $cad_observ ->setRg($this->input->post("rg"));
-        $cad_observ ->setEmail($this->input->post("email"));
-        $cad_observ ->setTel($this->input->post("tel"));
-        $cad_observ ->setSkype($this->input->post("skype"));
-        $cad_observ ->setEnd($this->input->post("end"));
-        $cad_observ ->setCidade($this->input->post("cidade"));
-        $cad_observ ->setUf($this->input->post("uf"));
+        $cad_observador ->setNome($this->input->post("nome"));
+        $cad_observador ->setCpf($this->input->post("cpf"));
+        $cad_observador ->setRg($this->input->post("rg"));
+        $cad_observador ->setEmail($this->input->post("email"));
+        $cad_observador ->setTel($this->input->post("tel"));
+        $cad_observador ->setSkype($this->input->post("skype"));
+        $cad_observador ->setEnd($this->input->post("end"));
+        $cad_observador ->setCidade($this->input->post("cidade"));
+        $cad_observador ->setUf($this->input->post("uf"));
 
         $config = array(
             array(
@@ -90,12 +90,12 @@ class Cad_observ_ct extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_observ", array("cad_observ"=>$cad_observ));
+            $this->load->view("mapa_bordo/cad_observador", array("cad_observador"=> new Cad_observador()));
         } else {
-            $this->doctrine->em->persist($cad_observ);
+            $this->doctrine->em->persist($cad_observador);
             $this->doctrine->em->flush();
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_observ", array("cad_observ"=> new cad_observ, "mensagem"=>$mensagem));
+            $this->load->view("mapa_bordo/cad_observador", array("Cad_observador"=> new Cad_observador(), "mensagem"=>$mensagem));
         }
     }
 //--------------------------------------------------------------------------------------------------------------------//

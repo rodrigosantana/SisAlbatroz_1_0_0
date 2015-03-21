@@ -55,12 +55,12 @@ class Cad_mestre_ct extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_mestre");
+            $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=> new Cad_mestre()));
         } else {
             $this->doctrine->em->persist($cad_mestre);
             $this->doctrine->em->flush();
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=>$cad_mestre, "mensagem"=>$mensagem));
+            $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=>new Cad_mestre(), "mensagem"=>$mensagem));
         }
     }
 //--------------------------------------------------------------------------------------------------------------------//

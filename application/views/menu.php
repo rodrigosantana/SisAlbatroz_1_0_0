@@ -16,7 +16,7 @@
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Basilares <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_ave_ct/cadave">Espécies</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_barco_ct/cadbarco">Embarcações</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_embarcacao_ct/cadembarcacao">Embarcações</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_mestre_ct/cadmestre">Mestres</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_empresa_ct/cadempresa">Empresas</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/cad_observ_ct/cadobserv">Observadores</a></li>

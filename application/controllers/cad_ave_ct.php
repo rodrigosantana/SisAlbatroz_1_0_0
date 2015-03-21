@@ -54,12 +54,12 @@ class Cad_ave_ct extends CI_Controller {
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>$cad_ave));
+            $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>new Cad_ave()));
             $this->load->view("menu");
         } else {
             $this->doctrine->em->persist($cad_ave);
             $this->doctrine->em->flush();
-            $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>$cad_ave, "mensagem"=>$mensagem));
+            $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>new Cad_ave(), "mensagem"=>$mensagem));
             $this->load->view("menu");
         }
     }

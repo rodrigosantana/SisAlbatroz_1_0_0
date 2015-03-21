@@ -31,7 +31,7 @@
     <?php echo validation_errors();?>
     </br>
     <form class="form-horizontal" role="form" id="form" method="post"
-          action="<?php echo base_url();?>index.php/cad_barco_ct/salva">
+          action="<?php echo base_url();?>index.php/cad_embarcacao_ct/salva">
         <input type="hidden" id="id_barco" name="id_barco" value="">
         <div class="row">
             <div class="col-sm-6 col-lg-4">
@@ -77,7 +77,7 @@
                 <div class="form-group">
                     <label for="Comprimento" class="col-md-4 control-label">Comprimento (m):</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="comp_barco" name="comp_barco" placeholder="Ex:18,23" value="<?php echo set_value('comp_barco');?>">
+                        <input type="number" class="form-control" id="comprimento" name="comprimento" placeholder="Ex:18,23" value="<?php echo set_value('comprimento');?>">
                     </div>
                 </div>
             </div>

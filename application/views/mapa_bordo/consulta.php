@@ -26,7 +26,7 @@
         <tr>
             <th class="text-center">Código</th>
             <th class="text-center">Observador</th>
-            <th class="text-center">Barco</th>
+            <th class="text-center">Embarcacao</th>
             <th class="text-center">Mestre</th>
             <th class="text-center">Data de Saída</th>
             <th class="text-center">Data de Chegada</th>
@@ -37,13 +37,13 @@
             <tr>
                 <td class="text-center"> <?php echo $mapa_bordo->getIdMb()?> </td>
                 <td class="text-center"> <?php echo $mapa_bordo->getObserv()?> </td>
-                <td class="text-center"> <?php echo $mapa_bordo->getBarco()?> </td>
+                <td class="text-center"> <?php echo $mapa_bordo->getEmbarcacao()?> </td>
                 <td class="text-center"> <?php echo $mapa_bordo->getMestre()?> </td>
                 <td class="text-center"> <?php echo $mapa_bordo->getDataSaida()?> </td>
                 <td class="text-center"> <?php echo $mapa_bordo->getDataChegada()?> </td>
                 <td class="text-center">
                     <div class="btn-group" role="group" aria-label="...">
-                        <a href="<?php echo base_url(); ?>index.php/marcact/edita?id_mb=<?php echo $mapa_bordo->getIdMb()?>" class="btn btn-default">Editar</a>
+                        <a href="#" class="btn btn-default">Editar</a>
                     </div>
                 </td>
             </tr>

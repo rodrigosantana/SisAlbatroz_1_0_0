@@ -11,22 +11,23 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css" />
     <!-- CSS do bootstrap    -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css"/>
-    <!-- CSS do plugin de validação    -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/formvalidation/dist/css/formValidation.css"/>
-    <!-- Biblioteca Bootstrap    -->
-    <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.js"></script>
+<!--    <!-- CSS do plugin de validação    -->
+<!--    <link rel="stylesheet" type="text/css" href="--><?php //echo base_url();?><!--assets/formvalidation/dist/css/formValidation.css"/>-->
     <!-- Biblioteca JQuery     -->
     <script src="<?php echo base_url();?>assets/js/jquery-1.11.2.js"></script>
-    <!-- Biblioteca do Plugin de Validação e classe suporte do Bootstrap    -->
-    <script src="<?php echo base_url();?>assets/formvalidation/dist/js/formValidation.js"></script>
-    <script src="<?php echo base_url();?>assets/formvalidation/dist/js/framework/bootstrap.js"></script>
-    <!-- Biblioteca de linguagem local para as mensagens de validação do form       -->
-    <script src="<?php echo base_url();?>assets/formvalidation/dist/js/language/pt_BR.js"></script>
+    <!-- Biblioteca Bootstrap    -->
+    <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.js"></script>
+<!--    <!-- Biblioteca do Plugin de Validação JQuery e classe suporte do Bootstrap    -->
+<!--    <script src="--><?php //echo base_url();?><!--assets/formvalidation/dist/js/formValidation.js"></script>-->
+<!--    <script src="--><?php //echo base_url();?><!--assets/formvalidation/dist/js/framework/bootstrap.js"></script>-->
+<!--    <!-- Biblioteca de linguagem local para as mensagens de validação do form       -->
+<!--    <script src="--><?php //echo base_url();?><!--assets/formvalidation/dist/js/language/pt_BR.js"></script>-->
 
     <!-- JS dos campos dinâmicos do formulário    -->
     <script src="<?php echo base_url();?>assets/js/clone_form.js"></script>
     <!-- JS para vaidação do formulário    -->
 <!--    <script src="--><?php //echo base_url();?><!--assets/js/validate.js"></script>-->
+
 </head>
 <header id="header" class="masthead">
     <img src="<?php echo base_url();?>assets/img/banner.jpg" alt="banner">
@@ -46,7 +47,8 @@
     <?php echo validation_errors();?>
     <div class="col-sm-12 col-lg-12">
         <h2 class="text-center titulo"> Dados Gerais </h2>
-        <h5> Os campos (<span class="glyphicon glyphicon-asterisk"></span>) são obrigatórios! </h5>
+<!--        Aviso utilizado em conjunto com a validação Jquery alternativa-->
+<!--        <h5> Os campos (<span class="glyphicon glyphicon-asterisk"></span>) são obrigatórios! </h5>-->
         <hr>
     </div>
     <form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/mapa_bordo_ct/salva" method="post">
@@ -58,7 +60,7 @@
                     <div class="col-md-8">
                         <select class="form-control" id="observador" name="observador">
                             <option value="">Selecione</option>
-                            <?php foreach ($obs as $cad_observador): ?>
+                            <?php foreach ($observadores as $cad_observador): ?>
                                 <option value="<?php echo $cad_observador->getObservId()?>"><?php echo $cad_observador->getObservNome()?></option>
                             <?php endforeach;?>
                         </select>
@@ -67,12 +69,12 @@
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="barco" class="col-md-4 control-label">Barco</label>
+                    <label for="embarcacao" class="col-md-4 control-label">Embarcacao</label>
                     <div class="col-md-8">
-                        <select class="form-control" id="barco" name="barco">
+                        <select class="form-control" id="embarcacao" name="embarcacao">
                             <option value="">Selecione</option>
-                            <?php foreach ($barcos as $cad_barco): ?>
-                                <option value="<?php echo $cad_barco->getBarcoId()?>"><?php echo $cad_barco->getBarcoNome()?></option>
+                            <?php foreach ($embarcacoes as $cad_embarcacao): ?>
+                                <option value="<?php echo $cad_embarcacao->getEmbarcacaoId()?>"><?php echo $cad_embarcacao->getEmbarcacaoNome()?></option>
                             <?php endforeach;?>
                         </select>
                     </div>

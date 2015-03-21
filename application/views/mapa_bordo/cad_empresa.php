@@ -75,9 +75,9 @@
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="tel" class="col-md-4 control-label">Telefone:</label>
+                    <label for="telefone" class="col-md-4 control-label">Telefone:</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" id="telefone" name="telefone" value="<?php echo set_value('telefone');?>" placeholder="">
+                        <input type="number" class="form-control" id="telefone" name="telefone" value="<?php echo set_value('telefone');?>">
                     </div>
                 </div>
             </div>

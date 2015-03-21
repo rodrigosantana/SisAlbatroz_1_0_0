@@ -30,7 +30,7 @@ $(document).ready(function() {
             // Campos e regras de validação
             fields: {
                 // Nome do campo
-                'barco':{
+                'embarcacao':{
                     // Validadores
                     validators:{
                         notEmpty:{
