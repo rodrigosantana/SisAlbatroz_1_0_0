@@ -85,6 +85,7 @@ class Mapa_bordo_ct extends CI_Controller {
         $mapa_bordo->setDataChegada($this->input->post("data_chegada"));
         $mapa_bordo->setObs($this->input->post("obs"));
 
+
         $mb_lance->setLance($this->input->post("lance"));
         $mb_lance->setData($this->input->post("data"));
         $mb_lance->setAnzois($this->input->post("anzois"));

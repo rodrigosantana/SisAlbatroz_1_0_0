@@ -95,7 +95,7 @@ class Cad_observ_ct extends CI_Controller {
             $this->doctrine->em->persist($cad_observ);
             $this->doctrine->em->flush();
             $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_observ", array("cad_observ"=>$cad_observ, "mensagem"=>$mensagem));
+            $this->load->view("mapa_bordo/cad_observ", array("cad_observ"=> new cad_observ, "mensagem"=>$mensagem));
         }
     }
 //--------------------------------------------------------------------------------------------------------------------//

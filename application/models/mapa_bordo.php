@@ -29,7 +29,8 @@ class Mapa_bordo {
     /**
     *@var integer $barco
     *
-    *@Column(name="barco", type="integer")
+    *@ManyToOne
+    *@Column(name="embarcacao", type="integer")
     */
     private $barco;
 //-------------------------------------------------------------------------------------------------------------------//
