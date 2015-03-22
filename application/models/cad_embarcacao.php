@@ -51,7 +51,7 @@ class Cad_embarcacao {
     /**
      *@var string $comprimento
      *
-     *@Column(name="comprimento", type="string", length=2)
+     *@Column(name="comprim_barco", type="decimal")
      */
     private $comprimento;
 //--------------------------------------------------------------------------------------------------------------------//

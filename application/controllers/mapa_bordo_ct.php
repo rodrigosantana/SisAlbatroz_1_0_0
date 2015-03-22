@@ -41,7 +41,8 @@ class Mapa_bordo_ct extends CI_Controller {
             "observadores"=> $observadores,
             "embarcacoes"=> $embarcacoes,
             "mestres"=> $mestres,
-            "aves"=> $aves
+            "aves"=> $aves,
+            "countLance"=>0
             )
         );
     }

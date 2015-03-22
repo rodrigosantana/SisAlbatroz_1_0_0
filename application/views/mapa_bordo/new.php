@@ -11,12 +11,26 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css" />
     <!-- CSS do bootstrap    -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/select2/select2.css"/>
 <!--    <!-- CSS do plugin de validação    -->
 <!--    <link rel="stylesheet" type="text/css" href="--><?php //echo base_url();?><!--assets/formvalidation/dist/css/formValidation.css"/>-->
     <!-- Biblioteca JQuery     -->
+    
+    <style>
+        .select2-choice {
+            height: 34px !important;
+        }
+        
+        .select2-chosen {
+            margin-top: 3px;
+        }
+    </style>
+    
     <script src="<?php echo base_url();?>assets/js/jquery-1.11.2.js"></script>
     <!-- Biblioteca Bootstrap    -->
     <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.js"></script>
+    <script src="<?php echo base_url(); ?>assets/select2/select2.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/addPrototype.js"></script>
 <!--    <!-- Biblioteca do Plugin de Validação JQuery e classe suporte do Bootstrap    -->
 <!--    <script src="--><?php //echo base_url();?><!--assets/formvalidation/dist/js/formValidation.js"></script>-->
 <!--    <script src="--><?php //echo base_url();?><!--assets/formvalidation/dist/js/framework/bootstrap.js"></script>-->
@@ -58,8 +72,8 @@
                 <div class="form-group">
                     <label for="observador" class="col-md-4 control-label">Observador</label>
                     <div class="col-md-8">
-                        <select class="form-control" id="observador" name="observador">
-                            <option value="">Selecione</option>
+                        <select class="select2" id="observador" name="observador" style="width: 100%">
+                            <option></option>
                             <?php foreach ($observadores as $cad_observador): ?>
                                 <option value="<?php echo $cad_observador->getObservId()?>"><?php echo $cad_observador->getObservNome()?></option>
                             <?php endforeach;?>
@@ -71,8 +85,8 @@
                 <div class="form-group">
                     <label for="embarcacao" class="col-md-4 control-label">Embarcacao</label>
                     <div class="col-md-8">
-                        <select class="form-control" id="embarcacao" name="embarcacao">
-                            <option value="">Selecione</option>
+                        <select class="select2" id="embarcacao" name="embarcacao" style="width: 100%">
+                            <option></option>
                             <?php foreach ($embarcacoes as $cad_embarcacao): ?>
                                 <option value="<?php echo $cad_embarcacao->getEmbarcacaoId()?>"><?php echo $cad_embarcacao->getEmbarcacaoNome()?></option>
                             <?php endforeach;?>
@@ -84,8 +98,8 @@
                 <div class="form-group">
                     <label for="mestre" class="col-md-4 control-label">Mestre</label>
                     <div class="col-md-8">
-                        <select class="form-control" id="mestre" name="mestre">
-                            <option value="" >Selecione</option>
+                        <select class="select2" id="mestre" name="mestre" style="width: 100%">
+                            <option></option>
                             <?php foreach ($mestres as $cad_mestre): ?>
                                 <option value="<?php echo $cad_mestre->getMestreId()?>"><?php echo $cad_mestre->getMestreApel()?></option>
                             <?php endforeach;?>
@@ -133,231 +147,16 @@
                 </div>
             </div>
         </div>
-        <div class="row lancamento" id="lancamento1">
-            <h2 class="text-center titulo">Dados do Lançamento</h2>
-            <hr>
-            <h4 id="reference" class="heading-reference titulo"> Lançamento #1 </h4>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="lance" class="col-md-4 control-label lb_lance">Lance</label>
-                    <div class="col-md-8">
-                        <input type="number" class="form-control lance" id="lance" name="lance"
-                               placeholder="Identificador do lance" value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="data_lance"
-                           class="col-md-4 control-label lb_data_lance">Data</label>
-                    <div class="col-md-8">
-                        <input type="date" class="form-control lance_data" id="lance_data" name="data"
-                               value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="anzois" class="col-md-4 control-label lb_anzois">Anzois</label>
-                    <div class="col-md-8">
-                        <input type="number" class="form-control anzois" id="anzois" name="anzois"
-                               value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="lance_lat" class="col-md-4 control-label lb_lance_lat">Latitude (decimal)</label>
-                    <div class="col-md-8">
-                        <input type="number" step="any" class="form-control lance_lat" id="lance_lat" name="lat" value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="lance_long" class="col-md-4 control-label lb_lance_long">Longitude(decimal)
-                    </label>
-                    <div class="col-md-8">
-                        <input type="number" step="any" class="form-control lance_long" id="lance_long" name="long" value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="isca" class="col-md-4 control-label lb_isca">Isca</label>
-                    <div class="col-md-8">
-                        <label class="checkbox-inline" for="isca_0">
-                            <input type="checkbox" class="isca_check" id="isca_0" name="L1_isca[]"
-                                   value="lula">Lula
-                        </label>
-                        <label class="checkbox-inline" for="isca_1">
-                            <input type="checkbox" class="isca_check" id="isca_1" name="L1_isca[]"
-                                   value="cavalinha">Cavalinha
-                        </label>
-                        <label class="checkbox-inline" for="isca_2">
-                            <input type="checkbox" class="isca_check" id="isca_2" name="L1_isca[]"
-                                   value="bonito">Bonito
-                        </label>
-                        <label class="checkbox-inline" for="isca_3">
-                            <input type="checkbox" class="isca_check" id="isca_3" name="L1_isca[]"
-                                   value="sardinha">Sardinha
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="lance_hora_ini" class="col-md-4 control-label lb_hora_ini">Hora Início do Lance</label>
-                    <div class="col-md-8">
-                        <input type="time" class="form-control lance_hora_ini" id="lance_hora_ini" name="hora_ini" value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="lance_hora_fin" class="col-md-4 control-label lb_hora_fin">Hora Final do Lance</label>
-                    <div class="col-md-8">
-                        <input type="time" class="form-control lance_hora_fin" id="lance_hora_fin" name="hora_fin" value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="mm_tipo" class="col-md-4 control-label lb_mm_tipo">Medida Mitigatória </label>
-                    <div class="col-md-8">
-                        <label class="checkbox-inline" for="mm_tipo_0">
-                            <input type="checkbox" class="mm_check" id="mm_tipo_0" name="L1_mm_tipo[]"  value="toriline">Toriline
-                        </label>
-                        <label class="checkbox-inline" for="mm_tipo_1">
-                            <input type="checkbox" class="mm_check"  id="mm_tipo_1" name="L1_mm_tipo[]" value="larg_noturna">Largada noturna
-                        </label>
-                        <label class="checkbox-inline" for="mm_tipo_2">
-                            <input type="checkbox" class="mm_check" id="mm_tipo_2" name="L1_mm_tipo[]" value="reg_peso">Regime de peso
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="mm_uso" class="col-md-4 control-label lb_mm_uso">Uso da MM</label>
-                    <div class="col-md-8">
-                        <label class="radio-inline lb_radio" for="mm_uso-0">
-                            <input type="radio" class="mm_uso_radio" name="mm_uso" id="mm_uso-0" value="total">Total
-                        </label>
-                        <label class="radio-inline lb_radio" for="mm_uso-1">
-                            <input type="radio" class="mm_uso_radio" name="mm_uso" id="mm_uso-1" value="parcial">Parcial
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="form-group">
-                    <label for="ave_capt" class="col-md-4 control-label lb_ave_capt">Ave Capturada</label>
-                    <div class="col-md-8">
-                        <label class="radio-inline" for="ave_capt_0">
-                            <input type="radio" class="ave_capt" name="ave_capt" id="ave_capt" value="s">Sim
-                        </label>
-                        <label class="radio-inline" for="ave_capt_1">
-                            <input type="radio" class="ave_capt" name="ave_capt" id="ave_capt" value="n">Não
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <input type="hidden" name="count" id="count" value="1" />
-            <div class="col-sm-12 col-lg-12">
-                <h2 class="text-center titulo">Dados de Captura de Aves</h2>
-                <hr>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
-                    <div class="col-md-8">
-                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp1[]">
-                            <option value="">Selecione</option>
-                            <?php foreach ($aves as $cad_ave): ?>
-                                <option value="<?php echo $cad_ave->getAveId()?>"><?php echo $cad_ave->getAveNome()?></option>
-                            <?php endforeach;?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">Quantidade</label>
-                    <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant1[]"
-                               value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
-                    <div class="col-md-8">
-                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp2[]">
-                            <option value="">Selecione</option>
-                            <option value="teste2">Teste2</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
-                        Quantidade</label>
-                    <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant2[]"
-                               value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
-                    <div class="col-md-8">
-                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp3[]">
-                            <option value="">Selecione</option>
-                            <option value="teste3">Teste3</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
-                        Quantidade</label>
-                    <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant3[]"
-                               value="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_spp" class="col-md-4 control-label lb_capt_spp">Espécie</label>
-                    <div class="col-md-8">
-                        <select class="form-control capt_spp" id="ID1_capt_spp" name="L1_capt_spp4[]">
-                            <option value="">Selecione</option>
-                            <option value="teste4">Teste4</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="form-group">
-                    <label for="capt_quant" class="col-md-4 control-label lb_capt_quant">
-                        Quantidade</label>
-                    <div class="col-md-8">
-                        <input type="number" class="form-control capt_quant" id="ID1_capt_quant" name="L1_capt_quant4[]"
-                               value="">
-                    </div>
-                </div>
-            </div>
+        
+        
+        <fieldset><h2 class="text-center titulo">Dados do Lançamento</h2></fieldset>
+        <hr>
+        <div id="lance_container" data-prototype="<?php echo htmlspecialchars($this->load->view("mapa_bordo/mb_lancamento", array("objecto" => new Mb_lance(), "countCaptura"=>0), true)); ?>">
         </div>
-        <div class="btn-group col-sm-12 col-md-12 text-rigth" role="group" >
-            <button type="button" id="btnAdd" name="btnAdd" class="btn btn-info">+ Lance</button>
-            <button type="button" id="btnDel" name="btnDel" class="btn btn-danger">- Lance</button>
-        </div>
+        
+        <a href="javascrit:;" class="btn btn-success" id="add_lance"><i class="glyphicon glyphicon-plus"></i> Adicionar lançamento</a>
+        <hr>
+        
         <div class="col-sm-12 col-md-12 text-right">
             <button type="submit" id="btnSub" name="btnSub" class="btn btn-success btn-lg btn_sub" >Submeter</button>
         </div>
@@ -380,3 +179,44 @@
 </footer>
 </body>
 </html>
+
+
+<script>
+$(document).ready(function() {
+    
+    $("#observador").select2({
+        placeholder: "Selecione",
+        allowClear: true,
+        formatNoMatches: function() {
+            return "Nenhum item encontrado"
+        }
+    });
+    
+    $("#embarcacao").select2({
+        placeholder: "Selecione",
+        allowClear: true,
+        formatNoMatches: function() {
+            return "Nenhum item encontrado"
+        }
+    });
+    
+    $("#mestre").select2({
+        placeholder: "Selecione",
+        allowClear: true,
+        formatNoMatches: function() {
+            return "Nenhum item encontrado"
+        }
+    });
+    
+    var lances = new Prototype.Class({
+        'count': <?php echo $countLance ?>,
+        'list': '#lance_container',
+        'addButton': '#add_lance',
+        'removeButton': '#remove-lance',
+        'container': '.lancamento',
+        'addOne': <?php echo $countLance > 0 ? 'false' : 'true' ?>,
+        'isEdit': <?php echo $countLance > 0 ? 'true' : 'false' ?>
+    });
+    
+});
+</script>
