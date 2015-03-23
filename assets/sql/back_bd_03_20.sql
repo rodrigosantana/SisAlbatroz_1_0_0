@@ -16,10 +16,10 @@ SET client_min_messages = warning;
 --
 -- TOC entry 2123 (class 1262 OID 16536)
 -- Dependencies: 2122
--- Name: SisMBAlbatroz; Type: COMMENT; Schema: -; Owner: postgres
+-- Name: SisAlbatroz; Type: COMMENT; Schema: -; Owner: postgres
 --
 
-COMMENT ON DATABASE "SisMBAlbatroz" IS 'Banco de dados primários para armazenamento de informações provenientes de Mapas de Bordo coletados pelo Projeto Albatroz.';
+COMMENT ON DATABASE "SisAlbatroz" IS 'Banco de dados primários para armazenamento de informações provenientes de Mapas de Bordo coletados pelo Projeto Albatroz.';
 
 
 --
