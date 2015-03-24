@@ -12,6 +12,8 @@
     <!-- CSS do bootstrap    -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/select2/select2.css"/>
+    
+    
 <!--    <!-- CSS do plugin de validação    -->
 <!--    <link rel="stylesheet" type="text/css" href="--><?php //echo base_url();?><!--assets/formvalidation/dist/css/formValidation.css"/>-->
     <!-- Biblioteca JQuery     -->
@@ -29,8 +31,10 @@
     <script src="<?php echo base_url();?>assets/js/jquery-1.11.2.js"></script>
     <!-- Biblioteca Bootstrap    -->
     <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/system.js"></script>
     <script src="<?php echo base_url(); ?>assets/select2/select2.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/addPrototype.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/jquery.blockUI.js" type="text/javascript" ></script>
 <!--    <!-- Biblioteca do Plugin de Validação JQuery e classe suporte do Bootstrap    -->
 <!--    <script src="--><?php //echo base_url();?><!--assets/formvalidation/dist/js/formValidation.js"></script>-->
 <!--    <script src="--><?php //echo base_url();?><!--assets/formvalidation/dist/js/framework/bootstrap.js"></script>-->
@@ -46,7 +50,7 @@
 <header id="header" class="masthead">
     <img src="<?php echo base_url();?>assets/img/banner.jpg" alt="banner">
 </header>
-
+<?php // $mbGeral = new MbGeral()?>
 <body>
 <!-- Início do corpo da página -->
 <div class="container-fluid">
@@ -65,7 +69,7 @@
 <!--        <h5> Os campos (<span class="glyphicon glyphicon-asterisk"></span>) são obrigatórios! </h5>-->
         <hr>
     </div>
-    <form class="form-horizontal" role="form" id="form" action="<?php echo base_url();?>index.php/mapa_bordo_ct/salva" method="post">
+    <form class="form-horizontal" role="form" action="<?php echo site_url();?>mapa_bordo_ct/salva" method="post">
         <input type="hidden" id="id_mb" name="id_mb" value="">
         <div class="row">
             <div class="col-sm-6 col-lg-4">
@@ -75,7 +79,8 @@
                         <select class="select2" id="observador" name="observador" style="width: 100%">
                             <option></option>
                             <?php foreach ($observadores as $cad_observador): ?>
-                                <option value="<?php echo $cad_observador->getObservId()?>"><?php echo $cad_observador->getObservNome()?></option>
+                                <?php $selected = (!is_null($mbGeral->getObservador()) && $mbGeral->getObservador()->getIdObserv() == $cad_observador->getIdObserv()) ? 'selected' : '' ?>
+                                <option value="<?php echo $cad_observador->getIdObserv()?>" <?php echo $selected;?>><?php echo $cad_observador->getNome()?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
@@ -83,12 +88,13 @@
             </div>
             <div class="col-sm-6 col-lg-4">
                 <div class="form-group">
-                    <label for="embarcacao" class="col-md-4 control-label">Embarcacao</label>
+                    <label for="embarcacao" class="col-md-4 control-label">Embarcação</label>
                     <div class="col-md-8">
                         <select class="select2" id="embarcacao" name="embarcacao" style="width: 100%">
                             <option></option>
                             <?php foreach ($embarcacoes as $cad_embarcacao): ?>
-                                <option value="<?php echo $cad_embarcacao->getEmbarcacaoId()?>"><?php echo $cad_embarcacao->getEmbarcacaoNome()?></option>
+                            <?php $selected = (!is_null($mbGeral->getEmbarcacao()) && $mbGeral->getEmbarcacao()->getIdEmbarcacao() == $cad_embarcacao->getIdEmbarcacao()) ? 'selected' : '' ?>
+                                <option value="<?php echo $cad_embarcacao->getIdEmbarcacao()?>" <?php echo $selected;?>><?php echo $cad_embarcacao->getNome()?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
@@ -101,7 +107,8 @@
                         <select class="select2" id="mestre" name="mestre" style="width: 100%">
                             <option></option>
                             <?php foreach ($mestres as $cad_mestre): ?>
-                                <option value="<?php echo $cad_mestre->getMestreId()?>"><?php echo $cad_mestre->getMestreApel()?></option>
+                                <?php $selected = (!is_null($mbGeral->getMestre()) && $mbGeral->getMestre()->getIdMestre() == $cad_mestre->getIdMestre()) ? 'selected' : '' ?>
+                                <option value="<?php echo $cad_mestre->getIdMestre()?>" <?php echo $selected;?>><?php echo $cad_mestre->getApelido()?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
@@ -111,10 +118,10 @@
                 <div class="form-group">
                     <label for="petre" class="col-md-4 control-label">Petrecho</label>
                     <div class="col-md-8">
-                        <label class="radio-inline"><input type="radio" name="petre" id="petre_esp_sup" value="esp_sup">
+                        <label class="radio-inline"><input type="radio" name="petrecho" id="petre_esp_sup" <?php echo ($mbGeral->getPetrecho() == Utils::ESPINHEL_SUPERFICIE) ? 'checked' : ''?> value="<?php echo Utils::ESPINHEL_SUPERFICIE?>">
                             Espinhel de Superfície
                         </label>
-                        <label class="radio-inline"><input type="radio" name="petre" id="petre_esp_fun" value="esp_fun">
+                        <label class="radio-inline"><input type="radio" name="petrecho" id="petre_esp_fun" <?php echo ($mbGeral->getPetrecho() == Utils::ESPINHEL_FUNDO) ? 'checked' : ''?> value="<?php echo Utils::ESPINHEL_FUNDO?>">
                             Espinhel de Fundo
                         </label>
                     </div>
@@ -125,7 +132,7 @@
                     <label for="data_saida" class="col-md-4 control-label">Data de Saída</label>
                     <div class="col-md-8">
                         <input type="date" class="form-control" id="data_saida" name="data_saida"
-                               value="">
+                               value="<?php echo is_null($mbGeral->getDataSaida()) ? '' : $mbGeral->getDataSaida()->format("d/m/Y")?>">
                     </div>
                 </div>
             </div>
@@ -134,7 +141,7 @@
                     <label for="data_chegada" class="col-md-4 control-label">Data de Chegada</label>
                     <div class="col-md-8">
                         <input type="date" class="form-control" id="data_chegada" name="data_chegada"
-                               value="">
+                               value="<?php echo is_null($mbGeral->getDataChegada()) ? '' : $mbGeral->getDataChegada()->format("d/m/Y")?>">
                     </div>
                 </div>
             </div>
@@ -142,7 +149,7 @@
                 <div class="form-group">
                     <label for="obs" class="col-md-4 control-label">Observações</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" id="obs" rows="2" name="obs" placeholder="Limite de 500 caracteres"></textarea>
+                        <textarea class="form-control" id="obs" rows="2" name="obs" placeholder="Limite de 500 caracteres"><?php echo $mbGeral->getObservacao()?></textarea>
                     </div>
                 </div>
             </div>
@@ -151,14 +158,14 @@
         
         <fieldset><h2 class="text-center titulo">Dados do Lançamento</h2></fieldset>
         <hr>
-        <div id="lance_container" data-prototype="<?php echo htmlspecialchars($this->load->view("mapa_bordo/mb_lancamento", array("objecto" => new Mb_lance(), "countCaptura"=>0), true)); ?>">
+        <div id="lance_container" data-prototype="<?php echo htmlspecialchars($this->load->view("mapa_bordo/mb_lancamento", array("mbLance" => new MbLance(), "countCaptura"=>0, 'iscas'=>$iscas, 'medidasMetigatorias'=>$medidasMetigatorias, 'aves'=>$aves), true)); ?>">
         </div>
         
         <a href="javascrit:;" class="btn btn-success" id="add_lance"><i class="glyphicon glyphicon-plus"></i> Adicionar lançamento</a>
         <hr>
         
         <div class="col-sm-12 col-md-12 text-right">
-            <button type="submit" id="btnSub" name="btnSub" class="btn btn-success btn-lg btn_sub" >Submeter</button>
+            <button type="button" id="btnSub" name="btnSub" class="btn btn-success btn-lg btn_sub" onclick="return validation('mapa_bordo_ct', this)">Submeter</button>
         </div>
     </form>
 </div>
@@ -182,6 +189,7 @@
 
 
 <script>
+var URL = "<?php echo site_url(); ?>";
 $(document).ready(function() {
     
     $("#observador").select2({

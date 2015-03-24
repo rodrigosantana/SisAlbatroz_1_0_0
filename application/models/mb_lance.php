@@ -97,7 +97,32 @@ class Mb_lance {
      */
     private $ave_capt;
 //--------------------------------------------------------------------------------------------------------------------//
-//TODO relacionamento entre tabelas
+
+	/**
+     * @var Mb_geral
+     *
+     * @ManyToOne(targetEntity="Mb_geral")
+     * 
+     * @JoinColumns({
+     *   @JoinColumn(name="mb_geral", referencedColumnName="id_mb")
+     * })
+     *
+     */
+    private $mbGeral;
+
+
+	/**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * 
+     * @OneToMany(targetEntity="Mb_captura", mappedBy="mbCaptura", cascade={"all"})
+     */
+    private $capturas;
+
+	public function __construct()
+    {
+        $this->capturas = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+
     /**
      *Set id_mb
      *
@@ -121,6 +146,8 @@ class Mb_lance {
         $this->lance = $lance;
         return $this;
     }
+    
+    
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
@@ -227,4 +254,48 @@ class Mb_lance {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
+	/**
+     * Set mbGeral
+     *
+     * @param Mb_geral $mbGeral
+     * @return Mb_lance
+     */
+    public function setMbGeral(Mb_geral $mbGeral = null)
+    {
+        $this->mbGeral = $mbGeral;
+        return $this;
+    }
+
+    /**
+     * Get mbGeral
+     *
+     * @return Mb_geral 
+     */
+    public function getMbGeral()
+    {
+        return $this->mbGeral;
+    }
+
+	/**
+     * Add captura
+     *
+     * @param Mb_captura $captura
+     * @return Mb_lance
+     */
+    public function addCaptura(Mb_captura $captura)
+    {
+        $lance->setMbLance($this);
+        $this->capturas[] = $captura;
+        return $this;
+    }
+
+    /**
+     * Get capturas
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCapturas()
+    {
+        return $this->capturas;
+    }
 }

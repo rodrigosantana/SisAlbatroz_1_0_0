@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('doctrine');
+$autoload['libraries'] = array('doctrine', 'utils', 'form_validation');
 
 
 /*
@@ -110,7 +110,29 @@ $autoload['language'] = array('i18n');
 */
 
 $autoload['model'] = array(
-    'Mb_geral','Mb_lance','Mb_isca','Cad_embarcacao','Cad_mestre','Cad_empresa','Cad_ave','Cad_observador','Users','AutorizPesca'
+    'Cad_embarcacao',
+    'Cad_mestre',
+    'Cad_empresa',
+    'Cad_ave',
+    'Cad_observador',
+    'Users',
+    'AutorizPesca',
+    'Mb_isca',
+    'Mb_lance',
+    'Mb_captura',
+    'Mb_geral',
+    
+    'CadAves',
+    'CadMestre',
+    'CadEmbarcacao',
+    'CadObservador',
+    
+    'CadIsca',
+    'CadMedidaMetigatoria',
+    'MbGeral',
+    'MbCaptura',
+    'MbLance',
+    
 );
 
 

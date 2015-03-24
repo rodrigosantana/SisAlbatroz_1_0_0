@@ -17,31 +17,43 @@ class Mapa_bordo_ct extends CI_Controller {
 
     public function novo(){
         // Consulta o BD e traz dados das tabelas
-        $observadores = $this->doctrine->em->getRepository("cad_observador")->findBy(
+        $observadores = $this->doctrine->em->getRepository("CadObservador")->findBy(
             array(),
             array('nome'=>'ASC')
         );
-        $embarcacoes = $this->doctrine->em->getRepository("cad_embarcacao")->findBy(
+        $embarcacoes = $this->doctrine->em->getRepository("CadEmbarcacao")->findBy(
             array(),
             array('nome'=>'ASC')
         );
-        $mestres = $this->doctrine->em->getRepository("cad_mestre")->findBy(
+        $mestres = $this->doctrine->em->getRepository("CadMestre")->findBy(
             array(),
             array('apelido'=>'ASC')
         );
-        $aves = $this->doctrine->em->getRepository("cad_ave")->findBy(
+        $aves = $this->doctrine->em->getRepository("CadAves")->findBy(
             array(),
-            array('nome_br'=>'ASC')
+            array('nomeComumBr'=>'ASC')
+        );
+        
+        $iscas = $this->doctrine->em->getRepository("CadIsca")->findBy(
+            array(),
+            array('nome'=>'ASC')
+        );
+        
+        $medidasMetigatorias = $this->doctrine->em->getRepository("CadMedidaMetigatoria")->findBy(
+            array(),
+            array('nome'=>'ASC')
         );
 
         $this->load->view('menu');
         $this->load->view("mapa_bordo/new", array(
-            "mb_geral"=> new Mb_geral(),
-            "mb_lance"=> new Mb_lance(),
+            "mbGeral"=> new MbGeral(),
+//            "mb_lance"=> new Mb_lance(),
             "observadores"=> $observadores,
             "embarcacoes"=> $embarcacoes,
             "mestres"=> $mestres,
             "aves"=> $aves,
+            "iscas"=>$iscas,
+            "medidasMetigatorias"=>$medidasMetigatorias,
             "countLance"=>0
             )
         );
@@ -243,6 +255,52 @@ class Mapa_bordo_ct extends CI_Controller {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
+    
+    public function validation() {
+        echo '<pre>';var_dump($this->input->post());die;
+        
+        $this->form_validation->set_rules("observador", "Observador", "trim|required|in_array[" . Utils::findIds('idObserv', 'CadObservador') . "]");
+        $this->form_validation->set_rules("embarcacao", "Embarcação", "trim|required|in_array[" . Utils::findIds('idEmbarcacao', 'CadEmbarcacao') . "]");
+        $this->form_validation->set_rules("mestre", "Mestre", "trim|required|in_array[" . Utils::findIds('idMestre', 'CadMestre') . "]");
+        $this->form_validation->set_rules("petrecho", "Petrecho", "trim|required|in_array[" . Utils::ESPINHEL_SUPERFICIE . "," . Utils::ESPINHEL_FUNDO . "]");
+        
+        $this->form_validation->set_rules("data_saida", "Data de saída", "trim|required|date_validation");        
+        $this->form_validation->set_rules("data_chegada", "Data de chegada", "trim|required|date_validation");
+        $this->form_validation->set_rules("obs", "Observações", "trim");
+        
+        $lancamentos = $this->input->post('lancamento');
+        
+        if ($lancamentos) {
+            foreach ($lancamentos as $key => $value) {
+                $this->form_validation->set_rules('lancamento['.$key.'][lance]', "Lance", "trim|required|integer");
+                
+                $this->form_validation->set_rules('lancamento['.$key.'][data]', "Data", "trim|required|date_validation");
+                $this->form_validation->set_rules('lancamento['.$key.'][anzois]', "Anzois", "trim|required|integer");
+                $this->form_validation->set_rules('lancamento['.$key.'][lat]', "Latitude", "trim|required|integer");
+                $this->form_validation->set_rules('lancamento['.$key.'][lng]', "Longitude", "trim|required|integer");
+                $this->form_validation->set_rules('lancamento['.$key.'][isca]', "Isca", "trim|required|in_array[" . Utils::findIds('idIsca', 'CadIsca') . "]");                
+                $this->form_validation->set_rules('lancamento['.$key.'][hora_ini]', "Hora inicío do lance", "trim|required");
+                $this->form_validation->set_rules('lancamento['.$key.'][hora_fin]', "Hora final do lance", "trim|required");
+                $this->form_validation->set_rules('lancamento['.$key.'][mm]', "Medida metigatória", "trim|required|in_array[" . Utils::findIds('idMedidaMetigatoria', 'CadMedidaMetigatoria') . "]");
+                $this->form_validation->set_rules('lancamento['.$key.'][mm_uso]', "Uso da MM", "trim|required|in_array[" . Utils::MM_USO_PARCIAL . "," . Utils::MM_USO_TOTAL . "]");
+                $this->form_validation->set_rules('lancamento['.$key.'][ave_capt]', "Ave capturada", "trim|required|boolean_validation");
+                
+                $capturas = $value['capt_especie'];
+                
+                foreach ($capturas as $keyCp => $valueCp) {
+                    $this->form_validation->set_rules('lancamento['.$key.'][capt_especie]['.$keyCp.'][capt_ssp]', "Espécie", "trim|required|in_array[" . Utils::findIds('idAves', 'CadAves') . "]");
+                    $this->form_validation->set_rules('lancamento['.$key.'][capt_especie]['.$keyCp.'][capt_quan]', "Espécie", "trim|required|integer");
+                }
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
 //    // Função para checar se a espécie já existe no BD
 //    public function checkNome($check){
 //

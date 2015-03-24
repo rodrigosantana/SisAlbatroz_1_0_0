@@ -43,6 +43,18 @@ Class Mb_captura {
     private $quant;
 //--------------------------------------------------------------------------------------------------------------------//
 
+	/**
+     * @var Mb_lance
+     *
+     * @ManyToOne(targetEntity="Mb_lance")
+     * 
+     * @JoinColumns({
+     *   @JoinColumn(name="id_lance", referencedColumnName="id_lance")
+     * })
+     *
+     */
+    private $mbLance;
+
     /**
      * @Set aves
      *
@@ -67,6 +79,27 @@ Class Mb_captura {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
+	/**
+     * Set mbLance
+     *
+     * @param Mb_lance $mbLance
+     * @return Mb_captura
+     */
+    public function setMbLance(Mb_lance $mbLance = null)
+    {
+        $this->mbLance = $mbLance;
+        return $this;
+    }
+
+    /**
+     * Get mbLance
+     *
+     * @return Mb_lance 
+     */
+    public function getMbLance()
+    {
+        return $this->mbLance;
+    }
 }
 
 

@@ -21,7 +21,10 @@ class Mb_geral {
     /**
     *@var integer $observadpr
     *
-    *@Column(name="observador", type="string", length=50)
+	* @ManyToOne(targetEntity="Cad_observador")
+    * @JoinColumns({
+    *   @JoinColumn(name="observador", referencedColumnName="id_observ")
+    * })
     */
     private $observador;
 //-------------------------------------------------------------------------------------------------------------------//
@@ -29,8 +32,10 @@ class Mb_geral {
     /**
     *@var $embarcacao
     *
-    *@Column(name="embarcacao", type="string", length=50)
-    *
+	* @ManyToOne(targetEntity="Cad_embarcacao")
+    * @JoinColumns({
+    *   @JoinColumn(name="embarcacao", referencedColumnName="id_embarcacao")
+    * })
     */
     private $embarcacao;
 //-------------------------------------------------------------------------------------------------------------------//
@@ -38,15 +43,18 @@ class Mb_geral {
     /**
     *@var integer $mestre
     *
-    *@Column(name="mestre", type="integer")
+	* @ManyToOne(targetEntity="Cad_mestre")
+    * @JoinColumns({
+    *   @JoinColumn(name="mestre", referencedColumnName="id_mestre")
+    * })
     */
     private $mestre;
 //-------------------------------------------------------------------------------------------------------------------//
 
     /**
-    *@var string $petrecho
+    *@var smallint $petrecho
     *
-    *@Column(name="petrecho", type="string", length=50)
+    *@Column(name="petrecho", type="smallint")
     */
     private $petrecho;
 //-------------------------------------------------------------------------------------------------------------------//
@@ -74,6 +82,19 @@ class Mb_geral {
     */
     private $observacao;
 //-------------------------------------------------------------------------------------------------------------------//
+
+	/**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * 
+     * @OneToMany(targetEntity="Mb_lance", mappedBy="mbGeral", cascade={"all"})
+     */
+    private $lances;
+
+	public function __construct()
+    {
+        $this->lances = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+
 
     /**
     *Set observador
@@ -116,13 +137,18 @@ class Mb_geral {
     /**
     *Set petrecho
     *
-    *@param string $petrecho
+    *@param smallint $petrecho
     *@return Mb_geral
     */
     public function setPetrecho($petrecho)
     {
         $this->petrecho = $petrecho;
         return $this;
+    }
+    
+    public function getPetrecho()
+    {
+        return $this->petrecho;
     }
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -224,6 +250,29 @@ class Mb_geral {
         return $this->data_chegada;
     }
 //--------------------------------------------------------------------------------------------------------------------//
+
+	/**
+     * Add lance
+     *
+     * @param Mb_lance $lance
+     * @return Mb_geral
+     */
+    public function addLance(Mb_lance $lance)
+    {
+        $lance->setMbGeral($this);
+        $this->lances[] = $lance;
+        return $this;
+    }
+
+    /**
+     * Get lances
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLances()
+    {
+        return $this->lances;
+    }
 
 }
 

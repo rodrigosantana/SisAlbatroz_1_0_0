@@ -1,13 +1,15 @@
 <?php $numeroEp = isset($indexEp) ? $indexEp : '$$numero2$$' ?>
+<?php //$mbCaptura = new MbCaptura();?>
 <div class="row captura">
     <div class="col-sm-6 col-md-6">
         <div class="form-group">
-            <label for="capt_spp" class="col-md-3 control-label lb_capt_spp">Espécie</label>
+            <label for="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_spp" class="col-md-3 control-label lb_capt_spp">Espécie</label>
             <div class="col-md-9">
-                <select class="select2" style="width: 100%" id="lancamento_<?php echo $numero; ?>_capt_spp_<?php echo $numeroEp?>" name="lancamento[<?php echo $numero; ?>][capt_ssp][<?php echo $numeroEp?>]">
+                <select class="select2" style="width: 100%" id="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_spp" name="lancamento[<?php echo $numero; ?>][capt_especie][<?php echo $numeroEp?>][capt_ssp]">
                     <option></option>
-                    <?php foreach ($aves as $cad_ave): ?>
-                        <option value="<?php echo $cad_ave->getAveId() ?>"><?php echo $cad_ave->getAveNome() ?></option>
+                    <?php foreach ($aves as $ave): ?>
+                        <?php $selected = (!is_null($mbCaptura->getIdAve()) && $mbCaptura->getIdAve()->getIdAves() == $ave->getIdAves()) ? 'selected' : ''?>
+                        <option value="<?php echo $ave->getIdAves() ?>" <?php echo $selected?>><?php echo $ave->getNomeComumBr() ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -15,9 +17,9 @@
     </div>
     <div class="col-sm-5 col-md-5">
         <div class="form-group">
-            <label for="capt_quant" class="col-md-3 control-label lb_capt_quant">Quantidade</label>
+            <label for="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_quan" class="col-md-3 control-label lb_capt_quant">Quantidade</label>
             <div class="col-md-9">
-                <input type="number" class="form-control capt_quant" id="lancamento_<?php echo $numero; ?>_capt_quan_<?php echo $numeroEp?>" name="lancamento[<?php echo $numero; ?>][capt_quan][<?php echo $numeroEp?>]" value="">
+                <input type="number" class="form-control capt_quant" id="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_quan" name="lancamento[<?php echo $numero; ?>][capt_especie][<?php echo $numeroEp?>][capt_quan]" value="<?php echo $mbCaptura->getQuantidade()?>">
             </div>
         </div>
     </div>
@@ -28,7 +30,7 @@
 
 <script>
     $(document).ready(function (){
-        $("#lancamento_<?php echo $numero; ?>_capt_spp_<?php echo $numeroEp?>").select2({
+        $("#lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_spp").select2({
             placeholder: "Selecione",
             allowClear: true,
             formatNoMatches: function() {
