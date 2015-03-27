@@ -1,5 +1,3 @@
-<!-- Configuração do Doctrine com o CodeIgniter
-Código retirado do site oficial do Doctrine -->
 <?php
 use Doctrine\Common\ClassLoader,
     Doctrine\ORM\Configuration,

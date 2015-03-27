@@ -23,7 +23,7 @@ class CadIsca
      * @Column(name="id_isca", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="cad_isca_id_isca_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="cad_isca_seq", allocationSize=1, initialValue=1)
      */
     private $idIsca;
 

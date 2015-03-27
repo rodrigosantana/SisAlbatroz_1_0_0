@@ -156,7 +156,6 @@ var Prototype = {
             }else{
             
                 $btn.click(function(evt){
-					console.log("Aqui");
                     ptype.removerElemento($(evt.target).parents(config.container));
                     list.children(config.container+':last-child').find('.insertaction');
                 }); 

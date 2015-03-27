@@ -107,7 +107,7 @@ class CadEmbarcacao
      * @Column(name="id_embarcacao", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="cad_embarcacao_id_embarcacao_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="cad_embarcacao_seq", allocationSize=1, initialValue=1)
      */
     private $idEmbarcacao;
 

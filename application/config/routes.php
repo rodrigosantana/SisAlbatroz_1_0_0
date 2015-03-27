@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "sistema_ct";
 $route['404_override'] = '';
 // Nova rota criada para verificar se existe URL
 // rota com atributo no fim

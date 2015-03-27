@@ -45,7 +45,7 @@ class CadMestre
      * @Column(name="id_mestre", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="cad_mestre_id_mestre_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="cad_mestre_seq", allocationSize=1, initialValue=1)
      */
     private $idMestre;
 

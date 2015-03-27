@@ -32,7 +32,13 @@ class MY_Form_validation extends CI_Form_validation
         
         $date = explode("/", $str);
         
-        if (count($date) !== 3 || !checkdate((int)$date[1], (int)$date[0], (int)$date[2])) {
+        if (count($date) !== 3) {
+            $date = explode("-", $str);
+            
+            if (!checkdate((int)$date[0], (int)$date[1], (int)$date[2])) {
+                
+            }
+        } else if (count($date) !== 3 || !checkdate((int)$date[1], (int)$date[0], (int)$date[2])) {
             return false;
         }
         
@@ -60,6 +66,11 @@ class MY_Form_validation extends CI_Form_validation
     public function in_array() {
         $args = func_get_args();
         $valor = $args[0];
+        
+        if (empty($valor)) {
+            return true;
+        }
+        
         $args = explode(",", $args[1]);
         if(is_array($valor)){
             $ok = true;

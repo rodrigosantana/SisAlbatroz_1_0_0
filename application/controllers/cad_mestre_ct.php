@@ -1,11 +1,23 @@
 <?php
 
 class Cad_mestre_ct extends CI_Controller {
+    public function __construct() {
+        parent::__construct();
+        
+        $this->output->set_template('sisalbatroz_template');
+    }
+    
+    public function access_map() {
+        return array(
+            'cadmestre'=>'create',            
+            'salva'=>'create',            
+            );
+    }
+    
     // Cadastro de mestres
 
     // Carrega a página inicial com o menu e um array em branco para o BD
     public function cadmestre(){
-        $this->load->view('menu');
         // Cad_mestre se refere a classe do model Cad_mestre.php
         $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=> new Cad_mestre));
     }

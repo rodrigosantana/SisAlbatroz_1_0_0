@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('doctrine', 'utils', 'form_validation');
+$autoload['libraries'] = array('doctrine', 'utils', 'form_validation', 'session');
 
 
 /*
@@ -126,6 +126,7 @@ $autoload['model'] = array(
     'CadMestre',
     'CadEmbarcacao',
     'CadObservador',
+    'CadEntrevistador',
     
     'CadIsca',
     'CadMedidaMetigatoria',

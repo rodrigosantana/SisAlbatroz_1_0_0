@@ -77,7 +77,7 @@ class CadObservador
      * @Column(name="id_observ", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="cad_observador_id_observ_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="cad_observador_seq", allocationSize=1, initialValue=1)
      */
     private $idObserv;
 

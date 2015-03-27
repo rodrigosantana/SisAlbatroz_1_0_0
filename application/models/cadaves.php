@@ -37,7 +37,7 @@ class CadAves
      * @Column(name="id_aves", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="cad_aves_id_aves_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="cad_aves_seq", allocationSize=1, initialValue=1)
      */
     private $idAves;
 

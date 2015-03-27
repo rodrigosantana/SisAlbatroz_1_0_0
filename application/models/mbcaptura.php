@@ -13,7 +13,7 @@ class MbCaptura
     /**
      * @var 
      *
-     * @ManyToOne(targetEntity="Acme\DemoBundle\Entity\CadAves")
+     * @ManyToOne(targetEntity="CadAves")
      * @JoinColumns({
      *   @JoinColumn(name="id_ave", referencedColumnName="id_aves")
      * })
@@ -33,7 +33,7 @@ class MbCaptura
      * @Column(name="id_capt", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="mb_captura_id_capt_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="mb_captura_seq", allocationSize=1, initialValue=1)
      */
     private $idCapt;
 

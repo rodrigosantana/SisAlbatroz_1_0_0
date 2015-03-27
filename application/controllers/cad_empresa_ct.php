@@ -2,6 +2,20 @@
 
 class Cad_empresa_ct extends CI_Controller
 {
+    
+    public function __construct() {
+        parent::__construct();
+        
+        $this->output->set_template('sisalbatroz_template');
+    }
+    
+    public function access_map() {
+        return array(
+            'cadempresa'=>'create',            
+            'salva'=>'create',            
+            );
+    }
+    
 //    Cadastro de empresas
 
     public function cadempresa()

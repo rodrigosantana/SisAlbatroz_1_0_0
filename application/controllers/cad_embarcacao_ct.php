@@ -1,6 +1,19 @@
 <?php
 class Cad_embarcacao_ct extends CI_Controller {
-
+    public function __construct() {
+        parent::__construct();
+        
+        $this->output->set_template('sisalbatroz_template');
+    }
+    
+    public function access_map() {
+        return array(
+            'cadembarcacao'=>'create',            
+            'salva'=>'create',            
+            );
+    }
+    
+    
 //    Cadastro de embarcações
     public function cadembarcacao(){
         // Carrega o BD de modalidades de pesca

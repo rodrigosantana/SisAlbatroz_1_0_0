@@ -23,7 +23,7 @@ class CadMedidaMetigatoria
      * @Column(name="id_medida_metigatoria", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="cad_medida_metigatoria_id_medida_metigatoria_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="cad_medida_metigatoria_seq", allocationSize=1, initialValue=1)
      */
     private $idMedidaMetigatoria;
 

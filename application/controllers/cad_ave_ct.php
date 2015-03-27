@@ -2,13 +2,25 @@
 
 class Cad_ave_ct extends CI_Controller {
 
+    public function __construct() {
+        parent::__construct();
+        
+        $this->output->set_template('sisalbatroz_template');
+    }
+    
+    public function access_map() {
+        return array(
+            'cadave'=>'create',
+            'salva'=>'create'
+            );
+    }
+    
     // Cadastro de aves marinhas
 
     // Carrega a página inicial com o menu e um array em branco para o BD
     public function cadave(){
-        $this->load->view('menu');
         // Cad_ave se refere a classe do model Cad_ave.php
-        $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>new Cad_ave()));
+        $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>new Cad_ave(), "mensagem"=>$this->session->flashdata('salva_cad_ave')));
         // Debugger
         //$this->output->enable_profiler(true);
 
@@ -59,8 +71,8 @@ class Cad_ave_ct extends CI_Controller {
         } else {
             $this->doctrine->em->persist($cad_ave);
             $this->doctrine->em->flush();
-            $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>new Cad_ave(), "mensagem"=>$mensagem));
-            $this->load->view("menu");
+            $this->session->set_flashdata('salva_cad_ave', true);
+            redirect('cad_ave_ct/cadave');
         }
     }
 //--------------------------------------------------------------------------------------------------------------------//

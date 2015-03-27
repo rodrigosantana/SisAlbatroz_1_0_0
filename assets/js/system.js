@@ -16,7 +16,8 @@ function validation(controller, element) {
         },
         error: function(xhr, ajaxOptions, thrownError) {            
             unblockWindow();
-            alert("Request error");
+			console.log(thrownError);
+            //alert("Request error");
         },
         async: true
     });
@@ -34,10 +35,19 @@ function showError(res) {
     } else if (res.status == "errors") {
         var errors = res.errors;
         for (var field in errors) {
-            console.log(field);
-            var formGroup = $("[name='" + field + "']").first().closest(".form-group");            
-            formGroup.append('<span class="help-block">'+errors[field]+'</span>');
-            formGroup.addClass("has-error");
+            var formGroup;
+
+			if ($("[name='" + field + "']").first().closest(".div-help").length > 0) {
+				formGroup = $("[name='" + field + "']").first().closest(".div-help");
+				console.log(formGroup);
+			} else {
+				formGroup = $("[name='" + field + "']").first().closest(".form-group");            
+			}
+
+            if (formGroup) {
+				formGroup.append('<span class="help-block">'+errors[field]+'</span>');
+	            formGroup.addClass("has-error");
+            }            
         }
     }
     return false;

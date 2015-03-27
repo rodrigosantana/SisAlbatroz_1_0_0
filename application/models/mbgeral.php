@@ -44,19 +44,19 @@ class MbGeral
      * @Column(name="id_mb", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="mb_geral_id_mb_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="mb_geral_seq", allocationSize=1, initialValue=1)
      */
     private $idMb;
 
     /**
-     * @var \CadObservador
+     * @var \CadEntrevistador
      *
-     * @ManyToOne(targetEntity="CadObservador")
+     * @ManyToOne(targetEntity="CadEntrevistador")
      * @JoinColumns({
-     *   @JoinColumn(name="observador", referencedColumnName="id_observ")
+     *   @JoinColumn(name="entrevistador", referencedColumnName="id")
      * })
      */
-    private $observador;
+    private $entrevistador;
 
     /**
      * @var \CadMestre
@@ -79,6 +79,20 @@ class MbGeral
     private $embarcacao;
 
 
+	/**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @OneToMany(targetEntity="MbLance", mappedBy="mbGeral", cascade={"all"})
+     */
+    protected $lances;
+
+	/**
+     * Constructor
+     */
+    public function __construct()
+    {
+		$this->lances = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Set dataSaida
@@ -183,26 +197,26 @@ class MbGeral
     }
 
     /**
-     * Set observador
+     * Set entrevistador
      *
-     * @param \CadObservador $observador
+     * @param \CadEntrevistador $entrevistador
      * @return MbGeral
      */
-    public function setObservador(\CadObservador $observador = null)
+    public function setEntrevistador(\CadEntrevistador $entrevistador = null)
     {
-        $this->observador = $observador;
+        $this->entrevistador = $entrevistador;
     
         return $this;
     }
 
     /**
-     * Get observador
+     * Get entrevistador
      *
-     * @return \CadObservador 
+     * @return \CadEntrevistador
      */
-    public function getObservador()
+    public function getEntrevistador()
     {
-        return $this->observador;
+        return $this->entrevistador;
     }
 
     /**
@@ -249,5 +263,28 @@ class MbGeral
     public function getEmbarcacao()
     {
         return $this->embarcacao;
+    }
+
+	/**
+     * Add lance
+     *
+     * @param MbLance $lance
+     * @return MbGeral
+     */
+    public function addLance(MbLance $lance)
+    {
+        $lance->setMbGeral($this);
+        $this->lances[] = $lance;
+        return $this;
+    }
+
+    /**
+     * Get lances
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLances()
+    {
+        return $this->lances;
     }
 }

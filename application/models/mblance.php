@@ -1,21 +1,12 @@
 <?php
 
-
-
 /**
  * MbLance
  *
  * @Table(name="mb_lance")
  * @Entity
  */
-class MbLance
-{
-    /**
-     * @var string
-     *
-     * @Column(name="id_mb", type="string", length=10, nullable=true)
-     */
-    private $idMb;
+class MbLance {
 
     /**
      * @var integer
@@ -86,7 +77,7 @@ class MbLance
      * @Column(name="id_lance", type="integer")
      * @Id
      * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="mb_lance_id_lance_seq", allocationSize=1, initialValue=1)
+     * @SequenceGenerator(sequenceName="mb_lance_seq", allocationSize=1, initialValue=1)
      */
     private $idLance;
 
@@ -103,48 +94,47 @@ class MbLance
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ManyToMany(targetEntity="CadMedidaMetigatoria", mappedBy="idLance")
+     * @ManyToMany(targetEntity="CadMedidaMetigatoria", orphanRemoval=false)
+     * @JoinTable(name="mb_mitigatoria",
+     *   joinColumns={
+     *     @JoinColumn(name="id_lance", referencedColumnName="id_lance")
+     *   },
+     *   inverseJoinColumns={
+     *     @JoinColumn(name="id_mm", referencedColumnName="id_medida_metigatoria")
+     *   }
+     * )
      */
     private $idMm;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ManyToMany(targetEntity="CadIsca", mappedBy="idLance")
+     * @ManyToMany(targetEntity="CadIsca", orphanRemoval=false)
+     * @JoinTable(name="mb_isca",
+     *   joinColumns={
+     *     @JoinColumn(name="id_lance", referencedColumnName="id_lance")
+     *   },
+     *   inverseJoinColumns={
+     *     @JoinColumn(name="id_isca", referencedColumnName="id_isca")
+     *   }
+     * )
      */
     private $idIsca;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @OneToMany(targetEntity="MbCaptura", mappedBy="idLance", cascade={"all"})
+     */
+    protected $capturas;
+
+    /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->idMm = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idIsca = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-
-    /**
-     * Set idMb
-     *
-     * @param string $idMb
-     * @return MbLance
-     */
-    public function setIdMb($idMb)
-    {
-        $this->idMb = $idMb;
-    
-        return $this;
-    }
-
-    /**
-     * Get idMb
-     *
-     * @return string 
-     */
-    public function getIdMb()
-    {
-        return $this->idMb;
+        $this->capturas = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -153,10 +143,9 @@ class MbLance
      * @param integer $lance
      * @return MbLance
      */
-    public function setLance($lance)
-    {
+    public function setLance($lance) {
         $this->lance = $lance;
-    
+
         return $this;
     }
 
@@ -165,8 +154,7 @@ class MbLance
      *
      * @return integer 
      */
-    public function getLance()
-    {
+    public function getLance() {
         return $this->lance;
     }
 
@@ -176,10 +164,9 @@ class MbLance
      * @param \DateTime $data
      * @return MbLance
      */
-    public function setData($data)
-    {
+    public function setData($data) {
         $this->data = $data;
-    
+
         return $this;
     }
 
@@ -188,8 +175,7 @@ class MbLance
      *
      * @return \DateTime 
      */
-    public function getData()
-    {
+    public function getData() {
         return $this->data;
     }
 
@@ -199,10 +185,9 @@ class MbLance
      * @param integer $anzois
      * @return MbLance
      */
-    public function setAnzois($anzois)
-    {
+    public function setAnzois($anzois) {
         $this->anzois = $anzois;
-    
+
         return $this;
     }
 
@@ -211,8 +196,7 @@ class MbLance
      *
      * @return integer 
      */
-    public function getAnzois()
-    {
+    public function getAnzois() {
         return $this->anzois;
     }
 
@@ -222,10 +206,9 @@ class MbLance
      * @param string $latitude
      * @return MbLance
      */
-    public function setLatitude($latitude)
-    {
+    public function setLatitude($latitude) {
         $this->latitude = $latitude;
-    
+
         return $this;
     }
 
@@ -234,8 +217,7 @@ class MbLance
      *
      * @return string 
      */
-    public function getLatitude()
-    {
+    public function getLatitude() {
         return $this->latitude;
     }
 
@@ -245,10 +227,9 @@ class MbLance
      * @param string $longitude
      * @return MbLance
      */
-    public function setLongitude($longitude)
-    {
+    public function setLongitude($longitude) {
         $this->longitude = $longitude;
-    
+
         return $this;
     }
 
@@ -257,8 +238,7 @@ class MbLance
      *
      * @return string 
      */
-    public function getLongitude()
-    {
+    public function getLongitude() {
         return $this->longitude;
     }
 
@@ -268,10 +248,9 @@ class MbLance
      * @param string $horaInicial
      * @return MbLance
      */
-    public function setHoraInicial($horaInicial)
-    {
+    public function setHoraInicial($horaInicial) {
         $this->horaInicial = $horaInicial;
-    
+
         return $this;
     }
 
@@ -280,8 +259,7 @@ class MbLance
      *
      * @return string 
      */
-    public function getHoraInicial()
-    {
+    public function getHoraInicial() {
         return $this->horaInicial;
     }
 
@@ -291,10 +269,9 @@ class MbLance
      * @param string $horaFinal
      * @return MbLance
      */
-    public function setHoraFinal($horaFinal)
-    {
+    public function setHoraFinal($horaFinal) {
         $this->horaFinal = $horaFinal;
-    
+
         return $this;
     }
 
@@ -303,8 +280,7 @@ class MbLance
      *
      * @return string 
      */
-    public function getHoraFinal()
-    {
+    public function getHoraFinal() {
         return $this->horaFinal;
     }
 
@@ -314,10 +290,9 @@ class MbLance
      * @param string $mmUso
      * @return MbLance
      */
-    public function setMmUso($mmUso)
-    {
+    public function setMmUso($mmUso) {
         $this->mmUso = $mmUso;
-    
+
         return $this;
     }
 
@@ -326,8 +301,7 @@ class MbLance
      *
      * @return string 
      */
-    public function getMmUso()
-    {
+    public function getMmUso() {
         return $this->mmUso;
     }
 
@@ -337,10 +311,9 @@ class MbLance
      * @param boolean $aveCapt
      * @return MbLance
      */
-    public function setAveCapt($aveCapt)
-    {
+    public function setAveCapt($aveCapt) {
         $this->aveCapt = $aveCapt;
-    
+
         return $this;
     }
 
@@ -349,8 +322,7 @@ class MbLance
      *
      * @return boolean 
      */
-    public function getAveCapt()
-    {
+    public function getAveCapt() {
         return $this->aveCapt;
     }
 
@@ -359,8 +331,7 @@ class MbLance
      *
      * @return integer 
      */
-    public function getIdLance()
-    {
+    public function getIdLance() {
         return $this->idLance;
     }
 
@@ -370,10 +341,9 @@ class MbLance
      * @param \MbGeral $mbGeral
      * @return MbLance
      */
-    public function setMbGeral(\MbGeral $mbGeral = null)
-    {
+    public function setMbGeral(\MbGeral $mbGeral = null) {
         $this->mbGeral = $mbGeral;
-    
+
         return $this;
     }
 
@@ -382,8 +352,7 @@ class MbLance
      *
      * @return \MbGeral 
      */
-    public function getMbGeral()
-    {
+    public function getMbGeral() {
         return $this->mbGeral;
     }
 
@@ -393,10 +362,9 @@ class MbLance
      * @param \CadMedidaMetigatoria $idMm
      * @return MbLance
      */
-    public function addIdMm(\CadMedidaMetigatoria $idMm)
-    {
+    public function addIdMm(\CadMedidaMetigatoria $idMm) {
         $this->idMm[] = $idMm;
-    
+
         return $this;
     }
 
@@ -405,8 +373,7 @@ class MbLance
      *
      * @param \CadMedidaMetigatoria $idMm
      */
-    public function removeIdMm(\CadMedidaMetigatoria $idMm)
-    {
+    public function removeIdMm(\CadMedidaMetigatoria $idMm) {
         $this->idMm->removeElement($idMm);
     }
 
@@ -415,8 +382,7 @@ class MbLance
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getIdMm()
-    {
+    public function getIdMm() {
         return $this->idMm;
     }
 
@@ -426,10 +392,9 @@ class MbLance
      * @param \CadIsca $idIsca
      * @return MbLance
      */
-    public function addIdIsca(\CadIsca $idIsca)
-    {
+    public function addIdIsca(\CadIsca $idIsca) {
         $this->idIsca[] = $idIsca;
-    
+
         return $this;
     }
 
@@ -438,8 +403,7 @@ class MbLance
      *
      * @param \CadIsca $idIsca
      */
-    public function removeIdIsca(\CadIsca $idIsca)
-    {
+    public function removeIdIsca(\CadIsca $idIsca) {
         $this->idIsca->removeElement($idIsca);
     }
 
@@ -448,8 +412,29 @@ class MbLance
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getIdIsca()
-    {
+    public function getIdIsca() {
         return $this->idIsca;
     }
+
+    /**
+     * Add captura
+     *
+     * @param MbCaptura $captura
+     * @return MbLance
+     */
+    public function addCaptura(MbCaptura $captura) {
+        $captura->setIdLance($this);
+        $this->capturas[] = $captura;
+        return $this;
+    }
+
+    /**
+     * Get capturas
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCapturas() {
+        return $this->capturas;
+    }
+
 }

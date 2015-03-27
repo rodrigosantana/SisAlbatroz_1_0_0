@@ -2,11 +2,24 @@
 
 class Cad_observ_ct extends CI_Controller {
 
+    public function __construct() {
+        parent::__construct();
+        
+        $this->output->set_template('sisalbatroz_template');
+    }
+    
+    public function access_map() {
+        return array(
+            'cadobserv'=>'create',            
+            'salva'=>'create',            
+            );
+    }
+    
     // Cadastro de observadores de bordo
 
     // Carrega a página inicial com o menu e um array em branco para o BD
     public function cadobserv(){
-        $this->load->view('menu');
+        
         // Cad_ave se refere a classe do model Cad_ave.php
         $this->load->view("mapa_bordo/cad_observador", array("cad_observador"=>new Cad_observador()));
         // Debugger

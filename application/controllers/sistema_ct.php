@@ -2,10 +2,11 @@
 
 class Sistema_ct extends CI_Controller {
 
-    public function sistema(){
-        $this->load->view('menu');
+    public function access_map() {
+        return array('index'=>'view');
+    }
+    
+    public function index(){        
         $this->load->view("sistema");
     }
-
-
 }

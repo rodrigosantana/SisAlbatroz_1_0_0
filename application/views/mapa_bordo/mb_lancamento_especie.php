@@ -3,9 +3,9 @@
 <div class="row captura">
     <div class="col-sm-6 col-md-6">
         <div class="form-group">
-            <label for="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_spp" class="col-md-3 control-label lb_capt_spp">Espécie</label>
-            <div class="col-md-9">
-                <select class="select2" style="width: 100%" id="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_spp" name="lancamento[<?php echo $numero; ?>][capt_especie][<?php echo $numeroEp?>][capt_ssp]">
+            <label for="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_spp" class="col-md-3 col-sm-4 control-label lb_capt_spp">Espécie</label>
+            <div class="col-md-9 col-sm-8 div-help">
+                <select class="select2 insertaction" style="width: 100%" id="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_spp" name="lancamento[<?php echo $numero; ?>][capt_especie][<?php echo $numeroEp?>][capt_ssp]">
                     <option></option>
                     <?php foreach ($aves as $ave): ?>
                         <?php $selected = (!is_null($mbCaptura->getIdAve()) && $mbCaptura->getIdAve()->getIdAves() == $ave->getIdAves()) ? 'selected' : ''?>
@@ -15,10 +15,10 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-5 col-md-5">
+    <div class="col-sm-4 col-md-5">
         <div class="form-group">
-            <label for="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_quan" class="col-md-3 control-label lb_capt_quant">Quantidade</label>
-            <div class="col-md-9">
+            <label for="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_quan" class="col-md-3 col-sm-4 control-label lb_capt_quant">Quantidade</label>
+            <div class="col-md-9 col-sm-8 div-help">
                 <input type="number" class="form-control capt_quant" id="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_quan" name="lancamento[<?php echo $numero; ?>][capt_especie][<?php echo $numeroEp?>][capt_quan]" value="<?php echo $mbCaptura->getQuantidade()?>">
             </div>
         </div>

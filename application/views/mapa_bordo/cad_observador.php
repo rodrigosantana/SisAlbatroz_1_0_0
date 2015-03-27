@@ -1,24 +1,3 @@
-<!-- Definindo o tipo de arquivo que vai ser -->
-<!DOCTYPE html PUBLIC>
-<!-- Abre o arquivo html e define a linguagem padrão -->
-<html lang="pt-br">
-<!-- Cabeçalho que não aparece para o usuário -->
-<head>
-    <!-- Informações sobre o texto e caracteres -->
-    <meta http-equiv="Content-type" content="text/hetml; charset=UTF-8">
-    <title> Cadastro de Observador </title>
-    <!-- carregando css, js e outros -->
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css"/>
-    <script src="<?php echo base_url();?>assets/js/jquery-1.11.2.js"></script>
-    <script src="<?php echo base_url();?>assets/js/clone_form.js"></script>
-    <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.js"></script>
-</head>
-<header id="header" class="masthead">
-    <img src="<?php echo base_url();?>assets/img/banner.jpg" alt="banner">
-</header>
-<body>
-<!-- Início do corpo da página -->
 <div class="container-fluid">
     <?php if (isset($mensagem)): ?>
     <div class="alert alert-success text-center" role="alert"><strong><?php echo $mensagem ?></strong></div>
@@ -112,19 +91,3 @@
     </div>
 </form>
 </div>
-<br>
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted">
-            Projeto Albatroz -
-            Base Regional de Santa Catarina -
-            Itajaí - SC -
-            Endereço: Universidade do Vale do Itajaí (Univali)
-            Rua Uruguai, 458, bloco D6 - sala 145 - Centro
-            CEP 88302-202 - Telefone: (13) 99753-5620 -
-            Responsáveis Técnicos: Rodrigo Sant'Ana | rsantana@projetoalbatroz.org.br e
-            André Santoro | asantoro@projetoalbatroz.org.br
-        </p>
-    </div>
-</footer>
-</body>

@@ -29,8 +29,14 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo base_url();?>index.php/mapa_bordo_ct/novo">Cadastro</a></li>
                     </ul>
                 </li>
-                <li><a href="<?php echo base_url();?>index.php">Sair</a></li>
+                
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="<?php echo site_url('sistema_ct/index/rbac/logout');?>">Sair</a></li>
             </ul>
         </div><!--/.nav-collapse -->
+        
+        
+            
     </div>
 </div>
