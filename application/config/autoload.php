@@ -64,7 +64,7 @@ $autoload['libraries'] = array('doctrine', 'utils', 'form_validation', 'session'
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','form');
+$autoload['helper'] = array('url','form', 'list');
 
 
 /*
@@ -127,6 +127,7 @@ $autoload['model'] = array(
     'CadEmbarcacao',
     'CadObservador',
     'CadEntrevistador',
+    'SystemUsers',
     
     'CadIsca',
     'CadMedidaMetigatoria',

@@ -6,8 +6,8 @@ $lang['valid_email']		= "O campo <strong style='color:#FE0000'>%s</strong> deve 
 $lang['valid_emails']		= "The %s field must contain all valid email addresses.";
 $lang['valid_url']			= "The %s field must contain a valid URL.";
 $lang['valid_ip']			= "The %s field must contain a valid IP.";
-$lang['min_length']			= "The %s field must be at least %s characters in length.";
-$lang['max_length']			= "The %s field can not exceed %s characters in length.";
+$lang['min_length']			= "O campo <strong>%s</strong> deve ter pelo menos <strong>%s</strong> caracteres.";
+$lang['max_length']			= "O campo <strong>%s</strong> não pode exceder <strong>%s</strong> caracteres de comprimento.";
 $lang['exact_length']		= "The %s field must be exactly %s characters in length.";
 $lang['alpha']				= "The %s field may only contain alphabetical characters.";
 $lang['alpha_numeric']		= "The %s field may only contain alpha-numeric characters.";

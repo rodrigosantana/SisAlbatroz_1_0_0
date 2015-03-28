@@ -143,7 +143,6 @@
 
 
 <script>
-    var URL = "<?php echo site_url(); ?>";
     $(document).ready(function() {
 
         $("#entrevistador").select2({

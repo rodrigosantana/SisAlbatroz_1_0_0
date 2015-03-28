@@ -67,7 +67,6 @@ class Cad_ave_ct extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("mapa_bordo/cad_ave", array("cad_ave"=>new Cad_ave()));
-            $this->load->view("menu");
         } else {
             $this->doctrine->em->persist($cad_ave);
             $this->doctrine->em->flush();

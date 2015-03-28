@@ -30,7 +30,7 @@ class MY_Output extends CI_Output {
 	private $_meta = array("keywords"=>array(), "description"=>null);
 	private $_rdf = array("keywords"=>array(), "description"=>null);
 	private $_template = null;
-	private $_mode = self::OUTPUT_MODE_NORMAL;
+	public $_mode = self::OUTPUT_MODE_NORMAL;
 	private $_messages = array("error"=>"", "info"=>"", "debug"=>"");
 	private $_output_data = array();
 

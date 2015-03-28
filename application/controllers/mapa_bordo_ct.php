@@ -29,6 +29,7 @@ D TODO
 
 L TODO
 
+Perguntar se usuário tem certeza antes da exclusão de registro.
 */
 
 
@@ -38,7 +39,7 @@ L TODO
         $mapas = $this->doctrine->em->getRepository("MbGeral")->findBy(
                 array(), array('idMb' => 'ASC'), 10
         );
-        $this->load->view("menu");
+        
         $this->load->view("mapa_bordo/consulta", array("mapas" => $mapas, 'mensagem'=>$this->session->flashdata('exclui_mapa_bordo')));
     }
 
@@ -282,6 +283,7 @@ L TODO
 
         $return = array();
         $return["erro"] = $this->form_validation->error_array();
+        $this->output->_mode = MY_Output::OUTPUT_MODE_NORMAL;
         $this->load->view("jsonresponse", $return);
     }
 

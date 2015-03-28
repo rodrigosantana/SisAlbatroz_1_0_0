@@ -18,10 +18,11 @@ class Cad_embarcacao_ct extends CI_Controller {
     public function cadembarcacao(){
         // Carrega o BD de modalidades de pesca
         $auto_pesca = $this->doctrine->em->getRepository("AutorizPesca")->findAll();
-        $this->load->view("menu");
-        $this->load->view("mapa_bordo/cad_embarcacao", array(
+        
+		$this->load->view("mapa_bordo/cad_embarcacao", array(
             "cad_embarcacao" => new Cad_embarcacao(),
-            "auto_pesca" => $auto_pesca
+            "auto_pesca" => $auto_pesca,
+			"mensagem"=>$this->session->flashdata('salva_embarcacao_ave')
             )
         );
     }
@@ -128,7 +129,6 @@ class Cad_embarcacao_ct extends CI_Controller {
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("menu");
             $this->load->view("mapa_bordo/cad_embarcacao", array(
                 "cad_embarcacao"=>$cad_embarcacao,
                 "auto_pesca" => $auto_pesca
@@ -137,13 +137,8 @@ class Cad_embarcacao_ct extends CI_Controller {
         } else {
             $this->doctrine->em->persist($cad_embarcacao);
             $this->doctrine->em->flush();
-            $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_embarcacao", array(
-                "cad_embarcacao"=>$cad_embarcacao,
-                "auto_pesca" => $auto_pesca,
-                "mensagem"=>$mensagem
-                )
-            );
+            $this->session->set_flashdata('salva_cad_embarcacao', true);
+            redirect('cad_embarcacao_ct/cadembarcacao');
         }
 
     }

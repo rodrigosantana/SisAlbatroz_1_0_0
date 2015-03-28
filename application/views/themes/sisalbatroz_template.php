@@ -12,7 +12,7 @@
         <!-- CSS do bootstrap    -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/select2/select2.css"/>
-
+        <link href="<?php echo base_url(); ?>assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!--    <!-- CSS do plugin de validação    -->
         <!--    <link rel="stylesheet" type="text/css" href="--><?php //echo base_url();  ?><!--assets/formvalidation/dist/css/formValidation.css"/>-->
@@ -97,6 +97,12 @@ body > .container {
             .panel-close-button-sisalbatroz:hover {
                 color: #DADADA;
             }
+            
+            .btn-add-sisalbatroz {
+                color: #fff;
+                background-color: #989998;
+                border-color: #989998;
+            }
         </style>
 
         <script src="<?php echo base_url(); ?>assets/js/jquery-1.11.2.js"></script>
@@ -117,10 +123,16 @@ body > .container {
         <!-- JS para vaidação do formulário    -->
     <!--    <script src="--><?php //echo base_url();  ?><!--assets/js/validate.js"></script>-->
 
+        <script>
+            var URL = "<?php echo site_url(); ?>";
+        </script>
     </head>
     
     <body>
         <?php echo $this->load->view('menu');?>
+        <header id="header" class="masthead">
+            <img src="<?php echo base_url();?>assets/img/banner.jpg" alt="banner">
+        </header>
         <div class="container"><?php echo $output; ?></div>
         
         

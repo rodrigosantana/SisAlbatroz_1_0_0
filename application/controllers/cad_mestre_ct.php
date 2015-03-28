@@ -19,7 +19,7 @@ class Cad_mestre_ct extends CI_Controller {
     // Carrega a página inicial com o menu e um array em branco para o BD
     public function cadmestre(){
         // Cad_mestre se refere a classe do model Cad_mestre.php
-        $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=> new Cad_mestre));
+        $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=> new Cad_mestre, "mensagem"=>$this->session->flashdata('salva_cad_mestre')));
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
@@ -66,13 +66,12 @@ class Cad_mestre_ct extends CI_Controller {
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("menu");
             $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=> new Cad_mestre()));
         } else {
             $this->doctrine->em->persist($cad_mestre);
             $this->doctrine->em->flush();
-            $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=>new Cad_mestre(), "mensagem"=>$mensagem));
+            $this->session->set_flashdata('salva_cad_mestre', true);
+            redirect('cad_mestre_ct/cadmestre');
         }
     }
 //--------------------------------------------------------------------------------------------------------------------//

@@ -20,8 +20,7 @@ class Cad_empresa_ct extends CI_Controller
 
     public function cadempresa()
     {
-        $this->load->view("menu");
-        $this->load->view("mapa_bordo/cad_empresa", array("cad_empresa" => new Cad_empresa()));
+        $this->load->view("mapa_bordo/cad_empresa", array("cad_empresa" => new Cad_empresa(), "mensagem"=>$this->session->flashdata('salva_cad_empresa')));
     }
 
 //--------------------------------------------------------------------------------------------------------------------//
@@ -90,13 +89,12 @@ class Cad_empresa_ct extends CI_Controller
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("menu");
             $this->load->view("mapa_bordo/cad_empresa");
         } else {
             $this->doctrine->em->persist($cad_empresa);
             $this->doctrine->em->flush();
-            $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_empresa", array("cad_empresa" => $cad_empresa, "mensagem" => $mensagem));
+            $this->session->set_flashdata('salva_cad_empresa', true);
+            redirect('cad_empresa_ct/cadempresa');
         }
     }
 //--------------------------------------------------------------------------------------------------------------------//

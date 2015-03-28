@@ -21,7 +21,7 @@ class Cad_observ_ct extends CI_Controller {
     public function cadobserv(){
         
         // Cad_ave se refere a classe do model Cad_ave.php
-        $this->load->view("mapa_bordo/cad_observador", array("cad_observador"=>new Cad_observador()));
+        $this->load->view("mapa_bordo/cad_observador", array("cad_observador"=>new Cad_observador(), "mensagem"=>$this->session->flashdata('salva_cad_observador')));
         // Debugger
         //$this->output->enable_profiler(true);
     }
@@ -102,13 +102,12 @@ class Cad_observ_ct extends CI_Controller {
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("menu");
             $this->load->view("mapa_bordo/cad_observador", array("cad_observador"=> new Cad_observador()));
         } else {
             $this->doctrine->em->persist($cad_observador);
             $this->doctrine->em->flush();
-            $this->load->view("menu");
-            $this->load->view("mapa_bordo/cad_observador", array("Cad_observador"=> new Cad_observador(), "mensagem"=>$mensagem));
+            $this->session->set_flashdata('salva_cad_observador', true);
+            redirect('cad_observador_ct/cadobservador');
         }
     }
 //--------------------------------------------------------------------------------------------------------------------//

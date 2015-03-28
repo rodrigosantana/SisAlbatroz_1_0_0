@@ -16,7 +16,11 @@
     <?php if (validation_errors() != '') : ?>   
         <div class="row">
             <div class="col-md-12">
-                <?php echo validation_errors(); ?>
+				<div class="col-md-6 col-md-offset-3 alert alert-danger alert-dismissible" role="alert" style="margin-top: 20px">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+					<p><strong>Erro!</strong><p> 
+						<?php echo validation_errors(); ?>
+				</div>                
             </div>
         </div>    
     <?php endif; ?>

@@ -209,7 +209,7 @@ class ezlogin
             return FALSE;
         }
         if ($user->{$this->_user_schema['status']} == 0) { // fail - not activated
-            $this->error = 'account is disabled! contact system administrator';
+            $this->error = 'Esta conta está desativada! Por favor contate o administrador do sistema.';
             return FALSE;
         }
 
