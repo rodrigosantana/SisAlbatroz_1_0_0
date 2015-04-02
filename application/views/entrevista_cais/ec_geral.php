@@ -294,7 +294,7 @@
         </div>
 
         <div class="col-sm-12 col-md-12 text-right">
-            <button type="submit" id="btnSub" name="btnSub" class="btn btn-success btn-lg btn_sub">Submeter</button>
+            <button type="submit" id="btnSub" name="btnSub" class="btn btn-success btn-lg btn_sub">Salvar</button>
         </div>
 
     </form>

@@ -1,16 +1,17 @@
 <?php
 
-class Mapa_bordo_ct extends CI_Controller {
+class Mapa_bordo_ct extends MY_Controller {
     
     public function __construct() {
-        parent::__construct();
+        $this->modelClassName = 'MbGeral';
+        $this->viewPath = 'mapa_bordo';
         
-        $this->output->set_template('sisalbatroz_template');
+        parent::__construct();
     }
     
     public function access_map() {
         return array(
-            'consulta'=>'view',
+            'index'=>'view',
             'novo'=>'create',
             'edita'=>'edit',
             'salva'=>'create',
@@ -25,23 +26,13 @@ class Mapa_bordo_ct extends CI_Controller {
 C ok
 R ok
 U ok
-D TODO
+D ok
 
-L TODO
+L ok
 
-Perguntar se usuário tem certeza antes da exclusão de registro.
+Perguntar se usuário tem certeza antes da exclusão de registro. ok
 */
 
-
-//--------------------------------------------------------------------------------------------------------------------//
-
-    public function consulta() {
-        $mapas = $this->doctrine->em->getRepository("MbGeral")->findBy(
-                array(), array('idMb' => 'ASC'), 10
-        );
-        
-        $this->load->view("mapa_bordo/consulta", array("mapas" => $mapas, 'mensagem'=>$this->session->flashdata('exclui_mapa_bordo')));
-    }
 
 //--------------------------------------------------------------------------------------------------------------------//
 
@@ -162,20 +153,16 @@ Perguntar se usuário tem certeza antes da exclusão de registro.
                         $mbLance->setAnzois((int)$value['anzois']);
                     }
                     
-                    if (!empty($value['lat'])) {
-                        $mbLance->setLatitude($value['lat']);
-                    }
-                    
-                    if (!empty($value['lng'])) {
-                        $mbLance->setLongitude($value['lng']);
+                    if (!empty($value['lat']) && !empty($value['lng'])) {
+                        $mbLance->setCoordenada(new Geometry(null, $value['lat'], $value['lng']));
                     }
                     
                     if (!empty($value['hora_ini'])) {
-                        $mbLance->setHoraInicial($value['hora_ini']);
+                        $mbLance->setHoraInicial(Utils::timeToDateTime($value['hora_ini']));
                     }
                     
                     if (!empty($value['hora_fin'])) {
-                        $mbLance->setHoraFinal($value['hora_fin']);
+                        $mbLance->setHoraFinal(Utils::timeToDateTime($value['hora_fin']));
                     }
                     
                     if (!empty($value['mm_uso'])) {
@@ -255,11 +242,24 @@ Perguntar se usuário tem certeza antes da exclusão de registro.
                 $this->form_validation->set_rules('lancamento[' . $key . '][lance]', "Lance", "trim|required|integer");
                 $this->form_validation->set_rules('lancamento[' . $key . '][data]', "Data", "trim|date_validation");
                 $this->form_validation->set_rules('lancamento[' . $key . '][anzois]', "Anzois", "trim|integer");
-                $this->form_validation->set_rules('lancamento[' . $key . '][lat]', "Latitude", "trim|decimal");
-                $this->form_validation->set_rules('lancamento[' . $key . '][lng]', "Longitude", "trim|decimal");
+                
+                if (isset($value['lng']) && !empty($value['lng']) && isset($value['lat']) && empty($value['lat'])) {
+                    $this->form_validation->set_rules('lancamento[' . $key . '][lat]', "Latitude", "trim|required|valida_latitude");
+                } else {
+                    $this->form_validation->set_rules('lancamento[' . $key . '][lat]', "Latitude", "trim|valida_latitude");
+                }
+                
+                if (isset($value['lat']) && !empty($value['lat']) && isset($value['lng']) && empty($value['lng'])) {
+                    $this->form_validation->set_rules('lancamento[' . $key . '][lng]', "Longitude", "trim|required|valida_longitude");
+                } else {
+                    $this->form_validation->set_rules('lancamento[' . $key . '][lng]', "Longitude", "trim|valida_longitude");
+                }
+                
+                
+                
                 $this->form_validation->set_rules('lancamento[' . $key . '][isca]', "Isca", "trim|in_array[" . Utils::findIds('idIsca', 'CadIsca') . "]");
-                $this->form_validation->set_rules('lancamento[' . $key . '][hora_ini]', "Hora inicío do lance", "trim");
-                $this->form_validation->set_rules('lancamento[' . $key . '][hora_fin]', "Hora final do lance", "trim");
+                $this->form_validation->set_rules('lancamento[' . $key . '][hora_ini]', "Hora inicío do lance", "trim|time_validation");
+                $this->form_validation->set_rules('lancamento[' . $key . '][hora_fin]', "Hora final do lance", "trim|time_validation");
                 $this->form_validation->set_rules('lancamento[' . $key . '][mm]', "Medida metigatória", "trim|in_array[" . Utils::findIds('idMedidaMetigatoria', 'CadMedidaMetigatoria') . "]");
                 $this->form_validation->set_rules('lancamento[' . $key . '][mm_uso]', "Uso da MM", "trim|in_array[" . Utils::MM_USO_PARCIAL . "," . Utils::MM_USO_TOTAL . "]");
                 $this->form_validation->set_rules('lancamento[' . $key . '][ave_capt]', "Ave capturada", "trim|boolean_validation");

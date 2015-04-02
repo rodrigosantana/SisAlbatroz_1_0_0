@@ -15,42 +15,42 @@
         <link href="<?php echo base_url(); ?>assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!--    <!-- CSS do plugin de validação    -->
-        <!--    <link rel="stylesheet" type="text/css" href="--><?php //echo base_url();  ?><!--assets/formvalidation/dist/css/formValidation.css"/>-->
+        <!--    <link rel="stylesheet" type="text/css" href="--><?php //echo base_url();   ?><!--assets/formvalidation/dist/css/formValidation.css"/>-->
         <!-- Biblioteca JQuery     -->
 
         <style>
             html {
-  position: relative;
-  min-height: 100%;
-}
+                position: relative;
+                min-height: 100%;
+            }
             body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #101010;
-  color: #FFF;
-}
+                /* Margin bottom by footer height */
+                margin-bottom: 60px;
+            }
+            .footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                /* Set the fixed height of the footer here */
+                height: 60px;
+                background-color: #101010;
+                color: #FFF;
+            }
 
 
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
+            /* Custom page CSS
+            -------------------------------------------------- */
+            /* Not required for template or sticky footer method. */
 
-body > .container {
-  padding: 20px 15px 0;
-}
+            body > .container {
+                padding: 20px 15px 0;
+            }
 
 
-.footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
-}
+            .footer > .container {
+                padding-right: 15px;
+                padding-left: 15px;
+            }
 
             .select2-choice {
                 height: 34px !important;
@@ -97,7 +97,7 @@ body > .container {
             .panel-close-button-sisalbatroz:hover {
                 color: #DADADA;
             }
-            
+
             .btn-add-sisalbatroz {
                 color: #fff;
                 background-color: #989998;
@@ -112,30 +112,34 @@ body > .container {
         <script src="<?php echo base_url(); ?>assets/select2/select2.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/addPrototype.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.blockUI.js" type="text/javascript" ></script>
+        <script src="<?php echo base_url(); ?>assets/bootbox-master/bootbox.js" type="text/javascript" ></script>
+        <script src="<?php echo base_url(); ?>assets/js/jquery.maskMoney.min.js" type="text/javascript" ></script>
+        
+
         <!--    <!-- Biblioteca do Plugin de Validação JQuery e classe suporte do Bootstrap    -->
-        <!--    <script src="--><?php //echo base_url();  ?><!--assets/formvalidation/dist/js/formValidation.js"></script>-->
-        <!--    <script src="--><?php //echo base_url();  ?><!--assets/formvalidation/dist/js/framework/bootstrap.js"></script>-->
+        <!--    <script src="--><?php //echo base_url();   ?><!--assets/formvalidation/dist/js/formValidation.js"></script>-->
+        <!--    <script src="--><?php //echo base_url();   ?><!--assets/formvalidation/dist/js/framework/bootstrap.js"></script>-->
         <!--    <!-- Biblioteca de linguagem local para as mensagens de validação do form       -->
-        <!--    <script src="--><?php //echo base_url();  ?><!--assets/formvalidation/dist/js/language/pt_BR.js"></script>-->
+        <!--    <script src="--><?php //echo base_url();   ?><!--assets/formvalidation/dist/js/language/pt_BR.js"></script>-->
 
         <!-- JS dos campos dinâmicos do formulário    -->
         <script src="<?php echo base_url(); ?>assets/js/clone_form.js"></script>
         <!-- JS para vaidação do formulário    -->
-    <!--    <script src="--><?php //echo base_url();  ?><!--assets/js/validate.js"></script>-->
+    <!--    <script src="--><?php //echo base_url();   ?><!--assets/js/validate.js"></script>-->
 
         <script>
             var URL = "<?php echo site_url(); ?>";
         </script>
     </head>
-    
+
     <body>
-        <?php echo $this->load->view('menu');?>
+        <?php echo $this->load->view('menu'); ?>
         <header id="header" class="masthead">
-            <img src="<?php echo base_url();?>assets/img/banner.jpg" alt="banner">
+            <img src="<?php echo base_url(); ?>assets/img/banner.jpg" alt="banner">
         </header>
         <div class="container"><?php echo $output; ?></div>
-        
-        
+
+
         <footer class="footer">
             <div class="container">
                 <p class="text-muted" style="margin-top: 10px;">

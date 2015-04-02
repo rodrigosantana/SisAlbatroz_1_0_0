@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-12" style="margin-bottom: 20px">
-            <button type="button" id="btnSub" name="btnSub" class="btn btn-primary btn-lg btn_sub" onclick="return validation('usuario', this)">Submeter</button>
+            <button type="button" id="btnSub" name="btnSub" class="btn btn-primary btn-lg btn_sub" onclick="return validation('usuario', this)">Salvar</button>
             <a href="<?php echo site_url('usuario')?>" class="btn btn-default btn-lg btn_sub">Cancelar</a>
         </div>
     </form>

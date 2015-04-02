@@ -28,32 +28,25 @@ class MbLance {
      * @Column(name="anzois", type="integer", nullable=false)
      */
     private $anzois;
-
+    
     /**
-     * @var string
+     * @var coordenada
      *
-     * @Column(name="latitude", type="string", length=50, nullable=false)
+     * @Column(name="coordenada", type="geometry")
      */
-    private $latitude;
+    private $coordenada;
 
     /**
      * @var string
      *
-     * @Column(name="longitude", type="string", length=50, nullable=false)
-     */
-    private $longitude;
-
-    /**
-     * @var string
-     *
-     * @Column(name="hora_inicial", type="string", length=10, nullable=false)
+     * @Column(name="hora_inicial", type="time")
      */
     private $horaInicial;
 
     /**
      * @var string
      *
-     * @Column(name="hora_final", type="string", length=10, nullable=false)
+     * @Column(name="hora_final", type="time")
      */
     private $horaFinal;
 
@@ -201,51 +194,30 @@ class MbLance {
     }
 
     /**
-     * Set latitude
+     * Set coordenada
      *
-     * @param string $latitude
+     * @param geometry $coordenada
      * @return MbLance
      */
-    public function setLatitude($latitude) {
-        $this->latitude = $latitude;
+    public function setCoordenada($coordenada) {
+        $this->coordenada = $coordenada;
 
         return $this;
     }
 
     /**
-     * Get latitude
+     * Get coordenada
      *
-     * @return string 
+     * @return geometry 
      */
-    public function getLatitude() {
-        return $this->latitude;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param string $longitude
-     * @return MbLance
-     */
-    public function setLongitude($longitude) {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return string 
-     */
-    public function getLongitude() {
-        return $this->longitude;
+    public function getCoordenada() {
+        return $this->coordenada;
     }
 
     /**
      * Set horaInicial
      *
-     * @param string $horaInicial
+     * @param time $horaInicial
      * @return MbLance
      */
     public function setHoraInicial($horaInicial) {
@@ -257,7 +229,7 @@ class MbLance {
     /**
      * Get horaInicial
      *
-     * @return string 
+     * @return time 
      */
     public function getHoraInicial() {
         return $this->horaInicial;
@@ -266,7 +238,7 @@ class MbLance {
     /**
      * Set horaFinal
      *
-     * @param string $horaFinal
+     * @param time $horaFinal
      * @return MbLance
      */
     public function setHoraFinal($horaFinal) {
@@ -278,7 +250,7 @@ class MbLance {
     /**
      * Get horaFinal
      *
-     * @return string 
+     * @return time 
      */
     public function getHoraFinal() {
         return $this->horaFinal;

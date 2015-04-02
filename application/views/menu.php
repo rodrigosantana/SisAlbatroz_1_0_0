@@ -26,7 +26,7 @@
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Mapa de Bordo <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('mapa_bordo_ct/consulta');?>">Consulta</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('mapa_bordo_ct');?>">Consulta</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('mapa_bordo_ct/novo');?>">Cadastro</a></li>
                     </ul>
                 </li>

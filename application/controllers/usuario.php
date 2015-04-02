@@ -7,8 +7,6 @@ class Usuario extends MY_Controller {
         $this->viewPath = 'usuario';
         
         parent::__construct();
-        
-        $this->output->set_template('sisalbatroz_template');
     }
     
     public function access_map() {

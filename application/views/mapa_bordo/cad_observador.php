@@ -116,7 +116,7 @@
 	</div>
     <div class="col-sm-12 col-md-12" style="margin-bottom: 20px">
 		<button type="submit" id="btnSub" name="btnSub"
-				class="btn btn-primary btn-lg btn_sub" >Submeter</button>
+				class="btn btn-primary btn-lg btn_sub" >Salvar</button>
 	</div>
 </form>
 </div>

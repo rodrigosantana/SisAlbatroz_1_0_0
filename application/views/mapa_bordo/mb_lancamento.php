@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label for="lancamento_<?php echo $numero; ?>_lat" class="col-md-4 control-label lb_lance_lat">Latitude (decimal)</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" step="any" class="form-control lance_lat" id="lancamento_<?php echo $numero; ?>_lat" name="lancamento[<?php echo $numero; ?>][lat]" value="<?php echo $mbLance->getLatitude() ?>">
+                        <input type="number" step="any" class="form-control lance_lat" id="lancamento_<?php echo $numero; ?>_lat" name="lancamento[<?php echo $numero; ?>][lat]" value="<?php echo is_null($mbLance->getCoordenada()) ? '' : $mbLance->getCoordenada()->latitudeDecimal ?>">
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     <label for="lancamento_<?php echo $numero; ?>_lng" class="col-md-4 control-label lb_lance_long">Longitude (decimal)
                     </label>
                     <div class="col-md-8 div-help">
-                        <input type="number" step="any" class="form-control lance_long" id="lancamento_<?php echo $numero; ?>_lng" name="lancamento[<?php echo $numero; ?>][lng]" value="<?php echo $mbLance->getLongitude() ?>">
+                        <input type="number" step="any" class="form-control lance_long" id="lancamento_<?php echo $numero; ?>_lng" name="lancamento[<?php echo $numero; ?>][lng]" value="<?php echo is_null($mbLance->getCoordenada()) ? '' : $mbLance->getCoordenada()->longitudeDecimal ?>">
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                 <div class="form-group">
                     <label for="lancamento_<?php echo $numero; ?>_hora_ini" class="col-md-4 control-label lb_hora_ini">Hora Início do Lance</label>
                     <div class="col-md-8 div-help">
-                        <input type="time" class="form-control lance_hora_ini" id="lancamento_<?php echo $numero; ?>_hora_ini" name="lancamento[<?php echo $numero; ?>][hora_ini]" value="<?php echo $mbLance->getHoraInicial() ?>">
+                        <input type="time" class="form-control lance_hora_ini" id="lancamento_<?php echo $numero; ?>_hora_ini" name="lancamento[<?php echo $numero; ?>][hora_ini]" value="<?php echo is_null($mbLance->getHoraInicial()) ? '' : $mbLance->getHoraInicial()->format("H:i") ?>">
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                 <div class="form-group">
                     <label for="lancamento_<?php echo $numero; ?>_hora_fim" class="col-md-4 control-label lb_hora_fin">Hora Final do Lance</label>
                     <div class="col-md-8 div-help">
-                        <input type="time" class="form-control lance_hora_fin" id="lancamento_<?php echo $numero; ?>_hora_fim" name="lancamento[<?php echo $numero; ?>][hora_fin]" value="<?php echo $mbLance->getHoraFinal() ?>">
+                        <input type="time" class="form-control lance_hora_fin" id="lancamento_<?php echo $numero; ?>_hora_fim" name="lancamento[<?php echo $numero; ?>][hora_fin]" value="<?php echo is_null($mbLance->getHoraFinal()) ? '' : $mbLance->getHoraFinal()->format("H:i") ?>">
                     </div>
                 </div>
             </div>

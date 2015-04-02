@@ -26,6 +26,11 @@ $lang['greater_than']		= "The %s field must contain a number greater than %s.";
 $lang['in_array']			= 'A opção selecionada não consta na lista.';
 $lang['date_validation']		= 'A data informada é inválida.';
 $lang['boolean_validation']             = 'A opção selecionada é inválida.';
+$lang['time_validation']             = 'Formato inválido para o campo (hh:mm).';
+
+$lang['valida_latitude']             = 'Valor inválido para o campo latitude.';
+$lang['valida_longitude']             = 'Valor inválido para o campo longitude.';
+
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/english/form_validation_lang.php */

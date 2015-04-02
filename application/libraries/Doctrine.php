@@ -3,7 +3,8 @@ use Doctrine\Common\ClassLoader,
     Doctrine\ORM\Configuration,
     Doctrine\ORM\EntityManager,
     Doctrine\Common\Cache\ArrayCache,
-    Doctrine\DBAL\Logging\EchoSQLLogger;
+    Doctrine\DBAL\Logging\EchoSQLLogger,
+    Doctrine\DBAL\Types\Type;
 
 class Doctrine {
 
@@ -55,6 +56,13 @@ class Doctrine {
         'host' =>     $db['default']['hostname'],
         'dbname' =>   $db['default']['database']
     );
+    
+    require_once APPPATH.'libraries/GeometryType.php';
+    require_once APPPATH.'libraries/Geometry.php';
+    require_once APPPATH.'libraries/extensions/TranslateLowerFunction.php';
+    require_once APPPATH.'libraries/extensions/TranslateFunction.php';
+    
+    Type::addType('geometry', 'GeometryType');
 
     // Create EntityManager
     $this->em = EntityManager::create($connectionOptions, $config);

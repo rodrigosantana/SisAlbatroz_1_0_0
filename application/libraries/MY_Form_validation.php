@@ -102,5 +102,47 @@ class MY_Form_validation extends CI_Form_validation
         
         return false;
     }
+    
+    function time_validation($str) {
+        if (empty($str)) {
+            return true;
+        }
+        
+        $time = explode(':', $str);
+        
+        if (count($time) !== 2 || !is_numeric($time[0]) || !is_numeric($time[1])) {
+            return false;
+        }
+        
+        if (((int)$time[0] > 23 || (int)$time[0] < 0) || ((int)$time[1] > 59 || (int)$time[1] < 0)) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public function valida_latitude($str) {
+        if (empty($str)) {
+            return true;
+        }
+        
+        if (!is_numeric($str) || (float)$str > 90 || (float)$str < -90) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public function valida_longitude($str) {
+        if (empty($str)) {
+            return true;
+        }
+        
+        if (!is_numeric($str) || (float)$str > 180 || (float)$str < -180) {
+            return false;
+        }
+        
+        return true;
+    }
 }
 ?>

@@ -19,6 +19,8 @@ class MY_Controller extends CI_Controller {
         if (empty($this->viewPath)) {
             $this->viewPath = $this->modelClassName;
         }
+        
+        $this->output->set_template('sisalbatroz_template');
     }
 
     public function index() {

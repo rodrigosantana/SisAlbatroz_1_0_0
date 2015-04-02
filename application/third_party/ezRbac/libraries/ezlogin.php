@@ -88,6 +88,7 @@ class ezlogin
      */
     public function login()
     {
+        
         $this->CI->form_validation->set_rules($this->validation_rule());
         if ($this->CI->form_validation->run() == FALSE) {
             $this->error = $this->CI->form_validation->error_array();
@@ -98,6 +99,7 @@ class ezlogin
             $this->view_login_form();
             //redirect($this->CI->uri->uri_string());
         }
+        
         $this->view_login_form();
     }
 

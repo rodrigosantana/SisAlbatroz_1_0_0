@@ -135,7 +135,8 @@
     </div>
 
     <div class="col-sm-12 col-md-12" style="margin-bottom: 20px">
-        <button type="button" id="btnSub" name="btnSub" class="btn btn-primary btn-lg btn_sub" onclick="return validation('mapa_bordo_ct', this)">Submeter</button>
+        <button type="button" id="btnSub" name="btnSub" class="btn btn-primary btn-lg btn_sub" onclick="return validation('mapa_bordo_ct', this)">Salvar</button>
+        <a href="<?php echo site_url('mapa_bordo_ct')?>" class="btn btn-default btn-lg btn_sub">Cancelar</a>
     </div>
 </form>
 
