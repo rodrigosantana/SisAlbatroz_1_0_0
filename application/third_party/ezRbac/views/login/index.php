@@ -190,7 +190,9 @@
             Rua Uruguai, 458, bloco D6 - sala 145 - Centro
             CEP 88302-202 - Telefone: (13) 99753-5620 -
             Responsáveis Técnicos: Rodrigo Sant'Ana | rsantana@projetoalbatroz.org.br e
-            André Santoro | asantoro@projetoalbatroz.org.br
+            André Santoro | asantoro@projetoalbatroz.org.br<br>
+            Sistema desenvolvido por: Rodrigo Sant'Ana (rsantana@projetoalbatroz.org.br), 
+            André Santoro (asantoro@projetoalbatroz.org.br) e Tiago Zis (tiagozis@gmail.com)
         </p>
     </div>
 </footer>

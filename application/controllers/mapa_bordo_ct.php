@@ -12,6 +12,8 @@ class Mapa_bordo_ct extends MY_Controller {
     public function access_map() {
         return array(
             'index'=>'view',
+            'filter'=>'view',
+            'clearfilter'=>'view',
             'novo'=>'create',
             'edita'=>'edit',
             'salva'=>'create',
@@ -107,9 +109,11 @@ Perguntar se usuário tem certeza antes da exclusão de registro. ok
         }
         
         $mbGeral = new MbGeral();
-
+        $isEdita = false;
+        
         if ($this->input->post('id_mb') && is_numeric($this->input->post('id_mb'))) {
             $mbGeral = $this->doctrine->em->find('MbGeral', $this->input->post('id_mb'));
+            $isEdita = true;
         }
 
         $entrevistador = null;
@@ -218,8 +222,15 @@ Perguntar se usuário tem certeza antes da exclusão de registro. ok
         $this->doctrine->em->persist($mbGeral);
         $this->doctrine->em->flush();
 
-        $this->session->set_flashdata('save_mapa_bordo', true);
-        redirect('mapa_bordo_ct/novo');
+        
+        
+        if ($isEdita) {
+            $this->session->set_flashdata(get_class($this) . '_mensagem', 'Registro salvo com sucesso.');
+            redirect('mapa_bordo_ct/index');
+        } else {
+            $this->session->set_flashdata('save_mapa_bordo', true);
+            redirect('mapa_bordo_ct/novo');
+        }        
     }
 
 //--------------------------------------------------------------------------------------------------------------------//
@@ -293,8 +304,8 @@ Perguntar se usuário tem certeza antes da exclusão de registro. ok
         $mapa_bordo = $this->doctrine->em->find("MbGeral", $this->input->get("id"));
         $this->doctrine->em->remove($mapa_bordo);
         $this->doctrine->em->flush();
-        $this->session->set_flashdata('exclui_mapa_bordo', true);
-		redirect('mapa_bordo_ct/consulta');
+        $this->session->set_flashdata(get_class($this) . '_mensagem', 'Registro excluído com sucesso.');
+		redirect('mapa_bordo_ct/index');
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
@@ -313,4 +324,123 @@ Perguntar se usuário tem certeza antes da exclusão de registro. ok
 //    }
 //--------------------------------------------------------------------------------------------------------------------//
 
+    
+    protected function telaFiltro() {
+        $filtro = $this->session->userdata('filtros_' . get_class($this));
+        
+        $entrevistadores = $this->doctrine->em->getRepository("CadEntrevistador")->findBy(
+                array(), array('nome' => 'ASC')
+        );
+        $embarcacoes = $this->doctrine->em->getRepository("CadEmbarcacao")->findBy(
+                array(), array('nome' => 'ASC')
+        );
+        $mestres = $this->doctrine->em->getRepository("CadMestre")->findBy(
+                array(), array('apelido' => 'ASC')
+        );
+        
+        return $this->load->view("mapa_bordo/filter", array(
+            "entrevistadores" => $entrevistadores,
+            "embarcacoes" => $embarcacoes,
+            "mestres" => $mestres,            
+            "filtro"=>$filtro
+                ), true
+        );
+    }
+    
+    public function filter() {
+        $filtros = array();
+        
+        if ($this->input->post('codigo') && is_numeric($this->input->post('codigo'))) {            
+            $filtros['codigo'] = $this->input->post('codigo');
+        }
+
+        if ($this->input->post('entrevistador') && is_numeric($this->input->post('entrevistador'))) {
+            $filtros['entrevistador'] = $this->input->post('entrevistador');
+        }
+
+        if ($this->input->post('embarcacao') && is_numeric($this->input->post('embarcacao'))) {
+            $filtros['embarcacao'] = $this->input->post('embarcacao');
+        }
+
+        if ($this->input->post('mestre') && is_numeric($this->input->post('mestre'))) {
+            $filtros['mestre'] = $this->input->post('mestre');
+        }
+        
+        if ($this->input->post('data_saida') && !is_null(Utils::dateToDatabaseDate($this->input->post('data_saida')))) {
+            $filtros['data_saida'] = Utils::dateToDatabaseDate($this->input->post('data_saida'));
+        }
+
+        if ($this->input->post('data_chegada') && !is_null(Utils::dateToDatabaseDate($this->input->post('data_chegada')))) {
+            $filtros['data_chegada'] = Utils::dateToDatabaseDate($this->input->post('data_chegada'));
+        }
+        
+        $this->session->set_userdata('filtros_' . get_class($this), $filtros);
+        redirect('mapa_bordo_ct/index');
+    }
+    
+    public function clearfilter() {
+        $this->session->set_userdata('filtros_' . get_class($this), array());
+        redirect('mapa_bordo_ct/index');
+    }
+    
+    protected function filterQueryBuilder() {
+        $queryBuilder = $this->doctrine->em->createQueryBuilder();
+        $queryBuilder->select("r")->from("MbGeral", "r");
+        $filtrosSessao = $this->session->userdata('filtros_' . get_class($this));
+        $filtros = array();        
+        $where = array();
+        $joins = array();
+        
+        
+        if (!empty($filtrosSessao)) {
+            if (isset($filtrosSessao['codigo'])) {
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->eq('r.idMb', '?1'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(1, $filtrosSessao['codigo']);
+            }
+
+            if (isset($filtrosSessao['entrevistador'])) {
+                $queryBuilder->join("r.entrevistador", "et");
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->eq('et.id', '?2'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(2, $filtrosSessao['entrevistador']);
+            }
+
+            if (isset($filtrosSessao['embarcacao'])) {
+                $queryBuilder->join("r.embarcacao", "eb");
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->eq('eb.idEmbarcacao', '?3'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(3, $filtrosSessao['embarcacao']);
+            }
+
+            if (isset($filtrosSessao['mestre'])) {
+                $queryBuilder->join("r.mestre", "m");
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->eq('m.idMestre', '?4'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(4, $filtrosSessao['mestre']);
+            }
+
+            if (isset($filtrosSessao['data_saida'])) {
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->eq('r.dataSaida', '?5'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(5, $filtrosSessao['data_saida']);
+            }
+
+            if (isset($filtrosSessao['data_chegada'])) {
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->eq('r.dataChegada', '?6'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(6, $filtrosSessao['data_chegada']);
+            }
+        }
+        
+        $query = $queryBuilder->getQuery();
+            
+        return $query;
+    }
 }

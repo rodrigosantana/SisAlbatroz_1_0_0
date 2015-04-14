@@ -25,14 +25,14 @@
             }
             body {
                 /* Margin bottom by footer height */
-                margin-bottom: 60px;
+                margin-bottom: 100px;
             }
             .footer {
                 position: absolute;
                 bottom: 0;
                 width: 100%;
                 /* Set the fixed height of the footer here */
-                height: 60px;
+                min-height: 80px;
                 background-color: #101010;
                 color: #FFF;
             }
@@ -61,33 +61,38 @@
             }
 
             .panel-sisalbatroz {
-                border-color: #333;
+                border-color: #006633;
             }
 
             .panel-sisalbatroz > .panel-heading {
-                color: #333;
-                background-color: #333;
-                border-color: #333;
+                color: #006633;
+                background-color: #006633;
+                border-color: #006633;
                 height: 35px;
             }
 
             .hr-sisalbatroz {
-                border-top: 1px solid #3D3D3D;
+                border-top: 1px solid #006633;
             }
 
             .panel-interno-sisalbatroz {
-                border-color: #3D3D3D;
+                border-color: #006633;
             }
 
             .panel-interno-sisalbatroz > .panel-heading {
-                color: #3D3D3D;
-                background-color: #3D3D3D;
-                border-color: #3D3D3D;
+                color: #006633;
+                background-color: #006633;
+                border-color: #006633;
                 height: 35px;
             }
 
             .panel-interno-sisalbatroz > .panel-heading > span {
                 color: #FFF;
+            }
+            
+            .panel-sisalbatroz > .panel-heading > span {
+                color: #FFF;
+                font-size: 16px;
             }
 
             .panel-close-button-sisalbatroz {
@@ -150,7 +155,9 @@
                     Rua Uruguai, 458, bloco D6 - sala 145 - Centro
                     CEP 88302-202 - Telefone: (13) 99753-5620 -
                     Responsáveis Técnicos: Rodrigo Sant'Ana | rsantana@projetoalbatroz.org.br e
-                    André Santoro | asantoro@projetoalbatroz.org.br
+                    André Santoro | asantoro@projetoalbatroz.org.br<br>
+                    Sistema desenvolvido por: Rodrigo Sant'Ana (rsantana@projetoalbatroz.org.br), 
+                    André Santoro (asantoro@projetoalbatroz.org.br) e Tiago Zis (tiagozis@gmail.com)
                 </p>
             </div>
         </footer>

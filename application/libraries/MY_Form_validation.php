@@ -33,10 +33,10 @@ class MY_Form_validation extends CI_Form_validation
         $date = explode("/", $str);
         
         if (count($date) !== 3) {
-            $date = explode("-", $str);
+            $date = explode('-', $str);
             
-            if (!checkdate((int)$date[0], (int)$date[1], (int)$date[2])) {
-                
+            if (count($date) !== 3 || !checkdate($date[1], $date[2], $date[0])) {
+                return false;
             }
         } else if (count($date) !== 3 || !checkdate((int)$date[1], (int)$date[0], (int)$date[2])) {
             return false;

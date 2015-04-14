@@ -51,6 +51,22 @@ class Utils {
         
         return null;
     }
+    
+    public static function dateToDatabaseDate($data) {
+        $valor = explode("/", $data);
+        
+        if (count($valor) == 3) {
+            return $valor[2] .'-'. $valor[1] .'-'. $valor[0];
+        } else {
+            $valor = explode('-', $data);
+            
+            if (count($valor) === 3 && checkdate($valor[1], $valor[2], $valor[0])) {
+                return $data;
+            }
+        }
+        
+        return null;
+    }
 
 	/**
      * Verifica se o valor enviado via requisi��o � verdadeiro ou falso.

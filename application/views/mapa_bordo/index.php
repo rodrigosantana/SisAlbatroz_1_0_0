@@ -4,7 +4,7 @@
         <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible" role="alert" style="margin-top: 20px">
             <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
             <p><strong>Sucesso!</strong><p> 
-                Registro excluído com sucesso.
+            <?php echo $mensagem?>    
         </div>
     </div>
 <?php endif; ?>
@@ -13,7 +13,9 @@
 
 <div class="panel panel-sisalbatroz">
     <div class="panel-heading" style="height: 55px">
-        <a href="<?php echo site_url('mapa_bordo_ct/novo') ?>" class="btn btn-add-sisalbatroz pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar</a>
+        <a href="<?php echo site_url('mapa_bordo_ct/novo') ?>" class="btn btn-add-sisalbatroz pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar</a>        
+        <a class="btn btn-add-sisalbatroz pull-right" role="button" data-toggle="modal" data-target="#filtroModal" style="margin-right: 10px"><i class="glyphicon glyphicon-search"></i> Filtrar</a>
+        
     </div>    
     <div class="panel-body">
         <div class="table-responsive">
@@ -54,6 +56,25 @@
     </div>
     <?php geraPaginador($parameters[$modelClassName . "_paginador"], site_url($controllerClassName . '/index'), !empty($parameters[$modelClassName . "_filtros"]))?>
 </div>
+
+
+<div class="modal fade " id="filtroModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 750px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Filtro de Mapa de Bordo</h4>
+            </div>
+
+            <div class="modal-body">
+                <?php echo $telaFiltro?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <script>
 function exclui(id) {

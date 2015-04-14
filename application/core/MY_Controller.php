@@ -29,9 +29,9 @@ class MY_Controller extends CI_Controller {
             $this->page = $p['pagina_atual'];
         }
         
-		$mensagem = $this->session->flashdata(get_class($this) . '_mensagem');
+	$mensagem = $this->session->flashdata(get_class($this) . '_mensagem');
         $alert = $this->getAlert();
-        $this->load->view(strtolower($this->viewPath) . "/index", array("mensagem" => $mensagem, "error" => $alert["error"], "parameters"=>$this->executeList(), "modelClassName"=> $this->modelClassName, "controllerClassName"=>  strtolower(get_class($this))));        
+        $this->load->view(strtolower($this->viewPath) . "/index", array("telaFiltro"=> $this->telaFiltro(), "mensagem" => $mensagem, "error" => $alert["error"], "parameters"=>$this->executeList($this->filterQueryBuilder()), "modelClassName"=> $this->modelClassName, "controllerClassName"=>  strtolower(get_class($this))));        
     }
     
     protected function findIsValid($codigo, $class) {
@@ -87,11 +87,18 @@ class MY_Controller extends CI_Controller {
 //        redirect('/' . strtolower(get_class($this)) . '/index?id=' . $id, 'refresh');
 //    }
     
-    private function executeList() {
+    private function executeList($qb = null) {
         $this->page = !$this->input->get("page") ? 1 : (int) $this->input->get("page");
-        $queryBuilder = $this->doctrine->em->createQueryBuilder();
-        $queryBuilder->select("e")->from($this->modelClassName, "e");
-        $query = $queryBuilder->getQuery();
+        
+        if (is_null($qb)) {
+            $queryBuilder = $this->doctrine->em->createQueryBuilder();
+            $queryBuilder->select("e")->from($this->modelClassName, "e");
+            $query = $queryBuilder->getQuery();
+        } else {
+            $query = $qb;
+        }
+        
+        
         
         $paginate = new Doctrine\ORM\Tools\Pagination\Paginator($query);
         $total = $paginate->count();
@@ -218,5 +225,13 @@ class MY_Controller extends CI_Controller {
             }
         }
         return $array;
+    }
+    
+    protected function telaFiltro() {
+        return '';
+    }
+    
+    protected function filterQueryBuilder() {
+        return null;
     }
 }

@@ -14,19 +14,11 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="text-center titulo"> Dados Gerais </h3>
-    </div>
-</div>
-
-
-
 <form class="form-horizontal" role="form" action="<?php echo site_url('mapa_bordo_ct/salva'); ?>" method="post">
     <input type="hidden" id="id_mb" name="id_mb" value="<?php echo $mbGeral->getIdMb() ?>">
 
     <div class="panel panel-sisalbatroz">
-        <div class="panel-heading"></div>    
+        <div class="panel-heading"><span><b>Dados Gerais</b></span></div>    
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-4">
