@@ -142,7 +142,7 @@
         <h3 class="text-center titulo">Dados de Captura de Aves</h3>
         <hr class="hr-sisalbatroz">
 
-        <div id="captura_container_<?php echo $numero ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("mapa_bordo/mb_lancamento_especie", array('mbCaptura' => new MbCaptura(), "numero" => $numero, 'aves' => $aves), true)); ?>">
+        <div id="captura_container_<?php echo $numero ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("mapa_bordo/mb_lancamento_especie", array('mbCaptura' => new MbCaptura(), "numero" => $numero, 'aves' => $aves, 'indexEp'=>'$$numero2$$'), true)); ?>">
             <?php
             $lista = $mbLance->getCapturas();
 
