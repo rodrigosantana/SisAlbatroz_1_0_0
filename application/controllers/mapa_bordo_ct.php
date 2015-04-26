@@ -23,19 +23,6 @@ class Mapa_bordo_ct extends MY_Controller {
     }
     
     
-/**
-
-C ok
-R ok
-U ok
-D ok
-
-L ok
-
-Perguntar se usuário tem certeza antes da exclusão de registro. ok
-*/
-
-
 //--------------------------------------------------------------------------------------------------------------------//
 
     public function novo() {
@@ -217,6 +204,16 @@ Perguntar se usuário tem certeza antes da exclusão de registro. ok
                     $mbGeral->addLance($mbLance);
                 }
             }
+        }
+        
+        $usuario = $this->doctrine->em->find("Users", $this->ezrbac->getCurrentUser()->id);
+        
+        if ($mbGeral->getIdMb() > 0) {
+            $mbGeral->setDataAlteracao(new DateTime());
+            $mbGeral->setUsuarioAlteracao($usuario);
+        } else {
+            $mbGeral->setDataInsercao(new DateTime());
+            $mbGeral->setUsuarioInsercao($usuario);            
         }
         
         $this->doctrine->em->persist($mbGeral);

@@ -1,15 +1,13 @@
 <?php
 
-
-
 /**
  * MbGeral
  *
  * @Table(name="mb_geral")
  * @Entity
  */
-class MbGeral
-{
+class MbGeral {
+
     /**
      * @var \DateTime
      *
@@ -78,20 +76,52 @@ class MbGeral
      */
     private $embarcacao;
 
-
-	/**
+    /**
      * @var \Doctrine\Common\Collections\Collection
      * 
      * @OneToMany(targetEntity="MbLance", mappedBy="mbGeral", cascade={"all"})
      */
     protected $lances;
 
-	/**
+    /**
+     * @var $usuarioInsercao
+     *
+     * @ManyToOne(targetEntity="Users")
+     * @JoinColumns({
+     *   @JoinColumn(name="usuario_insercao", referencedColumnName="id_users")
+     * })
+     */
+    private $usuarioInsercao;
+
+    /**
+     * @var $usuarioAlteracao
+     *
+     * @ManyToOne(targetEntity="Users")
+     * @JoinColumns({
+     *   @JoinColumn(name="usuario_alteracao", referencedColumnName="id_users")
+     * })
+     */
+    private $usuarioAlteracao;
+
+    /**
+     * @var string $dataInsercao
+     *
+     * @Column(name="data_insercao", type="datetime")
+     */
+    private $dataInsercao;
+
+    /**
+     * @var string $dataAlteracao
+     *
+     * @Column(name="data_alteracao", type="datetime")
+     */
+    private $dataAlteracao;
+
+    /**
      * Constructor
      */
-    public function __construct()
-    {
-		$this->lances = new \Doctrine\Common\Collections\ArrayCollection();
+    public function __construct() {
+        $this->lances = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -100,10 +130,9 @@ class MbGeral
      * @param \DateTime $dataSaida
      * @return MbGeral
      */
-    public function setDataSaida($dataSaida)
-    {
+    public function setDataSaida($dataSaida) {
         $this->dataSaida = $dataSaida;
-    
+
         return $this;
     }
 
@@ -112,8 +141,7 @@ class MbGeral
      *
      * @return \DateTime 
      */
-    public function getDataSaida()
-    {
+    public function getDataSaida() {
         return $this->dataSaida;
     }
 
@@ -123,10 +151,9 @@ class MbGeral
      * @param \DateTime $dataChegada
      * @return MbGeral
      */
-    public function setDataChegada($dataChegada)
-    {
+    public function setDataChegada($dataChegada) {
         $this->dataChegada = $dataChegada;
-    
+
         return $this;
     }
 
@@ -135,8 +162,7 @@ class MbGeral
      *
      * @return \DateTime 
      */
-    public function getDataChegada()
-    {
+    public function getDataChegada() {
         return $this->dataChegada;
     }
 
@@ -146,10 +172,9 @@ class MbGeral
      * @param string $observacao
      * @return MbGeral
      */
-    public function setObservacao($observacao)
-    {
+    public function setObservacao($observacao) {
         $this->observacao = $observacao;
-    
+
         return $this;
     }
 
@@ -158,8 +183,7 @@ class MbGeral
      *
      * @return string 
      */
-    public function getObservacao()
-    {
+    public function getObservacao() {
         return $this->observacao;
     }
 
@@ -169,10 +193,9 @@ class MbGeral
      * @param integer $petrecho
      * @return MbGeral
      */
-    public function setPetrecho($petrecho)
-    {
+    public function setPetrecho($petrecho) {
         $this->petrecho = $petrecho;
-    
+
         return $this;
     }
 
@@ -181,8 +204,7 @@ class MbGeral
      *
      * @return integer 
      */
-    public function getPetrecho()
-    {
+    public function getPetrecho() {
         return $this->petrecho;
     }
 
@@ -191,8 +213,7 @@ class MbGeral
      *
      * @return integer 
      */
-    public function getIdMb()
-    {
+    public function getIdMb() {
         return $this->idMb;
     }
 
@@ -202,10 +223,9 @@ class MbGeral
      * @param \CadEntrevistador $entrevistador
      * @return MbGeral
      */
-    public function setEntrevistador(\CadEntrevistador $entrevistador = null)
-    {
+    public function setEntrevistador(\CadEntrevistador $entrevistador = null) {
         $this->entrevistador = $entrevistador;
-    
+
         return $this;
     }
 
@@ -214,8 +234,7 @@ class MbGeral
      *
      * @return \CadEntrevistador
      */
-    public function getEntrevistador()
-    {
+    public function getEntrevistador() {
         return $this->entrevistador;
     }
 
@@ -225,10 +244,9 @@ class MbGeral
      * @param \CadMestre $mestre
      * @return MbGeral
      */
-    public function setMestre(\CadMestre $mestre = null)
-    {
+    public function setMestre(\CadMestre $mestre = null) {
         $this->mestre = $mestre;
-    
+
         return $this;
     }
 
@@ -237,8 +255,7 @@ class MbGeral
      *
      * @return \CadMestre 
      */
-    public function getMestre()
-    {
+    public function getMestre() {
         return $this->mestre;
     }
 
@@ -248,10 +265,9 @@ class MbGeral
      * @param \CadEmbarcacao $embarcacao
      * @return MbGeral
      */
-    public function setEmbarcacao(\CadEmbarcacao $embarcacao = null)
-    {
+    public function setEmbarcacao(\CadEmbarcacao $embarcacao = null) {
         $this->embarcacao = $embarcacao;
-    
+
         return $this;
     }
 
@@ -260,19 +276,17 @@ class MbGeral
      *
      * @return \CadEmbarcacao 
      */
-    public function getEmbarcacao()
-    {
+    public function getEmbarcacao() {
         return $this->embarcacao;
     }
 
-	/**
+    /**
      * Add lance
      *
      * @param MbLance $lance
      * @return MbGeral
      */
-    public function addLance(MbLance $lance)
-    {
+    public function addLance(MbLance $lance) {
         $lance->setMbGeral($this);
         $this->lances[] = $lance;
         return $this;
@@ -283,8 +297,40 @@ class MbGeral
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getLances()
-    {
+    public function getLances() {
         return $this->lances;
     }
+
+    public function setUsuarioInsercao(Users $usuario) {
+        $this->usuarioInsercao = $usuario;
+    }
+
+    public function getUsuarioInsercao() {
+        return $this->usuarioInsercao;
+    }
+
+    public function setUsuarioAlteracao(Users $usuario) {
+        $this->usuarioAlteracao = $usuario;
+    }
+
+    public function getUsuarioAlteracao() {
+        return $this->usuarioAlteracao;
+    }
+
+    public function setDataInsercao($data) {
+        $this->dataInsercao = $data;
+    }
+
+    public function getDataInsercao() {
+        return $this->dataInsercao;
+    }
+
+    public function setDataAlteracao($data) {
+        $this->dataAlteracao = $data;
+    }
+
+    public function getDataAlteracao() {
+        return $this->dataAlteracao;
+    }
+
 }
