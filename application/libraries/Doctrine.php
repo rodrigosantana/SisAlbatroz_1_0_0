@@ -30,7 +30,7 @@ class Doctrine {
     $config = new Configuration;
     $cache = new ArrayCache;
     $config->setMetadataCacheImpl($cache);
-    $driverImpl = $config->newDefaultAnnotationDriver(array(APPPATH.'models/Entities'));
+    $driverImpl = $config->newDefaultAnnotationDriver(array(APPPATH.'models'));
     $config->setMetadataDriverImpl($driverImpl);
     $config->setQueryCacheImpl($cache);
 
@@ -66,5 +66,12 @@ class Doctrine {
 
     // Create EntityManager
     $this->em = EntityManager::create($connectionOptions, $config);
+    $conn = $this->em->getConnection();
+    $conn->getDatabasePlatform()->registerDoctrineTypeMapping('geometry', 'geometry');
+    $conn->getDatabasePlatform()->registerDoctrineTypeMapping('_text', 'string');
+    
+    
+    //comando para o mapeamento
+    //--force  --from-database annotation ./entity
   }
 }

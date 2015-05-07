@@ -163,4 +163,11 @@ class Cad_empresa {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
+    public function getIdEmpresa() {
+        return $this->id_empresa;
+    }
+    
+    public function getNome() {
+        return $this->nome;
+    }
 }

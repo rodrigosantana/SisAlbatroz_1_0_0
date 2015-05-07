@@ -19,6 +19,94 @@ class Utils {
     const MM_USO_TOTAL = 'TOTAL';
     const MM_USO_PARCIAL = 'PARCIAL';
     
+    const RUMO_N = 'N';
+    const RUMO_NNE = 'NNE';
+    const RUMO_NE = 'NE';
+    const RUMO_ENE = 'ENE';
+    const RUMO_E = 'E';
+    const RUMO_ESE = 'ESE';
+    const RUMO_SE = 'SE';
+    const RUMO_SSE = 'SSE';
+    const RUMO_S = 'S';
+    const RUMO_SSO = 'SSO';
+    const RUMO_SO = 'SO';
+    const RUMO_OSO = 'OSO';
+    const RUMO_O = 'O';
+    const RUMO_ONO = 'ONO';
+    const RUMO_NO = 'NO';
+    const RUMO_NNO = 'NNO';
+    
+    const DIRECAO_VENTO_N = 'N';
+    const DIRECAO_VENTO_NNE = 'NNE';
+    const DIRECAO_VENTO_NE = 'NE';
+    const DIRECAO_VENTO_ENE = 'ENE';
+    const DIRECAO_VENTO_E = 'E';
+    const DIRECAO_VENTO_ESE = 'ESE';
+    const DIRECAO_VENTO_SE = 'SE';
+    const DIRECAO_VENTO_SSE = 'SSE';
+    const DIRECAO_VENTO_S = 'S';
+    const DIRECAO_VENTO_SSO = 'SSO';
+    const DIRECAO_VENTO_SO = 'SO';
+    const DIRECAO_VENTO_OSO = 'OSO';
+    const DIRECAO_VENTO_O = 'O';
+    const DIRECAO_VENTO_ONO = 'ONO';
+    const DIRECAO_VENTO_NO = 'NO';
+    const DIRECAO_VENTO_NNO = 'NNO';
+    
+    public static function indRumo($value = null) {
+        $array = array(
+            self::RUMO_N,
+            self::RUMO_NNE,
+            self::RUMO_NE,
+            self::RUMO_ENE,
+            self::RUMO_E,
+            self::RUMO_ESE,
+            self::RUMO_SE,
+            self::RUMO_SSE,
+            self::RUMO_S,
+            self::RUMO_SSO,
+            self::RUMO_SO,
+            self::RUMO_OSO,
+            self::RUMO_O,
+            self::RUMO_ONO,
+            self::RUMO_NO,
+            self::RUMO_NNO,
+        );
+        
+        if (!is_null($value) && in_array($value, $array)) {
+            return $array[array_search($value, $array)];
+        }
+        
+        return $array;
+    }
+    
+    public static function indDirecaoVento($value = null) {
+        $array = array(
+            self::DIRECAO_VENTO_N,
+            self::DIRECAO_VENTO_NNE,
+            self::DIRECAO_VENTO_NE,
+            self::DIRECAO_VENTO_ENE,
+            self::DIRECAO_VENTO_E,
+            self::DIRECAO_VENTO_ESE,
+            self::DIRECAO_VENTO_SE,
+            self::DIRECAO_VENTO_SSE,
+            self::DIRECAO_VENTO_S,
+            self::DIRECAO_VENTO_SSO,
+            self::DIRECAO_VENTO_SO,
+            self::DIRECAO_VENTO_OSO,
+            self::DIRECAO_VENTO_O,
+            self::DIRECAO_VENTO_ONO,
+            self::DIRECAO_VENTO_NO,
+            self::DIRECAO_VENTO_NNO,
+        );
+        
+        if (!is_null($value) && in_array($value, $array)) {
+            return $array[array_search($value, $array)];
+        }
+        
+        return $array;
+    }
+    
     public static function findIds($field, $model) {
         $CI = &get_instance();
         
@@ -68,7 +156,7 @@ class Utils {
         return null;
     }
 
-	/**
+    /**
      * Verifica se o valor enviado via requisi��o � verdadeiro ou falso.
      * 
      * @param string $valor Valor booleano no formato texto.
@@ -119,6 +207,33 @@ class Utils {
         $dt->setTime((int)$value[0], (int)$value[1], 0);        
         return $dt;
     }
+    
+    
+    public static function dateAndTimeToDateTime($data, $time) {
+        $valor = explode("/", $data);
+        $dateTime = null;
+        
+        if (count($valor) == 3) {
+            $dateTime = new DateTime($valor[2] .'-'. $valor[1] .'-'. $valor[0]);
+        } else if (substr_count($data, '-') == 2) {            
+            $dateTime = new DateTime($data);            
+        }
+        
+        $value = explode(":", $time);        
+        
+        if (empty($time) || count($value) !== 2) {
+            return $dateTime;
+        }
+        
+        if (is_null($dateTime)) {
+            $dateTime = new DateTime();
+        }
+        
+        
+        $dateTime->setTime((int)$value[0], (int)$value[1], 0);        
+        return $dateTime;
+    }    
+    
     
     /**
      * Converte coordenada do formato GMS para objeto do tipo Geometry.

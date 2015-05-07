@@ -108,6 +108,15 @@
                 background-color: #989998;
                 border-color: #989998;
             }
+            
+            .row-observador-bordo {
+                margin-top: 10px;
+            }
+   
+            .clickable {
+                cursor: pointer;
+                margin-right: 10px;
+            }    
         </style>
 
         <script src="<?php echo base_url(); ?>assets/js/jquery-1.11.2.js"></script>
@@ -119,6 +128,7 @@
         <script src="<?php echo base_url(); ?>assets/js/jquery.blockUI.js" type="text/javascript" ></script>
         <script src="<?php echo base_url(); ?>assets/bootbox-master/bootbox.js" type="text/javascript" ></script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.maskMoney.min.js" type="text/javascript" ></script>
+        <script src="<?php echo base_url(); ?>assets/js/fieldmanagement.js" type="text/javascript" ></script>
         
 
         <!--    <!-- Biblioteca do Plugin de Validação JQuery e classe suporte do Bootstrap    -->
@@ -134,6 +144,9 @@
 
         <script>
             var URL = "<?php echo site_url(); ?>";
+            
+         
+            
         </script>
     </head>
 
@@ -162,4 +175,22 @@
             </div>
         </footer>
     </body>
+    <script>
+        $(document).ready(function() {
+            $('.panel-heading span.clickable').on("click", function (e) {
+                if ($(this).hasClass('panel-collapsed')) {
+                    // expand the panel
+                    $(this).closest('.panel').find('.panel-body').slideDown();
+                    $(this).removeClass('panel-collapsed');
+                    $(this).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                }
+                else {
+                    // collapse the panel
+                    $(this).closest('.panel').find('.panel-body').slideUp();
+                    $(this).addClass('panel-collapsed');
+                    $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                }
+            });
+        });
+    </script>
 </html>
