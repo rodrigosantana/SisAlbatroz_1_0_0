@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo site_url();?>">Início</a></li>
-                <li><a href="<?php echo site_url('usuario');?>">Usuário</a></li>
+                
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Basilares <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -21,6 +21,7 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_mestre_ct/cadmestre');?>">Mestres</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_empresa_ct/cadempresa');?>">Empresas</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_observ_ct/cadobserv');?>">Observadores</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('usuario');?>">Usuário</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -28,6 +29,14 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('mapa_bordo_ct');?>">Consulta</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('mapa_bordo_ct/novo');?>">Cadastro</a></li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown">
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle">Observador de Bordo <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('observadorbordo');?>">Consulta</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('observadorbordo/novo');?>">Cadastro</a></li>
                     </ul>
                 </li>
                 
