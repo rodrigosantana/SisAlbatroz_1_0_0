@@ -33,9 +33,6 @@ if(isset($erro) && $erro !== false){
     }
     if(isset($regsubnaoencontrado)){
         $response["regsubnaoencontrado"] = $regsubnaoencontrado;
-    }    
-    if(isset($hidden)){
-        $response["hidden"] = $hidden;
     }
     
 }

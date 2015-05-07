@@ -40,7 +40,8 @@ class Mapa_bordo_ct extends MY_Controller {
         }
         
         if (is_null($mbGeral)) {
-            show_error('unknown_registry_error_message');
+            die('Precisa criar a tela de erro');
+            //mostra erro
         }
 
         $this->formulario($mbGeral);
@@ -89,7 +90,8 @@ class Mapa_bordo_ct extends MY_Controller {
     public function salva() {
 
         if ($this->validation(true) !== false) {
-            show_error('generic_error_message');
+            //mostra mensagem de erro
+            //$this->load->view("layout/jsonresponse", array("erroNaoEsperado" => true));
             return;
         }
         
@@ -98,11 +100,6 @@ class Mapa_bordo_ct extends MY_Controller {
         
         if ($this->input->post('id_mb') && is_numeric($this->input->post('id_mb'))) {
             $mbGeral = $this->doctrine->em->find('MbGeral', $this->input->post('id_mb'));
-            
-            if (is_null($mbGeral)) {
-                show_error('unknown_registry_error_message');
-            }
-            
             $isEdita = true;
         }
 
@@ -302,11 +299,6 @@ class Mapa_bordo_ct extends MY_Controller {
 
     public function exclui(){
         $mapa_bordo = $this->doctrine->em->find("MbGeral", $this->input->get("id"));
-        
-        if (is_null($mapa_bordo)) {
-            show_error('unknown_registry_error_message');
-        }
-        
         $this->doctrine->em->remove($mapa_bordo);
         $this->doctrine->em->flush();
         $this->session->set_flashdata(get_class($this) . '_mensagem', 'Registro excluído com sucesso.');

@@ -110,8 +110,6 @@ $autoload['language'] = array('i18n');
 */
 
 $autoload['model'] = array(
-    'CadFinanciador',
-    'CadEspecie',
     'Cad_embarcacao',
     'Cad_mestre',
     'Cad_empresa',
@@ -136,23 +134,6 @@ $autoload['model'] = array(
     'MbGeral',
     'MbCaptura',
     'MbLance',
-    
-    'Cruzeiro',
-    'ProducaoPesqueira',
-    'ProducaoPesqueiraEspecie',
-    
-    'DadosAbioticos',
-    'DadosAbioticosComplementar',
-    'DadosAbioticosLancamento',
-    'DadosAbioticosRecolhimento',
-    
-    'ContagemPorSol',
-    'ContagemPorSolEspecie',
-    'CapturaIncidental',
-    
-    'ContagemAveBoia',
-    'ContagemAveBoiaEspecie'
-    
     
 );
 

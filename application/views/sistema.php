@@ -49,7 +49,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3 col-md-3">
-                <a href="<?php echo site_url('mapa_bordo_ct');?>" class="thumbnail logo">
+                <a href="<?php echo base_url();?>index.php/mapa_bordo_ct" class="thumbnail logo">
                     <img src="<?php echo base_url();?>assets/img/PA_logo_mb.jpg" alt="Mapa de Bordo">
                 </a>
             </div>
@@ -59,7 +59,7 @@
                 </a>
             </div>
             <div class="col-xs-3 col-md-3">
-                <a href="<?php echo site_url('observadorbordo');?>" class="thumbnail logo">
+                <a href="#" class="thumbnail logo">
                     <img src="<?php echo base_url();?>assets/img/PA_logo_ob.jpg" alt="Observador de Bordo">
                 </a>
             </div>

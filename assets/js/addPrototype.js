@@ -125,16 +125,14 @@ var Prototype = {
         }
         
         //true no segundo parametro para setar focu no elemento após adiciona-lo na tela        
-        this.addElement = function (setFocus, isAddOne){
+        this.addElement = function (setFocus){
             var removeKeyboardDeleteShortcut = false;
             var list = $(config.list);
             
+            $(list).find('.collapse').addClass('expand');
+            $(list).find('.expand').removeClass('collapse');
+            $(list).find('.portlet-body').css('display', 'none');
             
-            
-            $(list).find('.panel-body').slideUp();
-            $(list).find('.panel-heading span.clickable').addClass('panel-collapsed');
-            $(list).find('.panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-                       
             var newWidget = list.attr('data-prototype');
             //tenta substituir o padrão $$name$$ caso não encontre, tenta substituir o padrão $$name2$$
             //isto é usado quando tem collection dentro de collection
@@ -146,23 +144,6 @@ var Prototype = {
 
             newWidget = $(newWidget);
             newWidget.appendTo(list);
-            
-            if (isAddOne !== true) {
-                newWidget.find('.panel-heading span.clickable').on("click", function (e) {
-                    if ($(this).hasClass('panel-collapsed')) {
-                        // expand the panel
-                        $(this).closest('.panel').find('.panel-body').slideDown();
-                        $(this).removeClass('panel-collapsed');
-                        $(this).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
-                    }
-                    else {
-                        // collapse the panel
-                        $(this).closest('.panel').find('.panel-body').slideUp();
-                        $(this).addClass('panel-collapsed');
-                        $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-                    }
-                });
-            }
 
             var $btn = $(config.removeButton+'-'+config.count);
 
@@ -173,6 +154,7 @@ var Prototype = {
                 removeKeyboardDeleteShortcut= true;
             
             }else{
+            
                 $btn.click(function(evt){
                     ptype.removerElemento($(evt.target).parents(config.container));
                     list.children(config.container+':last-child').find('.insertaction');
@@ -219,11 +201,11 @@ var Prototype = {
              if(config.count > 0){
                  ptype.start();
              }else if(config.addOne || config.isAlwaysVisible){
-                 ptype.addElement(config.focusOnStart, true);
+                 ptype.addElement(config.focusOnStart);
              }
         }else{
             if(config.addOne || config.isAlwaysVisible){
-                ptype.addElement(config.focusOnStart, true);
+                ptype.addElement(config.focusOnStart);
             }
         }   
     }                
