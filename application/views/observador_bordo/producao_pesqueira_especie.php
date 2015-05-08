@@ -5,7 +5,7 @@
         <div class="form-group">
             <label for="producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_especie" class="col-md-4 control-label">Espécie</label>
             <div class="col-md-8 div-help">
-                <select class="select2 insertaction" style="width: 100%" id="producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_especie" name="producao[<?php echo $numero?>][pp_especie][<?php echo $numero2?>][especie]">
+                <select class="select2" style="width: 100%" id="producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_especie" name="producao[<?php echo $numero?>][pp_especie][<?php echo $numero2?>][especie]">
                     <option></option>
                     <?php foreach ($especies as $especie): ?>
                         <?php $selected = (!is_null($producaoPesqueiraEspecie->getEspecie()) && $producaoPesqueiraEspecie->getEspecie()->getId() == $especie->getId()) ? 'selected' : ''?>

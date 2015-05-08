@@ -128,9 +128,9 @@ class Cruzeiro
     /**
      * @var $usuarioInsercao
      *
-     * @ManyToOne(targetEntity="Users")
+     * @ManyToOne(targetEntity="SystemUsers")
      * @JoinColumns({
-     *   @JoinColumn(name="usuario_insercao", referencedColumnName="id_users")
+     *   @JoinColumn(name="usuario_insercao", referencedColumnName="id")
      * })
      */
     private $usuarioInsercao;
@@ -138,9 +138,9 @@ class Cruzeiro
     /**
      * @var $usuarioAlteracao
      *
-     * @ManyToOne(targetEntity="Users")
+     * @ManyToOne(targetEntity="SystemUsers")
      * @JoinColumns({
-     *   @JoinColumn(name="usuario_alteracao", referencedColumnName="id_users")
+     *   @JoinColumn(name="usuario_alteracao", referencedColumnName="id")
      * })
      */
     private $usuarioAlteracao;
@@ -412,7 +412,7 @@ class Cruzeiro
         return $this->contagemAveBoia;
     }
     
-    public function setUsuarioInsercao(Users $usuario) {
+    public function setUsuarioInsercao(SystemUsers $usuario) {
         $this->usuarioInsercao = $usuario;
     }
 
@@ -420,7 +420,7 @@ class Cruzeiro
         return $this->usuarioInsercao;
     }
 
-    public function setUsuarioAlteracao(Users $usuario) {
+    public function setUsuarioAlteracao(SystemUsers $usuario) {
         $this->usuarioAlteracao = $usuario;
     }
 

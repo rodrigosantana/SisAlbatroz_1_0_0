@@ -16,16 +16,16 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="contagem_ave_boia_<?php echo $numero ?>_lance" name="contagem_ave_boia[<?php echo $numero ?>][lance]" class="col-md-4 control-label">Lance *</label>
+                    <label for="contagem_ave_boia_<?php echo $numero ?>_lance" class="col-md-4 control-label">Lance *</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control insertaction" id="contagem_ave_boia_<?php echo $numero ?>_lance" name="contagem_ave_boia[<?php echo $numero ?>][lance]" placeholder="Apenas dígitos" value="<?php echo $contagemAveBoia->getLance() ?>">
+                        <input type="number" class="form-control" id="contagem_ave_boia_<?php echo $numero ?>_lance" name="contagem_ave_boia[<?php echo $numero ?>][lance]" placeholder="Apenas dígitos" value="<?php echo $contagemAveBoia->getLance() ?>">
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="contagem_ave_boia_<?php echo $numero ?>_boia_radio" name="contagem_ave_boia[<?php echo $numero ?>][boia_radio]" class="col-md-4 control-label">Boia rádio</label>
+                    <label for="contagem_ave_boia_<?php echo $numero ?>_boia_radio" class="col-md-4 control-label">Boia rádio</label>
                     <div class="col-md-8 div-help">
                         <input type="number" class="form-control" id="contagem_ave_boia_<?php echo $numero ?>_boia_radio" name="contagem_ave_boia[<?php echo $numero ?>][boia_radio]" placeholder="Apenas dígitos" value="<?php echo $contagemAveBoia->getBoiaRadio() ?>">
                     </div>
@@ -34,7 +34,7 @@
             
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="contagem_ave_boia_<?php echo $numero ?>_data" name="contagem_ave_boia[<?php echo $numero ?>][data]" class="col-md-4 control-label">Data</label>
+                    <label for="contagem_ave_boia_<?php echo $numero ?>_data" class="col-md-4 control-label">Data</label>
                     <div class="col-md-8 div-help">
                         <input type="date" class="form-control" id="contagem_ave_boia_<?php echo $numero ?>_data" name="contagem_ave_boia[<?php echo $numero ?>][data]" value="<?php echo is_null($contagemAveBoia->getDataHora()) ? '' : $contagemAveBoia->getDataHora()->format("Y-m-d") ?>">
                     </div>

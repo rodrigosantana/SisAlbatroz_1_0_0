@@ -36,7 +36,7 @@
                     <?php foreach ($lista as $mapa_bordo): ?>
                         <tr>
                             <td class="text-center"> <?php echo $mapa_bordo->getIdMb() ?> </td>
-                            <td class="text-center"> <?php echo is_null($mapa_bordo->getEntrevistador()) ? '' : $mapa_bordo->getEntrevistador()->getNome() ?> </td>
+                            <td class="text-center"> <?php echo is_null($mapa_bordo->getEntrevistador()) ? '' : $mapa_bordo->getEntrevistador()->getName() ?> </td>
                             <td class="text-center"> <?php echo $mapa_bordo->getEmbarcacao()->getNome() ?> </td>
                             <td class="text-center"> <?php echo $mapa_bordo->getMestre()->getNome() ?> </td>
                             <td class="text-center"> <?php echo is_null($mapa_bordo->getDataSaida()) ? '' : $mapa_bordo->getDataSaida()->format("d/m/Y") ?> </td>

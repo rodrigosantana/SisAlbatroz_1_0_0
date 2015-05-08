@@ -65,11 +65,11 @@ class CapturaIncidental
     private $quantidade;
 
     /**
-     * @var \CadEspecie
+     * @var \CadAves
      *
-     * @ManyToOne(targetEntity="CadEspecie")
+     * @ManyToOne(targetEntity="CadAves")
      * @JoinColumns({
-     *   @JoinColumn(name="especie", referencedColumnName="id")
+     *   @JoinColumn(name="especie", referencedColumnName="id_aves")
      * })
      */
     private $especie;
@@ -237,10 +237,10 @@ class CapturaIncidental
     /**
      * Set especie
      *
-     * @param \CadEspecie $especie
+     * @param \CadAves $especie
      * @return CapturaIncidental
      */
-    public function setEspecie(\CadEspecie $especie = null)
+    public function setEspecie(\CadAves $especie = null)
     {
         $this->especie = $especie;
 
@@ -250,7 +250,7 @@ class CapturaIncidental
     /**
      * Get especie
      *
-     * @return \CadEspecie 
+     * @return \CadAves 
      */
     public function getEspecie()
     {

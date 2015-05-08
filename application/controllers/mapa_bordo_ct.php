@@ -49,9 +49,6 @@ class Mapa_bordo_ct extends MY_Controller {
 //--------------------------------------------------------------------------------------------------------------------//
     protected function formulario($mbGeral) {
 
-        $entrevistadores = $this->doctrine->em->getRepository("CadEntrevistador")->findBy(
-                array(), array('nome' => 'ASC')
-        );
         $embarcacoes = $this->doctrine->em->getRepository("CadEmbarcacao")->findBy(
                 array(), array('nome' => 'ASC')
         );
@@ -73,7 +70,6 @@ class Mapa_bordo_ct extends MY_Controller {
         
         $this->load->view("mapa_bordo/new", array(
             "mbGeral" => $mbGeral,
-            "entrevistadores" => $entrevistadores,
             "embarcacoes" => $embarcacoes,
             "mestres" => $mestres,
             "aves" => $aves,
@@ -94,7 +90,8 @@ class Mapa_bordo_ct extends MY_Controller {
         }
         
         $mbGeral = new MbGeral();
-        $isEdita = false;
+        $usuario = $this->doctrine->em->find("SystemUsers", $this->ezrbac->getCurrentUser()->id);
+        $isEdita = false;        
         
         if ($this->input->post('id_mb') && is_numeric($this->input->post('id_mb'))) {
             $mbGeral = $this->doctrine->em->find('MbGeral', $this->input->post('id_mb'));
@@ -106,16 +103,13 @@ class Mapa_bordo_ct extends MY_Controller {
             $isEdita = true;
         }
 
-        $entrevistador = null;
-        
-        if ($this->input->post('entrevistador') && is_numeric($this->input->post('entrevistador'))) {
-            $entrevistador = $this->doctrine->em->find('CadEntrevistador', $this->input->post('entrevistador'));
-        }
-        
         $embarcacao = $this->doctrine->em->find('CadEmbarcacao', $this->input->post('embarcacao'));
         $mestre = $this->doctrine->em->find('CadMestre', $this->input->post('mestre'));
 
-        $mbGeral->setEntrevistador($entrevistador);
+        if (is_null($mbGeral->getEntrevistador())) {
+            $mbGeral->setEntrevistador($usuario);
+        }
+        
         $mbGeral->setEmbarcacao($embarcacao);
         $mbGeral->setMestre($mestre);
         $mbGeral->setPetrecho((int) $this->input->post('petrecho'));
@@ -209,8 +203,6 @@ class Mapa_bordo_ct extends MY_Controller {
             }
         }
         
-        $usuario = $this->doctrine->em->find("Users", $this->ezrbac->getCurrentUser()->id);
-        
         if ($mbGeral->getIdMb() > 0) {
             $mbGeral->setDataAlteracao(new DateTime());
             $mbGeral->setUsuarioAlteracao($usuario);
@@ -237,7 +229,6 @@ class Mapa_bordo_ct extends MY_Controller {
 
 
     public function validation($returnError = false) {
-        $this->form_validation->set_rules("entrevistador", "Entrevistador", "trim|in_array[" . Utils::findIds('id', 'CadEntrevistador') . "]");
         $this->form_validation->set_rules("embarcacao", "Embarcação", "trim|required|in_array[" . Utils::findIds('idEmbarcacao', 'CadEmbarcacao') . "]");
         $this->form_validation->set_rules("mestre", "Mestre", "trim|required|in_array[" . Utils::findIds('idMestre', 'CadMestre') . "]");
         $this->form_validation->set_rules("petrecho", "Petrecho", "trim|required|in_array[" . Utils::ESPINHEL_SUPERFICIE . "," . Utils::ESPINHEL_FUNDO . "]");
@@ -333,8 +324,8 @@ class Mapa_bordo_ct extends MY_Controller {
     protected function telaFiltro() {
         $filtro = $this->session->userdata('filtros_' . get_class($this));
         
-        $entrevistadores = $this->doctrine->em->getRepository("CadEntrevistador")->findBy(
-                array(), array('nome' => 'ASC')
+        $entrevistadores = $this->doctrine->em->getRepository("SystemUsers")->findBy(
+                array(), array('name' => 'ASC')
         );
         $embarcacoes = $this->doctrine->em->getRepository("CadEmbarcacao")->findBy(
                 array(), array('nome' => 'ASC')

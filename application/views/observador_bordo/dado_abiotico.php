@@ -14,13 +14,16 @@
     <div class="panel-body" style="<?php echo is_null($dadoAbiotico->getId()) ? '' : 'display:none'?>">
         <?php //$dadoAbiotico = new DadosAbioticos()?>
         <div class="row">
+            
             <div class="col-md-6">
+                <h4 class="text-center titulo">Dados do lance</h4>
+                <hr class="hr-sisalbatroz">
                 <div class="row ">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="dado_abiotico_<?php echo $numero; ?>_lance" class="col-md-4 control-label lb_lance">Lance *</label>
                             <div class="col-md-8 div-help">
-                                <input type="number" class="form-control lance insertaction" id="dado_abiotico_<?php echo $numero; ?>_lance" name="dado_abiotico[<?php echo $numero; ?>][lance]"
+                                <input type="number" class="form-control lance" id="dado_abiotico_<?php echo $numero; ?>_lance" name="dado_abiotico[<?php echo $numero; ?>][lance]"
                                        placeholder="Identificador do lance" value="<?php echo $dadoAbiotico->getLance() ?>">
                             </div>
                         </div>
@@ -48,24 +51,7 @@
                 <div class="row ">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="dado_abiotico_<?php echo $numero?>_especie" class="col-md-4 control-label">Espécie alvo</label>
-                            <div class="col-md-8 div-help">
-                                <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero?>_especie" name="dado_abiotico[<?php echo $numero?>][especie]">
-                                    <option></option>
-                                    <?php foreach ($especies as $especie): ?>
-                                        <?php $selected = (!is_null($dadoAbiotico->getEspecieAlvo()) && $dadoAbiotico->getEspecieAlvo()->getId() == $especie->getId()) ? 'selected' : ''?>
-                                        <option value="<?php echo $especie->getId() ?>" <?php echo $selected?>><?php echo $especie->getNome() ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row ">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="dado_abiotico_<?php echo $numero ?>_anzois" name="dado_abiotico[<?php echo $numero ?>][anzois]" class="col-md-4 control-label">Anzóis</label>
+                            <label for="dado_abiotico_<?php echo $numero ?>_anzois" class="col-md-4 control-label">Anzóis</label>
                             <div class="col-md-8 div-help">
                                 <input type="number" class="form-control" id="dado_abiotico_<?php echo $numero ?>_anzois" name="dado_abiotico[<?php echo $numero ?>][anzois]" placeholder="Apenas dígitos" value="<?php echo $dadoAbiotico->getAnzois() ?>">
                             </div>
@@ -77,6 +63,8 @@
             
             
             <div class="col-md-6">
+                <h4 class="text-center titulo">Medidas Mitigadoras</h4>
+                <hr class="hr-sisalbatroz">
                 
                 <div class="row ">
                     <div class="col-md-12">
@@ -116,6 +104,8 @@
             </div>
             
         </div>
+        
+        
         
         
         <h3 class="text-center titulo">Dados do lancamento</h3>

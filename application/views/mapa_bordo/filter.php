@@ -19,7 +19,7 @@
                                 <option></option>
                                 <?php foreach ($entrevistadores as $cad_entrevistador): ?>
                                     <?php $selected = (!empty($filtro['entrevistador']) && (int)$filtro['entrevistador'] == $cad_entrevistador->getId()) ? 'selected' : '' ?>
-                                    <option value="<?php echo $cad_entrevistador->getId() ?>" <?php echo $selected; ?>><?php echo $cad_entrevistador->getNome() ?></option>
+                                    <option value="<?php echo $cad_entrevistador->getId() ?>" <?php echo $selected; ?>><?php echo $cad_entrevistador->getName() ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

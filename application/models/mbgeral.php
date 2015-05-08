@@ -47,9 +47,9 @@ class MbGeral {
     private $idMb;
 
     /**
-     * @var \CadEntrevistador
+     * @var \SystemUsers
      *
-     * @ManyToOne(targetEntity="CadEntrevistador")
+     * @ManyToOne(targetEntity="SystemUsers")
      * @JoinColumns({
      *   @JoinColumn(name="entrevistador", referencedColumnName="id")
      * })
@@ -86,9 +86,9 @@ class MbGeral {
     /**
      * @var $usuarioInsercao
      *
-     * @ManyToOne(targetEntity="Users")
+     * @ManyToOne(targetEntity="SystemUsers")
      * @JoinColumns({
-     *   @JoinColumn(name="usuario_insercao", referencedColumnName="id_users")
+     *   @JoinColumn(name="usuario_insercao", referencedColumnName="id")
      * })
      */
     private $usuarioInsercao;
@@ -96,9 +96,9 @@ class MbGeral {
     /**
      * @var $usuarioAlteracao
      *
-     * @ManyToOne(targetEntity="Users")
+     * @ManyToOne(targetEntity="SystemUsers")
      * @JoinColumns({
-     *   @JoinColumn(name="usuario_alteracao", referencedColumnName="id_users")
+     *   @JoinColumn(name="usuario_alteracao", referencedColumnName="id")
      * })
      */
     private $usuarioAlteracao;
@@ -220,10 +220,10 @@ class MbGeral {
     /**
      * Set entrevistador
      *
-     * @param \CadEntrevistador $entrevistador
+     * @param \SystemUsers $entrevistador
      * @return MbGeral
      */
-    public function setEntrevistador(\CadEntrevistador $entrevistador = null) {
+    public function setEntrevistador(\SystemUsers $entrevistador = null) {
         $this->entrevistador = $entrevistador;
 
         return $this;
@@ -232,7 +232,7 @@ class MbGeral {
     /**
      * Get entrevistador
      *
-     * @return \CadEntrevistador
+     * @return \SystemUsers
      */
     public function getEntrevistador() {
         return $this->entrevistador;
@@ -301,7 +301,7 @@ class MbGeral {
         return $this->lances;
     }
 
-    public function setUsuarioInsercao(Users $usuario) {
+    public function setUsuarioInsercao(SystemUsers $usuario) {
         $this->usuarioInsercao = $usuario;
     }
 
@@ -309,7 +309,7 @@ class MbGeral {
         return $this->usuarioInsercao;
     }
 
-    public function setUsuarioAlteracao(Users $usuario) {
+    public function setUsuarioAlteracao(SystemUsers $usuario) {
         $this->usuarioAlteracao = $usuario;
     }
 

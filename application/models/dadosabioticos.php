@@ -58,16 +58,6 @@ class DadosAbioticos
     private $iscaTingida;
 
     /**
-     * @var \CadEspecie
-     *
-     * @ManyToOne(targetEntity="CadEspecie")
-     * @JoinColumns({
-     *   @JoinColumn(name="especie_alvo", referencedColumnName="id")
-     * })
-     */
-    private $especieAlvo;
-
-    /**
      * @var \CadIsca
      *
      * @ManyToOne(targetEntity="CadIsca")
@@ -243,29 +233,6 @@ class DadosAbioticos
     public function getIscaTingida()
     {
         return $this->iscaTingida;
-    }
-
-    /**
-     * Set especieAlvo
-     *
-     * @param \CadEspecie $especieAlvo
-     * @return DadosAbioticos
-     */
-    public function setEspecieAlvo(\CadEspecie $especieAlvo = null)
-    {
-        $this->especieAlvo = $especieAlvo;
-
-        return $this;
-    }
-
-    /**
-     * Get especieAlvo
-     *
-     * @return \CadEspecie 
-     */
-    public function getEspecieAlvo()
-    {
-        return $this->especieAlvo;
     }
 
     /**

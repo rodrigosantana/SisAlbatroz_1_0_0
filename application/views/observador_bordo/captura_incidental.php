@@ -16,16 +16,16 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="captura_incidental_<?php echo $numero ?>_lance" name="captura_incidental[<?php echo $numero ?>][lance]" class="col-md-4 control-label">Lance</label>
+                    <label for="captura_incidental_<?php echo $numero ?>_lance" class="col-md-4 control-label">Lance</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control insertaction" id="captura_incidental_<?php echo $numero ?>_lance" name="captura_incidental[<?php echo $numero ?>][lance]" placeholder="Apenas dígitos" value="<?php echo $capturaIncidental->getLance() ?>">
+                        <input type="number" class="form-control" id="captura_incidental_<?php echo $numero ?>_lance" name="captura_incidental[<?php echo $numero ?>][lance]" placeholder="Apenas dígitos" value="<?php echo $capturaIncidental->getLance() ?>">
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="captura_incidental_<?php echo $numero ?>_data" name="captura_incidental[<?php echo $numero ?>][data]" class="col-md-4 control-label">Data</label>
+                    <label for="captura_incidental_<?php echo $numero ?>_data" class="col-md-4 control-label">Data</label>
                     <div class="col-md-8 div-help">
                         <input type="date" class="form-control" id="captura_incidental_<?php echo $numero ?>_data" name="captura_incidental[<?php echo $numero ?>][data]" value="<?php echo is_null($capturaIncidental->getData()) ? '' : $capturaIncidental->getData()->format("Y-m-d") ?>">
                     </div>
@@ -34,7 +34,7 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="captura_incidental_<?php echo $numero ?>_boia_radio" name="captura_incidental[<?php echo $numero ?>][boia_radio]" class="col-md-4 control-label">Boia rádio</label>
+                    <label for="captura_incidental_<?php echo $numero ?>_boia_radio" class="col-md-4 control-label">Boia rádio</label>
                     <div class="col-md-8 div-help">
                         <input type="number" class="form-control" id="captura_incidental_<?php echo $numero ?>_boia_radio" name="captura_incidental[<?php echo $numero ?>][boia_radio]" placeholder="Apenas dígitos" value="<?php echo $capturaIncidental->getBoiaRadio() ?>">
                     </div>
@@ -79,9 +79,9 @@
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="captura_incidental_<?php echo $numero; ?>_especie" name="captura_incidental[<?php echo $numero; ?>][especie]">
                             <option></option>
-                            <?php foreach ($especies as $especie): ?>
-                                <?php $selected = (!is_null($capturaIncidental->getEspecie()) && $capturaIncidental->getEspecie()->getId() == $especie->getId()) ? 'selected' : ''?>
-                                <option value="<?php echo $especie->getId() ?>" <?php echo $selected?>><?php echo $especie->getNome() ?></option>
+                            <?php foreach ($aves as $ave): ?>
+                                <?php $selected = (!is_null($capturaIncidental->getEspecie()) && $capturaIncidental->getEspecie()->getIdAves() == $ave->getIdAves()) ? 'selected' : ''?>
+                                <option value="<?php echo $ave->getIdAves() ?>" <?php echo $selected?>><?php echo $ave->getNomeCientifico() ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

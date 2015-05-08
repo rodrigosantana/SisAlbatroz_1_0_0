@@ -5,11 +5,11 @@
         <div class="form-group">
             <label for="contagem_ave_boia_<?php echo $numero?>_cab_especie_<?php echo $numero2?>_especie" class="col-md-4 control-label">Espécie</label>
             <div class="col-md-8 div-help">
-                <select class="select2 insertaction" style="width: 100%" id="contagem_ave_boia_<?php echo $numero?>_cab_especie_<?php echo $numero2?>_especie" name="contagem_ave_boia[<?php echo $numero?>][cab_especie][<?php echo $numero2?>][especie]">
+                <select class="select2" style="width: 100%" id="contagem_ave_boia_<?php echo $numero?>_cab_especie_<?php echo $numero2?>_especie" name="contagem_ave_boia[<?php echo $numero?>][cab_especie][<?php echo $numero2?>][especie]">
                     <option></option>
-                    <?php foreach ($especies as $especie): ?>
-                        <?php $selected = (!is_null($contagemAveBoiaEspecie->getEspecie()) && $contagemAveBoiaEspecie->getEspecie()->getId() == $especie->getId()) ? 'selected' : ''?>
-                        <option value="<?php echo $especie->getId() ?>" <?php echo $selected?>><?php echo $especie->getNome() ?></option>
+                    <?php foreach ($aves as $ave): ?>
+                        <?php $selected = (!is_null($contagemAveBoiaEspecie->getEspecie()) && $contagemAveBoiaEspecie->getEspecie()->getIdAves() == $ave->getIdAves()) ? 'selected' : ''?>
+                        <option value="<?php echo $ave->getIdAves() ?>" <?php echo $selected?>><?php echo $ave->getNomeCientifico() ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

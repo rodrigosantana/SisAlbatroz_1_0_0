@@ -183,12 +183,12 @@
                 </div>
                 
                 <div id="contagem_por_sol" class="tab-pane">
-                    <div id="contagem_por_sol_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => new ContagemPorSol(), 'especies'=>$especies), true)); ?>">
+                    <div id="contagem_por_sol_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => new ContagemPorSol(), 'aves'=>$aves), true)); ?>">
                         <?php
                         $lista = $cruzeiro->getContagemPorSol();
 
                         foreach ($lista as $key => $value) {
-                            echo $this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => $value, 'indexContagemPorSol' => $key, 'especies'=>$especies), true);
+                            echo $this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => $value, 'indexContagemPorSol' => $key, 'aves'=>$aves), true);
                         }
                         ?>
                     </div>
@@ -197,12 +197,12 @@
                 </div>
                 
                 <div id="captura_incidental" class="tab-pane">
-                    <div id="captura_incidental_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => new CapturaIncidental(), 'especies'=>$especies), true)); ?>">
+                    <div id="captura_incidental_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => new CapturaIncidental(), 'aves'=>$aves), true)); ?>">
                         <?php
                         $lista = $cruzeiro->getCapturaIncidental();
 
                         foreach ($lista as $key => $value) {
-                            echo $this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => $value, 'indexCapturaIncidental' => $key, 'especies'=>$especies), true);
+                            echo $this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => $value, 'indexCapturaIncidental' => $key, 'aves'=>$aves), true);
                         }
                         ?>
                     </div>
@@ -211,12 +211,12 @@
                 </div>                
                 
                 <div id="contagem_ave_boia" class="tab-pane">
-                    <div id="contagem_ave_boia_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => new ContagemAveBoia(), 'especies'=>$especies), true)); ?>">
+                    <div id="contagem_ave_boia_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => new ContagemAveBoia(), 'aves'=>$aves), true)); ?>">
                         <?php
                         $lista = $cruzeiro->getContagemAveBoia();
 
                         foreach ($lista as $key => $value) {
-                            echo $this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => $value, 'indexContagemAveBoia' => $key, 'especies'=>$especies), true);
+                            echo $this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => $value, 'indexContagemAveBoia' => $key, 'aves'=>$aves), true);
                         }
                         ?>
                     </div>

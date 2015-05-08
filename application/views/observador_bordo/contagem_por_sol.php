@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <label for="contagem_por_sol_<?php echo $numero; ?>_data" class="col-md-4 control-label">Data *</label>
                             <div class="col-md-8 div-help">
-                                <input type="date" class="form-control insertaction" id="contagem_por_sol_<?php echo $numero; ?>_data" name="contagem_por_sol[<?php echo $numero; ?>][data]"
+                                <input type="date" class="form-control" id="contagem_por_sol_<?php echo $numero; ?>_data" name="contagem_por_sol[<?php echo $numero; ?>][data]"
                                        value="<?php echo is_null($contagemPorSol->getDataHora()) ? '' : $contagemPorSol->getDataHora()->format("Y-m-d") ?>">
                             </div>
                         </div>
@@ -73,6 +73,9 @@
             </div>
 
             <div class="col-md-6">
+                <h4 class="text-center titulo">Medidas Mitigadoras</h4>
+                <hr class="hr-sisalbatroz">
+                
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -96,6 +99,8 @@
                         </div>
                     </div>
                 </div>
+                
+                <hr class="hr-sisalbatroz">
                 
                 <div class="row ">
                     <div class="col-md-12">

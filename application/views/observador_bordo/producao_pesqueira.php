@@ -17,16 +17,16 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="producao_<?php echo $numero ?>_lance" name="producao[<?php echo $numero ?>][lance]" class="col-md-4 control-label">Lance</label>
+                    <label for="producao_<?php echo $numero ?>_lance" class="col-md-4 control-label">Lance</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control insertaction" id="producao_<?php echo $numero ?>_lance" name="producao[<?php echo $numero ?>][lance]" placeholder="Apenas dígitos" value="<?php echo $producaoPesqueira->getLance() ?>">
+                        <input type="number" class="form-control" id="producao_<?php echo $numero ?>_lance" name="producao[<?php echo $numero ?>][lance]" placeholder="Apenas dígitos" value="<?php echo $producaoPesqueira->getLance() ?>">
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="producao_<?php echo $numero ?>_data" name="producao[<?php echo $numero ?>][data]" class="col-md-4 control-label">Data</label>
+                    <label for="producao_<?php echo $numero ?>_data" class="col-md-4 control-label">Data</label>
                     <div class="col-md-8 div-help">
                         <input type="date" class="form-control" id="producao_<?php echo $numero ?>_data" name="producao[<?php echo $numero ?>][data]" value="<?php echo is_null($producaoPesqueira->getData()) ? '' : $producaoPesqueira->getData()->format("Y-m-d") ?>">
                     </div>
@@ -35,7 +35,7 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="producao_<?php echo $numero ?>_boia_radio" name="producao[<?php echo $numero ?>][boia_radio]" class="col-md-4 control-label">Boia rádio</label>
+                    <label for="producao_<?php echo $numero ?>_boia_radio" class="col-md-4 control-label">Boia rádio</label>
                     <div class="col-md-8 div-help">
                         <input type="number" class="form-control" id="producao_<?php echo $numero ?>_boia_radio" name="producao[<?php echo $numero ?>][boia_radio]" placeholder="Apenas dígitos" value="<?php echo $producaoPesqueira->getBoiaRadio() ?>">
                     </div>

@@ -54,16 +54,16 @@ class DadosAbioticosComplementar
     private $dataFim;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @Column(name="profundidade_inicio", type="decimal", precision=10, scale=2, nullable=true)
+     * @Column(name="profundidade_inicio", type="integer", nullable=true)
      */
     private $profundidadeInicio;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @Column(name="profundidade_fim", type="decimal", precision=10, scale=2, nullable=true)
+     * @Column(name="profundidade_fim", type="integer", nullable=true)
      */
     private $profundidadeFim;
 
@@ -290,7 +290,7 @@ class DadosAbioticosComplementar
     /**
      * Set profundidadeInicio
      *
-     * @param string $profundidadeInicio
+     * @param integer $profundidadeInicio
      * @return DadosAbioticosComplementar
      */
     public function setProfundidadeInicio($profundidadeInicio)
@@ -303,7 +303,7 @@ class DadosAbioticosComplementar
     /**
      * Get profundidadeInicio
      *
-     * @return string 
+     * @return integer 
      */
     public function getProfundidadeInicio()
     {
@@ -313,7 +313,7 @@ class DadosAbioticosComplementar
     /**
      * Set profundidadeFim
      *
-     * @param string $profundidadeFim
+     * @param integer $profundidadeFim
      * @return DadosAbioticosComplementar
      */
     public function setProfundidadeFim($profundidadeFim)
@@ -326,7 +326,7 @@ class DadosAbioticosComplementar
     /**
      * Get profundidadeFim
      *
-     * @return string 
+     * @return integer 
      */
     public function getProfundidadeFim()
     {

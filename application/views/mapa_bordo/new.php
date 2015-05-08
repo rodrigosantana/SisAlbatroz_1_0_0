@@ -23,20 +23,6 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="entrevistador" class="col-md-4 control-label">Entrevistador</label>
-                        <div class="col-md-8 div-help">
-                            <select class="select2" id="entrevistador" name="entrevistador" style="width: 100%">
-                                <option></option>
-                                <?php foreach ($entrevistadores as $cad_entrevistador): ?>
-                                    <?php $selected = (!is_null($mbGeral->getEntrevistador()) && $mbGeral->getEntrevistador()->getId() == $cad_entrevistador->getId()) ? 'selected' : '' ?>
-                                    <option value="<?php echo $cad_entrevistador->getId() ?>" <?php echo $selected; ?>><?php echo $cad_entrevistador->getNome() ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
                         <label for="embarcacao" class="col-md-4 control-label">Embarcação *</label>
                         <div class="col-md-8 div-help">
                             <select class="select2" id="embarcacao" name="embarcacao" style="width: 100%">
