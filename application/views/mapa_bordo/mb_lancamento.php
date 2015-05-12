@@ -5,7 +5,9 @@
     <div class="panel-heading">
         <span>Lançamento #<?php echo $numero ?></span>
         <a href="javascript:;" class="pull-right panel-close-button-sisalbatroz" id="remove-lance-<?php echo $numero ?>"><i class="glyphicon glyphicon-remove"></i></a>
+        <span class="pull-right clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
     </div>
+
 
     <div class="panel-body">
         <div class="row">
@@ -152,7 +154,7 @@
             ?>
         </div>
 
-        <a href="javascrit:;" class="btn btn-success" id="add_captura_<?php echo $numero ?>" style="margin-top: 10px"><i class="glyphicon glyphicon-plus"></i> Adicionar camptura</a>
+        <a href="javascrit:;" class="btn btn-success" id="add_captura_<?php echo $numero ?>" style="margin-top: 10px"><i class="glyphicon glyphicon-plus"></i> Adicionar captura</a>
 
     </div>
 </div>

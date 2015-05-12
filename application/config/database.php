@@ -50,8 +50,8 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'postgres';
-$db['default']['password'] = 'zisdev';
-//$db['default']['password'] = 'oceano';
+//$db['default']['password'] = 'zisdev';
+$db['default']['password'] = 'oceano';
 $db['default']['database'] = 'sisalbatroz';
 $db['default']['port'] = '5432';
 $db['default']['dbdriver'] = 'postgre';

@@ -48,8 +48,8 @@
 								<select class="select2" name="aut_pesca" id="aut_pesca">
 									<option></option>
 									<?php foreach ($auto_pesca as $autorizPesca): ?>
-										<?php $selected = (set_value('reg_marinha') === $autorizPesca->getModalidade()) ? 'selected' : ''?>
-										<option value="<?php echo $autorizPesca->getModalidade()?>" <?php echo $selected?>><?php echo $autorizPesca->getDescricao()?></option>
+										<?php $selected = (set_value('aut_pesca') === $autorizPesca->getModalidade()) ? 'selected' : ''?>
+										<option value="<?php echo $autorizPesca->getModalidade()?>" <?php echo $selected ?>><?php echo $autorizPesca->getDescricao()?></option>
 									<?php endforeach;?>
 								</select>
 							</div>
@@ -139,7 +139,6 @@
 					</div>
 				</div>
 
-
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
@@ -149,14 +148,13 @@
 							</div>
 						</div>
 					</div>
-		<!--            Todo select do basilar a partir do RGP -->
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="base" class="col-md-4 control-label">Município:</label>
 							<div class="col-md-8">
 								<select class="select2" name="municipio" id="municipio">
 									<option></option>
-									<option value ="Itajai" <?php echo set_select('municipio','itajai');?>>Itajaí</option>
+									<option value ="Itajai" <?php echo set_select('municipio','Itajai');?>>Itajaí</option>
 								</select>
 							</div>
 						</div>
