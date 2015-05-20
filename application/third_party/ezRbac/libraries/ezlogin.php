@@ -49,26 +49,26 @@ class ezlogin
             array(
                 array(
                     'field' => 'username',
-                    'label' => 'Email',
+                    'label' => 'Usuário',
                     'rules' => 'trim|required|valid_email|xss_clean'
                 ),
                 array(
                     'field' => 'password',
-                    'label' => 'Password',
+                    'label' => 'Senha',
                     'rules' => 'trim|required|xss_clean|min_length[' . $this->CI->config->item('password_min_length', 'ez_rbac') . ']'
                 )
             ),
             array(
                 array(
                     'field' => 'username',
-                    'label' => 'Email',
+                    'label' => 'Usuário',
                     'rules' => 'trim|required|valid_email|xss_clean'
                 )
             ),
             array(
                 array(
                     'field' => 'password',
-                    'label' => 'New Password',
+                    'label' => 'Nova senha',
                     'rules' => 'trim|required|xss_clean|min_length[' . $this->CI->config->item('password_min_length', 'ez_rbac') . ']|matches[re_password]'
                 ),
                 array(
@@ -95,9 +95,7 @@ class ezlogin
             $this->view_login_form();
         }
         if ($this->process_login()) {
-            $this->error = 'false';
-            $this->view_login_form();
-            //redirect($this->CI->uri->uri_string());
+            redirect($this->CI->uri->uri_string());
         }
         
         $this->view_login_form();
@@ -110,15 +108,8 @@ class ezlogin
      */
     private function view_login_form()
     {
-        if ($this->error) {
-            $data = array('erro'=>$this->error);
-            $view = 'jsonresponse';
-        } else {
-            $data['form_error'] = $this->error;
-            $view = 'login/index';
-        }
-        
-        $this->load_view($view, $data);
+        $data['form_error'] = $this->error;
+        $this->load_view('login/index', $data);
         $this->end_now();
     }
 
@@ -199,7 +190,7 @@ class ezlogin
             $this->error = 'Senha inválida.';
             return FALSE;
         } // fail - wrong login
-        $this->error = 'O usuário não possui registro.';
+        $this->error = 'O usuário não possui cadastro.';
         return FALSE;
 
     }

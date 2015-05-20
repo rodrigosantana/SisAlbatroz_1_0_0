@@ -63,7 +63,7 @@
     </div>
     <div class="row">
         <div class="col-xs-6">
-            <a class="btn btn-success btn-block btn-lg" role="button" data-toggle="modal" data-target="#loginModal">Acesso ao Sistema</a>
+            <a id="btn-modal" class="btn btn-success btn-block btn-lg" role="button" data-toggle="modal" data-target="#loginModal">Acesso ao Sistema</a>
         </div>
     </div>
 </div>
@@ -78,33 +78,43 @@
 
             <div class="modal-body">
                 <form action="" method="post" class="form-horizontal" id="form_login">
-                    <div class="alert alert-danger col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2" role="alert" style="display: none;">
+                    
+                    
+                    <?php if($form_error !== false && !is_array($form_error)): ?>
+                    <div class="alert alert-danger col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2" role="alert">
                         <div class="row">
                             <div class="col-md-2 col-sm-2 col-xs-3"><i style="font-size: 30px;" class="glyphicon glyphicon-exclamation-sign"></i></div>
                             <div class="col-md-10 col-sm-8 col-xs-7" id="error_container" style="padding-top: 6px;">
+                                <?php echo $form_error?>
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                     
                     <div class="form-group">
                         <label class="col-xs-3 control-label">Usuário</label>
-                        <div class="col-xs-5 div-help">
-                            <input type="text" id="username" name="username" class="form-control"
-                                   value="<?php echo $this->input->post('username') ?>"/>
+                        <div class="col-xs-6 div-help">
+                            <input type="text" id="username" name="username" class="form-control" value="<?php echo $this->input->post('username') ?>"/>
                             <input type="hidden" name="action" value="login"/>
+                            <?php if($form_error !== false && is_array($form_error) && array_key_exists('username', $form_error)): ?>
+                                <span class="help-block"><?php echo $form_error['username']?></span>
+                            <?php endif; ?>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-xs-3 control-label">Senha</label>
-                        <div class="col-xs-5 div-help">
+                        <div class="col-xs-6 div-help">
                             <input type="password" id="password" name="password" class="form-control"/>
+                            <?php if($form_error !== false && is_array($form_error) && array_key_exists('password', $form_error)): ?>
+                                <span class="help-block"><?php echo $form_error['password']?></span>
+                            <?php endif; ?>
                         </div>
                     </div>
 
                     <div class="form-group">
                            <div class="col-xs-5 col-xs-offset-3">
-                            <button type="button" class="btn btn-success" onclick="login()">Login</button>
+                                <button class="btn btn-success" type="submit">Login</button>
                         </div>
                     </div>
                 </form>
@@ -114,42 +124,11 @@
 </div>
 
 <script>
-    function login() {
-        blockWindow();
-        $(".help-block").remove();
-        $(".has-error").removeClass("has-error");
-        $('.alert-danger').hide();
-        $.ajax({
-            type: "POST",
-            cache: false,
-            url: '<?php echo site_url()?>',
-            dataType: "json",
-            data: $('#form_login').serialize(),
-            success: function (res) {
-                console.log(res.errors);
-                unblockWindow();
-                
-                if (res.errors && jQuery.type(res.errors) == 'object') {
-                    showError(res);
-                } else if (res.errors === 'false') {
-                    $('#form_login').submit();
-                } else {  
-                    $('.alert-danger').show();
-                    $('#error_container').html('<p>' + res.errors + '</p>');
-                }
-                
-                
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                location.reload();
-                unblockWindow();
-            },
-            async: false
-        });
-        return false;        
-    }
-    
     $(document).ready(function() {
+        <?php if ($form_error) :?>
+        $('#loginModal').modal('show');
+        <?php endif;?>
+    
         $('#').formValidation({
             framework: 'bootstrap',
             // Linguagem das mensagens

@@ -2,11 +2,11 @@
 
 $lang['required']			= "O campo <strong style='color:#FE0000'>%s</strong> é obrigatório.";
 $lang['isset']				= "The %s field must have a value.";
-$lang['valid_email']		= "O campo <strong style='color:#FE0000'>%s</strong> deve conter um endereço de e-mail inválido.";
+$lang['valid_email']		= "O campo <strong style='color:#FE0000'>%s</strong> deve conter um endereço de e-mail válido.";
 $lang['valid_emails']		= "The %s field must contain all valid email addresses.";
 $lang['valid_url']			= "The %s field must contain a valid URL.";
 $lang['valid_ip']			= "The %s field must contain a valid IP.";
-$lang['min_length']			= "O campo <strong>%s</strong> deve ter pelo menos <strong>%s</strong> caracteres.";
+$lang['min_length']			= "O campo <strong>%s</strong> deve conter pelo menos <strong>%s</strong> caracteres.";
 $lang['max_length']			= "O campo <strong>%s</strong> não pode exceder <strong>%s</strong> caracteres de comprimento.";
 $lang['exact_length']		= "The %s field must be exactly %s characters in length.";
 $lang['alpha']				= "The %s field may only contain alphabetical characters.";
