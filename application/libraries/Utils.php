@@ -53,6 +53,55 @@ class Utils {
     const DIRECAO_VENTO_NO = 'NO';
     const DIRECAO_VENTO_NNO = 'NNO';
     
+    
+    const PLUMAGEM_ADULTO = 'adulto';
+    const PLUMAGEM_ADULTO_EM_MUDA = 'adulto_em_muda';
+    const PLUMAGEM_JUVENIL = 'juvenil';
+    const PLUMAGEM_JUVENIL_EM_MUDA = 'juvenil_em_muda';
+    
+    const PROCEDENCIA_CAPTURA_INCIDENTAL = 'captura_incidental';
+    const PROCEDENCIA_ENCALHE = 'encalhe';
+    const PROCEDENCIA_REABILITACAO = 'reabilitacao';
+    const PROCEDENCIA_OUTROS = 'outros';
+    
+    const CONDICAO_CARCACA_FRESCA = 'fresca';
+    const CONDICAO_CARCACA_CONGELADA = 'congelada';
+    const CONDICAO_CARCACA_INTEIRA = 'inteira';
+    const CONDICAO_CARCACA_EMPARTES = 'empartes';
+    
+    const AUTOLISE_LEVE = 'leve';
+    const AUTOLISE_MODERADA = 'moderada';
+    const AUTOLISE_SEVERA = 'severa';
+    
+    const EMPETROLAMENTO_25 = '25';
+    const EMPETROLAMENTO_25_75 = '25_75';
+    const EMPETROLAMENTO_75 = '75';
+    
+    const CONDICAO_CORPORAL_OTIMO = 'otimo';
+    const CONDICAO_CORPORAL_BOM = 'bom';
+    const CONDICAO_CORPORAL_MAGRO = 'magro';
+    const CONDICAO_CORPORAL_CAQUETICO = 'caquetico';
+    
+    const BAIXA = 'baixa';
+    const MEDIA = 'media';
+    const ALTA = 'alta';
+    const NAO_INFORMADO = 'nao_informado';
+    const NAO_COLETADO = 'nao_coletado';
+    const PAPEL_ALUMINIO = 'papel_aluminio';
+    const PAPEL_EPPENDORF = 'papel_eppendorf';
+    const FALCON = 'falcon';
+    const ALCOOL_70 = 'alcool_70';
+    const CORPO = 'corpo';
+    const ASA = 'asa';
+    
+//    const SEXAGEM_ = '';
+//    const SEXAGEM_ = '';
+//    const SEXAGEM_ = '';
+//    
+//    Macho  - Femea/Certeza - Incerteza/Indeterminado
+    
+    
+    
     public static function indRumo($value = null) {
         $array = array(
             self::RUMO_N,

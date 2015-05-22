@@ -117,6 +117,18 @@
                 cursor: pointer;
                 margin-right: 10px;
             }    
+            
+            .th-table-checkbox {
+                font-size: 14px;
+            }
+            
+            .table-sisalbatroz td {
+                border:none !important;
+            }
+            
+            .table-sisalbatroz th {
+                border:none !important;
+            }
         </style>
 
         <script src="<?php echo base_url(); ?>assets/js/jquery-1.11.2.js"></script>
