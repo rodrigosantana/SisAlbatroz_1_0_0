@@ -541,7 +541,20 @@
                     
                     <div class="row">
                         <div class="col-md-6">
-                            Sexagem
+                            <div class="form-group">
+                                <label for="sexagem" class="col-md-3 control-label">Sexagem</label>
+                                <div class="col-md-9 div-help">
+                                    <select class="select2" style="width: 100%" id="sexagem" name="sexagem">
+                                        <option></option>
+                                        <option value="<?php echo Utils::MACHO_CERTEZA?>">Macho / Certeza</option>
+                                        <option value="<?php echo Utils::MACHO_INCERTEZA?>">Macho / Incerteza</option>
+                                        <option value="<?php echo Utils::FEMEA_CERTEZA?>">Femea / Certeza</option>
+                                        <option value="<?php echo Utils::FEMEA_INCERTEZA?>">Femea / Incerteza</option>
+                                        <option value="<?php echo Utils::INDETERMINADO?>">Indeterminado</option>                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
                         </div>
                         
                         <div class="col-md-6">

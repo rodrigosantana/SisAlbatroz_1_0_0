@@ -94,13 +94,11 @@ class Utils {
     const CORPO = 'corpo';
     const ASA = 'asa';
     
-//    const SEXAGEM_ = '';
-//    const SEXAGEM_ = '';
-//    const SEXAGEM_ = '';
-//    
-//    Macho  - Femea/Certeza - Incerteza/Indeterminado
-    
-    
+    const MACHO_CERTEZA = 'macho_certeza';
+    const MACHO_INCERTEZA = 'macho_incerteza';
+    const FEMEA_CERTEZA = 'femea_certeza';
+    const FEMEA_INCERTEZA = 'femea_incerteza';
+    const INDETERMINADO = 'indeterminado';
     
     public static function indRumo($value = null) {
         $array = array(
