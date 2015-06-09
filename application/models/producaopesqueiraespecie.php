@@ -37,9 +37,9 @@ class ProducaoPesqueiraEspecie
     private $predacao;
 
     /**
-     * @var \CadEspecie
+     * @var \Pescado
      *
-     * @ManyToOne(targetEntity="CadEspecie")
+     * @ManyToOne(targetEntity="Pescado")
      * @JoinColumns({
      *   @JoinColumn(name="especie", referencedColumnName="id")
      * })
@@ -117,10 +117,10 @@ class ProducaoPesqueiraEspecie
     /**
      * Set especie
      *
-     * @param \CadEspecie $especie
+     * @param \Pescado $especie
      * @return ProducaoPesqueiraEspecie
      */
-    public function setEspecie(\CadEspecie $especie = null)
+    public function setEspecie(\Pescado $especie = null)
     {
         $this->especie = $especie;
 
@@ -130,7 +130,7 @@ class ProducaoPesqueiraEspecie
     /**
      * Get especie
      *
-     * @return \CadEspecie 
+     * @return \Pescado 
      */
     public function getEspecie()
     {

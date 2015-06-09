@@ -2,9 +2,14 @@
 
 class ObservadorBordo extends MY_Controller {
     
+    private $lances;
+    private $boias;    
+    
     public function __construct() {        
         $this->modelClassName = 'Cruzeiro';
         $this->viewPath = 'observador_bordo';
+        $this->lances = array();
+        $this->boias = array();
         
         parent::__construct();
     }
@@ -61,15 +66,31 @@ class ObservadorBordo extends MY_Controller {
                 array(), array('nome' => 'ASC')
         );
         
-        $especies = $this->doctrine->em->getRepository('CadEspecie')->findAll();
+        $especies = $this->doctrine->em->getRepository('Pescado')->findAll();
         
         $iscas = $this->doctrine->em->getRepository("CadIsca")->findBy(
                 array(), array('nome' => 'ASC')
         );
         
-        $aves = $this->doctrine->em->getRepository("CadAves")->findBy(
+        $aves = $this->doctrine->em->getRepository("Ave")->findBy(
                 array(), array('nomeCientifico' => 'ASC')
         );
+        
+        $lances = $objeto->getDadosAbioticos()->toArray();
+        $listaLances = array();
+        
+        foreach ($lances as $lance) {
+            $listaLances[] = array('id'=>$lance->getId(), 'value'=>$lance->getLance());
+        }
+        
+        $boias = $objeto->getContagemAveBoia()->toArray();
+        $listaBoias = array();
+        
+        foreach ($boias as $boia) {
+            $listaBoias[] = array('id'=>$boia->getId(), 'value'=>$boia->getBoiaRadio());
+        }
+
+        //echo '<pre>'; var_dump($aves);die;
         
         $this->load->view($this->viewPath . '/new', array(
                 'cruzeiro'=>$objeto, 
@@ -81,7 +102,11 @@ class ObservadorBordo extends MY_Controller {
                 'empresas'=>$empresas,
                 'financiadores'=>$financiadores,
                 'iscas'=>$iscas,
-                'aves'=>$aves
+                'aves'=>$aves,
+                'lances'=>$lances,
+                'boias'=>$boias,
+                'listaLances'=>json_encode($listaLances),
+                'listaBoias'=>json_encode($listaBoias)
             )
         );
     }
@@ -96,6 +121,8 @@ class ObservadorBordo extends MY_Controller {
         }
         
         $cruzeiro = new Cruzeiro();
+        $lances = array();
+        $boias = array();
         $isEdita = false;
         
         if ($this->input->post('id') && is_numeric($this->input->post('id'))) {
@@ -107,8 +134,7 @@ class ObservadorBordo extends MY_Controller {
             
             $isEdita = true;
         }
-        
-        
+                
         $cruzeiro->setObservador($this->doctrine->em->find('CadObservador', $this->input->post('observador')));
         $cruzeiro->setEmbarcacao($this->doctrine->em->find('CadEmbarcacao', $this->input->post('embarcacao')));
         $cruzeiro->setMestre();
@@ -141,14 +167,14 @@ class ObservadorBordo extends MY_Controller {
             $this->doctrine->em->remove($valor);
         }
         
-        $dadosAbioticos = $this->input->post('dado_abiotico');
+        $dadosAbioticos = $this->input->post('dado_abiotico') === false ? array() : $this->input->post('dado_abiotico');
         
         if ($dadosAbioticos) {
             foreach ($dadosAbioticos as $key => $value) {
                 if (isset($value['lance']) && is_numeric($value['lance'])) {
                     $dadoAbiotico = new DadosAbioticos();
                     $dadoAbiotico->setLance((int)$value['lance']);
-
+                    
                     if (isset($value['tipo_isca']) && is_numeric($value['tipo_isca'])) {
                         $tipoIsca = $this->doctrine->em->find('CadIsca', $value['tipo_isca']);
                         $dadoAbiotico->setTipoIsca($tipoIsca);
@@ -159,15 +185,15 @@ class ObservadorBordo extends MY_Controller {
                     }
 
                     if (isset($value['reg_peso'])) {
-                        $dadoAbiotico->setRegPeso(true);
+                        $dadoAbiotico->setRegPeso(Utils::valorBooleano($value['reg_peso']));
                     }
 
                     if (isset($value['toriline'])) {
-                        $dadoAbiotico->setToriline(true);
+                        $dadoAbiotico->setToriline(Utils::valorBooleano($value['toriline']));
                     }
 
                     if (isset($value['isca_tingida'])) {
-                        $dadoAbiotico->setIscaTingida(true);
+                        $dadoAbiotico->setIscaTingida(Utils::valorBooleano($value['isca_tingida']));
                     }
 
                     $array = array('lancamento', 'recolhimento');
@@ -274,6 +300,7 @@ class ObservadorBordo extends MY_Controller {
 
                     }
 
+                    $lances[$value['id']] = $dadoAbiotico;
                     $cruzeiro->addDadoAbiotico($dadoAbiotico);
                 }
             }
@@ -286,62 +313,74 @@ class ObservadorBordo extends MY_Controller {
             $this->doctrine->em->remove($valor);
         }
         
-        $contagensPorSol = $this->input->post('contagem_por_sol');
+        $contagensPorSol = $this->input->post('contagem_por_sol') === false ? array() : $this->input->post('contagem_por_sol');
         
         if ($contagensPorSol) {
             foreach ($contagensPorSol as $value) {
-                if (isset($value['lance']) && is_numeric($value['lance'])) {
+                if (isset($value['data'])) {                    
                     $contagemPorSol = new ContagemPorSol();
                     
-                    $contagemPorSol->setDataHora(Utils::dateAndTimeToDateTime($value['data'], $value['hora']));
-                    
+                    $contagemPorSol->setData(Utils::dataToDateTime($value['data']));
+                    $contagemPorSol->setHoraPorSol(Utils::timeToDateTime($value['hora']));
+
                     if (!empty($value['lat']) && !empty($value['lng'])) {
                         $contagemPorSol->setCoordenada(new Geometry(null, $value['lat'], $value['lng']));
                     }
                     
-                    $contagemPorSol->setLance((int)$value['lance']);
+                    if (isset($value['lance']) && array_key_exists($value['lance'], $lances)) {
+                        $contagemPorSol->setLance($lances[$value['lance']]);
+                    }
                     
                     if (isset($value['toriline'])) {
-                        $contagemPorSol->setToriline(true);
+                        $contagemPorSol->setToriline(Utils::valorBooleano($value['toriline']));
                     }
-
+                    
                     if (isset($value['isca_tingida'])) {
-                        $contagemPorSol->setIscaTingida(true);
-                    }
+                        $contagemPorSol->setIscaTingida(Utils::valorBooleano($value['isca_tingida']));
+                    }                    
                     
                     if (isset($value['observacao']) && !empty($value['observacao'])) {
                         $contagemPorSol->setObservacao($value['observacao']);
                     }
                     
-                    if (isset($value['indice']) && is_numeric($value['indice'])) {
-                        $contagemPorSol->setIndice((int)$value['indice']);
-                    }
-                    
-                    if (isset($value['contagem_hora']) && !empty($value['contagem_hora'])) {
-                        $contagemPorSol->setHora(Utils::timeToDateTime($value['contagem_hora']));
-                    }
-                    
-                    if (isset($value['total']) && is_numeric($value['total'])) {
-                        $contagemPorSol->setTotal((int)$value['total']);
-                    }
-                    
-                    
-                    if (isset($value['cps_especie'])) {
-                        $especies = $value['cps_especie'];
-
-                        foreach ($especies as $keyEp => $especie) {
+                    if (isset($value['contagem_psi'])) {
+                        $contagensPsi = $value['contagem_psi'];
+                        
+                        foreach ($contagensPsi as $keyPsi => $contagemPsi) {
+                            if (isset($value['indice']) && is_numeric($value['indice'])) {
+                                $contagemPorSolIndice = new ContagemPorSolIndice();                            
                             
-                            if (isset($especie['especie']) && is_numeric($especie['especie'])) {
-                                $ep = $this->doctrine->em->find('CadAves', $especie['especie']);                        
+                                $contagemPorSolIndice->setIndice((int)$value['indice']);
                                 
-                                $contagemPorSolEspecie = new ContagemPorSolEspecie();
-                                $contagemPorSolEspecie->setEspecie($ep);                                
+                                if (isset($value['contagem_hora']) && !empty($value['contagem_hora'])) {
+                                    $contagemPorSolIndice->setHora(Utils::timeToDateTime($value['contagem_hora']));
+                                }
 
-                                if (is_numeric($especie['quantidade'])) {
-                                    $contagemPorSolEspecie->setQuantidade((int)$especie['quantidade']);
+                                if (isset($value['total']) && is_numeric($value['total'])) {
+                                    $contagemPorSolIndice->setTotal((int)$value['total']);
                                 }
                                 
-                                $contagemPorSol->addContagemPorSolEspecie($contagemPorSolEspecie);
+                                if (isset($contagemPsi['cps_especie'])) {
+                                    $especies = $contagemPsi['cps_especie'];
+
+                                    foreach ($especies as $keyEp => $especie) {
+
+                                        if (isset($especie['especie']) && is_numeric($especie['especie'])) {
+                                            $ep = $this->doctrine->em->find('Ave', $especie['especie']);                        
+
+                                            $contagemPorSolEspecie = new ContagemPorSolEspecie();
+                                            $contagemPorSolEspecie->setEspecie($ep);                                
+
+                                            if (is_numeric($especie['quantidade'])) {
+                                                $contagemPorSolEspecie->setQuantidade((int)$especie['quantidade']);
+                                            }
+
+                                            $contagemPorSolIndice->addContagemPorSolEspecie($contagemPorSolEspecie);
+                                        }
+                                    }
+                                }
+                                
+                                $contagemPorSol->addContagemPorSolIndice($contagemPorSolIndice);
                             }
                         }
                     }
@@ -351,50 +390,6 @@ class ObservadorBordo extends MY_Controller {
             }
         }    
         
-        $listaCapturaIncidental = $cruzeiro->getCapturaIncidental()->toArray();
-        $cruzeiro->getCapturaIncidental()->clear();
-        
-        foreach ($listaCapturaIncidental as $valor) {
-            $this->doctrine->em->remove($valor);
-        }
-        
-        $capturasIncidentais = $this->input->post('captura_incidental');
-        
-        if ($capturasIncidentais) {
-            foreach ($capturasIncidentais as $value) {
-                if (isset($value['lance']) && is_numeric($value['lance'])) {
-                    $capturaIncidental = new CapturaIncidental();
-                    $capturaIncidental->setLance((int)$value['lance']);
-                    
-                    $capturaIncidental->setData(Utils::dataToDateTime($value['data']));
-                    
-                    if (is_numeric($value['boia_radio'])) {
-                        $capturaIncidental->setBoiaRadio((int)$value['boia_radio']);
-                    }
-                    
-                    if (!empty($value['lat']) && !empty($value['lng'])) {
-                        $capturaIncidental->setCoordenada(new Geometry(null, $value['lat'], $value['lng']));
-                    }
-                    
-                    if (isset($value['etiqueta']) && is_numeric($value['etiqueta'])) {
-                        $capturaIncidental->setEtiqueta((int)$value['etiqueta']);
-                    }
-                    
-                    if (isset($value['especie']) && is_numeric($value['especie'])) {
-                        $ep = $this->doctrine->em->find('CadAves', $value['especie']);                        
-                        $capturaIncidental->setEspecie($ep);
-                    }
-
-                    if (isset($value['quantidade']) && is_numeric($value['quantidade'])) {
-                        $capturaIncidental->setQuantidade((int)$value['quantidade']);
-                    }
-                    
-                    $cruzeiro->addCapturaIncidental($capturaIncidental);
-                }   
-            }
-        }
-
-        
         $listaContagemAveBoia = $cruzeiro->getContagemAveBoia()->toArray();
         $cruzeiro->getContagemAveBoia()->clear();
         
@@ -402,12 +397,12 @@ class ObservadorBordo extends MY_Controller {
             $this->doctrine->em->remove($valor);
         }
         
-        $contagensAveBoia = $this->input->post('contagem_ave_boia');
+        $contagensAveBoia = $this->input->post('contagem_ave_boia') === false ? array() : $this->input->post('contagem_ave_boia');
         
         foreach ($contagensAveBoia as $key => $value) {
-            if (isset($value['lance']) && is_numeric($value['lance'])) {
+            if (isset($value['lance']) && array_key_exists($value['lance'], $lances)) {
                 $contagemAveBoia = new ContagemAveBoia();
-                $contagemAveBoia->setLance((int)$value['lance']);
+                $contagemAveBoia->setLance($lances[$value['lance']]);
                 
                 if (is_numeric($value['boia_radio'])) {
                     $contagemAveBoia->setBoiaRadio((int)$value['boia_radio']);
@@ -416,7 +411,7 @@ class ObservadorBordo extends MY_Controller {
                 $contagemAveBoia->setDataHora(Utils::dateAndTimeToDateTime($value['data'], $value['hora']));
 
                 if (!empty($value['temperatura_agua'])) {
-                    $contagemAveBoia->setTemperaturaAgua((int)$value['temperatura_agua']);
+                    $contagemAveBoia->setTemperaturaAgua((double)$value['temperatura_agua']);
                 }
                 
                 if (!empty($value['profundidade'])) {
@@ -424,7 +419,7 @@ class ObservadorBordo extends MY_Controller {
                 }
                 
                 if (!empty($value['pressao_atmosferica'])) {
-                    $contagemAveBoia->setPressaoAtmosferica((int)$value['pressao_atmosferica']);
+                    $contagemAveBoia->setPressaoAtmosferica((double)$value['pressao_atmosferica']);
                 }
                 
                 if (!empty($value['lat']) && !empty($value['lng'])) {
@@ -437,7 +432,7 @@ class ObservadorBordo extends MY_Controller {
                     foreach ($especies as $keyEp => $especie) {
 
                         if (isset($especie['especie']) && is_numeric($especie['especie'])) {
-                            $ep = $this->doctrine->em->find('CadAves', $especie['especie']);                        
+                            $ep = $this->doctrine->em->find('Ave', $especie['especie']);                        
 
                             $contagemAveBoiaEspecie = new ContagemAveBoiaEspecie();
                             $contagemAveBoiaEspecie->setEspecie($ep);
@@ -451,9 +446,65 @@ class ObservadorBordo extends MY_Controller {
                     }
                 }
                 
+                $boias[$value['id']] = $contagemAveBoia;
                 $cruzeiro->addContagemAveBoia($contagemAveBoia);
             }
         }
+        
+        
+        $listaCapturaIncidental = $cruzeiro->getCapturaIncidental()->toArray();
+        $cruzeiro->getCapturaIncidental()->clear();
+        
+        foreach ($listaCapturaIncidental as $valor) {
+            $this->doctrine->em->remove($valor);
+        }
+        
+        $capturasIncidentais = $this->input->post('captura_incidental') === false ? array() : $this->input->post('captura_incidental');
+        
+        if ($capturasIncidentais) {
+            foreach ($capturasIncidentais as $value) {
+                if (isset($value['lance']) && array_key_exists($value['lance'], $lances)) {
+                    $capturaIncidental = new CapturaIncidental();
+                    $capturaIncidental->setLance($lances[$value['lance']]);
+                    
+                    $capturaIncidental->setData(Utils::dataToDateTime($value['data']));
+                    
+                    if (isset($value['boia_radio']) && isset($boias[$value['boia_radio']])) {
+                        $capturaIncidental->setBoiaRadio($boias[$value['boia_radio']]);
+                    }
+                    
+                    if (!empty($value['lat']) && !empty($value['lng'])) {
+                        $capturaIncidental->setCoordenada(new Geometry(null, $value['lat'], $value['lng']));
+                    }
+                    
+                    if (isset($value['ci_especie'])) {
+                        $especies = $value['ci_especie'];
+
+                        foreach ($especies as $keyEp => $especie) {
+                            if (isset($especie['especie']) && is_numeric($especie['especie'])) {
+                                $capturaIncidentalEspecie = new CapturaIncidentalEspecie();
+                                
+                                $ep = $this->doctrine->em->find('Ave', $especie['especie']);                        
+                                $capturaIncidentalEspecie->setEspecie($ep);
+                                
+                                if (isset($especie['etiqueta']) && is_numeric($especie['etiqueta'])) {
+                                    $capturaIncidentalEspecie->setEtiqueta((int)$especie['etiqueta']);
+                                }                                
+                             
+                                if (isset($especie['quantidade']) && is_numeric($especie['quantidade'])) {
+                                    $capturaIncidentalEspecie->setQuantidade((int)$especie['quantidade']);
+                                }
+                                
+                                $capturaIncidental->addCapturaIncidentalEspecie($capturaIncidentalEspecie);
+                            }
+                        }
+                    }
+                    
+                    $cruzeiro->addCapturaIncidental($capturaIncidental);
+                }   
+            }
+        }
+
         
         $listaProducoesPesqueiras = $cruzeiro->getProducoesPesqueiras()->toArray();
         $cruzeiro->getProducoesPesqueiras()->clear();
@@ -462,18 +513,18 @@ class ObservadorBordo extends MY_Controller {
             $this->doctrine->em->remove($valor);
         }
 
-        $producoes = $this->input->post('producao');
+        $producoes = $this->input->post('producao') === false ? array() : $this->input->post('producao');
         
         if ($producoes) {
             foreach ($producoes as $key => $value) {
-                if (isset($value['lance']) && is_numeric($value['lance'])) {
+                if (isset($value['lance']) && array_key_exists($value['lance'], $lances)) {
                     $producao = new ProducaoPesqueira();
                     
-                    $producao->setLance((int)$value['lance']);
+                    $producao->setLance($lances[$value['lance']]);
                     $producao->setData(Utils::dataToDateTime($value['data']));
                     
-                    if (is_numeric($value['boia_radio'])) {
-                        $producao->setBoiaRadio((int)$value['boia_radio']);
+                    if (isset($value['boia_radio']) && isset($boias[$value['boia_radio']])) {
+                        $producao->setBoiaRadio($boias[$value['boia_radio']]);
                     }
                     
                     if (isset($value['pp_especie'])) {
@@ -482,7 +533,7 @@ class ObservadorBordo extends MY_Controller {
                         foreach ($especies as $keyEp => $especie) {
                             
                             if (isset($especie['especie']) && is_numeric($especie['especie'])) {
-                                $ep = $this->doctrine->em->find('CadEspecie', $especie['especie']);                        
+                                $ep = $this->doctrine->em->find('Pescado', $especie['especie']);                        
 
                                 $producaoPesqueiraEspecie = new ProducaoPesqueiraEspecie();
                                 $producaoPesqueiraEspecie->setEspecie($ep);
@@ -519,12 +570,12 @@ class ObservadorBordo extends MY_Controller {
         $this->doctrine->em->persist($cruzeiro);
         $this->doctrine->em->flush();
         
-        
+        $mensagem = 'Registro salvo com sucesso. (Código: ' . $cruzeiro->getId() . ')';        
         if ($isEdita) {
-            $this->session->set_flashdata(get_class($this) . '_mensagem', 'Registro salvo com sucesso.');
+            $this->session->set_flashdata(get_class($this) . '_mensagem', $mensagem);
             redirect('observadorbordo/index');
         } else {
-            $this->session->set_flashdata('save_observador_bordo', true);
+            $this->session->set_flashdata('save_observador_bordo', $mensagem);
             redirect('observadorbordo/novo');
         }        
     }
@@ -544,10 +595,9 @@ class ObservadorBordo extends MY_Controller {
         
         $this->dadosAbioticosValidation();        
         $this->contagemPorSolValidation();
-        $this->capturasAcidentaisValidation();
         $this->contagemAveBoiaValidation();
+        $this->capturasAcidentaisValidation();        
         $this->producaoPesqueiraValidation();
-        
                 
         $this->form_validation->run();
 
@@ -573,14 +623,13 @@ class ObservadorBordo extends MY_Controller {
         }
         
         foreach ($dadosAbioticos as $key => $dadoAbiotico) {
+            $this->lances[] = $dadoAbiotico['id'];
             $this->form_validation->set_rules('dado_abiotico[' . $key . '][lance]', "Lance", "trim|required|integer");
             $this->form_validation->set_rules('dado_abiotico[' . $key . '][tipo_isca]', "Tipo de isca", "trim|in_array[" . Utils::findIds('idIsca', 'CadIsca') . "]");
             $this->form_validation->set_rules('dado_abiotico[' . $key . '][anzois]', "Anzóis", "trim|integer");
-            
-//            $this->form_validation->set_rules('producao[' . $key . '][reg_peso]', "Reg. peso", "");
-//            $this->form_validation->set_rules('producao[' . $key . '][toriline]', "Toriline", "");
-//            $this->form_validation->set_rules('producao[' . $key . '][isca_tingida]', "Isca tingida", "");
-            
+            $this->form_validation->set_rules('dado_abiotico[' . $key . '][reg_peso]', "Reg. peso", "trim|boolean_validation");
+            $this->form_validation->set_rules('dado_abiotico[' . $key . '][toriline]', "Toriline", "trim|boolean_validation");
+            $this->form_validation->set_rules('dado_abiotico[' . $key . '][isca_tingida]', "Isca tingida", "trim|boolean_validation");
             
             /*
              * Para não repetir as linhas de código de validação para lancamento 
@@ -674,7 +723,7 @@ class ObservadorBordo extends MY_Controller {
         
         foreach ($contagensPorSol as $key => $contagemPorSol) {
             $this->form_validation->set_rules('contagem_por_sol[' . $key . '][data]', "Data", "trim|required|date_validation");
-            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][hora]', "Horário do por-do-sol", "trim|required|time_validation");
+            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][hora]', "Horário do por-do-sol", "trim|time_validation");
             
             if (isset($contagemPorSol['lng']) && !empty($contagemPorSol['lng']) && isset($contagemPorSol['lat']) && empty($contagemPorSol['lat'])) {
                 $this->form_validation->set_rules('contagem_por_sol[' . $key . '][lat]', "Latitude", "trim|required|valida_latitude");
@@ -688,23 +737,30 @@ class ObservadorBordo extends MY_Controller {
                 $this->form_validation->set_rules('contagem_por_sol[' . $key . '][lng]', "Longitude", "trim|valida_longitude");
             }
                 
-            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][lance]', "Lance", "trim|required|integer");
+            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][lance]', "Lance", "trim|callback_lace_validation[" . implode(',', $this->lances) . "]");
                    
-//            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][toriline]', "Toriline", "");
-//            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][isca_tingida]', "Isca tingida", "");
+            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][toriline]', "Toriline", "trim|boolean_validation");
+            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][isca_tingida]', "Isca tingida", "trim|boolean_validation");
             
             $this->form_validation->set_rules('contagem_por_sol[' . $key . '][observacao]', "Observações", "trim");
             
-            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][indice]', "Índice da contagem", "trim|integer");
-            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_hora]', "Hora", "trim|time_validation");
-            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][total]', "Total", "trim|integer");
             
-            if (isset($contagemPorSol['cps_especie'])) {
-                $especies = $contagemPorSol['cps_especie'];
+            if (isset($contagemPorSol['contagem_psi'])) {
+                $contagensPsi = $contagemPorSol['contagem_psi'];
+                
+                foreach ($contagensPsi as $keyPsi => $contagemPsi) {
+                    $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_psi][' . $keyPsi . '][indice]', "Índice da contagem", "trim|required|integer");
+                    $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_psi][' . $keyPsi . '][contagem_hora]', "Hora", "trim|time_validation");
+                    $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_psi][' . $keyPsi . '][total]', "Total", "trim|integer");
+                    
+                    if (isset($contagemPsi['cps_especie'])) {
+                        $especies = $contagemPsi['cps_especie'];
 
-                foreach ($especies as $keyEp => $especie) {
-                    $this->form_validation->set_rules('contagem_por_sol[' . $key . '][cps_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('idAves', 'CadAves') . "]");
-                    $this->form_validation->set_rules('contagem_por_sol[' . $key . '][cps_especie][' . $keyEp . '][quantidade]', "Quantidade", "trim|integer");
+                        foreach ($especies as $keyEp => $especie) {
+                            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_psi][' . $keyPsi . '][cps_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('id', 'Ave') . "]");
+                            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_psi][' . $keyPsi . '][cps_especie][' . $keyEp . '][quantidade]', "Quantidade", "trim|integer");
+                        }
+                    }
                 }
             }
         }
@@ -719,9 +775,10 @@ class ObservadorBordo extends MY_Controller {
         }
         
         foreach ($capturasIncidentais as $key => $capturaIncidental) {
-            $this->form_validation->set_rules('captura_incidental[' . $key . '][lance]', "Lance", "trim|required|integer");
+            $this->form_validation->set_rules('captura_incidental[' . $key . '][lance]', "Lance", "trim|required|callback_lace_validation[" . implode(',', $this->lances) . "]");
             $this->form_validation->set_rules('captura_incidental[' . $key . '][data]', "Data", "trim|date_validation");
-            $this->form_validation->set_rules('captura_incidental[' . $key . '][boia_radio]', "Boia rádio", "trim|integer");
+
+            $this->form_validation->set_rules('captura_incidental[' . $key . '][boia_radio]', "Boia rádio", "trim|callback_boia_validation[" . implode(',', $this->boias) . "]");
             
             if (isset($capturaIncidental['lng']) && !empty($capturaIncidental['lng']) && isset($capturaIncidental['lat']) && empty($capturaIncidental['lat'])) {
                 $this->form_validation->set_rules('captura_incidental[' . $key . '][lat]', "Latitude", "trim|required|valida_latitude");
@@ -735,9 +792,16 @@ class ObservadorBordo extends MY_Controller {
                 $this->form_validation->set_rules('captura_incidental[' . $key . '][lng]', "Longitude", "trim|valida_longitude");
             }
             
-            $this->form_validation->set_rules('captura_incidental[' . $key . '][etiqueta]', "Etiqueta", "trim|integer");
-            $this->form_validation->set_rules('captura_incidental[' . $key . '][especie]', "Espécie", "trim|in_array[" . Utils::findIds('idAves', 'CadAves') . "]");
-            $this->form_validation->set_rules('captura_incidental[' . $key . '][quantidade]', "Quantidade", "trim|integer");
+            if (isset($capturaIncidental['ci_especie'])) {
+                $especies = $capturaIncidental['ci_especie'];
+
+                foreach ($especies as $keyEp => $especie) {
+                    $this->form_validation->set_rules('captura_incidental[' . $key . '][ci_especie][' . $keyEp . '][etiqueta]', "Etiqueta", "trim|integer");
+                    $this->form_validation->set_rules('captura_incidental[' . $key . '][ci_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('id', 'Ave') . "]");
+                    $this->form_validation->set_rules('captura_incidental[' . $key . '][ci_especie][' . $keyEp . '][quantidade]', "Quantidade", "trim|integer");
+                }
+            }
+            
         }
     }
 
@@ -750,7 +814,8 @@ class ObservadorBordo extends MY_Controller {
         }        
         
         foreach ($contagensAveBoia as $key => $contagemAveBoia) {
-            $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][lance]', "Lance", "trim|required|integer");
+            $this->boias[] = $contagemAveBoia['id'];
+            $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][lance]', "Lance", "trim|required|callback_lace_validation[" . implode(',', $this->lances) . "]");
             $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][boia_radio]', "Boia rádio", "trim|integer");
             
             
@@ -766,12 +831,9 @@ class ObservadorBordo extends MY_Controller {
                 $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][hora]', "Hora", "trim|time_validation");
             }
             
-            
-            
-            
-            $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][temperatura_agua]', "Temperatura da água (°C)", "trim|integer");
+            $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][temperatura_agua]', "Temperatura da água (°C)", "trim|decimal");
             $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][profundidade]', "Profundidade (metros)", "trim|integer");
-            $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][pressao_atmosferica]', "Pressão atmosférica", "trim|integer");
+            $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][pressao_atmosferica]', "Pressão atmosférica", "trim|decimal");
             
             
             if (isset($contagemAveBoia['lng']) && !empty($contagemAveBoia['lng']) && isset($contagemAveBoia['lat']) && empty($contagemAveBoia['lat'])) {
@@ -790,7 +852,7 @@ class ObservadorBordo extends MY_Controller {
                 $especies = $contagemAveBoia['cab_especie'];
 
                 foreach ($especies as $keyEp => $especie) {
-                    $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][cab_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('idAves', 'CadAves') . "]");
+                    $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][cab_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('id', 'Ave') . "]");
                     $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][cab_especie][' . $keyEp . '][quantidade]', "Quantidade", "trim|integer");
                 }
             }
@@ -806,15 +868,15 @@ class ObservadorBordo extends MY_Controller {
         }
         
         foreach ($producoes as $key => $producao) {
-            $this->form_validation->set_rules('producao[' . $key . '][lance]', "Lance", "trim|integer");
+            $this->form_validation->set_rules('producao[' . $key . '][lance]', "Lance", "trim|required|callback_lace_validation[" . implode(',', $this->lances) . "]");
             $this->form_validation->set_rules('producao[' . $key . '][data]', "Data", "trim|date_validation");
-            $this->form_validation->set_rules('producao[' . $key . '][boia_radio]', "Boia rádio", "trim|integer");
+            $this->form_validation->set_rules('producao[' . $key . '][boia_radio]', "Boia rádio", "trim|callback_boia_validation[" . implode(',', $this->boias) . "]");
             
             if (isset($producao['pp_especie'])) {
                 $especies = $producao['pp_especie'];
 
                 foreach ($especies as $keyEp => $especie) {
-                    $this->form_validation->set_rules('producao[' . $key . '][pp_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('id', 'CadEspecie') . "]");
+                    $this->form_validation->set_rules('producao[' . $key . '][pp_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('id', 'Pescado') . "]");
                     $this->form_validation->set_rules('producao[' . $key . '][pp_especie][' . $keyEp . '][quantidade]', "Quantidade", "trim|integer");
                     $this->form_validation->set_rules('producao[' . $key . '][pp_especie][' . $keyEp . '][predacao]', "Predação", "trim|max_length[255]");
                 }
@@ -903,10 +965,6 @@ class ObservadorBordo extends MY_Controller {
         $queryBuilder = $this->doctrine->em->createQueryBuilder();
         $queryBuilder->select("r")->from("Cruzeiro", "r");
         $filtrosSessao = $this->session->userdata('filtros_' . get_class($this));
-        $filtros = array();        
-        $where = array();
-        $joins = array();
-        
         
         if (!empty($filtrosSessao)) {
             if (isset($filtrosSessao['codigo'])) {
@@ -919,7 +977,7 @@ class ObservadorBordo extends MY_Controller {
             if (isset($filtrosSessao['observador'])) {
                 $queryBuilder->join("r.observador", "et");
                 $wherex = $queryBuilder->expr()->orx();
-                $wherex->add($queryBuilder->expr()->eq('et.id', '?2'));
+                $wherex->add($queryBuilder->expr()->eq('et.idObserv', '?2'));
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(2, $filtrosSessao['observador']);
             }
@@ -960,4 +1018,35 @@ class ObservadorBordo extends MY_Controller {
         return $query;
     }
     
+    
+    public function lance_validation($str, $list) {
+        if (empty($str)) {
+            return true;
+        }
+        
+        $array = explode(',', $list);
+        
+        if (in_array($str, $array)) {
+            return true;
+        }
+        
+        $this->form_validation->set_message('lance_validation', 'O valor informado não existe.');
+        return false;
+    }
+    
+    public function boia_validation($str, $list) {
+        
+        if (empty($str)) {
+            return true;
+        }
+        
+        $array = explode(',', $list);
+        
+        if (in_array($str, $array)) {
+            return true;
+        }
+        
+        $this->form_validation->set_message('boia_validation', 'O valor informado não existe.');
+        return false;
+    }
 }

@@ -1,9 +1,4 @@
 <?php
-
-
-
-
-
 /**
  * CapturaIncidental
  *
@@ -23,9 +18,12 @@ class CapturaIncidental
     private $id;
 
     /**
-     * @var integer
+     * @var \DadosAbioticos
      *
-     * @Column(name="lance", type="integer", nullable=true)
+     * @ManyToOne(targetEntity="DadosAbioticos")
+     * @JoinColumns({
+     *   @JoinColumn(name="lance", referencedColumnName="id")
+     * })
      */
     private $lance;
 
@@ -37,9 +35,12 @@ class CapturaIncidental
     private $data;
 
     /**
-     * @var string
+     * @var \ContagemAveBoia
      *
-     * @Column(name="boia_radio", type="string", length=255, nullable=true)
+     * @ManyToOne(targetEntity="ContagemAveBoia")
+     * @JoinColumns({
+     *   @JoinColumn(name="boia_radio", referencedColumnName="id")
+     * })
      */
     private $boiaRadio;
 
@@ -50,29 +51,6 @@ class CapturaIncidental
      */
     private $coordenada;
 
-    /**
-     * @var integer
-     *
-     * @Column(name="etiqueta", type="integer", nullable=true)
-     */
-    private $etiqueta;
-
-    /**
-     * @var integer
-     *
-     * @Column(name="quantidade", type="integer", nullable=true)
-     */
-    private $quantidade;
-
-    /**
-     * @var \CadAves
-     *
-     * @ManyToOne(targetEntity="CadAves")
-     * @JoinColumns({
-     *   @JoinColumn(name="especie", referencedColumnName="id_aves")
-     * })
-     */
-    private $especie;
 
     /**
      * @var \Cruzeiro
@@ -84,7 +62,16 @@ class CapturaIncidental
      */
     private $cruzeiro;
 
-
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @OneToMany(targetEntity="CapturaIncidentalEspecie", mappedBy="capturaIncidental", cascade={"all"})
+     */
+    private $capturaIncidentalEspecie;
+    
+    public function __construct() {
+        $this->capturaIncidentalEspecie = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -99,10 +86,10 @@ class CapturaIncidental
     /**
      * Set lance
      *
-     * @param integer $lance
+     * @param DadosAbioticos $lance
      * @return CapturaIncidental
      */
-    public function setLance($lance)
+    public function setLance(DadosAbioticos $lance = null)
     {
         $this->lance = $lance;
 
@@ -112,7 +99,7 @@ class CapturaIncidental
     /**
      * Get lance
      *
-     * @return integer 
+     * @return DadosAbioticos 
      */
     public function getLance()
     {
@@ -145,10 +132,10 @@ class CapturaIncidental
     /**
      * Set boiaRadio
      *
-     * @param string $boiaRadio
-     * @return CapturaIncidental
+     * @param ContagemAveBoia $boiaRadio
+     * @return ProducaoPesqueira
      */
-    public function setBoiaRadio($boiaRadio)
+    public function setBoiaRadio(ContagemAveBoia $boiaRadio = null)
     {
         $this->boiaRadio = $boiaRadio;
 
@@ -158,7 +145,7 @@ class CapturaIncidental
     /**
      * Get boiaRadio
      *
-     * @return string 
+     * @return ContagemAveBoia 
      */
     public function getBoiaRadio()
     {
@@ -189,75 +176,6 @@ class CapturaIncidental
     }
 
     /**
-     * Set etiqueta
-     *
-     * @param integer $etiqueta
-     * @return CapturaIncidental
-     */
-    public function setEtiqueta($etiqueta)
-    {
-        $this->etiqueta = $etiqueta;
-
-        return $this;
-    }
-
-    /**
-     * Get etiqueta
-     *
-     * @return integer 
-     */
-    public function getEtiqueta()
-    {
-        return $this->etiqueta;
-    }
-
-    /**
-     * Set quantidade
-     *
-     * @param integer $quantidade
-     * @return CapturaIncidental
-     */
-    public function setQuantidade($quantidade)
-    {
-        $this->quantidade = $quantidade;
-
-        return $this;
-    }
-
-    /**
-     * Get quantidade
-     *
-     * @return integer 
-     */
-    public function getQuantidade()
-    {
-        return $this->quantidade;
-    }
-
-    /**
-     * Set especie
-     *
-     * @param \CadAves $especie
-     * @return CapturaIncidental
-     */
-    public function setEspecie(\CadAves $especie = null)
-    {
-        $this->especie = $especie;
-
-        return $this;
-    }
-
-    /**
-     * Get especie
-     *
-     * @return \CadAves 
-     */
-    public function getEspecie()
-    {
-        return $this->especie;
-    }
-
-    /**
      * Set cruzeiro
      *
      * @param \Cruzeiro $cruzeiro
@@ -278,5 +196,15 @@ class CapturaIncidental
     public function getCruzeiro()
     {
         return $this->cruzeiro;
+    }
+    
+    public function addCapturaIncidentalEspecie(CapturaIncidentalEspecie $capturaIncidentalEspecie) {
+        $capturaIncidentalEspecie->setCapturaIncidental($this);
+        $this->capturaIncidentalEspecie[] = $capturaIncidentalEspecie;
+        return $this;
+    }
+    
+    public function getCapturaIncidentalEspecie() {
+        return $this->capturaIncidentalEspecie;
     }
 }

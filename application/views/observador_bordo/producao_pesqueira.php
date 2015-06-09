@@ -17,9 +17,15 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="producao_<?php echo $numero ?>_lance" class="col-md-4 control-label">Lance</label>
+                    <label for="producao_<?php echo $numero ?>_lance" class="col-md-4 control-label">Lance *</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control" id="producao_<?php echo $numero ?>_lance" name="producao[<?php echo $numero ?>][lance]" placeholder="Apenas dígitos" value="<?php echo $producaoPesqueira->getLance() ?>">
+                        <select class="select2 lance-observadorbordo" style="width: 100%" id="producao_<?php echo $numero ?>_lance" name="producao[<?php echo $numero ?>][lance]">
+                            <option></option>
+                            <?php foreach ($lances as $lance): ?>
+                                <?php $selectedPp = (!is_null($producaoPesqueira->getLance()) && $producaoPesqueira->getLance()->getId() == $lance->getId()) ? 'selected' : ''?>
+                                <option value="<?php echo $lance->getId() ?>" <?php echo $selectedPp?>><?php echo $lance->getLance() ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -33,13 +39,20 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            
+            <div class="col-md-4">                
                 <div class="form-group">
                     <label for="producao_<?php echo $numero ?>_boia_radio" class="col-md-4 control-label">Boia rádio</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control" id="producao_<?php echo $numero ?>_boia_radio" name="producao[<?php echo $numero ?>][boia_radio]" placeholder="Apenas dígitos" value="<?php echo $producaoPesqueira->getBoiaRadio() ?>">
+                        <select class="select2 boia-observadorbordo" style="width: 100%" id="producao_<?php echo $numero ?>_boia_radio" name="producao[<?php echo $numero ?>][boia_radio]">
+                            <option></option>
+                            <?php foreach ($boias as $boia): ?>
+                                <?php $selectedBoiasPp = (!is_null($producaoPesqueira->getBoiaRadio()) && $producaoPesqueira->getBoiaRadio()->getId() == $boia->getId()) ? 'selected' : ''?>
+                                <option value="<?php echo $boia->getId() ?>" <?php echo $selectedBoiasPp?>><?php echo $boia->getBoiaRadio() ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
-                </div>
+                </div>                
             </div>
         </div>
 
@@ -68,9 +81,33 @@
             'addButton': '#add_producao_pesqueira_especie_<?php echo $numero ?>',
             'removeButton': '#remove-producao-pesqueira-especie-<?php echo $numero ?>',
             'container': '.producao-pesqueira-especie',
-            'addOne': <?php echo $producaoPesqueira->getEspecies()->count() > 0 ? 'false' : 'true' ?>,
+            'addOne': false,
             'isEdit': <?php echo $producaoPesqueira->getEspecies()->count() > 0 ? 'true' : 'false' ?>
         });
 
+        $("#producao_<?php echo $numero ?>_lance").select2({
+            placeholder: "Selecione",
+            allowClear: true,
+            formatNoMatches: function() {
+                return "Nenhum item encontrado";
+            }
+        });
+        
+        $(".select2-container").removeClass('lance-observadorbordo');
+        
+        $("#producao_<?php echo $numero ?>_boia_radio").select2({
+            placeholder: "Selecione",
+            allowClear: true,
+            formatNoMatches: function() {
+                return "Nenhum item encontrado";
+            }
+        });
+        
+        $(".select2-container").removeClass('boia-observadorbordo');
+        
+        <?php if (is_null($producaoPesqueira->getId())) :?>
+            adicionarLances($("#producao_<?php echo $numero ?>_lance"));
+            adicionarBoias($("#producao_<?php echo $numero ?>_boia_radio"));
+        <?php endif;?>
     });
 </script>

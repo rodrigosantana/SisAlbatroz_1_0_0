@@ -26,11 +26,11 @@ class ContagemAveBoiaEspecie
     private $quantidade;
 
     /**
-     * @var \CadAves
+     * @var \Ave
      *
-     * @ManyToOne(targetEntity="CadAves")
+     * @ManyToOne(targetEntity="Ave")
      * @JoinColumns({
-     *   @JoinColumn(name="especie", referencedColumnName="id_aves")
+     *   @JoinColumn(name="especie", referencedColumnName="id")
      * })
      */
     private $especie;
@@ -83,10 +83,10 @@ class ContagemAveBoiaEspecie
     /**
      * Set especie
      *
-     * @param \CadAves $especie
+     * @param \Ave $especie
      * @return ContagemAveBoiaEspecie
      */
-    public function setEspecie(\CadAves $especie = null)
+    public function setEspecie(\Ave $especie = null)
     {
         $this->especie = $especie;
 
@@ -96,7 +96,7 @@ class ContagemAveBoiaEspecie
     /**
      * Get especie
      *
-     * @return \CadAves 
+     * @return \Ave 
      */
     public function getEspecie()
     {

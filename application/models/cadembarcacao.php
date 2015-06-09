@@ -13,7 +13,7 @@ class CadEmbarcacao
     /**
      * @var string
      *
-     * @Column(name="nome", type="string", length=50, nullable=false)
+     * @Column(name="nome", type="string", length=150, nullable=false)
      */
     private $nome;
 
@@ -62,14 +62,14 @@ class CadEmbarcacao
     /**
      * @var string
      *
-     * @Column(name="mat_casco", type="string", length=10, nullable=true)
+     * @Column(name="mat_casco", type="string", length=50, nullable=true)
      */
     private $matCasco;
 
     /**
      * @var string
      *
-     * @Column(name="propulsao", type="string", length=10, nullable=true)
+     * @Column(name="propulsao", type="string", length=50, nullable=true)
      */
     private $propulsao;
 
@@ -88,18 +88,14 @@ class CadEmbarcacao
     private $tripulacao;
 
     /**
-     * @var string
+     * @var \Municipio
      *
-     * @Column(name="municipio", type="string", length=20, nullable=true)
+     * @ManyToOne(targetEntity="Municipio")
+     * @JoinColumns({
+     *   @JoinColumn(name="municipio", referencedColumnName="id")
+     * })
      */
     private $municipio;
-
-    /**
-     * @var string
-     *
-     * @Column(name="uf", type="string", length=3, nullable=true)
-     */
-    private $uf;
 
     /**
      * @var integer
@@ -367,12 +363,12 @@ class CadEmbarcacao
     }
 
     /**
-     * Set municipio
+     * Set Municipio
      *
-     * @param string $municipio
+     * @param Municipio $municipio
      * @return CadEmbarcacao
      */
-    public function setMunicipio($municipio)
+    public function setMunicipio(Municipio $municipio)
     {
         $this->municipio = $municipio;
     
@@ -380,36 +376,13 @@ class CadEmbarcacao
     }
 
     /**
-     * Get municipio
+     * Get Municipio
      *
      * @return string 
      */
     public function getMunicipio()
     {
         return $this->municipio;
-    }
-
-    /**
-     * Set uf
-     *
-     * @param string $uf
-     * @return CadEmbarcacao
-     */
-    public function setUf($uf)
-    {
-        $this->uf = $uf;
-    
-        return $this;
-    }
-
-    /**
-     * Get uf
-     *
-     * @return string 
-     */
-    public function getUf()
-    {
-        return $this->uf;
     }
 
     /**

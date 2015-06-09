@@ -1,11 +1,11 @@
 
 <!-- Início do corpo da página -->
 
-<?php if ($mensagem): ?>    
+<?php if (!empty($mensagem)): ?>    
     <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible" role="alert" style="margin-top: 20px">
         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
         <p><strong>Sucesso!</strong><p> 
-            Registro salvo com sucesso.
+            <?php echo $mensagem?>
     </div>  
 <?php endif; ?>
 <div class="row">

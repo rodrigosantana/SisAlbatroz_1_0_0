@@ -13,6 +13,7 @@
 
     <div class="panel-body" style="<?php echo is_null($dadoAbiotico->getId()) ? '' : 'display:none'?>">
         <?php //$dadoAbiotico = new DadosAbioticos()?>
+        <input type="hidden" id="dado_abiotico_<?php echo $numero; ?>_id" name="dado_abiotico[<?php echo $numero; ?>][id]" value="<?php echo is_null($dadoAbiotico->getId()) ? 'lance_' . $numero : $dadoAbiotico->getId()?>">
         <div class="row">
             
             <div class="col-md-6">
@@ -24,7 +25,7 @@
                             <label for="dado_abiotico_<?php echo $numero; ?>_lance" class="col-md-4 control-label lb_lance">Lance *</label>
                             <div class="col-md-8 div-help">
                                 <input type="number" class="form-control lance" id="dado_abiotico_<?php echo $numero; ?>_lance" name="dado_abiotico[<?php echo $numero; ?>][lance]"
-                                       placeholder="Identificador do lance" value="<?php echo $dadoAbiotico->getLance() ?>">
+                                       placeholder="" value="<?php echo $dadoAbiotico->getLance() ?>">
                             </div>
                         </div>
                     </div>
@@ -66,43 +67,36 @@
                 <h4 class="text-center titulo">Medidas Mitigadoras</h4>
                 <hr class="hr-sisalbatroz">
                 
-                <div class="row ">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="dado_abiotico_<?php echo $numero; ?>_reg_peso" class="col-md-4 control-label">Reg. peso</label>
-                            <div class="col-md-8 div-help">
-                                <input type="checkbox" id="dado_abiotico_<?php echo $numero; ?>_reg_peso" name="dado_abiotico[<?php echo $numero; ?>][reg_peso]" 
-                                               <?php echo $dadoAbiotico->getRegPeso() === true ? 'checked' : '' ?>>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row ">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="dado_abiotico_<?php echo $numero; ?>_toriline" class="col-md-4 control-label">Toriline</label>
-                            <div class="col-md-8 div-help">
-                                <input type="checkbox" id="dado_abiotico_<?php echo $numero; ?>_toriline" name="dado_abiotico[<?php echo $numero; ?>][toriline]" 
-                                               <?php echo $dadoAbiotico->getToriline() === true ? 'checked' : '' ?>>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row ">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="dado_abiotico_<?php echo $numero; ?>_isca_tingida" class="col-md-4 control-label">Isca tingida</label>
-                            <div class="col-md-8 div-help">
-                                <input type="checkbox" id="dado_abiotico_<?php echo $numero; ?>_isca_tingida" name="dado_abiotico[<?php echo $numero; ?>][isca_tingida]" 
-                                    <?php echo $dadoAbiotico->getIscaTingida() === true ? 'checked' : '' ?>>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+                <div class="table-responsive">
+                    <table class="table table-sisalbatroz">
+                        <thead>
+                            <tr>
+                                <th class="col-md-3"></th>
+                                <th class="col-md-2">Sim</th>
+                                <th class="col-md-2">Não</th>
+                                <th class="col-md-5"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="th-table-checkbox">Reg. peso</th>
+                                <td><input type="checkbox" name="dado_abiotico[<?php echo $numero; ?>][reg_peso]" value="true" class="check-sim-nao" <?php echo $dadoAbiotico->getRegPeso() === true ? 'checked' : '' ?>></td>
+                                <td><input type="checkbox" name="dado_abiotico[<?php echo $numero; ?>][reg_peso]" value="false" class="check-sim-nao" <?php echo $dadoAbiotico->getRegPeso() === false ? 'checked' : '' ?>></td>           
+                            </tr>
+                            <tr>
+                                <th scope="row" class="th-table-checkbox">Toriline</th>
+                                <td><input type="checkbox" name="dado_abiotico[<?php echo $numero; ?>][toriline]" value="true" class="check-sim-nao" <?php echo $dadoAbiotico->getToriline() === true ? 'checked' : '' ?>></td>
+                                <td><input type="checkbox" name="dado_abiotico[<?php echo $numero; ?>][toriline]" value="false" class="check-sim-nao" <?php echo $dadoAbiotico->getToriline() === false ? 'checked' : '' ?>></td>           
+                            </tr>
+                            <tr>
+                                <th scope="row" class="th-table-checkbox">Isca tingida</th>
+                                <td><input type="checkbox" name="dado_abiotico[<?php echo $numero; ?>][isca_tingida]" value="true" class="check-sim-nao" <?php echo $dadoAbiotico->getIscaTingida() === true ? 'checked' : '' ?>></td>
+                                <td><input type="checkbox" name="dado_abiotico[<?php echo $numero; ?>][isca_tingida]" value="false" class="check-sim-nao" <?php echo $dadoAbiotico->getIscaTingida() === false ? 'checked' : '' ?>></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>                
+            </div>            
         </div>
         
         
@@ -122,22 +116,37 @@
 <script>
 $(document).ready(function() {
         
-        $("#dado_abiotico_<?php echo $numero?>_tipo_isca").select2({
-            placeholder: "Selecione",
-            allowClear: true,
-            formatNoMatches: function() {
-                return "Nenhum item encontrado";
-            }
-        });
-        
-        $("#dado_abiotico_<?php echo $numero?>_especie").select2({
-            placeholder: "Selecione",
-            allowClear: true,
-            formatNoMatches: function() {
-                return "Nenhum item encontrado";
-            }
-        }); 
+    $("#dado_abiotico_<?php echo $numero?>_tipo_isca").select2({
+        placeholder: "Selecione",
+        allowClear: true,
+        formatNoMatches: function() {
+            return "Nenhum item encontrado";
+        }
+    });
 
+    $("#dado_abiotico_<?php echo $numero?>_especie").select2({
+        placeholder: "Selecione",
+        allowClear: true,
+        formatNoMatches: function() {
+            return "Nenhum item encontrado";
+        }
+    }); 
+    
+    $("#dado_abiotico_<?php echo $numero; ?>_lance").change(function () {
+        var idValue = '';
+        
+        if (!$('#dado_abiotico_<?php echo $numero; ?>_id').val() && $("#dado_abiotico_<?php echo $numero; ?>_lance").val()) {
+            idValue = 'lance_' . $("#dado_abiotico_<?php echo $numero; ?>_lance").val();
+        } else {
+            idValue = $('#dado_abiotico_<?php echo $numero; ?>_id').val();
+        }
+        alterarLance($("#dado_abiotico_<?php echo $numero; ?>_lance").val(), idValue);
+    }); 
+    
+    $('#remove-dado-abiotico-<?php echo $numero ?>').click(function () {
+        alterarLance(null, $('#dado_abiotico_<?php echo $numero; ?>_id').val());
+        $('#remove-dado-abiotico-<?php echo $numero ?>').closest('.dado-abiotico').first().remove();        
+    });
 });
 </script>
 

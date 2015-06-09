@@ -123,6 +123,9 @@ $autoload['model'] = array(
     'Mb_lance',
     'Mb_captura',
     'Mb_geral',
+    'Municipio',
+    'UserRole',
+    'UserAccessMap',
     
     'CadAves',
     'CadMestre',
@@ -147,12 +150,17 @@ $autoload['model'] = array(
     'DadosAbioticosRecolhimento',
     
     'ContagemPorSol',
+    'ContagemPorSolIndice',
     'ContagemPorSolEspecie',
     'CapturaIncidental',
+    'CapturaIncidentalEspecie',
     
     'ContagemAveBoia',
-    'ContagemAveBoiaEspecie'
+    'ContagemAveBoiaEspecie',
     
+    'Especies',
+    'Pescado',
+    'Ave',    
     
 );
 

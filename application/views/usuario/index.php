@@ -23,7 +23,8 @@
                     <tr>
                         <th class="text-center">Nome</th>
                         <th class="text-center">Email</th>
-                        <th class="text-center">Ativo</th>
+                        <th class="text-center">Tipo de usuário</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@
                         <tr>
                             <td class="text-center"> <?php echo $usuario->getName() ?> </td>
                             <td class="text-center"> <?php echo $usuario->getEmail() ?> </td>
+                            <td class="text-center"> <?php echo is_null($usuario->getUserRole()) ? '' : $usuario->getUserRole()->getRoleName() ?> </td>
                             <td class="text-center"> <?php echo $usuario->getStatus() > 0 ? 'Ativo' : 'Inativo' ?> </td>
                             <td class="text-center">
                                 <div class="btn-group" role="group" aria-label="...">

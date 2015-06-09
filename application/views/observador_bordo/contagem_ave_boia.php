@@ -12,13 +12,19 @@
     </div>
 
     <div class="panel-body" style="<?php echo is_null($contagemAveBoia->getId()) ? '' : 'display:none'?>">
-
+        <input type="hidden" id="contagem_ave_boia_<?php echo $numero; ?>_id" name="contagem_ave_boia[<?php echo $numero; ?>][id]" value="<?php echo is_null($contagemAveBoia->getId()) ? 'boia_' . $numero : $contagemAveBoia->getId()?>">
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="contagem_ave_boia_<?php echo $numero ?>_lance" class="col-md-4 control-label">Lance *</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control" id="contagem_ave_boia_<?php echo $numero ?>_lance" name="contagem_ave_boia[<?php echo $numero ?>][lance]" placeholder="Apenas dígitos" value="<?php echo $contagemAveBoia->getLance() ?>">
+                        <select class="select2 lance-observadorbordo" style="width: 100%" id="contagem_ave_boia_<?php echo $numero ?>_lance" name="contagem_ave_boia[<?php echo $numero ?>][lance]">
+                            <option></option>
+                            <?php foreach ($lances as $lance): ?>
+                                <?php $selectedCab = (!is_null($contagemAveBoia->getLance()) && $contagemAveBoia->getLance()->getId() == $lance->getId()) ? 'selected' : ''?>
+                                <option value="<?php echo $lance->getId() ?>" <?php echo $selectedCab?>><?php echo $lance->getLance() ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -129,8 +135,37 @@
             'addButton': '#add_contagem_ave_boia_especie_<?php echo $numero ?>',
             'removeButton': '#remove-contagem-ave-boia-especie-<?php echo $numero ?>',
             'container': '.contagem-ave-boia-especie',
-            'addOne': <?php echo $contagemAveBoia->getContagemAveBoiaEspecie()->count() > 0 ? 'false' : 'true' ?>,
+            'addOne': false,
             'isEdit': <?php echo $contagemAveBoia->getContagemAveBoiaEspecie()->count() > 0 ? 'true' : 'false' ?>
+        });
+        
+        $("#contagem_ave_boia_<?php echo $numero ?>_lance").select2({
+            placeholder: "Selecione",
+            allowClear: true,
+            formatNoMatches: function() {
+                return "Nenhum item encontrado";
+            }
+        });
+        
+        <?php if (is_null($contagemAveBoia->getId())) :?>
+            adicionarLances($("#contagem_ave_boia_<?php echo $numero ?>_lance"));
+        <?php endif;?>
+        
+        $(".select2-container").removeClass('lance-observadorbordo');
+        
+        $("#contagem_ave_boia_<?php echo $numero ?>_boia_radio").change(function () {
+            var idValue = '';
+
+            if (!$('#contagem_ave_boia_<?php echo $numero; ?>_id').val() && $("#contagem_ave_boia_<?php echo $numero ?>_boia_radio").val()) {
+                idValue = 'boia_' . $("#contagem_ave_boia_<?php echo $numero ?>_boia_radio").val();
+            } else {
+                idValue = $('#contagem_ave_boia_<?php echo $numero; ?>_id').val();
+            }
+            alterarBoia($("#contagem_ave_boia_<?php echo $numero ?>_boia_radio").val(), idValue);
+        }); 
+
+        $('#remove-contagem-ave-boia-<?php echo $numero ?>').click(function () {
+            alterarBoia(null, $('#contagem_ave_boia_<?php echo $numero; ?>_id').val());
         });
     });
 </script>

@@ -13,9 +13,9 @@ class MbCaptura
     /**
      * @var 
      *
-     * @ManyToOne(targetEntity="CadAves")
+     * @ManyToOne(targetEntity="Ave")
      * @JoinColumns({
-     *   @JoinColumn(name="id_ave", referencedColumnName="id_aves")
+     *   @JoinColumn(name="id_ave", referencedColumnName="id")
      * })
      */
     private $idAve;

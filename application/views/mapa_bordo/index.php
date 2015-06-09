@@ -13,7 +13,9 @@
 
 <div class="panel panel-sisalbatroz">
     <div class="panel-heading" style="height: 55px">
+        <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'mapa_bordo_ct')) :?>
         <a href="<?php echo site_url('mapa_bordo_ct/novo') ?>" class="btn btn-add-sisalbatroz pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar</a>        
+        <?php endif;?>
         <a class="btn btn-add-sisalbatroz pull-right" role="button" data-toggle="modal" data-target="#filtroModal" style="margin-right: 10px"><i class="glyphicon glyphicon-search"></i> Filtrar</a>
         
     </div>    
@@ -44,8 +46,13 @@
                             <td class="text-center">
 
                                 <div class="btn-group" role="group" aria-label="...">
+                                    <?php if ($this->ezrbac->hasAccess(Utils::EDIT, 'mapa_bordo_ct')) :?>
                                     <a href="<?php echo site_url('mapa_bordo_ct/edita') . '?id=' . $mapa_bordo->getIdMb() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                                    <?php endif;?>
+                                        
+                                    <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'mapa_bordo_ct')) :?>
                                     <a  onclick="exclui(<?php echo $mapa_bordo->getIdMb() ?>)" href="javascript:;" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+                                    <?php endif;?>
                                 </div>
                             </td>
                         </tr>
@@ -75,7 +82,7 @@
 
 
 
-
+<?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'mapa_bordo_ct')) :?>
 <script>
 function exclui(id) {
     bootbox.confirm("Tem certeza que deseja excluir o registro?", function(result) {
@@ -85,3 +92,4 @@ function exclui(id) {
     }); 
 }
 </script>
+<?php endif;?>

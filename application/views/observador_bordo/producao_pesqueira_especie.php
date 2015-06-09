@@ -9,7 +9,7 @@
                     <option></option>
                     <?php foreach ($especies as $especie): ?>
                         <?php $selected = (!is_null($producaoPesqueiraEspecie->getEspecie()) && $producaoPesqueiraEspecie->getEspecie()->getId() == $especie->getId()) ? 'selected' : ''?>
-                        <option value="<?php echo $especie->getId() ?>" <?php echo $selected?>><?php echo $especie->getNome() ?></option>
+                        <option value="<?php echo $especie->getId() ?>" <?php echo $selected?>><?php echo $especie->__toString() ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

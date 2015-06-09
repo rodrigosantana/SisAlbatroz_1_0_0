@@ -45,6 +45,24 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="observador" class="col-md-3 control-label">Tipo de usuário</label>
+                            <div class="col-md-9 div-help">
+                                <select class="select2" style="width: 100%" id="tipo_usuario" name="tipo_usuario">
+                                    <option></option>
+                                    <?php foreach ($tiposUsuarios as $tipoUsuario): ?>
+                                        <?php $selected = (!is_null($usuario->getUserRoleId()) && $usuario->getUserRoleId()->getId() == $tipoUsuario->getId()) ? 'selected' : ''?>
+                                        <option value="<?php echo $tipoUsuario->getId() ?>" <?php echo $selected?>><?php echo $tipoUsuario->getRoleName() ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                
             </div>
         </div>
         <div class="col-sm-12 col-md-12" style="margin-bottom: 20px">
@@ -53,3 +71,16 @@
         </div>
     </form>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#tipo_usuario").select2({
+            placeholder: "Selecione",
+            allowClear: true,
+            formatNoMatches: function() {
+                return "Nenhum item encontrado";
+            }
+        });
+    });
+</script>
+

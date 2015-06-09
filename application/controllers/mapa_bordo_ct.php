@@ -55,7 +55,7 @@ class Mapa_bordo_ct extends MY_Controller {
         $mestres = $this->doctrine->em->getRepository("CadMestre")->findBy(
                 array(), array('apelido' => 'ASC')
         );
-        $aves = $this->doctrine->em->getRepository("CadAves")->findBy(
+        $aves = $this->doctrine->em->getRepository("Ave")->findBy(
                 array(), array('nomeComumBr' => 'ASC')
         );
 
@@ -75,8 +75,7 @@ class Mapa_bordo_ct extends MY_Controller {
             "aves" => $aves,
             "iscas" => $iscas,
             "medidasMetigatorias" => $medidasMetigatorias,
-            "mensagem" => $this->session->flashdata('save_mapa_bordo')
-                )
+            "mensagem" => $this->session->flashdata('save_mapa_bordo'))
         );
     }
 
@@ -184,7 +183,7 @@ class Mapa_bordo_ct extends MY_Controller {
 
                         foreach ($capturas as $keyCp => $valueCp) {
                             if (isset($valueCp['capt_ssp']) && !empty($valueCp['capt_ssp'])) {                        
-                                $especie = $this->doctrine->em->find('CadAves', $valueCp['capt_ssp']);                        
+                                $especie = $this->doctrine->em->find('Ave', $valueCp['capt_ssp']);                        
 
                                 $mbCaptura = new MbCaptura();
                                 $mbCaptura->setIdAve($especie);
@@ -215,12 +214,12 @@ class Mapa_bordo_ct extends MY_Controller {
         $this->doctrine->em->flush();
 
         
-        
+        $mensagem = 'Registro salvo com sucesso. (Código: ' . $mbGeral->getIdMb() . ')';
         if ($isEdita) {
-            $this->session->set_flashdata(get_class($this) . '_mensagem', 'Registro salvo com sucesso.');
+            $this->session->set_flashdata(get_class($this) . '_mensagem', $mensagem);
             redirect('mapa_bordo_ct/index');
         } else {
-            $this->session->set_flashdata('save_mapa_bordo', true);
+            $this->session->set_flashdata('save_mapa_bordo', $mensagem);
             redirect('mapa_bordo_ct/novo');
         }        
     }
@@ -270,7 +269,7 @@ class Mapa_bordo_ct extends MY_Controller {
                     $capturas = $value['capt_especie'];
 
                     foreach ($capturas as $keyCp => $valueCp) {
-                        $this->form_validation->set_rules('lancamento[' . $key . '][capt_especie][' . $keyCp . '][capt_ssp]', "Espécie", "trim|in_array[" . Utils::findIds('idAves', 'CadAves') . "]");
+                        $this->form_validation->set_rules('lancamento[' . $key . '][capt_especie][' . $keyCp . '][capt_ssp]', "Espécie", "trim|in_array[" . Utils::findIds('id', 'Ave') . "]");
                         $this->form_validation->set_rules('lancamento[' . $key . '][capt_especie][' . $keyCp . '][capt_quan]', "Espécie", "trim|integer");
                     }
                 }                

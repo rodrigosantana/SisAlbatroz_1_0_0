@@ -69,7 +69,8 @@ class Ezuser extends  CI_Model {
 
         if(!empty($missingFields)){
             $missingStr = '<b>'.implode(', ', $missingFields).'<b>';
-            show_error("The database schema for <b>{$this->_table_name}</b> Table is missing some required field(s): {$missingStr}");
+            //show_error("The database schema for <b>{$this->_table_name}</b> Table is missing some required field(s): {$missingStr}");
+            show_error("generic_error_message");
         }
     }
 

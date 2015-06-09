@@ -13,7 +13,9 @@
 
 <div class="panel panel-sisalbatroz">
     <div class="panel-heading" style="height: 55px">
+        <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'medicinaconservacao')) :?>
         <a href="<?php echo site_url('medicinaconservacao/novo') ?>" class="btn btn-add-sisalbatroz pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar</a>        
+        <?php endif;?>
         <a class="btn btn-add-sisalbatroz pull-right" role="button" data-toggle="modal" data-target="#filtroModal" style="margin-right: 10px"><i class="glyphicon glyphicon-search"></i> Filtrar</a>
         
     </div>    

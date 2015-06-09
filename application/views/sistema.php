@@ -48,26 +48,37 @@
 <body>
     <div class="container">
         <div class="row">
+            <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_ave_ct')) :?>
             <div class="col-xs-3 col-md-3">
                 <a href="<?php echo site_url('mapa_bordo_ct');?>" class="thumbnail logo">
                     <img src="<?php echo base_url();?>assets/img/PA_logo_mb.jpg" alt="Mapa de Bordo">
                 </a>
             </div>
+            <?php endif;?>
+            
+            <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_ave_ct')) :?>
             <div class="col-xs-3 col-md-3">
                 <a href="#" class="thumbnail logo">
                     <img src="<?php echo base_url();?>assets/img/PA_logo_ec.jpg" alt="Entrevista de Cais">
                 </a>
             </div>
+            <?php endif;?>
+            
+            <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_ave_ct')) :?>
             <div class="col-xs-3 col-md-3">
                 <a href="<?php echo site_url('observadorbordo');?>" class="thumbnail logo">
                     <img src="<?php echo base_url();?>assets/img/PA_logo_ob.jpg" alt="Observador de Bordo">
                 </a>
             </div>
+            <?php endif;?>
+            
+            <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_ave_ct')) :?>
             <div class="col-xs-3 col-md-3">
                 <a href="<?php echo site_url('medicinaconservacao');?>" class="thumbnail logo">
                     <img src="<?php echo base_url();?>assets/img/PA_logo_mc.jpg" alt="Medicina da Conservação">
                 </a>
             </div>
+            <?php endif;?>
         </div>
     </div>
 </body>

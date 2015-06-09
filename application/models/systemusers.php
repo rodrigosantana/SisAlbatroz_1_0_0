@@ -38,12 +38,16 @@ class SystemUsers {
      */
     private $salt;
 
+    
     /**
-     * @var integer $userRoleId
+     * @var \UserRole
      *
-     * @Column(name="user_role_id", type="integer")
+     * @ManyToOne(targetEntity="UserRole")
+     * @JoinColumns({
+     *   @JoinColumn(name="user_role_id", referencedColumnName="id")
+     * })
      */
-    private $userRoleId;
+    private $userRole;
 
     /**
      * @var datetime $lastLogin
@@ -132,13 +136,13 @@ class SystemUsers {
         return $this->salt;
     }
 
-    public function setUserRoleId($userRoleId) {
-        $this->userRoleId = $userRoleId;
+    public function setUserRole($userRole) {
+        $this->userRole = $userRole;
         return $this;
     }
 
-    public function getUserRoleId() {
-        return $this->userRoleId;
+    public function getUserRole() {
+        return $this->userRole;
     }
 
     public function setLastLogin($lastLogin) {

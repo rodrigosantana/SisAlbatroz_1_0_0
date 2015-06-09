@@ -24,7 +24,9 @@ class ezrbac
      * @var
      */
     private $user;
-
+    
+    private $usuario = null;
+    
     /**
      *
      */
@@ -33,8 +35,47 @@ class ezrbac
         $this->CI = & get_instance();
         $this->CI->load->model('ezuser');
         $this->CI->load->library('ezlogin');
+        $this->CI->load->model('manage/ezcontrollers');
+        $this->CI->load->model('user_access_map');
         $this->CI->load->model('manage/user_role');
     }
+
+    public function getControllers() {
+        return $clist=array_diff($this->CI->ezcontrollers->get_controllers(),$this->CI->config->item('public_controller', 'ez_rbac'));
+    }
+    
+    public function getAccessMap() {        
+        return $this->CI->accessmap->get_access_map();
+    }
+    
+    
+    
+    public function hasAccess($method, $controller) {
+        $arrayAction = $this->getAccessMap();
+
+        if(is_null($this->usuario)) {
+            $this->usuario = $this->CI->doctrine->em->find('SystemUsers', $this->getCurrentUser()->id);
+        }
+        
+        $accessMap = $this->usuario->getUserRole()->getUserAccessMap();
+
+        $controller = strtolower($controller);
+        foreach ($accessMap as $access) {
+            if ($access->getController() == $controller) {
+                $access_str = strrev($this->CI->accessmap->validate(decbin($access->getPermission())));
+                $values = str_split($access_str);
+                
+                if (array_search($method, $arrayAction) !== false && $values[array_search($method, $arrayAction)] === "1") {
+                    return true;
+                }
+                
+                return false;
+            }
+        }
+        
+        return false;
+    }
+
 
     /**
      * return the user object for logged in user

@@ -25,10 +25,17 @@ class ContagemPorSol
     /**
      * @var \DateTime
      *
-     * @Column(name="data_hora", type="datetime", nullable=true)
+     * @Column(name="data", type="date", nullable=false)
      */
-    private $dataHora;
+    private $data;
 
+    /**
+     * @var \DateTime
+     *
+     * @Column(name="hora_por_sol", type="time", nullable=true)
+     */
+    private $horaPorSol;
+    
     /**
      * @var geometry
      *
@@ -37,9 +44,12 @@ class ContagemPorSol
     private $coordenada;
 
     /**
-     * @var integer
+     * @var \DadosAbioticos
      *
-     * @Column(name="lance", type="integer", nullable=true)
+     * @ManyToOne(targetEntity="DadosAbioticos")
+     * @JoinColumns({
+     *   @JoinColumn(name="lance", referencedColumnName="id")
+     * })
      */
     private $lance;
 
@@ -98,12 +108,12 @@ class ContagemPorSol
     /**
      * @var \Doctrine\Common\Collections\Collection
      * 
-     * @OneToMany(targetEntity="ContagemPorSolEspecie", mappedBy="contagemPs", cascade={"all"})
+     * @OneToMany(targetEntity="ContagemPorSolIndice", mappedBy="contagemPorSol", cascade={"all"})
      */
-    private $contagemPorSolEspecie;
+    private $contagemPorSolIndice;
     
     public function __construct() {
-        $this->contagemPorSolEspecie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contagemPorSolIndice = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
 
@@ -118,26 +128,49 @@ class ContagemPorSol
     }
 
     /**
-     * Set dataHora
+     * Set data
      *
-     * @param \DateTime $dataHora
+     * @param \DateTime $data
      * @return ContagemPorSol
      */
-    public function setDataHora($dataHora)
+    public function setData($data)
     {
-        $this->dataHora = $dataHora;
+        $this->data = $data;
 
         return $this;
     }
 
     /**
-     * Get dataHora
+     * Get data
      *
      * @return \DateTime 
      */
-    public function getDataHora()
+    public function getData()
     {
-        return $this->dataHora;
+        return $this->data;
+    }
+    
+    /**
+     * Set hora
+     *
+     * @param \DateTime $horaPorSol
+     * @return ContagemPorSol
+     */
+    public function setHoraPorSol($horaPorSol)
+    {
+        $this->horaPorSol = $horaPorSol;
+
+        return $this;
+    }
+
+    /**
+     * Get horaPorSol
+     *
+     * @return \DateTime 
+     */
+    public function getHoraPorSol()
+    {
+        return $this->horaPorSol;
     }
 
     /**
@@ -166,10 +199,10 @@ class ContagemPorSol
     /**
      * Set lance
      *
-     * @param integer $lance
+     * @param DadosAbioticos $lance
      * @return ContagemPorSol
      */
-    public function setLance($lance)
+    public function setLance(DadosAbioticos $lance = null)
     {
         $this->lance = $lance;
 
@@ -179,7 +212,7 @@ class ContagemPorSol
     /**
      * Get lance
      *
-     * @return integer 
+     * @return DadosAbioticos 
      */
     public function getLance()
     {
@@ -347,13 +380,13 @@ class ContagemPorSol
         return $this->cruzeiro;
     }
     
-    public function addContagemPorSolEspecie(ContagemPorSolEspecie $contagemPorSolEspecie) {
-        $contagemPorSolEspecie->setContagemPs($this);
-        $this->contagemPorSolEspecie[] = $contagemPorSolEspecie;
+    public function addContagemPorSolIndice(ContagemPorSolIndice $contagemPorSolIndice) {
+        $contagemPorSolIndice->setContagemPorSol($this);
+        $this->contagemPorSolIndice[] = $contagemPorSolIndice;
         return $this;
     }
     
-    public function getContagemPorSolEspecie() {
-        return $this->contagemPorSolEspecie;
+    public function getContagemPorSolIndice() {
+        return $this->contagemPorSolIndice;
     }
 }

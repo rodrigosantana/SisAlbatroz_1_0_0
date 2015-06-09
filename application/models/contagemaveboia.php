@@ -19,9 +19,12 @@ class ContagemAveBoia
     private $id;
 
     /**
-     * @var integer
+     * @var \DadosAbioticos
      *
-     * @Column(name="lance", type="integer", nullable=true)
+     * @ManyToOne(targetEntity="DadosAbioticos")
+     * @JoinColumns({
+     *   @JoinColumn(name="lance", referencedColumnName="id")
+     * })
      */
     private $lance;
 
@@ -40,9 +43,9 @@ class ContagemAveBoia
     private $dataHora;
 
     /**
-     * @var integer
+     * @var decimal
      *
-     * @Column(name="temperatura_agua", type="integer", nullable=true)
+     * @Column(name="temperatura_agua", type="decimal", nullable=true)
      */
     private $temperaturaAgua;
 
@@ -54,9 +57,9 @@ class ContagemAveBoia
     private $profundidade;
 
     /**
-     * @var integer
+     * @var decimal
      *
-     * @Column(name="pressao_atmosferica", type="integer", nullable=true)
+     * @Column(name="pressao_atmosferica", type="decimal", nullable=true)
      */
     private $pressaoAtmosferica;
 
@@ -101,10 +104,10 @@ class ContagemAveBoia
     /**
      * Set lance
      *
-     * @param integer $lance
+     * @param DadosAbioticos $lance
      * @return ContagemAveBoia
      */
-    public function setLance($lance)
+    public function setLance(DadosAbioticos $lance =null)
     {
         $this->lance = $lance;
 
@@ -114,7 +117,7 @@ class ContagemAveBoia
     /**
      * Get lance
      *
-     * @return integer 
+     * @return DadosAbioticos 
      */
     public function getLance()
     {
@@ -170,7 +173,7 @@ class ContagemAveBoia
     /**
      * Set temperaturaAgua
      *
-     * @param integer $temperaturaAgua
+     * @param decimal $temperaturaAgua
      * @return ContagemAveBoia
      */
     public function setTemperaturaAgua($temperaturaAgua)
@@ -183,7 +186,7 @@ class ContagemAveBoia
     /**
      * Get temperaturaAgua
      *
-     * @return integer 
+     * @return decimal 
      */
     public function getTemperaturaAgua()
     {
@@ -216,7 +219,7 @@ class ContagemAveBoia
     /**
      * Set pressaoAtmosferica
      *
-     * @param integer $pressaoAtmosferica
+     * @param decimal $pressaoAtmosferica
      * @return ContagemAveBoia
      */
     public function setPressaoAtmosferica($pressaoAtmosferica)
@@ -229,7 +232,7 @@ class ContagemAveBoia
     /**
      * Get pressaoAtmosferica
      *
-     * @return integer 
+     * @return decimal 
      */
     public function getPressaoAtmosferica()
     {

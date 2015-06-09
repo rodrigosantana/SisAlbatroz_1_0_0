@@ -13,7 +13,9 @@
 
 <div class="panel panel-sisalbatroz">
     <div class="panel-heading" style="height: 55px">
+        <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'observadorbordo')) :?>
         <a href="<?php echo site_url('observadorbordo/novo') ?>" class="btn btn-add-sisalbatroz pull-right"><i class="glyphicon glyphicon-plus"></i> Adicionar</a>        
+        <?php endif;?>
         <a class="btn btn-add-sisalbatroz pull-right" role="button" data-toggle="modal" data-target="#filtroModal" style="margin-right: 10px"><i class="glyphicon glyphicon-search"></i> Filtrar</a>
         
     </div>    
@@ -37,15 +39,20 @@
                         <tr>
                             <td class="text-center"> <?php echo $objeto->getId() ?> </td>
                             <td class="text-center"> <?php echo is_null($objeto->getObservador()) ? '' : $objeto->getObservador()->getNome() ?> </td>
-                            <td class="text-center"> <?php echo $objeto->getEmbarcacao()->getNome() ?> </td>
-                            <td class="text-center"> <?php echo $objeto->getMestre()->getNome() ?> </td>
+                            <td class="text-center"> <?php echo is_null($objeto->getEmbarcacao()) ? '' : $objeto->getEmbarcacao()->getNome() ?> </td>
+                            <td class="text-center"> <?php echo is_null($objeto->getMestre()) ? '' : $objeto->getMestre()->getNome() ?> </td>
                             <td class="text-center"> <?php echo is_null($objeto->getDataSaida()) ? '' : $objeto->getDataSaida()->format("d/m/Y") ?> </td>
                             <td class="text-center"> <?php echo is_null($objeto->getDataChegada()) ? '' : $objeto->getDataChegada()->format("d/m/Y") ?> </td>
                             <td class="text-center">
 
                                 <div class="btn-group" role="group" aria-label="...">
+                                    <?php if ($this->ezrbac->hasAccess(Utils::EDIT, 'observadorbordo')) :?>
                                     <a href="<?php echo site_url('observadorbordo/edita') . '?id=' . $objeto->getId() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                                    <?php endif;?>
+                                    
+                                    <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'observadorbordo')) :?>
                                     <a  onclick="exclui(<?php echo $objeto->getId() ?>)" href="javascript:;" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+                                    <?php endif;?>
                                 </div>
                             </td>
                         </tr>
@@ -75,7 +82,7 @@
 
 
 
-
+<?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'observadorbordo')) :?>
 <script>
 function exclui(id) {
     bootbox.confirm("Tem certeza que deseja excluir o registro?", function(result) {
@@ -85,3 +92,4 @@ function exclui(id) {
     }); 
 }
 </script>
+<?php endif;?>

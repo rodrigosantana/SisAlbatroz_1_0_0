@@ -105,19 +105,14 @@ class Cad_embarcacao {
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     *@var string $municipio
+     * @var \Municipio
      *
-     *@Column(name="municipio", type="string", length=20)
+     * @ManyToOne(targetEntity="Municipio")
+     * @JoinColumns({
+     *   @JoinColumn(name="municipio", referencedColumnName="id")
+     * })
      */
     private $municipio;
-//--------------------------------------------------------------------------------------------------------------------//
-
-    /**
-     *@var string $uf
-     *
-     *@Column(name="uf", type="string", length=3)
-     */
-    private $uf;
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
@@ -253,25 +248,13 @@ class Cad_embarcacao {
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     * set municipio
+     * set Municipio
      *
-     * @param string $municipio
+     * @param Municipio $municipio
      * @return Cad_embarcacao
      */
-    public function setMunicipio($municipio){
+    public function setMunicipio(Municipio $municipio){
         $this->municipio=$municipio;
-        return $this;
-    }
-//--------------------------------------------------------------------------------------------------------------------//
-
-    /**
-     * set uf
-     *
-     * @param string $uf
-     * @return Cad_embarcacao
-     */
-    public function setUf($uf){
-        $this->uf=$uf;
         return $this;
     }
 //--------------------------------------------------------------------------------------------------------------------//

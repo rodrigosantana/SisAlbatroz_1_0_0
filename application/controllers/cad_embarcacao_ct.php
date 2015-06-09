@@ -18,12 +18,13 @@ class Cad_embarcacao_ct extends CI_Controller {
     public function cadembarcacao(){
         // Carrega o BD de modalidades de pesca
         $auto_pesca = $this->doctrine->em->getRepository("AutorizPesca")->findAll();
+        $municipios = $this->doctrine->em->getRepository('Municipio')->findAll();
         
-		$this->load->view("mapa_bordo/cad_embarcacao", array(
+	$this->load->view("mapa_bordo/cad_embarcacao", array(
             "cad_embarcacao" => new Cad_embarcacao(),
             "auto_pesca" => $auto_pesca,
-			"mensagem"=>$this->session->flashdata('salva_embarcacao_ave')
-            )
+            "mensagem"=>$this->session->flashdata('salva_embarcacao_ave'),
+            "municipios"=>$municipios)
         );
     }
 //--------------------------------------------------------------------------------------------------------------------//
@@ -53,8 +54,10 @@ class Cad_embarcacao_ct extends CI_Controller {
       $cad_embarcacao->setPropulsao($this->input->post("propulsao"));
       $cad_embarcacao->setPotMotor($this->input->post("pot_motor"));
       $cad_embarcacao->setTripulacao($this->input->post("tripulacao"));
-      $cad_embarcacao->setMunicipio($this->input->post("municipio"));
-      $cad_embarcacao->setUf($this->input->post("uf"));
+      
+      if ($this->input->post("municipio") && is_numeric($this->input->post("municipio"))) {
+          $cad_embarcacao->setMunicipio($this->doctrine->em->find('Municipio', $this->input->post("municipio")));
+      }
 
 //      Array com as variáveis e as regras de validação
         $config = array(
@@ -116,12 +119,7 @@ class Cad_embarcacao_ct extends CI_Controller {
             array(
                 'field' => 'municipio',
                 'label' => 'Município',
-                'rules' => 'required|max_length[20]'
-            ),
-            array(
-                'field' => 'uf',
-                'label' => 'UF',
-                'rules' => 'required|max_length[3]'
+                'rules' => 'required|in_array[' . Utils::findIds( 'id', 'Municipio') . ']'
             )
         );
 
@@ -131,7 +129,8 @@ class Cad_embarcacao_ct extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view("mapa_bordo/cad_embarcacao", array(
                 "cad_embarcacao"=>$cad_embarcacao,
-                "auto_pesca" => $auto_pesca
+                "auto_pesca" => $auto_pesca,
+                "municipios"=>$this->doctrine->em->getRepository('Municipio')->findAll()
                 )
             );
         } else {

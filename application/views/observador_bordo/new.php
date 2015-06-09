@@ -1,11 +1,11 @@
 
 <!-- Início do corpo da página -->
 
-<?php if ($mensagem): ?>    
+<?php if (!empty($mensagem)): ?>    
     <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible" role="alert" style="margin-top: 20px">
         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
         <p><strong>Sucesso!</strong><p> 
-            Registro salvo com sucesso.
+            <?php echo $mensagem?>
     </div>  
 <?php endif; ?>
 
@@ -183,12 +183,12 @@
                 </div>
                 
                 <div id="contagem_por_sol" class="tab-pane">
-                    <div id="contagem_por_sol_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => new ContagemPorSol(), 'aves'=>$aves), true)); ?>">
+                    <div id="contagem_por_sol_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => new ContagemPorSol(), 'aves'=>$aves, 'lances'=>$lances), true)); ?>">
                         <?php
                         $lista = $cruzeiro->getContagemPorSol();
 
                         foreach ($lista as $key => $value) {
-                            echo $this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => $value, 'indexContagemPorSol' => $key, 'aves'=>$aves), true);
+                            echo $this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => $value, 'indexContagemPorSol' => $key, 'aves'=>$aves, 'lances'=>$lances), true);
                         }
                         ?>
                     </div>
@@ -197,12 +197,12 @@
                 </div>
                 
                 <div id="captura_incidental" class="tab-pane">
-                    <div id="captura_incidental_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => new CapturaIncidental(), 'aves'=>$aves), true)); ?>">
+                    <div id="captura_incidental_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => new CapturaIncidental(), 'aves'=>$aves, 'lances'=>$lances, 'boias'=>$boias), true)); ?>">
                         <?php
                         $lista = $cruzeiro->getCapturaIncidental();
 
                         foreach ($lista as $key => $value) {
-                            echo $this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => $value, 'indexCapturaIncidental' => $key, 'aves'=>$aves), true);
+                            echo $this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => $value, 'indexCapturaIncidental' => $key, 'aves'=>$aves, 'lances'=>$lances, 'boias'=>$boias), true);
                         }
                         ?>
                     </div>
@@ -211,12 +211,12 @@
                 </div>                
                 
                 <div id="contagem_ave_boia" class="tab-pane">
-                    <div id="contagem_ave_boia_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => new ContagemAveBoia(), 'aves'=>$aves), true)); ?>">
+                    <div id="contagem_ave_boia_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => new ContagemAveBoia(), 'aves'=>$aves, 'lances'=>$lances), true)); ?>">
                         <?php
                         $lista = $cruzeiro->getContagemAveBoia();
 
                         foreach ($lista as $key => $value) {
-                            echo $this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => $value, 'indexContagemAveBoia' => $key, 'aves'=>$aves), true);
+                            echo $this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => $value, 'indexContagemAveBoia' => $key, 'aves'=>$aves, 'lances'=>$lances), true);
                         }
                         ?>
                     </div>
@@ -225,12 +225,12 @@
                 </div>
                                
                 <div id="producao_pesqueira" class="tab-pane">
-                    <div id="producao_pesqueira_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/producao_pesqueira", array('producaoPesqueira' => new ProducaoPesqueira(), 'especies' => $especies), true)); ?>">
+                    <div id="producao_pesqueira_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/producao_pesqueira", array('producaoPesqueira' => new ProducaoPesqueira(), 'especies' => $especies, 'lances'=>$lances, 'boias'=>$boias), true)); ?>">
                         <?php
                         $lista = $cruzeiro->getProducoesPesqueiras();
 
                         foreach ($lista as $key => $value) {
-                            echo $this->load->view("observador_bordo/producao_pesqueira", array('producaoPesqueira' => $value, 'indexProducaoPesqueira' => $key, 'especies' => $especies), true);
+                            echo $this->load->view("observador_bordo/producao_pesqueira", array('producaoPesqueira' => $value, 'indexProducaoPesqueira' => $key, 'especies' => $especies, 'lances'=>$lances, 'boias'=>$boias), true);
                         }
                         ?>
                     </div>
@@ -249,6 +249,9 @@
 
 
 <script>
+    var listaLances = <?php echo $listaLances?>;
+    var listaBoias = <?php echo $listaBoias?>;
+    
     $(document).ready(function() {
         var dadoAbiotico= new Prototype.Class({
             'count': <?php echo $cruzeiro->getDadosAbioticos()->count() ?>,
@@ -256,7 +259,7 @@
             'addButton': '#add_dado_abiotico',
             'removeButton': '#remove-dado-abiotico',
             'container': '.dado-abiotico',
-            'addOne': <?php echo $cruzeiro->getDadosAbioticos()->count() > 0 ? 'false' : 'true' ?>,
+            'addOne': false,
             'isEdit': <?php echo $cruzeiro->getDadosAbioticos()->count() > 0 ? 'true' : 'false' ?>
         });
         
@@ -266,7 +269,7 @@
             'addButton': '#add_contagem_por_sol',
             'removeButton': '#remove-contagem-por-sol',
             'container': '.contagem-por-sol',
-            'addOne': <?php echo $cruzeiro->getContagemPorSol()->count() > 0 ? 'false' : 'true' ?>,
+            'addOne': false,
             'isEdit': <?php echo $cruzeiro->getContagemPorSol()->count() > 0 ? 'true' : 'false' ?>
         });
         
@@ -276,7 +279,7 @@
             'addButton': '#add_captura_incidental',
             'removeButton': '#remove-captura-incidental',
             'container': '.captura-incidental',
-            'addOne': <?php echo $cruzeiro->getCapturaIncidental()->count() > 0 ? 'false' : 'true' ?>,
+            'addOne': false,
             'isEdit': <?php echo $cruzeiro->getCapturaIncidental()->count() > 0 ? 'true' : 'false' ?>
         });
         
@@ -286,7 +289,7 @@
             'addButton': '#add_contagem_ave_boia',
             'removeButton': '#remove-contagem-ave-boia',
             'container': '.contagem-ave-boia',
-            'addOne': <?php echo $cruzeiro->getContagemAveBoia()->count() > 0 ? 'false' : 'true' ?>,
+            'addOne': false,
             'isEdit': <?php echo $cruzeiro->getContagemAveBoia()->count() > 0 ? 'true' : 'false' ?>
         });
         
@@ -296,7 +299,7 @@
             'addButton': '#add_producao_pesqueira',
             'removeButton': '#remove-producao-pesqueira',
             'container': '.producao-pesqueira',
-            'addOne': <?php echo $cruzeiro->getProducoesPesqueiras()->count() > 0 ? 'false' : 'true' ?>,
+            'addOne': false,
             'isEdit': <?php echo $cruzeiro->getProducoesPesqueiras()->count() > 0 ? 'true' : 'false' ?>
         });
         
@@ -341,6 +344,137 @@
                 return "Nenhum item encontrado";
             }
         });
+        
+        $(".check-sim-nao").click(function (event) {            
+            if (event.target.value == 'true') {
+                $("[name='"+event.target.name+"'][value='false']").removeAttr('checked');
+            } else if (event.target.value == 'false') {
+                $("[name='"+event.target.name+"'][value='true']").removeAttr('checked');
+            }
+        });
 
     });
+    
+    function alterarLance(valor, idLance) {
+        var list = $('.lance-observadorbordo');
+        
+        for(var i = 0; i < list.length; i++) {
+            var component = list[i];
+            var value = $(component).val();
+            
+            if ($(component).find('option[value="' + idLance + '"]').length > 0) {
+                if (valor) {
+                    $(component).find('option[value="' + idLance + '"]').html(valor);                    
+                } else {
+                    $(component).find('option[value="' + idLance + '"]').remove();
+                }                
+                $(component).find('option').sort(NASort).appendTo($(component));
+                $(component).select2('val', value);
+            } else if (valor) {
+                $(component).append('<option value="' + idLance + '">' + valor + '</option>');
+                $(component).find('option').sort(NASort).appendTo($(component));
+                $(component).select2('val', value);
+            }
+        }
+        
+        var indice = -1;
+        
+        for(var j = 0; j < listaLances.length; j++) {
+            var lance = listaLances[j];
+            
+            if (lance.id == idLance) {
+                indice = j;
+                break;
+            }
+        }
+        
+        if (indice > -1) {
+            if (valor) {
+                listaLances[indice].value = valor;
+            } else {
+                listaLances.splice(indice, 1);
+            }
+        } else {
+            listaLances.push({id:idLance, value:valor});
+        }
+    }
+    
+    
+    function adicionarLances(component) {
+        component.find('option').remove();
+        component.append('<option></option>');
+        for(var j = 0; j < listaLances.length; j++) {
+            var lance = listaLances[j];
+            component.append('<option value="' + lance.id + '">' + lance.value + '</option>');
+        }
+        
+        component.find('option').sort(NASort).appendTo(component);
+    }
+    
+    function alterarBoia(valor, idBoia) {
+        var list = $('.boia-observadorbordo');
+        
+        for(var i = 0; i < list.length; i++) {
+            var component = list[i];
+            var value = $(component).val();
+            
+            if ($(component).find('option[value="' + idBoia + '"]').length > 0) {
+                if (valor) {
+                    $(component).find('option[value="' + idBoia + '"]').html(valor);                    
+                } else {
+                    $(component).find('option[value="' + idBoia + '"]').remove();
+                }                
+                $(component).find('option').sort(NASort).appendTo($(component));
+                $(component).select2('val', value);
+            } else if (valor) {
+                $(component).append('<option value="' + idBoia + '">' + valor + '</option>');
+                $(component).find('option').sort(NASort).appendTo($(component));
+                $(component).select2('val', value);
+            }
+        }
+        
+        var indice = -1;
+        
+        for(var j = 0; j < listaBoias.length; j++) {
+            var boia = listaBoias[j];
+            
+            if (boia.id == idBoia) {
+                indice = j;
+                break;
+            }
+        }
+        
+        if (indice > -1) {
+            if (valor) {
+                listaBoias[indice].value = valor;
+            } else {
+                listaBoias.splice(indice, 1);
+            }
+        } else {
+            listaBoias.push({id:idBoia, value:valor});
+        }
+    }
+    
+    function adicionarBoias(component) {
+        component.find('option').remove();
+        component.append('<option></option>');
+        
+        for(var j = 0; j < listaBoias.length; j++) {
+            var boia = listaBoias[j];
+            component.append('<option value="' + boia.id + '">' + boia.value + '</option>');
+        }
+        
+        component.find('option').sort(NASort).appendTo(component);
+    }
+    
+    function NASort(a, b) {    
+        if (a.innerHTML == 'NA') {
+            return 1;   
+        }
+        else if (b.innerHTML == 'NA') {
+            return -1;   
+        }       
+        
+        return (parseInt(a.innerHTML) > parseInt(b.innerHTML)) ? 1 : -1;
+    };
 </script>

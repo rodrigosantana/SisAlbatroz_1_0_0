@@ -20,7 +20,7 @@
                             <label for="contagem_por_sol_<?php echo $numero; ?>_data" class="col-md-4 control-label">Data *</label>
                             <div class="col-md-8 div-help">
                                 <input type="date" class="form-control" id="contagem_por_sol_<?php echo $numero; ?>_data" name="contagem_por_sol[<?php echo $numero; ?>][data]"
-                                       value="<?php echo is_null($contagemPorSol->getDataHora()) ? '' : $contagemPorSol->getDataHora()->format("Y-m-d") ?>">
+                                       value="<?php echo is_null($contagemPorSol->getData()) ? '' : $contagemPorSol->getData()->format("Y-m-d") ?>">
                             </div>
                         </div>
                     </div>
@@ -29,9 +29,9 @@
                 <div class="row ">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="contagem_por_sol_<?php echo $numero; ?>_hora" class="col-md-4 control-label">Horário do por-do-sol *</label>
+                            <label for="contagem_por_sol_<?php echo $numero; ?>_hora" class="col-md-4 control-label">Horário do por-do-sol</label>
                             <div class="col-md-8 div-help">
-                                <input type="time" class="form-control" id="contagem_por_sol_<?php echo $numero; ?>_hora" name="contagem_por_sol[<?php echo $numero; ?>][hora]" value="<?php echo is_null($contagemPorSol->getDataHora()) ? '' : $contagemPorSol->getDataHora()->format("H:i") ?>">
+                                <input type="time" class="form-control" id="contagem_por_sol_<?php echo $numero; ?>_hora" name="contagem_por_sol[<?php echo $numero; ?>][hora]" value="<?php echo is_null($contagemPorSol->getHoraPorSol()) ? '' : $contagemPorSol->getHoraPorSol()->format("H:i") ?>">
                             </div>
                         </div>
                     </div>
@@ -62,10 +62,15 @@
                 <div class="row ">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="contagem_por_sol_<?php echo $numero; ?>_lance" class="col-md-4 control-label lb_lance">Lance *</label>
+                            <label for="contagem_por_sol_<?php echo $numero; ?>_lance" class="col-md-4 control-label lb_lance">Lance</label>
                             <div class="col-md-8 div-help">
-                                <input type="number" class="form-control lance" id="contagem_por_sol_<?php echo $numero; ?>_lance" name="contagem_por_sol[<?php echo $numero; ?>][lance]"
-                                       placeholder="Identificador do lance" value="<?php echo $contagemPorSol->getLance() ?>">
+                                <select class="select2 lance-observadorbordo" style="width: 100%" id="contagem_por_sol_<?php echo $numero; ?>_lance" name="contagem_por_sol[<?php echo $numero; ?>][lance]">
+                                    <option></option>
+                                    <?php foreach ($lances as $lance): ?>
+                                        <?php $selectedCps = (!is_null($contagemPorSol->getLance()) && $contagemPorSol->getLance()->getId() == $lance->getId()) ? 'selected' : ''?>
+                                        <option value="<?php echo $lance->getId() ?>" <?php echo $selectedCps?>><?php echo $lance->getLance() ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -76,28 +81,30 @@
                 <h4 class="text-center titulo">Medidas Mitigadoras</h4>
                 <hr class="hr-sisalbatroz">
                 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="contagem_por_sol_<?php echo $numero; ?>_toriline" class="col-md-4 control-label">Toriline</label>
-                            <div class="col-md-8 div-help">
-                                <input type="checkbox" id="contagem_por_sol_<?php echo $numero; ?>_toriline" name="contagem_por_sol[<?php echo $numero; ?>][toriline]" 
-                                               <?php echo $contagemPorSol->getToriline() === true ? 'checked' : '' ?>>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 
-                <div class="row ">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="contagem_por_sol_<?php echo $numero; ?>_isca_tingida" class="col-md-4 control-label">Isca tingida</label>
-                            <div class="col-md-8 div-help">
-                                <input type="checkbox" id="contagem_por_sol_<?php echo $numero; ?>_isca_tingida" name="contagem_por_sol[<?php echo $numero; ?>][isca_tingida]" 
-                                    <?php echo $contagemPorSol->getIscaTingida() === true ? 'checked' : '' ?>>
-                            </div>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-sisalbatroz">
+                        <thead>
+                            <tr>
+                                <th class="col-md-3"></th>
+                                <th class="col-md-2">Sim</th>
+                                <th class="col-md-2">Não</th>
+                                <th class="col-md-5"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="th-table-checkbox">Toriline</th>
+                                <td><input type="checkbox" name="contagem_por_sol[<?php echo $numero; ?>][toriline]" value="true" class="check-sim-nao" <?php echo $contagemPorSol->getToriline() === true ? 'checked' : '' ?>></td>
+                                <td><input type="checkbox" name="contagem_por_sol[<?php echo $numero; ?>][toriline]" value="false" class="check-sim-nao" <?php echo $contagemPorSol->getToriline() === false ? 'checked' : '' ?>></td>           
+                            </tr>          
+                            <tr>
+                                <th scope="row" class="th-table-checkbox">Isca tingida</th>
+                                <td><input type="checkbox" name="contagem_por_sol[<?php echo $numero; ?>][isca_tingida]" value="true" class="check-sim-nao" <?php echo $contagemPorSol->getIscaTingida() === true ? 'checked' : '' ?>></td>
+                                <td><input type="checkbox" name="contagem_por_sol[<?php echo $numero; ?>][isca_tingida]" value="false" class="check-sim-nao" <?php echo $contagemPorSol->getIscaTingida() === false ? 'checked' : '' ?>></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 
                 <hr class="hr-sisalbatroz">
@@ -118,63 +125,44 @@
         <h3 class="text-center titulo">Contagens</h3>
         <hr class="hr-sisalbatroz">
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="contagem_por_sol_<?php echo $numero; ?>_indice" class="col-md-4 control-label lb_lance">Índice da contagem</label>
-                    <div class="col-md-8 div-help">
-                        <input type="number" class="form-control lance" id="contagem_por_sol_<?php echo $numero; ?>_indice" name="contagem_por_sol[<?php echo $numero; ?>][indice]"
-                               placeholder="Identificador do lance" value="<?php echo $contagemPorSol->getIndice() ?>">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="contagem_por_sol_<?php echo $numero; ?>_contagem_hora" class="col-md-4 control-label">Hora</label>
-                    <div class="col-md-8 div-help">
-                        <input type="time" class="form-control" id="contagem_por_sol_<?php echo $numero; ?>_contagem_hora" name="contagem_por_sol[<?php echo $numero; ?>][contagem_hora]" value="<?php echo is_null($contagemPorSol->getHora()) ? '' : $contagemPorSol->getHora()->format("H:i") ?>">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="contagem_por_sol_<?php echo $numero; ?>_total" class="col-md-4 control-label lb_lance">Total</label>
-                    <div class="col-md-8 div-help">
-                        <input type="number" class="form-control lance" id="contagem_por_sol_<?php echo $numero; ?>_total" name="contagem_por_sol[<?php echo $numero; ?>][total]"
-                               placeholder="Identificador do lance" value="<?php echo $contagemPorSol->getTotal() ?>">
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <hr class="hr-sisalbatroz">
-        <div id="contagem_por_sol_especie_container_<?php echo $numero ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol_especie", array('contagemPorSolEspecie' => new ContagemPorSolEspecie(), "numero" => $numero, 'especies' => $especies), true)); ?>">
+        <div id="contagem_por_sol_indice_container_<?php echo $numero ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol_indice", array('contagemPorSolIndice' => new ContagemPorSolIndice(), "numero" => $numero, 'especies' => $especies), true)); ?>">
             <?php
-            $lista = $contagemPorSol->getContagemPorSolEspecie();
+            $lista = $contagemPorSol->getContagemPorSolIndice();
             
             foreach ($lista as $key => $value) {
-                echo $this->load->view("observador_bordo/contagem_por_sol_especie", array('contagemPorSolEspecie' => $value, 'indexContagemPorSolEspecie' => $key, "numero" => $numero, 'especies' => $especies), true);
+                echo $this->load->view("observador_bordo/contagem_por_sol_indice", array('contagemPorSolIndice' => $value, 'indexContagemPorSolIndice' => $key, "numero" => $numero, 'especies' => $especies), true);
             }
             ?>
         </div>
         
-        <a href="javascrit:;" class="btn btn-success" id="add_contagem_por_sol_especie_<?php echo $numero ?>" style="margin-top: 10px"><i class="glyphicon glyphicon-plus"></i> Adicionar espécie</a>
+        <a href="javascrit:;" class="btn btn-success" id="add_contagem_por_sol_indice_<?php echo $numero ?>" style="margin-top: 10px"><i class="glyphicon glyphicon-plus"></i> Adicionar índice</a>
     </div>
 </div>
 
 <script>
     $(document).ready(function() {
-        var contagemPorSolEspecie<?php echo $numero ?> = new Prototype.Class({
-            'count': <?php echo $contagemPorSol->getContagemPorSolEspecie()->count() ?>,
-            'list': '#contagem_por_sol_especie_container_<?php echo $numero ?>',
-            'addButton': '#add_contagem_por_sol_especie_<?php echo $numero ?>',
-            'removeButton': '#remove-contagem-por-sol-especie-<?php echo $numero ?>',
-            'container': '.contagem-por-sol-especie',
-            'addOne': <?php echo $contagemPorSol->getContagemPorSolEspecie()->count() > 0 ? 'false' : 'true' ?>,
-            'isEdit': <?php echo $contagemPorSol->getContagemPorSolEspecie()->count() > 0 ? 'true' : 'false' ?>
+        var contagemPorSolIndice<?php echo $numero ?> = new Prototype.Class({
+            'count': <?php echo $contagemPorSol->getContagemPorSolIndice()->count() ?>,
+            'list': '#contagem_por_sol_indice_container_<?php echo $numero ?>',
+            'addButton': '#add_contagem_por_sol_indice_<?php echo $numero ?>',
+            'removeButton': '#remove-contagem-por-sol-indice-<?php echo $numero ?>',
+            'container': '.contagem-por-sol-indice',
+            'addOne': false,
+            'isEdit': <?php echo $contagemPorSol->getContagemPorSolIndice()->count() > 0 ? 'true' : 'false' ?>
         });
 
+        $("#contagem_por_sol_<?php echo $numero; ?>_lance").select2({
+            placeholder: "Selecione",
+            allowClear: true,
+            formatNoMatches: function() {
+                return "Nenhum item encontrado";
+            }
+        });
+        
+        $(".select2-container").removeClass('lance-observadorbordo');
+        
+        <?php if (is_null($contagemPorSol->getId())) :?>
+            adicionarLances($("#contagem_por_sol_<?php echo $numero; ?>_lance"));
+        <?php endif;?>
     });
 </script>

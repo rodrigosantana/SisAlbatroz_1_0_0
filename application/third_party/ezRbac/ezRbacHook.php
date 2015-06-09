@@ -223,7 +223,7 @@ class EzRbacHook
         if ($this->CI->config->item('redirect_url', 'ez_rbac')) {
             redirect($this->CI->config->item('redirect_url', 'ez_rbac'));
         }
-        show_error('you do not have sufficient permission to access this resource', 403);
+        show_error('insufficient_permission_access', 403);
     }
 
     /**

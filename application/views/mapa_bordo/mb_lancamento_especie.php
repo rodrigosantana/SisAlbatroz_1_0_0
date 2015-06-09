@@ -8,8 +8,8 @@
                 <select class="select2 insertaction" style="width: 100%" id="lancamento_<?php echo $numero; ?>_capt_especie_<?php echo $numeroEp?>_capt_spp" name="lancamento[<?php echo $numero; ?>][capt_especie][<?php echo $numeroEp?>][capt_ssp]">
                     <option></option>
                     <?php foreach ($aves as $ave): ?>
-                        <?php $selected = (!is_null($mbCaptura->getIdAve()) && $mbCaptura->getIdAve()->getIdAves() == $ave->getIdAves()) ? 'selected' : ''?>
-                        <option value="<?php echo $ave->getIdAves() ?>" <?php echo $selected?>><?php echo $ave->getNomeComumBr() ?></option>
+                        <?php $selected = (!is_null($mbCaptura->getIdAve()) && $mbCaptura->getIdAve()->getId() == $ave->getId()) ? 'selected' : ''?>
+                        <option value="<?php echo $ave->getId() ?>" <?php echo $selected?>><?php echo $ave->__toString() ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

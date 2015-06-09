@@ -8,8 +8,8 @@
                 <select class="select2" style="width: 100%" id="contagem_ave_boia_<?php echo $numero?>_cab_especie_<?php echo $numero2?>_especie" name="contagem_ave_boia[<?php echo $numero?>][cab_especie][<?php echo $numero2?>][especie]">
                     <option></option>
                     <?php foreach ($aves as $ave): ?>
-                        <?php $selected = (!is_null($contagemAveBoiaEspecie->getEspecie()) && $contagemAveBoiaEspecie->getEspecie()->getIdAves() == $ave->getIdAves()) ? 'selected' : ''?>
-                        <option value="<?php echo $ave->getIdAves() ?>" <?php echo $selected?>><?php echo $ave->getNomeCientifico() ?></option>
+                        <?php $selected = (!is_null($contagemAveBoiaEspecie->getEspecie()) && $contagemAveBoiaEspecie->getEspecie()->getId() == $ave->getId()) ? 'selected' : ''?>
+                        <option value="<?php echo $ave->getId() ?>" <?php echo $selected?>><?php echo $ave->__toString() ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

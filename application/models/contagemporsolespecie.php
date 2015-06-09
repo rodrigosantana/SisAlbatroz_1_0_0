@@ -30,24 +30,24 @@ class ContagemPorSolEspecie
     private $quantidade;
 
     /**
-     * @var \CadAves
+     * @var \Ave
      *
-     * @ManyToOne(targetEntity="CadAves")
+     * @ManyToOne(targetEntity="Ave")
      * @JoinColumns({
-     *   @JoinColumn(name="especie", referencedColumnName="id_aves")
+     *   @JoinColumn(name="especie", referencedColumnName="id")
      * })
      */
     private $especie;
 
     /**
-     * @var \ContagemPorSol
+     * @var \ContagemPorSolIndice
      *
-     * @ManyToOne(targetEntity="ContagemPorSol")
+     * @ManyToOne(targetEntity="ContagemPorSolIndice")
      * @JoinColumns({
-     *   @JoinColumn(name="contagem_ps", referencedColumnName="id")
+     *   @JoinColumn(name="contagem_psi", referencedColumnName="id")
      * })
      */
-    private $contagemPs;
+    private $contagemPsi;
 
 
 
@@ -87,10 +87,10 @@ class ContagemPorSolEspecie
     /**
      * Set especie
      *
-     * @param \CadAves $especie
+     * @param \Ave $especie
      * @return ContagemPorSolEspecie
      */
-    public function setEspecie(\CadAves $especie = null)
+    public function setEspecie(\Ave $especie = null)
     {
         $this->especie = $especie;
 
@@ -100,7 +100,7 @@ class ContagemPorSolEspecie
     /**
      * Get especie
      *
-     * @return \CadAves 
+     * @return \Ave 
      */
     public function getEspecie()
     {
@@ -108,25 +108,25 @@ class ContagemPorSolEspecie
     }
 
     /**
-     * Set contagemPs
+     * Set contagemPsi
      *
-     * @param \ContagemPorSol $contagemPs
+     * @param \ContagemPorSolIndice $contagemPsi
      * @return ContagemPorSolEspecie
      */
-    public function setContagemPs(\ContagemPorSol $contagemPs = null)
+    public function setContagemPsi(\ContagemPorSolIndice $contagemPsi = null)
     {
-        $this->contagemPs = $contagemPs;
+        $this->contagemPsi = $contagemPsi;
 
         return $this;
     }
 
     /**
-     * Get contagemPs
+     * Get contagemPsi
      *
-     * @return \ContagemPorSol 
+     * @return \ContagemPorSolIndice 
      */
-    public function getContagemPs()
+    public function getContagemPsi()
     {
-        return $this->contagemPs;
+        return $this->contagemPsi;
     }
 }

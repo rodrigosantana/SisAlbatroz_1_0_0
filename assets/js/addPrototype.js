@@ -140,8 +140,10 @@ var Prototype = {
             //isto é usado quando tem collection dentro de collection
             if(newWidget.match(/\$\$numero\$\$/g) != null){
                 newWidget = newWidget.replace(/\$\$numero\$\$/g, config.count);
-            }else{
+            } else if (newWidget.match(/\$\$numero2\$\$/g) != null) {
                 newWidget = newWidget.replace(/\$\$numero2\$\$/g, config.count);
+            } else {
+                newWidget = newWidget.replace(/\$\$numero3\$\$/g, config.count);
             }
 
             newWidget = $(newWidget);

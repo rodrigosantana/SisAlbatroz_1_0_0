@@ -18,9 +18,12 @@ class ProducaoPesqueira
     private $id;
 
     /**
-     * @var integer
+     * @var \DadosAbioticos
      *
-     * @Column(name="lance", type="integer", nullable=true)
+     * @ManyToOne(targetEntity="DadosAbioticos")
+     * @JoinColumns({
+     *   @JoinColumn(name="lance", referencedColumnName="id")
+     * })
      */
     private $lance;
 
@@ -31,12 +34,17 @@ class ProducaoPesqueira
      */
     private $data;
 
+    
     /**
-     * @var integer
+     * @var \ContagemAveBoia
      *
-     * @Column(name="boia_radio", type="integer", nullable=true)
+     * @ManyToOne(targetEntity="ContagemAveBoia")
+     * @JoinColumns({
+     *   @JoinColumn(name="boia_radio", referencedColumnName="id")
+     * })
      */
     private $boiaRadio;
+    
 
     /**
      * @var \Cruzeiro
@@ -73,10 +81,10 @@ class ProducaoPesqueira
     /**
      * Set lance
      *
-     * @param integer $lance
+     * @param DadosAbioticos $lance
      * @return ProducaoPesqueira
      */
-    public function setLance($lance)
+    public function setLance(DadosAbioticos $lance = null)
     {
         $this->lance = $lance;
 
@@ -86,7 +94,7 @@ class ProducaoPesqueira
     /**
      * Get lance
      *
-     * @return integer 
+     * @return DadosAbioticos 
      */
     public function getLance()
     {
@@ -119,10 +127,10 @@ class ProducaoPesqueira
     /**
      * Set boiaRadio
      *
-     * @param integer $boiaRadio
+     * @param ContagemAveBoia $boiaRadio
      * @return ProducaoPesqueira
      */
-    public function setBoiaRadio($boiaRadio)
+    public function setBoiaRadio(ContagemAveBoia $boiaRadio = null)
     {
         $this->boiaRadio = $boiaRadio;
 
@@ -132,7 +140,7 @@ class ProducaoPesqueira
     /**
      * Get boiaRadio
      *
-     * @return integer 
+     * @return ContagemAveBoia 
      */
     public function getBoiaRadio()
     {

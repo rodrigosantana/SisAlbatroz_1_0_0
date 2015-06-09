@@ -100,6 +100,11 @@ class Utils {
     const FEMEA_INCERTEZA = 'femea_incerteza';
     const INDETERMINADO = 'indeterminado';
     
+    const CREATE = 'create';
+    const EDIT = 'edit';
+    const DELETE = 'delete';
+    const VIEW = 'view';
+    
     public static function indRumo($value = null) {
         $array = array(
             self::RUMO_N,

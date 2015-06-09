@@ -21,7 +21,8 @@ class Usuario extends MY_Controller {
     }
 
     public function novo() {
-        $this->load->view("usuario/new", array("usuario" =>new SystemUsers()));
+//        var_dump($this->ezrbac->getCurrentUser());die;
+        $this->load->view("usuario/new", array("usuario" =>new SystemUsers(), 'tiposUsuarios'=>$this->doctrine->em->getRepository('UserRole')->findAll()));
     }
 
     public function edita() {
@@ -32,18 +33,16 @@ class Usuario extends MY_Controller {
         }
         
         if (is_null($usuario)) {
-            die('Precisa criar a tela de erro');
-            //mostra erro
+            show_error('unknown_registry_error_message');
         }
 
-        $this->load->view("usuario/new", array("usuario" => $usuario));
+        $this->load->view("usuario/new", array("usuario" => $usuario, 'tiposUsuarios'=>$this->doctrine->em->getRepository('UserRole')->findAll()));
     }
 
     public function salva() {
 
         if ($this->validation(true) !== false) {
-            //mostra mensagem de erro
-            //$this->load->view("layout/jsonresponse", array("erroNaoEsperado" => true));
+            show_error('generic_error_message');
             return;
         }
         
@@ -53,9 +52,14 @@ class Usuario extends MY_Controller {
             $usuario = $this->doctrine->em->find('SystemUsers', $this->input->post('id'));
         }
         
+        if (is_null($usuario)) {
+            show_error('unknown_registry_error_message');
+        }
+        
         $salt = uniqid('', true);
         $usuario->setName($this->input->post('name'));
         $usuario->setEmail($this->input->post('email'));
+        $usuario->setUserRoleId($this->doctrine->em->find('UserRole', $this->input->post('tipo_usuario')));
         
         if ($usuario->getId() == 0 || $usuario->getId() == null || ($usuario->getId() > 0 && $this->input->post("password") != "")) {        
             $usuario->setPassword($this->encrypt->sha1($this->input->post('password') . $salt));
@@ -65,7 +69,6 @@ class Usuario extends MY_Controller {
         if (is_null($usuario->getId())) {
             $usuario->setStatus(1);
             $usuario->setVerificationStatus(1);
-            $usuario->setUserRoleId(1);
         }
         
         $this->doctrine->em->persist($usuario);
@@ -78,6 +81,7 @@ class Usuario extends MY_Controller {
     public function validation($returnError = false) {
         $this->form_validation->set_rules("name", "Nome", "trim|required|max_length[255]");
         $this->form_validation->set_rules("email", "Email", "trim|required|valid_email|max_length[254]");
+        $this->form_validation->set_rules('tipo_usuario', "Tipo de usuário", "trim|required|in_array[" . Utils::findIds('id', 'UserRole') . "]");
         
         if (!is_numeric($this->input->post("id")) || (is_numeric($this->input->post("id")) && $this->input->post("password") != '')) {
             $this->form_validation->set_rules("password", "Senha", "trim|required|max_length[20]|min_length[6]");
@@ -97,6 +101,11 @@ class Usuario extends MY_Controller {
 
     public function ativa(){
         $usuario = $this->doctrine->em->find("SystemUsers", $this->input->get("id"));
+        
+        if (is_null($usuario)) {
+            show_error('unknown_registry_error_message');
+        }
+        
         $usuario->setStatus((int)(!(bool)$usuario->getStatus()));
         $this->doctrine->em->persist($usuario);
         $this->doctrine->em->flush();
