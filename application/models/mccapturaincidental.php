@@ -1,26 +1,28 @@
 <?php
+
 /**
  * McCapturaIncidental
  *
  * @Table(name="mc_captura_incidental")
  * @Entity
  */
-class McCapturaIncidental
-{
+class McCapturaIncidental {
+
     /**
-     * @OneToOne(targetEntity="MedicinaConservacao", inversedBy="capturaIncidental")
-     * @JoinColumn(name="id", referencedColumnName="id")
-     **/
+     * @ID
+     * @OneToOne(targetEntity="MedConservacao", inversedBy="capturaIncidental")
+     * @JoinColumn(name="mc_id", referencedColumnName="id")
+     * */
     private $id;
 
-	/**
+    /**
      * @var string
      *
      * @Column(name="informacao", type="string", length=20)
      */
     private $informacao;
-	
-	/**
+
+    /**
      * @var \Cruzeiro
      *
      * @ManyToOne(targetEntity="Cruzeiro")
@@ -29,8 +31,8 @@ class McCapturaIncidental
      * })
      */
     private $cruzeiro;
-	
-	/**
+
+    /**
      * @var \DadosAbioticos
      *
      * @ManyToOne(targetEntity="DadosAbioticos")
@@ -39,8 +41,8 @@ class McCapturaIncidental
      * })
      */
     private $lance;
-    
-	/**
+
+    /**
      * @var \CadObservador
      *
      * @ManyToOne(targetEntity="CadObservador")
@@ -49,8 +51,8 @@ class McCapturaIncidental
      * })
      */
     private $observador;
-	
-	/**
+
+    /**
      * @var \CadMestre
      *
      * @ManyToOne(targetEntity="CadMestre")
@@ -69,27 +71,29 @@ class McCapturaIncidental
      * })
      */
     private $embarcacao;
-	
-	/**
+
+    /**
      * @var text
      *
      * @Column(name="historico", type="text")
      */
     private $historico;
-	
-	/**
+
+    /**
      * @var text
      *
      * @Column(name="descricao_local_coleta", type="text")
      */
     private $descricaoLocalColeta;
-	
-	
-    public function getId()
-    {
+
+    public function getId() {
         return $this->id;
     }
     
+    public function setId(MedConservacao $id) {
+        $this->id = $id;
+    }
+
     public function getInformacao() {
         return $this->informacao;
     }
@@ -126,33 +130,32 @@ class McCapturaIncidental
         $this->informacao = $informacao;
     }
 
-    public function setCruzeiro(\Cruzeiro $cruzeiro) {
+    public function setCruzeiro(\Cruzeiro $cruzeiro = null) {
         $this->cruzeiro = $cruzeiro;
     }
 
-    public function setLance(\DadosAbioticos $lance) {
+    public function setLance(\DadosAbioticos $lance = null) {
         $this->lance = $lance;
     }
 
-    public function setObservador(\CadObservador $observador) {
+    public function setObservador(\CadObservador $observador = null) {
         $this->observador = $observador;
     }
 
-    public function setMestre(\CadMestre $mestre) {
+    public function setMestre(\CadMestre $mestre = null) {
         $this->mestre = $mestre;
     }
 
-    public function setEmbarcacao(\CadEmbarcacao $embarcacao) {
+    public function setEmbarcacao(\CadEmbarcacao $embarcacao = null) {
         $this->embarcacao = $embarcacao;
     }
 
-    public function setHistorico(text $historico) {
+    public function setHistorico($historico) {
         $this->historico = $historico;
     }
 
-    public function setDescricaoLocalColeta(text $descricaoLocalColeta) {
+    public function setDescricaoLocalColeta($descricaoLocalColeta) {
         $this->descricaoLocalColeta = $descricaoLocalColeta;
     }
-
 
 }

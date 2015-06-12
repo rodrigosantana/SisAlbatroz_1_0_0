@@ -9,7 +9,8 @@
 class McColetaMaterialBiologico {
 
     /**
-     * @OneToOne(targetEntity="MedicinaConservacao", inversedBy="capturaIncidental")
+     * @id
+     * @OneToOne(targetEntity="MedConservacao", inversedBy="capturaIncidental")
      * @JoinColumn(name="id", referencedColumnName="id")
      * */
     private $id;
@@ -162,9 +163,10 @@ class McColetaMaterialBiologico {
     /**
      * @var array
      *
-     * @Column(name="amtFigado", type="array")
+     * @Column(name="amt_figado", type="array")
      */
-
+    private $amtFigado;
+    
     /**
      * @var array
      *
@@ -206,7 +208,7 @@ class McColetaMaterialBiologico {
 
     /**
      * @var boolean
-     * @Column(name=""htp_ingluvio, type="boolean")
+     * @Column(name="htp_ingluvio", type="boolean")
      */
     private $htpIngluvio;
 
@@ -352,7 +354,7 @@ class McColetaMaterialBiologico {
      * @var boolean
      * @Column(name="htp_grandes_vasos", type="boolean")
      */
-    private $htpGrandes_vasos;
+    private $htpGrandesVasos;
 
     /**
      * @var boolean
@@ -392,12 +394,6 @@ class McColetaMaterialBiologico {
 
     /**
      * @var boolean
-     * @Column(name="htp_boolean", type="boolean")
-     */
-    private $htpBoolean;
-    
-    /**
-     * @var boolean
      * @Column(name="htp_encefalo", type="boolean")
      */
     private $htpEncefalo;
@@ -414,10 +410,25 @@ class McColetaMaterialBiologico {
      */
     private $htpOsso;
 
+    public function __construct() {
+        $this->amtBaco = array();
+        $this->amtEncefalo = array();
+        $this->amtFigado = array();
+        $this->amtFigado = array();
+        $this->amtGordura = array();
+        $this->amtMedulaOssea = array();
+        $this->amtMusculo = array();
+        $this->amtPulmao = array();        
+    }
+   
     public function getId() {
         return $this->id;
     }
 
+    public function setId(MedConservacao $id) {
+        $this->id = $id;
+    }
+    
     public function getDataNecropsia() {
         return $this->dataNecropsia;
     }
@@ -491,26 +502,58 @@ class McColetaMaterialBiologico {
     }
 
     public function getAmtEncefalo() {
+        if (is_null($this->amtEncefalo)) {
+            $this->amtEncefalo = array();
+        }
+        
         return $this->amtEncefalo;
     }
 
     public function getAmtMedulaOssea() {
+        if (is_null($this->amtMedulaOssea)) {
+            $this->amtMedulaOssea = array();
+        }
+        
         return $this->amtMedulaOssea;
     }
 
     public function getAmtMusculo() {
+        if (is_null($this->amtMusculo)) {
+            $this->amtMusculo = array();
+        }
+        
         return $this->amtMusculo;
     }
 
+    public function getAmtFigado() {
+        if (is_null($this->amtFigado)) {
+            $this->amtFigado = array();
+        }
+        
+        return $this->amtFigado;
+    }
+    
     public function getAmtPulmao() {
+        if (is_null($this->amtPulmao)) {
+            $this->amtPulmao = array();
+        }
+        
         return $this->amtPulmao;
     }
 
     public function getAmtBaco() {
+        if (is_null($this->amtBaco)) {
+            $this->amtBaco = array();
+        }
+        
         return $this->amtBaco;
     }
 
     public function getAmtGordura() {
+        if (is_null($this->amtGordura)) {
+            $this->amtGordura = array();
+        }
+        
         return $this->amtGordura;
     }
 
@@ -622,8 +665,8 @@ class McColetaMaterialBiologico {
         return $this->htpBursa;
     }
 
-    public function getHtpGrandes_vasos() {
-        return $this->htpGrandes_vasos;
+    public function getHtpGrandesVasos() {
+        return $this->htpGrandesVasos;
     }
 
     public function getHtpSacoAereo() {
@@ -650,10 +693,6 @@ class McColetaMaterialBiologico {
         return $this->htpGldSal;
     }
 
-    public function getHtpBoolean() {
-        return $this->htpBoolean;
-    }
-
     public function getHtpEncefalo() {
         return $this->htpEncefalo;
     }
@@ -666,7 +705,7 @@ class McColetaMaterialBiologico {
         return $this->htpOsso;
     }
 
-    public function setDataNecropsia(\DateTyme $dataNecropsia) {
+    public function setDataNecropsia(DateTyme $dataNecropsia = null) {
         $this->dataNecropsia = $dataNecropsia;
     }
 
@@ -739,26 +778,58 @@ class McColetaMaterialBiologico {
     }
 
     public function setAmtEncefalo($amtEncefalo) {
+        if (is_null($amtEncefalo)) {
+            $this->amtEncefalo = array();
+        }
+        
         $this->amtEncefalo = $amtEncefalo;
     }
 
     public function setAmtMedulaOssea($amtMedulaOssea) {
+        if (is_null($amtMedulaOssea)) {
+            $this->amtMedulaOssea = array();
+        }
+        
         $this->amtMedulaOssea = $amtMedulaOssea;
     }
 
     public function setAmtMusculo($amtMusculo) {
+        if (is_null($amtMusculo)) {
+            $this->amtMusculo = array();
+        }
+        
         $this->amtMusculo = $amtMusculo;
+    }
+    
+    public function setAmtFigado($amtFigado) {
+        if (is_null($amtFigado)) {
+            $this->amtFigado = array();
+        }
+        
+        $this->amtFigado = $amtFigado;
     }
 
     public function setAmtPulmao($amtPulmao) {
+        if (is_null($amtPulmao)) {
+            $this->amtPulmao = array();
+        }
+        
         $this->amtPulmao = $amtPulmao;
     }
 
     public function setAmtBaco($amtBaco) {
+        if (is_null($amtBaco)) {
+            $this->amtBaco = array();
+        }
+        
         $this->amtBaco = $amtBaco;
     }
 
     public function setAmtGordura($amtGordura) {
+        if (is_null($amtGordura)) {
+            $this->amtGordura = array();
+        }
+        
         $this->amtGordura = $amtGordura;
     }
 
@@ -870,8 +941,8 @@ class McColetaMaterialBiologico {
         $this->htpBursa = $htpBursa;
     }
 
-    public function setHtpGrandes_vasos($htpGrandes_vasos) {
-        $this->htpGrandes_vasos = $htpGrandes_vasos;
+    public function setHtpGrandesVasos($htpGrandesVasos) {
+        $this->htpGrandesVasos = $htpGrandesVasos;
     }
 
     public function setHtpSacoAereo($htpSacoAereo) {
@@ -896,10 +967,6 @@ class McColetaMaterialBiologico {
 
     public function setHtpGldSal($htpGldSal) {
         $this->htpGldSal = $htpGldSal;
-    }
-
-    public function setHtpBoolean($htpBoolean) {
-        $this->htpBoolean = $htpBoolean;
     }
 
     public function setHtpEncefalo($htpEncefalo) {

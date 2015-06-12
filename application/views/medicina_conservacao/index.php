@@ -26,7 +26,8 @@
                     <tr>
                         <th class="text-center">Código</th>
                         <th class="text-center">Etiqueta</th>
-                        <th class="text-center">Espécie</th>
+                        <th class="text-center">Etiqueta Antiga</th>
+                        <th class="text-center col-md-2">Espécie</th>
                         <th class="text-center">Responsável</th>
                         <th class="text-center">Data de Entrada</th>
                         <th class="text-center">Data de Captura</th>
@@ -37,7 +38,24 @@
                     <?php $lista = $parameters['data']; ?>
                     <?php foreach ($lista as $objeto): ?>
                         <tr>
-                            
+                            <td><?php echo $objeto->getId();?></td>
+                            <td><?php echo $objeto->getEtiqueta();?></td>
+                            <td><?php echo $objeto->getEtiquetaAntiga();?></td>
+                            <td><?php echo is_null($objeto->getEspecie()) ? '' : $objeto->getEspecie()->__toString();?></td>
+                            <td><?php echo $objeto->getResponsavel();?></td>
+                            <td><?php echo is_null($objeto->getDataEntrada()) ? '' : $objeto->getDataEntrada()->format('d/m/y');?></td>
+                            <td><?php echo is_null($objeto->getDataCaptura()) ? '' : $objeto->getDataCaptura()->format('d/m/y');?></td>
+                            <td>
+                            <div class="btn-group" role="group" aria-label="...">
+                                <?php if ($this->ezrbac->hasAccess(Utils::EDIT, 'medicinaconservacao')) :?>
+                                <a href="<?php echo site_url('medicinaconservacao/edita') . '?id=' . $objeto->getId() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                                <?php endif;?>
+
+                                <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'medicinaconservacao')) :?>
+                                <a  onclick="exclui(<?php echo $objeto->getId() ?>)" href="javascript:;" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+                                <?php endif;?>
+                            </div>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -67,11 +85,13 @@
 
 
 <script>
-//function exclui(id) {
-//    bootbox.confirm("Tem certeza que deseja excluir o registro?", function(result) {
-//        if (result) {
-//            document.location.href = '<?php //echo site_url('medicinaconservacao/exclui') . '?id='?>' + id;
-//        }
-//    }); 
-//}
+<?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'medicinaconservacao')) :?>
+function exclui(id) {
+    bootbox.confirm("Tem certeza que deseja excluir o registro?", function(result) {
+        if (result) {
+            document.location.href = '<?php echo site_url('medicinaconservacao/exclui') . '?id='?>' + id;
+        }
+    }); 
+}
+<?php endif;?>
 </script>

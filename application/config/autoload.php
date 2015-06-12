@@ -162,6 +162,13 @@ $autoload['model'] = array(
     'Pescado',
     'Ave',    
     
+    'McCapturaIncidental',
+    'McColetaMaterialBiologico',
+    'McBiometria',
+    'McOutrasPesquisas',
+    'MedConservacao',
+    
+    
 );
 
 

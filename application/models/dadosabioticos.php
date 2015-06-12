@@ -305,4 +305,12 @@ class DadosAbioticos
     {
         return $this->dadosAbioticosRecolhimento;
     }
+    
+    public function __toString() {
+        return $this->lance;
+    }
+    
+    public function __toJson() {
+        return array('id'=>$this->id, 'name'=>$this->lance);
+    }
 }

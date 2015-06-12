@@ -59,28 +59,92 @@ class Utils {
     const PLUMAGEM_JUVENIL = 'juvenil';
     const PLUMAGEM_JUVENIL_EM_MUDA = 'juvenil_em_muda';
     
+    public static function getPlumagem($value = null) {
+        $array = array(
+            self::PLUMAGEM_ADULTO,
+            self::PLUMAGEM_ADULTO_EM_MUDA,
+            self::PLUMAGEM_JUVENIL,
+            self::PLUMAGEM_JUVENIL_EM_MUDA,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
     const PROCEDENCIA_CAPTURA_INCIDENTAL = 'captura_incidental';
     const PROCEDENCIA_ENCALHE = 'encalhe';
     const PROCEDENCIA_REABILITACAO = 'reabilitacao';
     const PROCEDENCIA_OUTROS = 'outros';
+    
+    public static function getProcedencia($value = null) {
+        $array = array(
+            self::PROCEDENCIA_CAPTURA_INCIDENTAL,
+            self::PROCEDENCIA_ENCALHE,
+            self::PROCEDENCIA_REABILITACAO,
+            self::PROCEDENCIA_OUTROS,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
     
     const CONDICAO_CARCACA_FRESCA = 'fresca';
     const CONDICAO_CARCACA_CONGELADA = 'congelada';
     const CONDICAO_CARCACA_INTEIRA = 'inteira';
     const CONDICAO_CARCACA_EMPARTES = 'empartes';
     
+    public static function getCondicaoCarcaca($value = null) {
+        $array = array(
+            self::CONDICAO_CARCACA_FRESCA,
+            self::CONDICAO_CARCACA_CONGELADA,
+            self::CONDICAO_CARCACA_INTEIRA,
+            self::CONDICAO_CARCACA_EMPARTES,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
     const AUTOLISE_LEVE = 'leve';
     const AUTOLISE_MODERADA = 'moderada';
     const AUTOLISE_SEVERA = 'severa';
+    
+    public static function getAutolise($value = null) {
+        $array = array(
+        self::AUTOLISE_LEVE,
+        self::AUTOLISE_MODERADA,
+        self::AUTOLISE_SEVERA,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
     
     const EMPETROLAMENTO_25 = '25';
     const EMPETROLAMENTO_25_75 = '25_75';
     const EMPETROLAMENTO_75 = '75';
     
+    public static function getEmpetrolamento($value = null) {
+        $array = array(
+        self::EMPETROLAMENTO_25,
+        self::EMPETROLAMENTO_25_75,
+        self::EMPETROLAMENTO_75,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
     const CONDICAO_CORPORAL_OTIMO = 'otimo';
     const CONDICAO_CORPORAL_BOM = 'bom';
     const CONDICAO_CORPORAL_MAGRO = 'magro';
     const CONDICAO_CORPORAL_CAQUETICO = 'caquetico';
+    
+    public static function getCondicaoCorporal($value = null) {
+        $array = array(
+        self::CONDICAO_CORPORAL_OTIMO,
+        self::CONDICAO_CORPORAL_BOM,
+        self::CONDICAO_CORPORAL_MAGRO,
+        self::CONDICAO_CORPORAL_CAQUETICO,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
     
     const BAIXA = 'baixa';
     const MEDIA = 'media';
@@ -94,11 +158,83 @@ class Utils {
     const CORPO = 'corpo';
     const ASA = 'asa';
     
+    public static function getCruz($value = null) {
+        $array = array(
+        self::BAIXA,
+        self::MEDIA,
+        self::ALTA,
+        self::NAO_INFORMADO,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
+    public static function getAmostrasTecido($value = null) {
+        $array = array(
+        self::NAO_COLETADO,
+        self::NAO_INFORMADO,
+        self::PAPEL_ALUMINIO,
+        self::PAPEL_EPPENDORF,
+        self::FALCON,
+        self::ALCOOL_70,
+        
+        );
+        
+        if (is_array($value)) {
+            $newArray = array();
+            
+            foreach ($value as $v) {
+                if (in_array($v, $array)) {
+                    $newArray[] = $v;
+                }
+            }
+            
+            return empty($newArray) ? null : $newArray;
+        } else {
+            return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+        }
+    }
+    
+    public static function getPena($value = null) {
+        $array = array(
+        self::ASA,
+        self::CORPO,
+        self::NAO_COLETADO,
+        );
+        
+        if (is_array($value)) {
+            $newArray = array();
+            
+            foreach ($value as $v) {
+                if (in_array($v, $array)) {
+                    $newArray[] = $v;
+                }
+            }
+            
+            return empty($newArray) ? null : $newArray;
+        } else {
+            return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+        }
+    }
+
+
     const MACHO_CERTEZA = 'macho_certeza';
     const MACHO_INCERTEZA = 'macho_incerteza';
     const FEMEA_CERTEZA = 'femea_certeza';
     const FEMEA_INCERTEZA = 'femea_incerteza';
     const INDETERMINADO = 'indeterminado';
+    
+    public static function getSexagem($value = null) {
+        $array = array(
+        self::MACHO_CERTEZA,
+        self::MACHO_INCERTEZA,
+        self::FEMEA_CERTEZA,
+        self::FEMEA_INCERTEZA,
+        self::INDETERMINADO,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
     
     const CREATE = 'create';
     const EDIT = 'edit';

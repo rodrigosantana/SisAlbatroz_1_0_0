@@ -9,7 +9,8 @@
 class McBiometria {
 
     /**
-     * @OneToOne(targetEntity="MedicinaConservacao", inversedBy="capturaIncidental")
+     * @id
+     * @OneToOne(targetEntity="MedConservacao", inversedBy="capturaIncidental")
      * @JoinColumn(name="id", referencedColumnName="id")
      * */
     private $id;
@@ -40,7 +41,7 @@ class McBiometria {
 
     /**
      * @var integer
-     * @Column(name=""altura_bico_base, type="integer")
+     * @Column(name="altura_bico_base", type="integer")
      */
     private $alturaBicoBase;
 
@@ -136,6 +137,10 @@ class McBiometria {
 
     public function getId() {
         return $this->id;
+    }
+    
+    public function setId(MedConservacao $id) {
+        $this->id = $id;
     }
 
     public function getPeso() {

@@ -9,7 +9,8 @@
 class McOutrasPesquisas {
 
     /**
-     * @OneToOne(targetEntity="MedicinaConservacao", inversedBy="capturaIncidental")
+     * @id
+     * @OneToOne(targetEntity="MedConservacao", inversedBy="capturaIncidental")
      * @JoinColumn(name="id", referencedColumnName="id")
      * */
     private $id;
@@ -56,8 +57,16 @@ class McOutrasPesquisas {
      */
     private $observacoes;
 
+    public function __construct() {
+        $this->penas = array();
+    }
+    
     public function getId() {
         return $this->id;
+    }
+    
+    public function setId(MedConservacao $id) {
+        $this->id = $id;
     }
     
     public function getSwabCloaca() {
@@ -77,6 +86,10 @@ class McOutrasPesquisas {
     }
 
     public function getPenas() {
+        if (is_null($this->penas)) {
+            $this->penas = array();
+        }
+        
         return $this->penas;
     }
 
@@ -105,6 +118,10 @@ class McOutrasPesquisas {
     }
 
     public function setPenas($penas) {
+        if (is_null($penas)) {
+            $this->penas = $penas;
+        }
+        
         $this->penas = $penas;
     }
 

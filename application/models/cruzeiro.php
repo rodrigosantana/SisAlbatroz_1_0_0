@@ -443,4 +443,8 @@ class Cruzeiro
     public function getDataAlteracao() {
         return $this->dataAlteracao;
     }
+    
+    public function __toString() {
+        return $this->embarcacao->getNome() . " (" . $this->observador->getNome() . ")";
+    }
 }
