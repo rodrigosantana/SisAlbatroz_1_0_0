@@ -54,7 +54,7 @@
                                 <select class="select2" style="width: 100%" id="tipo_usuario" name="tipo_usuario">
                                     <option></option>
                                     <?php foreach ($tiposUsuarios as $tipoUsuario): ?>
-                                        <?php $selected = (!is_null($usuario->getUserRoleId()) && $usuario->getUserRoleId()->getId() == $tipoUsuario->getId()) ? 'selected' : ''?>
+                                        <?php $selected = (!is_null($usuario->getUserRole()) && $usuario->getUserRole()->getId() == $tipoUsuario->getId()) ? 'selected' : ''?>
                                         <option value="<?php echo $tipoUsuario->getId() ?>" <?php echo $selected?>><?php echo $tipoUsuario->getRoleName() ?></option>
                                     <?php endforeach; ?>
                                 </select>

@@ -59,7 +59,7 @@ class Usuario extends MY_Controller {
         $salt = uniqid('', true);
         $usuario->setName($this->input->post('name'));
         $usuario->setEmail($this->input->post('email'));
-        $usuario->setUserRoleId($this->doctrine->em->find('UserRole', $this->input->post('tipo_usuario')));
+        $usuario->setUserRole($this->doctrine->em->find('UserRole', $this->input->post('tipo_usuario')));
         
         if ($usuario->getId() == 0 || $usuario->getId() == null || ($usuario->getId() > 0 && $this->input->post("password") != "")) {        
             $usuario->setPassword($this->encrypt->sha1($this->input->post('password') . $salt));
