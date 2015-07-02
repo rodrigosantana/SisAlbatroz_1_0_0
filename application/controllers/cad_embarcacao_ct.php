@@ -84,12 +84,12 @@ class Cad_embarcacao_ct extends CI_Controller {
             array(
                 'field' => 'comprimento',
                 'label' => 'Comprimento',
-                'rules' => 'required|numeric|max_length[2]'
+                'rules' => 'required|numeric|max_length[5]'
             ),
             array(
                 'field' => 'arq_bruta',
                 'label' => 'Arqueação Bruta',
-                'rules' => 'required|numeric|max_length[2]'
+                'rules' => 'required|numeric|max_length[5]'
             ),
             array(
                 'field' => 'ano_fab',
@@ -99,12 +99,12 @@ class Cad_embarcacao_ct extends CI_Controller {
             array(
                 'field' => 'mat_casco',
                 'label' => 'Material do Casco',
-                'rules' => 'max_length[10]'
+                'rules' => 'max_length[50]'
             ),
             array(
                 'field' => 'propulsao',
                 'label' => 'Propulsão',
-                'rules' => 'max_length[10]'
+                'rules' => 'max_length[50]'
             ),
             array(
                 'field' => 'pot_motor',

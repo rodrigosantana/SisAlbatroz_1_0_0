@@ -58,6 +58,20 @@ class MbLance {
     private $mmUso;
 
     /**
+     * @var integer
+     *
+     * @Column(name="ponteira_peso", type="integer", nullable=true)
+     */
+    private $ponteiraPeso;
+
+    /**
+     * @var float
+     *
+     * @Column(name="ponteira_distancia", type="decimal", nullable=true)
+     */
+    private $ponteiraDistancia;
+
+    /**
      * @var boolean
      *
      * @Column(name="ave_capt", type="boolean",  nullable=false)
@@ -275,6 +289,48 @@ class MbLance {
      */
     public function getMmUso() {
         return $this->mmUso;
+    }
+
+    /**
+     * Set ponteiraPeso
+     *
+     * @param integer $ponteiraPeso
+     * @return MbLance
+     */
+    public function setPonteiraPeso($ponteiraPeso) {
+        $this->ponteiraPeso = $ponteiraPeso;
+
+        return $this;
+    }
+
+    /**
+     * Get ponteiraPeso
+     *
+     * @return integer
+     */
+    public function getPonteiraPeso() {
+        return $this->ponteiraPeso;
+    }
+
+    /**
+     * Set ponteiraDistancia
+     *
+     * @param float $ponteiraDistancia
+     * @return MbLance
+     */
+    public function setPonteiraDistancia($ponteiraDistancia) {
+        $this->ponteiraDistancia = $ponteiraDistancia;
+
+        return $this;
+    }
+
+    /**
+     * Get ponteiraDistancia
+     *
+     * @return float
+     */
+    public function getPonteiraDistancia() {
+        return $this->ponteiraDistancia;
     }
 
     /**

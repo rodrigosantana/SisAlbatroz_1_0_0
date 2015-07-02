@@ -5,6 +5,7 @@ class Mapa_bordo_ct extends MY_Controller {
     public function __construct() {
         $this->modelClassName = 'MbGeral';
         $this->viewPath = 'mapa_bordo';
+
         
         parent::__construct();
     }
@@ -21,8 +22,8 @@ class Mapa_bordo_ct extends MY_Controller {
             'exclui'=>'delete',
             );
     }
-    
-    
+
+
 //--------------------------------------------------------------------------------------------------------------------//
 
     public function novo() {
@@ -67,7 +68,7 @@ class Mapa_bordo_ct extends MY_Controller {
                 array(), array('nome' => 'ASC')
         );
 
-        
+        // Preparando o array do form e populando campos do BD
         $this->load->view("mapa_bordo/new", array(
             "mbGeral" => $mbGeral,
             "embarcacoes" => $embarcacoes,
@@ -152,10 +153,18 @@ class Mapa_bordo_ct extends MY_Controller {
                         $mbLance->setHoraFinal(Utils::timeToDateTime($value['hora_fin']));
                     }
                     
+                    if (!empty($value['ponteira_peso'])) {
+                        $mbLance->setPonteiraPeso($value['ponteira_peso']);
+                    }
+
+                    if (!empty($value['ponteira_distancia'])) {
+                        $mbLance->setPonteiraDistancia($value['ponteira_distancia']);
+                    }
+
                     if (!empty($value['mm_uso'])) {
                         $mbLance->setMmUso($value['mm_uso']);
                     }
-                    
+
                     $mbLance->setAveCapt(Utils::valorBooleano($value['ave_capt']));
                     $mbLance->getIdMm()->clear();
                     $mbLance->getIdIsca()->clear();
@@ -226,7 +235,7 @@ class Mapa_bordo_ct extends MY_Controller {
 
 //--------------------------------------------------------------------------------------------------------------------//
 
-
+    // Validação do form CI
     public function validation($returnError = false) {
         $this->form_validation->set_rules("embarcacao", "Embarcação", "trim|required|in_array[" . Utils::findIds('idEmbarcacao', 'CadEmbarcacao') . "]");
         $this->form_validation->set_rules("mestre", "Mestre", "trim|required|in_array[" . Utils::findIds('idMestre', 'CadMestre') . "]");
@@ -256,13 +265,13 @@ class Mapa_bordo_ct extends MY_Controller {
                     $this->form_validation->set_rules('lancamento[' . $key . '][lng]', "Longitude", "trim|valida_longitude");
                 }
                 
-                
-                
                 $this->form_validation->set_rules('lancamento[' . $key . '][isca]', "Isca", "trim|in_array[" . Utils::findIds('idIsca', 'CadIsca') . "]");
                 $this->form_validation->set_rules('lancamento[' . $key . '][hora_ini]', "Hora inicío do lance", "trim|time_validation");
                 $this->form_validation->set_rules('lancamento[' . $key . '][hora_fin]', "Hora final do lance", "trim|time_validation");
                 $this->form_validation->set_rules('lancamento[' . $key . '][mm]', "Medida metigatória", "trim|in_array[" . Utils::findIds('idMedidaMetigatoria', 'CadMedidaMetigatoria') . "]");
                 $this->form_validation->set_rules('lancamento[' . $key . '][mm_uso]', "Uso da MM", "trim|in_array[" . Utils::MM_USO_PARCIAL . "," . Utils::MM_USO_TOTAL . "]");
+                $this->form_validation->set_rules('lancamento[' . $key . '][ponteira_peso]', "Ponteira peso", "trim");
+                $this->form_validation->set_rules('lancamento[' . $key . '][ponteira_distancia]', "Ponteira distância", "trim");
                 $this->form_validation->set_rules('lancamento[' . $key . '][ave_capt]', "Ave capturada", "trim|boolean_validation");
 
                 if (isset($value['capt_especie'])) {
@@ -286,7 +295,10 @@ class Mapa_bordo_ct extends MY_Controller {
         $return["erro"] = $this->form_validation->error_array();
         $this->output->_mode = MY_Output::OUTPUT_MODE_NORMAL;
         $this->load->view("jsonresponse", $return);
+
     }
+
+
 
 //--------------------------------------------------------------------------------------------------------------------//
 
@@ -304,22 +316,7 @@ class Mapa_bordo_ct extends MY_Controller {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
-
-//    // Função para checar se a espécie já existe no BD
-//    public function checkNome($check){
-//
-//        $checkNome = $this->doctrine->em->getRepository("Cad_ave")->findOneBy(array("nome_cient" => $check));
-//        if ($checkNome == null){
-//            return TRUE;
-//        } else {
-//            $this->form_validation->set_message('checkNome',
-//                '<strong style="color:#FE0000">Essa espécie já foi cadastrada.</strong>');
-//            return FALSE;
-//        }
-//    }
-//--------------------------------------------------------------------------------------------------------------------//
-
-    
+    // Funções da tela de filtro
     protected function telaFiltro() {
         $filtro = $this->session->userdata('filtros_' . get_class($this));
         
@@ -438,4 +435,5 @@ class Mapa_bordo_ct extends MY_Controller {
             
         return $query;
     }
+
 }

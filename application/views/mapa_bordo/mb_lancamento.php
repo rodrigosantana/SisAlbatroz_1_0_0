@@ -8,7 +8,6 @@
         <span class="pull-right clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
     </div>
 
-
     <div class="panel-body">
         <div class="row">
             <div class="col-md-4">
@@ -20,6 +19,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="lancamento_<?php echo $numero; ?>_data"
@@ -30,6 +30,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="lancamento_<?php echo $numero; ?>_anzois" class="col-md-4 control-label lb_anzois">Anzois</label>
@@ -40,6 +41,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -59,6 +61,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="col-md-4 control-label lb_isca">Isca</label>
@@ -74,6 +77,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
@@ -83,7 +87,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div class="col-md-4">
                 <div class="form-group">
@@ -95,8 +98,8 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label class="col-md-4 control-label lb_mm_tipo">Medida Mitigatória </label>
-                    <div class="col-md-8 div-help">
+                    <label class="col-md-3 control-label lb_mm_tipo">Medida Mitigatória </label>
+                    <div class="col-md-9 div-help">
 
                         <?php foreach ($medidasMetigatorias as $mm): ?>
 
@@ -110,8 +113,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label class="col-md-4 control-label lb_mm_uso">Uso da MM</label>
                     <div class="col-md-8 div-help">
@@ -125,10 +129,29 @@
                 </div>
             </div>
 
-
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="ave_capt" class="col-md-4 control-label lb_ave_capt">Ave Capturada *</label>
+                    <label for="lancamento_<?php echo $numero; ?>_ponteira_peso" class="col-md-4 control-label lb_anzois">Ponteira peso (g)</label>
+                    <div class="col-md-8 div-help">
+                        <input type="number" class="form-control" id="lancamento_<?php echo $numero; ?>_ponteira_peso" name="lancamento[<?php echo $numero; ?>][ponteira_peso]"
+                               value="<?php echo $mbLance->getPonteiraPeso() ?>">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="lancamento_<?php echo $numero; ?>_ponteira_distancia" class="col-md-4 control-label lb_anzois">Ponteira dist. (m)</label>
+                    <div class="col-md-8 div-help">
+                        <input type="number" class="form-control" id="lancamento_<?php echo $numero; ?>_ponteira_distancia" name="lancamento[<?php echo $numero; ?>][ponteira_distancia]"
+                               value="<?php echo $mbLance->getPonteiraDistancia() ?>">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="ave_capt" class="col-md-4 control-label lb_ave_capt">Ave Capturada*</label>
                     <div class="col-md-8 div-help">
                         <label class="radio-inline" for="lancamento_<?php echo $numero; ?>_ave_capt_1">
                             <input type="radio" class="ave_capt" name="lancamento[<?php echo $numero; ?>][ave_capt]" id="lancamento_<?php echo $numero; ?>_ave_capt_1" value="true" <?php echo $mbLance->getAveCapt() === true ? 'checked' : '' ?>>Sim
@@ -140,6 +163,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+
+        </div>
+
 
         <h3 class="text-center titulo">Dados de Captura de Aves</h3>
         <hr class="hr-sisalbatroz">
