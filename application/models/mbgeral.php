@@ -333,4 +333,12 @@ class MbGeral {
         return $this->dataAlteracao;
     }
 
+    public function getLancesOrdenado() {
+        $iterator = $this->lances->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return ($a->getLance() < $b->getLance()) ? -1 : 1;
+        });
+        $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
+        return $collection;
+    }
 }

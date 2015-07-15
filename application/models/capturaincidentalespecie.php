@@ -20,13 +20,6 @@ class CapturaIncidentalEspecie
     /**
      * @var integer
      *
-     * @Column(name="quantidade", type="integer", nullable=true)
-     */
-    private $quantidade;
-
-    /**
-     * @var integer
-     *
      * @Column(name="etiqueta", type="integer", nullable=true)
      */
     private $etiqueta;
@@ -60,29 +53,6 @@ class CapturaIncidentalEspecie
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set quantidade
-     *
-     * @param integer $quantidade
-     * @return CapturaIncidentalEspecie
-     */
-    public function setQuantidade($quantidade)
-    {
-        $this->quantidade = $quantidade;
-
-        return $this;
-    }
-
-    /**
-     * Get quantidade
-     *
-     * @return integer 
-     */
-    public function getQuantidade()
-    {
-        return $this->quantidade;
     }
 
     /**

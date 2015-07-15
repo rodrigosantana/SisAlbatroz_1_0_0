@@ -70,6 +70,20 @@ class Utils {
         return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
     }
     
+    const JUVENIL = 'juvenil';
+    const ADULTO = 'adulto';
+    const INDEFINIDO = 'indefinido';
+    
+    public static function getTipoIndividuo($value = null) {
+        $array = array(
+            self::JUVENIL,
+            self::ADULTO,
+            self::INDEFINIDO
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
     const PROCEDENCIA_CAPTURA_INCIDENTAL = 'captura_incidental';
     const PROCEDENCIA_ENCALHE = 'encalhe';
     const PROCEDENCIA_REABILITACAO = 'reabilitacao';
@@ -293,6 +307,20 @@ class Utils {
         }
         
         return $array;
+    }
+    
+    const ORCA = 'orca';
+    const TUBARAO = 'tubarao';
+    const AVES = 'aves';
+    
+    public static function getPredacao($value = null) {
+        $array = array(
+            self::ORCA,
+            self::TUBARAO,
+            self::AVES
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
     }
     
     public static function findIds($field, $model) {

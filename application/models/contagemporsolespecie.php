@@ -30,6 +30,13 @@ class ContagemPorSolEspecie
     private $quantidade;
 
     /**
+     *@var string $tipoIndividuo
+     *
+     *@Column(name="tipo_individuo", type="string", length=30)
+     */
+    private $tipoIndividuo;
+    
+    /**
      * @var \Ave
      *
      * @ManyToOne(targetEntity="Ave")
@@ -129,4 +136,15 @@ class ContagemPorSolEspecie
     {
         return $this->contagemPsi;
     }
+    
+    public function getTipoIndividuo() {
+        return $this->tipoIndividuo;
+    }
+
+    public function setTipoIndividuo($tipoIndividuo) {
+        $this->tipoIndividuo = $tipoIndividuo;
+        return $this;
+    }
+
+
 }

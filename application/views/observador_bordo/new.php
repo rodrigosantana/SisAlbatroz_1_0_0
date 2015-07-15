@@ -26,9 +26,9 @@
                 <li class="active"><a href="#cruzeiro" data-toggle="tab">Cruzeiro</a></li>                
                 <li><a href="#dados_abioticos" data-toggle="tab">Dados Abióticos</a></li>
                 <li><a href="#contagem_por_sol" data-toggle="tab">Contagem do Por-do-sol</a></li>
-                <li><a href="#captura_incidental" data-toggle="tab">Captura Incidental</a></li>
                 <li><a href="#contagem_ave_boia" data-toggle="tab">Aves Bóia-rádio</a></li>
                 <li><a href="#producao_pesqueira" data-toggle="tab">Produção Pesqueira</a></li>
+                <li><a href="#captura_incidental" data-toggle="tab">Captura Incidental</a></li>
             </ul>
             <?php // $cruzeiro = new Cruzeiro()?>
             <div class="tab-content" style="margin-top: 20px;">
@@ -171,7 +171,7 @@
                 <div id="dados_abioticos" class="tab-pane">
                     <div id="dado_abiotico_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/dado_abiotico", array('dadoAbiotico' => new DadosAbioticos(new DadosAbioticosLancamento(), new DadosAbioticosRecolhimento())), true)); ?>">
                         <?php
-                        $lista = $cruzeiro->getDadosAbioticos();
+                        $lista = $cruzeiro->getDadosAbioticosOrdenado();
 
                         foreach ($lista as $key => $value) {
                             echo $this->load->view("observador_bordo/dado_abiotico", array('dadoAbiotico' => $value, 'index' => $key), true);
@@ -185,7 +185,7 @@
                 <div id="contagem_por_sol" class="tab-pane">
                     <div id="contagem_por_sol_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => new ContagemPorSol(), 'aves'=>$aves, 'lances'=>$lances), true)); ?>">
                         <?php
-                        $lista = $cruzeiro->getContagemPorSol();
+                        $lista = $cruzeiro->getContagemPorSolOrdenado();
 
                         foreach ($lista as $key => $value) {
                             echo $this->load->view("observador_bordo/contagem_por_sol", array('contagemPorSol' => $value, 'indexContagemPorSol' => $key, 'aves'=>$aves, 'lances'=>$lances), true);
@@ -196,24 +196,12 @@
                     <a href="javascrit:;" class="btn btn-success" id="add_contagem_por_sol" style="margin-top: 10px"><i class="glyphicon glyphicon-plus"></i> Adicionar contagem</a>
                 </div>
                 
-                <div id="captura_incidental" class="tab-pane">
-                    <div id="captura_incidental_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => new CapturaIncidental(), 'aves'=>$aves, 'lances'=>$lances, 'boias'=>$boias), true)); ?>">
-                        <?php
-                        $lista = $cruzeiro->getCapturaIncidental();
-
-                        foreach ($lista as $key => $value) {
-                            echo $this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => $value, 'indexCapturaIncidental' => $key, 'aves'=>$aves, 'lances'=>$lances, 'boias'=>$boias), true);
-                        }
-                        ?>
-                    </div>
-
-                    <a href="javascrit:;" class="btn btn-success" id="add_captura_incidental" style="margin-top: 10px"><i class="glyphicon glyphicon-plus"></i> Adicionar captura incidental</a>
-                </div>                
+                                
                 
                 <div id="contagem_ave_boia" class="tab-pane">
                     <div id="contagem_ave_boia_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => new ContagemAveBoia(), 'aves'=>$aves, 'lances'=>$lances), true)); ?>">
                         <?php
-                        $lista = $cruzeiro->getContagemAveBoia();
+                        $lista = $cruzeiro->getContagemAveBoiaOrdenado();
 
                         foreach ($lista as $key => $value) {
                             echo $this->load->view("observador_bordo/contagem_ave_boia", array('contagemAveBoia' => $value, 'indexContagemAveBoia' => $key, 'aves'=>$aves, 'lances'=>$lances), true);
@@ -227,7 +215,7 @@
                 <div id="producao_pesqueira" class="tab-pane">
                     <div id="producao_pesqueira_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/producao_pesqueira", array('producaoPesqueira' => new ProducaoPesqueira(), 'especies' => $especies, 'lances'=>$lances, 'boias'=>$boias), true)); ?>">
                         <?php
-                        $lista = $cruzeiro->getProducoesPesqueiras();
+                        $lista = $cruzeiro->getProducoesPesqueirasOrdenado();
 
                         foreach ($lista as $key => $value) {
                             echo $this->load->view("observador_bordo/producao_pesqueira", array('producaoPesqueira' => $value, 'indexProducaoPesqueira' => $key, 'especies' => $especies, 'lances'=>$lances, 'boias'=>$boias), true);
@@ -236,6 +224,20 @@
                     </div>
 
                     <a href="javascrit:;" class="btn btn-success" id="add_producao_pesqueira" style="margin-top: 10px"><i class="glyphicon glyphicon-plus"></i> Adicionar produção</a>
+                </div>
+                
+                <div id="captura_incidental" class="tab-pane">
+                    <div id="captura_incidental_container" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => new CapturaIncidental(), 'aves'=>$aves, 'lances'=>$lances, 'boias'=>$boias), true)); ?>">
+                        <?php
+                        $lista = $cruzeiro->getCapturaIncidentalOrdenado();
+
+                        foreach ($lista as $key => $value) {
+                            echo $this->load->view("observador_bordo/captura_incidental", array('capturaIncidental' => $value, 'indexCapturaIncidental' => $key, 'aves'=>$aves, 'lances'=>$lances, 'boias'=>$boias), true);
+                        }
+                        ?>
+                    </div>
+
+                    <a href="javascrit:;" class="btn btn-success" id="add_captura_incidental" style="margin-top: 10px"><i class="glyphicon glyphicon-plus"></i> Adicionar captura incidental</a>
                 </div>
             </div>
         </div>
@@ -251,6 +253,7 @@
 <script>
     var listaLances = <?php echo $listaLances?>;
     var listaBoias = <?php echo $listaBoias?>;
+    var especiesEspecificas = <?php echo '[' . implode(',', $especiesEspecificas) . ']'?>;
     
     $(document).ready(function() {
         var dadoAbiotico= new Prototype.Class({
@@ -375,6 +378,8 @@
                 $(component).find('option').sort(NASort).appendTo($(component));
                 $(component).select2('val', value);
             }
+            
+            $(component).trigger('change');
         }
         
         var indice = -1;

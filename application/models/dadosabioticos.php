@@ -57,16 +57,22 @@ class DadosAbioticos
      */
     private $iscaTingida;
 
+    
     /**
-     * @var \CadIsca
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ManyToOne(targetEntity="CadIsca")
-     * @JoinColumns({
-     *   @JoinColumn(name="tipo_isca", referencedColumnName="id_isca")
-     * })
+     * @ManyToMany(targetEntity="CadIsca", orphanRemoval=false)
+     * @JoinTable(name="dados_abioticos_isca",
+     *   joinColumns={
+     *     @JoinColumn(name="id_dados_abioticos", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @JoinColumn(name="id_isca", referencedColumnName="id_isca")
+     *   }
+     * )
      */
-    private $tipoIsca;
-
+    private $iscas;
+    
     /**
      * @var \Cruzeiro
      *
@@ -101,6 +107,8 @@ class DadosAbioticos
     private $dadosAbioticosRecolhimento;
     
     public function __construct($lancamento = null, $recolhimento = null) {
+        $this->iscas = new \Doctrine\Common\Collections\ArrayCollection();
+        
         if (!is_null($lancamento)) {
             $this->dadosAbioticosLancamento = $lancamento;
         }
@@ -236,29 +244,6 @@ class DadosAbioticos
     }
 
     /**
-     * Set tipoIsca
-     *
-     * @param \CadIsca $tipoIsca
-     * @return DadosAbioticos
-     */
-    public function setTipoIsca(\CadIsca $tipoIsca = null)
-    {
-        $this->tipoIsca = $tipoIsca;
-
-        return $this;
-    }
-
-    /**
-     * Get tipoIsca
-     *
-     * @return \CadIsca 
-     */
-    public function getTipoIsca()
-    {
-        return $this->tipoIsca;
-    }
-
-    /**
      * Set cruzeiro
      *
      * @param \Cruzeiro $cruzeiro
@@ -301,6 +286,36 @@ class DadosAbioticos
         return $this;
     }
 
+    /**
+     * Add isca
+     *
+     * @param \CadIsca $isca
+     * @return DadosAbioticos
+     */
+    public function addIscas(\CadIsca $isca) {
+        $this->iscas[] = $isca;
+
+        return $this;
+    }
+
+    /**
+     * Remove isca
+     *
+     * @param \CadIsca $isca
+     */
+    public function removeIscas(\CadIsca $isca) {
+        $this->iscas->removeElement($isca);
+    }
+
+    /**
+     * Get iscas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIscas() {
+        return $this->iscas;
+    }
+    
     public function getDadosAbioticosRecolhimento()
     {
         return $this->dadosAbioticosRecolhimento;
@@ -313,4 +328,5 @@ class DadosAbioticos
     public function __toJson() {
         return array('id'=>$this->id, 'name'=>$this->lance);
     }
+    
 }

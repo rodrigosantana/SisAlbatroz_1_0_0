@@ -129,7 +129,21 @@
                 <div class="form-group">
                     <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento" class="col-md-4 control-label lb_lance">Velocidade do vento (nós)</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][inicio][velocidade_vento]" value="<?php echo $objeto->getVelocidadeVentoInicio() ?>">
+                        <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][inicio][velocidade_vento]">
+                            <option></option>
+                            <option value="1" <?php echo $objeto->getVelocidadeVentoInicio() === 1 ? 'selected' : ''?>>1</option>
+                            <option value="2" <?php echo $objeto->getVelocidadeVentoInicio() === 2 ? 'selected' : ''?>>2</option>
+                            <option value="3" <?php echo $objeto->getVelocidadeVentoInicio() === 3 ? 'selected' : ''?>>3</option>
+                            <option value="4" <?php echo $objeto->getVelocidadeVentoInicio() === 4 ? 'selected' : ''?>>4</option>
+                            <option value="5" <?php echo $objeto->getVelocidadeVentoInicio() === 5 ? 'selected' : ''?>>5</option>
+                            <option value="6" <?php echo $objeto->getVelocidadeVentoInicio() === 6 ? 'selected' : ''?>>6</option>
+                            <option value="7" <?php echo $objeto->getVelocidadeVentoInicio() === 7 ? 'selected' : ''?>>7</option>
+                            <option value="8" <?php echo $objeto->getVelocidadeVentoInicio() === 8 ? 'selected' : ''?>>8</option>
+                            <option value="9" <?php echo $objeto->getVelocidadeVentoInicio() === 9 ? 'selected' : ''?>>9</option>
+                            <option value="10" <?php echo $objeto->getVelocidadeVentoInicio() === 10 ? 'selected' : ''?>>10</option>
+                            <option value="11" <?php echo $objeto->getVelocidadeVentoInicio() === 11 ? 'selected' : ''?>>11</option>
+                            <option value="12" <?php echo $objeto->getVelocidadeVentoInicio() === 12 ? 'selected' : ''?>>12</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -343,7 +357,21 @@
                 <div class="form-group">
                     <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_velocidade_vento" class="col-md-4 control-label lb_lance">Velocidade do vento (nós)</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_velocidade_vento" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][velocidade_vento]" value="<?php echo $objeto->getVelocidadeVentoFim() ?>">
+                        <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_velocidade_vento" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][velocidade_vento]">
+                            <option></option>
+                            <option value="1" <?php echo $objeto->getVelocidadeVentoFim() === 1 ? 'selected' : ''?>>1</option>
+                            <option value="2" <?php echo $objeto->getVelocidadeVentoFim() === 2 ? 'selected' : ''?>>2</option>
+                            <option value="3" <?php echo $objeto->getVelocidadeVentoFim() === 3 ? 'selected' : ''?>>3</option>
+                            <option value="4" <?php echo $objeto->getVelocidadeVentoFim() === 4 ? 'selected' : ''?>>4</option>
+                            <option value="5" <?php echo $objeto->getVelocidadeVentoFim() === 5 ? 'selected' : ''?>>5</option>
+                            <option value="6" <?php echo $objeto->getVelocidadeVentoFim() === 6 ? 'selected' : ''?>>6</option>
+                            <option value="7" <?php echo $objeto->getVelocidadeVentoFim() === 7 ? 'selected' : ''?>>7</option>
+                            <option value="8" <?php echo $objeto->getVelocidadeVentoFim() === 8 ? 'selected' : ''?>>8</option>
+                            <option value="9" <?php echo $objeto->getVelocidadeVentoFim() === 9 ? 'selected' : ''?>>9</option>
+                            <option value="10" <?php echo $objeto->getVelocidadeVentoFim() === 10 ? 'selected' : ''?>>10</option>
+                            <option value="11" <?php echo $objeto->getVelocidadeVentoFim() === 11 ? 'selected' : ''?>>11</option>
+                            <option value="12" <?php echo $objeto->getVelocidadeVentoFim() === 12 ? 'selected' : ''?>>12</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -493,6 +521,23 @@
         });
 
         $("#dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_rumo").select2({
+            placeholder: "Selecione",
+            allowClear: true,
+            formatNoMatches: function() {
+                return "Nenhum item encontrado";
+            }
+        });
+        
+        $("#dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento").select2({
+            placeholder: "Selecione",
+            allowClear: true,
+            formatNoMatches: function() {
+                return "Nenhum item encontrado";
+            }
+        });
+        
+        
+        $("#dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_velocidade_vento").select2({
             placeholder: "Selecione",
             allowClear: true,
             formatNoMatches: function() {

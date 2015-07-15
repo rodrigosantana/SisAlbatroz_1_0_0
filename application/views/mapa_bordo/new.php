@@ -100,7 +100,7 @@
             <hr class="hr-sisalbatroz">
             <div id="lance_container" data-prototype="<?php echo htmlspecialchars($this->load->view("mapa_bordo/mb_lancamento", array("mbLance" => new MbLance(), 'iscas' => $iscas, 'medidasMetigatorias' => $medidasMetigatorias, 'aves' => $aves), true)); ?>">
                 <?php
-                $lista = $mbGeral->getLances();
+                $lista = $mbGeral->getLancesOrdenado();
 
                 foreach ($lista as $key => $value) {
                     echo $this->load->view("mapa_bordo/mb_lancamento", array("mbLance" => $value, "index" => $key, 'iscas' => $iscas, 'medidasMetigatorias' => $medidasMetigatorias, 'aves' => $aves), true);

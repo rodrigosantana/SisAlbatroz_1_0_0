@@ -2,6 +2,7 @@
 
 <div class="panel panel-interno-sisalbatroz captura-incidental">
     <div class="panel-heading">
+        <span id="captura_incidental_span_lance_<?php echo $numero; ?>"><?php echo is_null($capturaIncidental->getLance()) ? '' : 'Lance #'. $capturaIncidental->getLance()->getLance() ?></span>
         <a href="javascript:;" class="pull-right panel-close-button-sisalbatroz" id="remove-captura-incidental-<?php echo $numero ?>"><i class="glyphicon glyphicon-remove"></i></a>
         <?php if (is_null($capturaIncidental->getId())) :?>        
             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>            
@@ -11,7 +12,7 @@
         
     </div>
 
-    <div class="panel-body" style="<?php echo is_null($capturaIncidental->getId()) ? '' : 'display:none'?>">
+    <div class="panel-body insertaction" style="<?php echo is_null($capturaIncidental->getId()) ? '' : 'display:none'?>">
 
         <div class="row">
             <div class="col-md-4">
@@ -131,5 +132,16 @@
             adicionarLances($("#captura_incidental_<?php echo $numero ?>_lance"));
             adicionarBoias($("#captura_incidental_<?php echo $numero ?>_boia_radio"));
         <?php endif;?>
+            
+        $('#captura_incidental_<?php echo $numero ?>_lance').change(function () {
+            var data = $('#captura_incidental_<?php echo $numero ?>_lance').select2('data');
+            var text = '';
+            
+            if (data) {
+                text = 'Lance #' + data.text;
+            }
+            
+            $('#captura_incidental_span_lance_<?php echo $numero; ?>').html(text);
+        });
     });
 </script>
