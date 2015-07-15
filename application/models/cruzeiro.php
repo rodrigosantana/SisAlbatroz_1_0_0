@@ -447,4 +447,50 @@ class Cruzeiro
     public function __toString() {
         return $this->embarcacao->getNome() . " (" . $this->observador->getNome() . ")";
     }
+    
+    public function getDadosAbioticosOrdenado() {
+        $iterator = $this->dadosAbioticos->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return ($a->getLance() < $b->getLance()) ? -1 : 1;
+        });
+        $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
+        return $collection;
+    }
+    
+    public function getContagemPorSolOrdenado() {
+        $iterator = $this->contagemPorSol->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return (!is_null($a->getLance()) && !is_null($b->getLance()) && ($a->getLance()->getLance() < $b->getLance()->getLance())) ? -1 : 1;
+        });
+        $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
+        return $collection;
+    }
+    
+    
+    public function getContagemAveBoiaOrdenado() {
+        $iterator = $this->contagemAveBoia->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return (!is_null($a->getLance()) && !is_null($b->getLance()) && ($a->getLance()->getLance() < $b->getLance()->getLance())) ? -1 : 1;
+        });
+        $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
+        return $collection;
+    }
+    
+    public function getCapturaIncidentalOrdenado() {
+        $iterator = $this->capturaIncidental->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return (!is_null($a->getLance()) && !is_null($b->getLance()) && ($a->getLance()->getLance() < $b->getLance()->getLance())) ? -1 : 1;
+        });
+        $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
+        return $collection;
+    }
+    
+    public function getProducoesPesqueirasOrdenado() {
+        $iterator = $this->producoesPesqueiras->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return (!is_null($a->getLance()) && !is_null($b->getLance()) && ($a->getLance()->getLance() < $b->getLance()->getLance())) ? -1 : 1;
+        });
+        $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
+        return $collection;
+    }
 }

@@ -2,6 +2,8 @@
 
 <div class="panel panel-interno-sisalbatroz contagem-por-sol">
     <div class="panel-heading">
+        <span id="contagem_por_sol_span_lance_<?php echo $numero; ?>"><?php echo is_null($contagemPorSol->getLance()) ? '' : 'Lance #'. $contagemPorSol->getLance()->getLance() ?></span>
+        
         <a href="javascript:;" class="pull-right panel-close-button-sisalbatroz" id="remove-contagem-por-sol-<?php echo $numero ?>"><i class="glyphicon glyphicon-remove"></i></a>
         <?php if (is_null($contagemPorSol->getId())) :?>        
             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>            
@@ -11,7 +13,7 @@
         
     </div>
 
-    <div class="panel-body" style="<?php echo is_null($contagemPorSol->getId()) ? '' : 'display:none'?>">
+    <div class="panel-body insertaction" style="<?php echo is_null($contagemPorSol->getId()) ? '' : 'display:none'?>">
         <div class="row">
             <div class="col-md-6">
                 <div class="row ">
@@ -125,7 +127,7 @@
         <h3 class="text-center titulo">Contagens</h3>
         <hr class="hr-sisalbatroz">
 
-        <div id="contagem_por_sol_indice_container_<?php echo $numero ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol_indice", array('contagemPorSolIndice' => new ContagemPorSolIndice(), "numero" => $numero, 'especies' => $especies), true)); ?>">
+        <div id="contagem_por_sol_indice_container_<?php echo $numero ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol_indice", array('indexContagemPorSolIndice'=>'$$numero2$$', 'contagemPorSolIndice' => new ContagemPorSolIndice(), "numero" => $numero, 'especies' => $especies), true)); ?>">
             <?php
             $lista = $contagemPorSol->getContagemPorSolIndice();
             
@@ -164,5 +166,16 @@
         <?php if (is_null($contagemPorSol->getId())) :?>
             adicionarLances($("#contagem_por_sol_<?php echo $numero; ?>_lance"));
         <?php endif;?>
+            
+        $('#contagem_por_sol_<?php echo $numero; ?>_lance').change(function () {
+            var data = $('#contagem_por_sol_<?php echo $numero; ?>_lance').select2('data');
+            var text = '';
+            
+            if (data) {
+                text = 'Lance #' + data.text;
+            }
+            
+            $('#contagem_por_sol_span_lance_<?php echo $numero; ?>').html(text);
+        });
     });
 </script>

@@ -4,12 +4,16 @@ class ObservadorBordo extends MY_Controller {
     
     private $lances;
     private $boias;    
+    private $especiesEspecificas;
     
     public function __construct() {        
         $this->modelClassName = 'Cruzeiro';
         $this->viewPath = 'observador_bordo';
         $this->lances = array();
         $this->boias = array();
+        
+        //Adicionar aqui o id das espécies que permitem a seleção de tipo de indivíduo, juvenil, adulto ou indefinido.
+        $this->especiesEspecificas = array(1,3);
         
         parent::__construct();
     }
@@ -83,11 +87,17 @@ class ObservadorBordo extends MY_Controller {
             $listaLances[] = array('id'=>$lance->getId(), 'value'=>$lance->getLance());
         }
         
-        $boias = $objeto->getContagemAveBoia()->toArray();
+        $list = $objeto->getContagemAveBoia()->toArray();
         $listaBoias = array();
+        $boias = array();
         
-        foreach ($boias as $boia) {
-            $listaBoias[] = array('id'=>$boia->getId(), 'value'=>$boia->getBoiaRadio());
+        foreach ($list as $boia) {
+            if (!is_null($boia->getBoiaRadio())) {
+                $listaBoias[] = array('id'=>$boia->getId(), 'value'=>$boia->getBoiaRadio());
+                $boias[] = $boia;
+            }
+            
+            
         }
 
         //echo '<pre>'; var_dump($aves);die;
@@ -106,7 +116,8 @@ class ObservadorBordo extends MY_Controller {
                 'lances'=>$lances,
                 'boias'=>$boias,
                 'listaLances'=>json_encode($listaLances),
-                'listaBoias'=>json_encode($listaBoias)
+                'listaBoias'=>json_encode($listaBoias),
+                'especiesEspecificas'=>$this->especiesEspecificas
             )
         );
     }
@@ -175,11 +186,16 @@ class ObservadorBordo extends MY_Controller {
                     $dadoAbiotico = new DadosAbioticos();
                     $dadoAbiotico->setLance((int)$value['lance']);
                     
-                    if (isset($value['tipo_isca']) && is_numeric($value['tipo_isca'])) {
-                        $tipoIsca = $this->doctrine->em->find('CadIsca', $value['tipo_isca']);
-                        $dadoAbiotico->setTipoIsca($tipoIsca);
-                    }
+                    
+                    if (isset($value['iscas'])) {
+                        $iscas = $value['iscas'];
 
+                        foreach ($iscas as $isca) {
+                            $object = $this->doctrine->em->find('CadIsca', $isca);
+                            $dadoAbiotico->addIscas($object);
+                        }
+                    }
+                    
                     if (isset($value['anzois']) && is_numeric($value['anzois'])) {
                         $dadoAbiotico->setAnzois((int)$value['anzois']);
                     }
@@ -347,17 +363,18 @@ class ObservadorBordo extends MY_Controller {
                         $contagensPsi = $value['contagem_psi'];
                         
                         foreach ($contagensPsi as $keyPsi => $contagemPsi) {
-                            if (isset($value['indice']) && is_numeric($value['indice'])) {
+                            
+                            if (isset($contagemPsi['indice']) && is_numeric($contagemPsi['indice'])) {
                                 $contagemPorSolIndice = new ContagemPorSolIndice();                            
                             
-                                $contagemPorSolIndice->setIndice((int)$value['indice']);
+                                $contagemPorSolIndice->setIndice((int)$contagemPsi['indice']);
                                 
-                                if (isset($value['contagem_hora']) && !empty($value['contagem_hora'])) {
-                                    $contagemPorSolIndice->setHora(Utils::timeToDateTime($value['contagem_hora']));
+                                if (isset($contagemPsi['contagem_hora']) && !empty($contagemPsi['contagem_hora'])) {
+                                    $contagemPorSolIndice->setHora(Utils::timeToDateTime($contagemPsi['contagem_hora']));
                                 }
 
-                                if (isset($value['total']) && is_numeric($value['total'])) {
-                                    $contagemPorSolIndice->setTotal((int)$value['total']);
+                                if (isset($contagemPsi['total']) && is_numeric($contagemPsi['total'])) {
+                                    $contagemPorSolIndice->setTotal((int)$contagemPsi['total']);
                                 }
                                 
                                 if (isset($contagemPsi['cps_especie'])) {
@@ -373,6 +390,10 @@ class ObservadorBordo extends MY_Controller {
 
                                             if (is_numeric($especie['quantidade'])) {
                                                 $contagemPorSolEspecie->setQuantidade((int)$especie['quantidade']);
+                                            }
+                                            
+                                            if (in_array($contagemPorSolEspecie->getEspecie()->getId(), $this->especiesEspecificas) && isset($especie['tipo_individuo'])) {
+                                                $contagemPorSolEspecie->setTipoIndividuo($especie['tipo_individuo']);
                                             }
 
                                             $contagemPorSolIndice->addContagemPorSolEspecie($contagemPorSolEspecie);
@@ -489,10 +510,6 @@ class ObservadorBordo extends MY_Controller {
                                 
                                 if (isset($especie['etiqueta']) && is_numeric($especie['etiqueta'])) {
                                     $capturaIncidentalEspecie->setEtiqueta((int)$especie['etiqueta']);
-                                }                                
-                             
-                                if (isset($especie['quantidade']) && is_numeric($especie['quantidade'])) {
-                                    $capturaIncidentalEspecie->setQuantidade((int)$especie['quantidade']);
                                 }
                                 
                                 $capturaIncidental->addCapturaIncidentalEspecie($capturaIncidentalEspecie);
@@ -521,7 +538,6 @@ class ObservadorBordo extends MY_Controller {
                     $producao = new ProducaoPesqueira();
                     
                     $producao->setLance($lances[$value['lance']]);
-                    $producao->setData(Utils::dataToDateTime($value['data']));
                     
                     if (isset($value['boia_radio']) && isset($boias[$value['boia_radio']])) {
                         $producao->setBoiaRadio($boias[$value['boia_radio']]);
@@ -625,7 +641,7 @@ class ObservadorBordo extends MY_Controller {
         foreach ($dadosAbioticos as $key => $dadoAbiotico) {
             $this->lances[] = $dadoAbiotico['id'];
             $this->form_validation->set_rules('dado_abiotico[' . $key . '][lance]', "Lance", "trim|required|integer");
-            $this->form_validation->set_rules('dado_abiotico[' . $key . '][tipo_isca]', "Tipo de isca", "trim|in_array[" . Utils::findIds('idIsca', 'CadIsca') . "]");
+            $this->form_validation->set_rules('dado_abiotico[' . $key . '][iscas]', "Tipo de isca", "trim|in_array[" . Utils::findIds('idIsca', 'CadIsca') . "]");
             $this->form_validation->set_rules('dado_abiotico[' . $key . '][anzois]', "Anzóis", "trim|integer");
             $this->form_validation->set_rules('dado_abiotico[' . $key . '][reg_peso]', "Reg. peso", "trim|boolean_validation");
             $this->form_validation->set_rules('dado_abiotico[' . $key . '][toriline]', "Toriline", "trim|boolean_validation");
@@ -663,7 +679,7 @@ class ObservadorBordo extends MY_Controller {
                 
                 $this->form_validation->set_rules($nameInicio.'[rumo]', "Rumo", "trim|in_array[" . implode(',', Utils::indRumo()) . "]");
                 $this->form_validation->set_rules($nameInicio.'[direcao_vento]', "Direção do vento", "trim|in_array[" . implode(',', Utils::indDirecaoVento()) . "]");
-                $this->form_validation->set_rules($nameInicio.'[velocidade_vento]', "Velocidade do vento (nós)", "trim|integer");
+                $this->form_validation->set_rules($nameInicio.'[velocidade_vento]', "Velocidade do vento (nós)", "trim|in_array[1,2,3,4,5,6,7,8,9,10,11,12]");
                 
                 $this->form_validation->set_rules($nameInicio.'[categoria_mar]', "Categoria do mar", "trim|in_array[1,2,3,4,5,6,7,8,9,10,11,12]");
                 
@@ -696,7 +712,7 @@ class ObservadorBordo extends MY_Controller {
                 
                 $this->form_validation->set_rules($nameFim.'[rumo]', "Rumo", "trim|in_array[" . implode(',', Utils::indRumo()) . "]");
                 $this->form_validation->set_rules($nameFim.'[direcao_vento]', "Direção do vento", "trim|in_array[" . implode(',', Utils::indDirecaoVento()) . "]");
-                $this->form_validation->set_rules($nameFim.'[velocidade_vento]', "Velocidade do vento (nós)", "trim|integer");
+                $this->form_validation->set_rules($nameFim.'[velocidade_vento]', "Velocidade do vento (nós)", "trim|in_array[1,2,3,4,5,6,7,8,9,10,11,12]");
                 
                 $this->form_validation->set_rules($nameFim.'[categoria_mar]', "Categoria do mar", "trim|in_array[1,2,3,4,5,6,7,8,9,10,11,12]");
                 
@@ -759,6 +775,7 @@ class ObservadorBordo extends MY_Controller {
                         foreach ($especies as $keyEp => $especie) {
                             $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_psi][' . $keyPsi . '][cps_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('id', 'Ave') . "]");
                             $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_psi][' . $keyPsi . '][cps_especie][' . $keyEp . '][quantidade]', "Quantidade", "trim|integer");
+                            $this->form_validation->set_rules('contagem_por_sol[' . $key . '][contagem_psi][' . $keyPsi . '][cps_especie][' . $keyEp . '][tipo_individuo]', "Tipo do indivíduo", "trim|in_array[" . implode(',', Utils::getTipoIndividuo()) . "]");
                         }
                     }
                 }
@@ -798,7 +815,6 @@ class ObservadorBordo extends MY_Controller {
                 foreach ($especies as $keyEp => $especie) {
                     $this->form_validation->set_rules('captura_incidental[' . $key . '][ci_especie][' . $keyEp . '][etiqueta]', "Etiqueta", "trim|integer");
                     $this->form_validation->set_rules('captura_incidental[' . $key . '][ci_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('id', 'Ave') . "]");
-                    $this->form_validation->set_rules('captura_incidental[' . $key . '][ci_especie][' . $keyEp . '][quantidade]', "Quantidade", "trim|integer");
                 }
             }
             
@@ -833,7 +849,7 @@ class ObservadorBordo extends MY_Controller {
             
             $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][temperatura_agua]', "Temperatura da água (°C)", "trim|decimal");
             $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][profundidade]', "Profundidade (metros)", "trim|integer");
-            $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][pressao_atmosferica]', "Pressão atmosférica", "trim|decimal");
+            $this->form_validation->set_rules('contagem_ave_boia[' . $key . '][pressao_atmosferica]', "Pressão atmosférica", "trim");
             
             
             if (isset($contagemAveBoia['lng']) && !empty($contagemAveBoia['lng']) && isset($contagemAveBoia['lat']) && empty($contagemAveBoia['lat'])) {
@@ -869,7 +885,6 @@ class ObservadorBordo extends MY_Controller {
         
         foreach ($producoes as $key => $producao) {
             $this->form_validation->set_rules('producao[' . $key . '][lance]', "Lance", "trim|required|callback_lace_validation[" . implode(',', $this->lances) . "]");
-            $this->form_validation->set_rules('producao[' . $key . '][data]', "Data", "trim|date_validation");
             $this->form_validation->set_rules('producao[' . $key . '][boia_radio]', "Boia rádio", "trim|callback_boia_validation[" . implode(',', $this->boias) . "]");
             
             if (isset($producao['pp_especie'])) {
@@ -878,7 +893,7 @@ class ObservadorBordo extends MY_Controller {
                 foreach ($especies as $keyEp => $especie) {
                     $this->form_validation->set_rules('producao[' . $key . '][pp_especie][' . $keyEp . '][especie]', "Espécie", "trim|required|in_array[" . Utils::findIds('id', 'Pescado') . "]");
                     $this->form_validation->set_rules('producao[' . $key . '][pp_especie][' . $keyEp . '][quantidade]', "Quantidade", "trim|integer");
-                    $this->form_validation->set_rules('producao[' . $key . '][pp_especie][' . $keyEp . '][predacao]', "Predação", "trim|max_length[255]");
+                    $this->form_validation->set_rules('producao[' . $key . '][pp_especie][' . $keyEp . '][predacao]', "Predação", "trim|in_array[" . implode(',', Utils::getPredacao()) . "]");
                 }
             } 
         }

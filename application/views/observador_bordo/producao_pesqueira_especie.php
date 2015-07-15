@@ -1,7 +1,7 @@
 <?php $numero2 = isset($indexProducaoPesqueiraEspecie) ? $indexProducaoPesqueiraEspecie : '$$numero2$$' ?>
 
 <div class="row producao-pesqueira-especie">
-    <div class="col-md-4 col-sm-4">
+    <div class="col-md-4 col-sm-4 insertaction">
         <div class="form-group">
             <label for="producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_especie" class="col-md-4 control-label">Espécie</label>
             <div class="col-md-8 div-help">
@@ -29,7 +29,12 @@
         <div class="form-group">
             <label for="producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_predacao" class="col-md-4 control-label">Predação</label>
             <div class="col-md-8 div-help">
-                <input type="text" class="form-control" id="producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_predacao" name="producao[<?php echo $numero?>][pp_especie][<?php echo $numero2?>][predacao]" maxlength="255" value="<?php echo $producaoPesqueiraEspecie->getPredacao()?>">
+                <select class="select2" style="width: 100%" id="producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_predacao" name="producao[<?php echo $numero?>][pp_especie][<?php echo $numero2?>][predacao]">
+                    <option></option>
+                    <option value="<?php echo Utils::ORCA?>" <?php echo $producaoPesqueiraEspecie->getPredacao() === Utils::ORCA ? 'selected' : ''?>>Orca</option>
+                    <option value="<?php echo Utils::TUBARAO?>" <?php echo $producaoPesqueiraEspecie->getPredacao() === Utils::TUBARAO ? 'selected' : ''?>>Tubarão</option>
+                    <option value="<?php echo Utils::AVES?>" <?php echo $producaoPesqueiraEspecie->getPredacao() === Utils::AVES ? 'selected' : ''?>>Aves</option>
+                </select>
             </div>
         </div>
     </div>
@@ -43,6 +48,14 @@
 <script>
     $(document).ready(function (){
         $("#producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_especie").select2({
+            placeholder: "Selecione",
+            allowClear: true,
+            formatNoMatches: function() {
+                return "Nenhum item encontrado";
+            }
+        });
+        
+        $("#producao_<?php echo $numero?>_pp_especie_<?php echo $numero2?>_predacao").select2({
             placeholder: "Selecione",
             allowClear: true,
             formatNoMatches: function() {

@@ -3,7 +3,7 @@
     <!-- Default panel contents -->
     <?php // $mbLance = new MbLance()?>
     <div class="panel-heading">
-        <span>Lançamento #<?php echo $numero ?></span>
+        <span id="span_lancamento_<?php echo $numero; ?>"><?php echo is_null($mbLance->getLance()) ? '' : 'Lançamento #'. $mbLance->getLance() ?></span>
         <a href="javascript:;" class="pull-right panel-close-button-sisalbatroz" id="remove-lance-<?php echo $numero ?>"><i class="glyphicon glyphicon-remove"></i></a>
         <span class="pull-right clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
     </div>
@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label for="lancamento_<?php echo $numero; ?>_lance" class="col-md-4 control-label lb_lance">Lance *</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control lance insertaction" id="lancamento_<?php echo $numero; ?>_lance" name="lancamento[<?php echo $numero; ?>][lance]"
+                        <input type="number" class="form-control lance" id="lancamento_<?php echo $numero; ?>_lance" name="lancamento[<?php echo $numero; ?>][lance]"
                                placeholder="Identificador do lance" value="<?php echo $mbLance->getLance() ?>">
                     </div>
                 </div>
@@ -64,7 +64,7 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label class="col-md-4 control-label lb_isca">Isca</label>
+                    <label class="col-md-4 control-label lb_isca">Iscas</label>
                     <div class="col-md-8 div-help">
                         <?php foreach ($iscas as $isca): ?>
                             <label class="checkbox-inline" for="lancamento_<?php echo $numero; ?>_isca_<?php echo $isca->getIdIsca() ?>">
@@ -199,5 +199,8 @@
             'isEdit': <?php echo $mbLance->getCapturas()->count() > 0 ? 'true' : 'false' ?>
         });
 
+        $('#lancamento_<?php echo $numero; ?>_lance').change(function () {
+            $('#span_lancamento_<?php echo $numero; ?>').html('Lançamento #' + $('#lancamento_<?php echo $numero; ?>_lance').val())
+        });
     });
 </script>

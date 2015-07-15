@@ -2,7 +2,7 @@
 
 <div class="panel panel-interno-sisalbatroz producao-pesqueira">
     <div class="panel-heading">
-<!--        <span>Lançamento #<?php echo $numero ?></span>-->
+        <span id="producao_span_lance_<?php echo $numero; ?>"><?php echo is_null($producaoPesqueira->getLance()) ? '' : 'Lance #'. $producaoPesqueira->getLance()->getLance() ?></span>
         <a href="javascript:;" class="pull-right panel-close-button-sisalbatroz" id="remove-producao-pesqueira-<?php echo $numero ?>"><i class="glyphicon glyphicon-remove"></i></a>
         <?php if (is_null($producaoPesqueira->getId())) :?>        
             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>            
@@ -12,13 +12,13 @@
         
     </div>
 
-    <div class="panel-body" style="<?php echo is_null($producaoPesqueira->getId()) ? '' : 'display:none'?>">
+    <div class="panel-body insertaction" style="<?php echo is_null($producaoPesqueira->getId()) ? '' : 'display:none'?>">
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="producao_<?php echo $numero ?>_lance" class="col-md-4 control-label">Lance *</label>
-                    <div class="col-md-8 div-help">
+                    <label for="producao_<?php echo $numero ?>_lance" class="col-md-3 control-label">Lance *</label>
+                    <div class="col-md-9 div-help">
                         <select class="select2 lance-observadorbordo" style="width: 100%" id="producao_<?php echo $numero ?>_lance" name="producao[<?php echo $numero ?>][lance]">
                             <option></option>
                             <?php foreach ($lances as $lance): ?>
@@ -30,20 +30,10 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">                
                 <div class="form-group">
-                    <label for="producao_<?php echo $numero ?>_data" class="col-md-4 control-label">Data</label>
-                    <div class="col-md-8 div-help">
-                        <input type="date" class="form-control" id="producao_<?php echo $numero ?>_data" name="producao[<?php echo $numero ?>][data]" value="<?php echo is_null($producaoPesqueira->getData()) ? '' : $producaoPesqueira->getData()->format("Y-m-d") ?>">
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="col-md-4">                
-                <div class="form-group">
-                    <label for="producao_<?php echo $numero ?>_boia_radio" class="col-md-4 control-label">Boia rádio</label>
-                    <div class="col-md-8 div-help">
+                    <label for="producao_<?php echo $numero ?>_boia_radio" class="col-md-3 control-label">Boia rádio</label>
+                    <div class="col-md-9 div-help">
                         <select class="select2 boia-observadorbordo" style="width: 100%" id="producao_<?php echo $numero ?>_boia_radio" name="producao[<?php echo $numero ?>][boia_radio]">
                             <option></option>
                             <?php foreach ($boias as $boia): ?>
@@ -109,5 +99,16 @@
             adicionarLances($("#producao_<?php echo $numero ?>_lance"));
             adicionarBoias($("#producao_<?php echo $numero ?>_boia_radio"));
         <?php endif;?>
+            
+        $('#producao_<?php echo $numero ?>_lance').change(function () {
+            var data = $('#producao_<?php echo $numero ?>_lance').select2('data');
+            var text = '';
+            
+            if (data) {
+                text = 'Lance #' + data.text;
+            }
+            
+            $('#producao_span_lance_<?php echo $numero; ?>').html(text);
+        });
     });
 </script>

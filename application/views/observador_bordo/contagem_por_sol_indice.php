@@ -10,7 +10,7 @@
         
     </div>
 
-    <div class="panel-body" style="<?php echo is_null($contagemPorSolIndice->getId()) ? '' : 'display:none'?>">
+    <div class="panel-body insertaction" style="<?php echo is_null($contagemPorSolIndice->getId()) ? '' : 'display:none'?>">
     
         <div class="row">
             <div class="col-md-4">
@@ -44,12 +44,12 @@
             
         </div>
         <hr class="hr-sisalbatroz">
-        <div id="contagem_por_sol_especie_container_<?php echo $numero ?>_<?php echo $numero2 ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol_especie", array('contagemPorSolEspecie' => new ContagemPorSolEspecie(), "numero" => $numero, "numero2" => $numero2, 'especies' => $especies), true)); ?>">
+        <div id="contagem_por_sol_especie_container_<?php echo $numero ?>_<?php echo $numero2 ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/contagem_por_sol_especie", array('indexContagemPorSolEspecie'=>'$$numero3$$', 'contagemPorSolEspecie' => new ContagemPorSolEspecie(), "numero" => $numero, "numero2" => $numero2, 'especies' => $especies), true)); ?>">
             <?php
-            $lista = $contagemPorSolIndice->getContagemPorSolEspecie();
+            $lista = $contagemPorSolIndice->getContagemPorSolEspecie()->toArray();
             
             foreach ($lista as $key => $value) {
-                echo $this->load->view("observador_bordo/contagem_por_sol_especie", array('contagemPorSolEspecie' => $value, 'indexContagemPorSolEspecie' => $key, "numero" => $numero, "numero" => $numero2, 'especies' => $especies), true);
+                echo $this->load->view("observador_bordo/contagem_por_sol_especie", array('contagemPorSolEspecie' => $value, 'indexContagemPorSolEspecie' => $key, "numero" => $numero, "numero2" => $numero2, 'especies' => $especies), true);
             }
             ?>
         </div>

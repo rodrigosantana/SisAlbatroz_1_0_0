@@ -1,10 +1,10 @@
 <?php $numero2 = isset($indexContagemAveBoiaEspecie) ? $indexContagemAveBoiaEspecie : '$$numero2$$' ?>
 
 <div class="row contagem-ave-boia-especie">
-    <div class="col-md-4 col-sm-4">
+    <div class="col-md-7 col-sm-8 insertaction">
         <div class="form-group">
-            <label for="contagem_ave_boia_<?php echo $numero?>_cab_especie_<?php echo $numero2?>_especie" class="col-md-4 control-label">Espécie</label>
-            <div class="col-md-8 div-help">
+            <label for="contagem_ave_boia_<?php echo $numero?>_cab_especie_<?php echo $numero2?>_especie" class="col-md-3 control-label">Espécie</label>
+            <div class="col-md-9 div-help">
                 <select class="select2" style="width: 100%" id="contagem_ave_boia_<?php echo $numero?>_cab_especie_<?php echo $numero2?>_especie" name="contagem_ave_boia[<?php echo $numero?>][cab_especie][<?php echo $numero2?>][especie]">
                     <option></option>
                     <?php foreach ($aves as $ave): ?>

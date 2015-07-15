@@ -51,7 +51,7 @@ class ContagemPorSolIndice
     /**
      * @var \Doctrine\Common\Collections\Collection
      * 
-     * @OneToMany(targetEntity="ContagemPorSolEspecie", mappedBy="contagemPs", cascade={"all"})
+     * @OneToMany(targetEntity="ContagemPorSolEspecie", mappedBy="contagemPsi", cascade={"all"})
      */
     private $contagemPorSolEspecie;
     

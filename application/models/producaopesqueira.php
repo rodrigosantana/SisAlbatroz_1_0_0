@@ -27,13 +27,6 @@ class ProducaoPesqueira
      */
     private $lance;
 
-    /**
-     * @var \DateTime
-     *
-     * @Column(name="data", type="date", nullable=true)
-     */
-    private $data;
-
     
     /**
      * @var \ContagemAveBoia
@@ -100,30 +93,7 @@ class ProducaoPesqueira
     {
         return $this->lance;
     }
-
-    /**
-     * Set data
-     *
-     * @param \DateTime $data
-     * @return ProducaoPesqueira
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-
-        return $this;
-    }
-
-    /**
-     * Get data
-     *
-     * @return \DateTime 
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
+    
     /**
      * Set boiaRadio
      *

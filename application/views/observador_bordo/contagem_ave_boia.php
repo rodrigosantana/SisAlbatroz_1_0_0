@@ -2,6 +2,7 @@
 
 <div class="panel panel-interno-sisalbatroz contagem-ave-boia">
     <div class="panel-heading">
+        <span id="contagem_ave_boia_span_lance_<?php echo $numero; ?>"><?php echo is_null($contagemAveBoia->getLance()) ? '' : 'Lance #'. $contagemAveBoia->getLance()->getLance() ?></span>
         <a href="javascript:;" class="pull-right panel-close-button-sisalbatroz" id="remove-contagem-ave-boia-<?php echo $numero ?>"><i class="glyphicon glyphicon-remove"></i></a>
         <?php if (is_null($contagemAveBoia->getId())) :?>        
             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>            
@@ -11,7 +12,7 @@
         
     </div>
 
-    <div class="panel-body" style="<?php echo is_null($contagemAveBoia->getId()) ? '' : 'display:none'?>">
+    <div class="panel-body insertaction" style="<?php echo is_null($contagemAveBoia->getId()) ? '' : 'display:none'?>">
         <input type="hidden" id="contagem_ave_boia_<?php echo $numero; ?>_id" name="contagem_ave_boia[<?php echo $numero; ?>][id]" value="<?php echo is_null($contagemAveBoia->getId()) ? 'boia_' . $numero : $contagemAveBoia->getId()?>">
         <div class="row">
             <div class="col-md-4">
@@ -166,6 +167,17 @@
 
         $('#remove-contagem-ave-boia-<?php echo $numero ?>').click(function () {
             alterarBoia(null, $('#contagem_ave_boia_<?php echo $numero; ?>_id').val());
+        });
+        
+        $('#contagem_ave_boia_<?php echo $numero ?>_lance').change(function () {
+            var data = $('#contagem_ave_boia_<?php echo $numero ?>_lance').select2('data');
+            var text = '';
+            
+            if (data) {
+                text = 'Lance #' + data.text;
+            }
+            
+            $('#contagem_ave_boia_span_lance_<?php echo $numero; ?>').html(text);
         });
     });
 </script>

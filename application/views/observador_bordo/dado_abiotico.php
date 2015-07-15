@@ -2,6 +2,7 @@
 
 <div class="panel panel-interno-sisalbatroz dado-abiotico">
     <div class="panel-heading">
+        <span id="span_lance_<?php echo $numero; ?>"><?php echo is_null($dadoAbiotico->getLance()) ? '' : 'Lance #'. $dadoAbiotico->getLance() ?></span>
         <a href="javascript:;" class="pull-right panel-close-button-sisalbatroz" id="remove-dado-abiotico-<?php echo $numero ?>"><i class="glyphicon glyphicon-remove"></i></a>
         <?php if (is_null($dadoAbiotico->getId())) :?>        
             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>            
@@ -11,7 +12,7 @@
         
     </div>
 
-    <div class="panel-body" style="<?php echo is_null($dadoAbiotico->getId()) ? '' : 'display:none'?>">
+    <div class="panel-body insertaction" style="<?php echo is_null($dadoAbiotico->getId()) ? '' : 'display:none'?>">
         <?php //$dadoAbiotico = new DadosAbioticos()?>
         <input type="hidden" id="dado_abiotico_<?php echo $numero; ?>_id" name="dado_abiotico[<?php echo $numero; ?>][id]" value="<?php echo is_null($dadoAbiotico->getId()) ? 'lance_' . $numero : $dadoAbiotico->getId()?>">
         <div class="row">
@@ -33,17 +34,19 @@
             
             
                 <div class="row ">
+                    
+                    
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="dado_abiotico_<?php echo $numero?>_tipo_isca" class="col-md-4 control-label">Tipo de isca</label>
+                            <label class="col-md-4 control-label lb_isca">Tipo de isca</label>
                             <div class="col-md-8 div-help">
-                                <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero?>_tipo_isca" name="dado_abiotico[<?php echo $numero?>][tipo_isca]">
-                                    <option></option>
-                                    <?php foreach ($iscas as $isca): ?>
-                                        <?php $selected = (!is_null($dadoAbiotico->getTipoIsca()) && $dadoAbiotico->getTipoIsca()->getIdIsca() == $isca->getIdIsca()) ? 'selected' : ''?>
-                                        <option value="<?php echo $isca->getIdIsca() ?>" <?php echo $selected?>><?php echo $isca->getNome() ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <?php foreach ($iscas as $isca): ?>
+                                    <label class="checkbox-inline" for="dado_abiotico_<?php echo $numero; ?>_iscas_<?php echo $isca->getIdIsca() ?>">
+                                        <input type="checkbox" class="isca_check" id="dado_abiotico_<?php echo $numero; ?>_iscas_<?php echo $isca->getIdIsca() ?>" name="dado_abiotico[<?php echo $numero; ?>][iscas][]"
+                                               value="<?php echo $isca->getIdIsca() ?>" <?php echo Utils::ischecked($dadoAbiotico->getIscas()->toArray(), $isca->getIdIsca(), 'getIdIsca') ?>><?php echo $isca->getNome() ?>
+                                    </label>
+                                <?php endforeach; ?>
+                                <imput type="hidden" name="lancamento[<?php echo $numero; ?>][isca]"></imput>
                             </div>
                         </div>
                     </div>
@@ -134,6 +137,8 @@ $(document).ready(function() {
     
     $("#dado_abiotico_<?php echo $numero; ?>_lance").change(function () {
         var idValue = '';
+        
+        $('#span_lance_<?php echo $numero; ?>').html('Lance #' + $('#dado_abiotico_<?php echo $numero; ?>_lance').val());
         
         if (!$('#dado_abiotico_<?php echo $numero; ?>_id').val() && $("#dado_abiotico_<?php echo $numero; ?>_lance").val()) {
             idValue = 'lance_' . $("#dado_abiotico_<?php echo $numero; ?>_lance").val();
