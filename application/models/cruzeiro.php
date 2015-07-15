@@ -493,4 +493,13 @@ class Cruzeiro
         $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
         return $collection;
     }
+    
+    public function getContagemAveBoiaBoiaOrdenado() {
+        $iterator = $this->contagemAveBoia->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return (!is_null($a->getBoiaRadio()) && !is_null($b->getBoiaRadio()) && ($a->getBoiaRadio() < $b->getBoiaRadio())) ? -1 : 1;
+        });
+        $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
+        return $collection;
+    }
 }

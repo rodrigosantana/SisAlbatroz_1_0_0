@@ -87,7 +87,7 @@ class ObservadorBordo extends MY_Controller {
             $listaLances[] = array('id'=>$lance->getId(), 'value'=>$lance->getLance());
         }
         
-        $list = $objeto->getContagemAveBoia()->toArray();
+        $list = $objeto->getContagemAveBoiaBoiaOrdenado()->toArray();
         $listaBoias = array();
         $boias = array();
         
