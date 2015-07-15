@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * CadMestre
  *
@@ -60,14 +57,14 @@ class CadMestre
     public function setNome($nome)
     {
         $this->nome = $nome;
-    
+
         return $this;
     }
 
     /**
      * Get nome
      *
-     * @return string 
+     * @return string
      */
     public function getNome()
     {
@@ -83,14 +80,14 @@ class CadMestre
     public function setApelido($apelido)
     {
         $this->apelido = $apelido;
-    
+
         return $this;
     }
 
     /**
      * Get apelido
      *
-     * @return string 
+     * @return string
      */
     public function getApelido()
     {
@@ -106,14 +103,14 @@ class CadMestre
     public function setTelefone($telefone)
     {
         $this->telefone = $telefone;
-    
+
         return $this;
     }
 
     /**
      * Get telefone
      *
-     * @return string 
+     * @return string
      */
     public function getTelefone()
     {
@@ -129,14 +126,14 @@ class CadMestre
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -146,7 +143,7 @@ class CadMestre
     /**
      * Get idMestre
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdMestre()
     {

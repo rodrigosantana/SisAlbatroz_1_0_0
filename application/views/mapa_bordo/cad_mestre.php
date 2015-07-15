@@ -36,7 +36,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="mestre" class="col-md-3 control-label">Nome:</label>
+						<label for="mestre" class="col-md-3 control-label">Nome</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do mestre"
 								   value="<?php echo set_value('nome');?>">
@@ -45,7 +45,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="apelido" class="col-md-3 control-label">Apelido: </label>
+						<label for="apelido" class="col-md-3 control-label">Apelido *</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control" id="apelido" name="apelido" placeholder="Caso não tenha, repetir no nome"
 								   value="<?php echo set_value('apelido');?>">
@@ -57,7 +57,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="telefone" class="col-md-3 control-label">Telefone:</label>
+						<label for="telefone" class="col-md-3 control-label">Telefone</label>
 						<div class="col-md-9">
 							<input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Ex: 4797444182"
 								   value="<?php echo set_value('telefone');?>">
@@ -66,7 +66,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="email" class="col-md-3 control-label">E-mail:</label>
+						<label for="email" class="col-md-3 control-label">E-mail</label>
 						<div class="col-md-9">
 							<input type="email" class="form-control" id="email" name="email"
 								   value="<?php echo set_value('email');?>">

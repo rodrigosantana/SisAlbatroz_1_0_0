@@ -57,31 +57,15 @@ class CadObservador
      */
     private $endereco;
 
-    /**
-     * @var string
-     *
-     * @Column(name="cidade", type="string", length=50, nullable=false)
-     */
-    private $cidade;
-
-    /**
-     * @var string
-     *
-     * @Column(name="uf", type="string", length=3, nullable=false)
-     */
-    private $uf;
-
-    /**
-     * @var integer
-     *
-     * @Column(name="id_observ", type="integer")
-     * @Id
-     * @GeneratedValue(strategy="SEQUENCE")
-     * @SequenceGenerator(sequenceName="cad_observador_seq", allocationSize=1, initialValue=1)
-     */
-    private $idObserv;
-
-
+   /**
+   * @var integer
+   *
+   * @Column(name="id_observ", type="integer")
+   * @Id
+   * @GeneratedValue(strategy="SEQUENCE")
+   * @SequenceGenerator(sequenceName="cad_observador_seq", allocationSize=1, initialValue=1)
+   */
+   private $idObserv;
 
     /**
      * Set nome
@@ -92,14 +76,14 @@ class CadObservador
     public function setNome($nome)
     {
         $this->nome = $nome;
-    
+
         return $this;
     }
 
     /**
      * Get nome
      *
-     * @return string 
+     * @return string
      */
     public function getNome()
     {
@@ -115,14 +99,14 @@ class CadObservador
     public function setCpf($cpf)
     {
         $this->cpf = $cpf;
-    
+
         return $this;
     }
 
     /**
      * Get cpf
      *
-     * @return string 
+     * @return string
      */
     public function getCpf()
     {
@@ -138,14 +122,14 @@ class CadObservador
     public function setRg($rg)
     {
         $this->rg = $rg;
-    
+
         return $this;
     }
 
     /**
      * Get rg
      *
-     * @return string 
+     * @return string
      */
     public function getRg()
     {
@@ -161,14 +145,14 @@ class CadObservador
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -184,14 +168,14 @@ class CadObservador
     public function setTelefone($telefone)
     {
         $this->telefone = $telefone;
-    
+
         return $this;
     }
 
     /**
      * Get telefone
      *
-     * @return string 
+     * @return string
      */
     public function getTelefone()
     {
@@ -207,14 +191,14 @@ class CadObservador
     public function setSkype($skype)
     {
         $this->skype = $skype;
-    
+
         return $this;
     }
 
     /**
      * Get skype
      *
-     * @return string 
+     * @return string
      */
     public function getSkype()
     {
@@ -230,14 +214,14 @@ class CadObservador
     public function setEndereco($endereco)
     {
         $this->endereco = $endereco;
-    
+
         return $this;
     }
 
     /**
      * Get endereco
      *
-     * @return string 
+     * @return string
      */
     public function getEndereco()
     {
@@ -253,14 +237,14 @@ class CadObservador
     public function setCidade($cidade)
     {
         $this->cidade = $cidade;
-    
+
         return $this;
     }
 
     /**
      * Get cidade
      *
-     * @return string 
+     * @return string
      */
     public function getCidade()
     {
@@ -276,14 +260,14 @@ class CadObservador
     public function setUf($uf)
     {
         $this->uf = $uf;
-    
+
         return $this;
     }
 
     /**
      * Get uf
      *
-     * @return string 
+     * @return string
      */
     public function getUf()
     {
@@ -293,7 +277,7 @@ class CadObservador
     /**
      * Get idObserv
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdObserv()
     {

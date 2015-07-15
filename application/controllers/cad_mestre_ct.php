@@ -1,93 +1,181 @@
 <?php
 
-class Cad_mestre_ct extends CI_Controller {
+class Cad_mestre_ct extends MY_Controller {
+
+
     public function __construct() {
+        $this->modelClassName = 'CadMestre';
+        $this->viewPath = 'mestre';
+
         parent::__construct();
-        
-        $this->output->set_template('sisalbatroz_template');
     }
-    
+
     public function access_map() {
         return array(
-            'cadmestre'=>'create',            
-            'salva'=>'create',            
+            'index'=>'view',
+            'filter'=>'view',
+            'clearfilter'=>'view',
+            'novo'=>'create',
+            'edita'=>'edit',
+            'salva'=>'create',
+            'validation'=>'create',
+            'exclui'=>'delete',
             );
+
     }
-    
-    // Cadastro de mestres
 
-    // Carrega a página inicial com o menu e um array em branco para o BD
-    public function cadmestre(){
-        // Cad_mestre se refere a classe do model Cad_mestre.php
-        $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=> new Cad_mestre, "mensagem"=>$this->session->flashdata('salva_cad_mestre')));
+
+    public function novo() {
+        $this->load->view($this->viewPath . "/new", array("mestre" =>new CadMestre()));
     }
-//--------------------------------------------------------------------------------------------------------------------//
 
-    public function salva(){
-//      Carrega a biblioteca de validação
-        $this->load->library('form_validation');
-//      Modifica os delimitadores da msg de erro de <p></p>
-        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-//      Cria um array do form para ser enviado ao BD
-        $cad_mestre = new Cad_mestre();
-//      Chama mensagem de sucesso de envio
-        $mensagem = $this->lang->line("salva_sucesso");
+    public function edita() {
+        $mestre = null;
 
-//      Salva variáveis enviados por POST do form
-        $cad_mestre->setNome($this->input->post("nome"));
-        $cad_mestre->setApel($this->input->post("apelido"));
-        $cad_mestre->setTel($this->input->post("telefone"));
-        $cad_mestre->setEmail($this->input->post("email"));
-
-//      Regras de validação do form
-        $config = array(
-            array(
-                'field' => 'nome',
-                'label' => 'Nome',
-                'rules' => 'max_length[50]'
-            ),
-            array(
-                'field' => 'apelido',
-                'label' => 'Apelido',
-                'rules' => 'required|callback_check|max_length[20]'
-            ),
-            array(
-                'field' => 'telefone',
-                'label' => 'Telefone',
-                'rules' => 'numeric|max_length[11]'
-            ),
-            array(
-                'field' => 'email',
-                'label' => 'E-mail',
-                'rules' => 'valid_email|max_length[100]'
-            )
-        );
-
-        $this->form_validation->set_rules($config);
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view("mapa_bordo/cad_mestre", array("cad_mestre"=> new Cad_mestre()));
-        } else {
-            $this->doctrine->em->persist($cad_mestre);
-            $this->doctrine->em->flush();
-            $this->session->set_flashdata('salva_cad_mestre', true);
-            redirect('cad_mestre_ct/cadmestre');
+        if ($this->input->get('id') && is_numeric($this->input->get('id'))) {
+            $mestre = $this->doctrine->em->find('CadMestre', $this->input->get('id'));
         }
-    }
-//--------------------------------------------------------------------------------------------------------------------//
 
-    // Função para checar se a espécie já existe no BD
-    public function check($check){
-
-        $checkApe = $this->doctrine->em->getRepository("Cad_mestre")->findOneBy(array("apelido" => $check));
-        if ($checkApe == null){
-            return TRUE;
-        } else {
-            $this->form_validation->set_message('check',
-                '<strong style="color:#FE0000">Este Mestre já foi cadastrado.</strong>');
-            return FALSE;
+        if (is_null($mestre)) {
+            show_error('unknown_registry_error_message');
         }
+
+        $this->load->view($this->viewPath . "/new", array("mestre" => $mestre));
+    }
+
+    public function salva() {
+
+        if ($this->validation(true) !== false) {
+            show_error('generic_error_message');
+            return;
+        }
+
+        $mestre = null;
+        $em = $this->doctrine->em;
+
+        if ($this->input->post('id') && is_numeric($this->input->post('id'))) {
+            $mestre = $this->doctrine->em->find('CadMestre', $this->input->post('id'));
+        }
+
+        if (is_null($mestre)) {
+            show_error('unknown_registry_error_message');
+        }
+
+        $mestre->setNome($this->input->post('nome'));
+        $mestre->setApelido($this->input->post('apelido'));
+        $mestre->setTelefone($this->input->post('telefone'));
+        $mestre->setEmail($this->input->post('email'));
+        $em->persist($mestre);
+        $em->flush();
+
+        $this->session->set_flashdata(get_class($this) . '_mensagem', 'Mestre salvo com sucesso!');
+        redirect($this->viewPath . '/index', 'refresh');
+    }
+
+    public function validation($returnError = false) {
+        $this->form_validation->set_rules("nome", "Nome", "trim|required|max_length[100]");
+        $this->form_validation->set_rules("apelido", "Apelido", "trim|max_length[100]");
+        $this->form_validation->set_rules("telefone", "Telefone", "trim|max_length[11]");
+        $this->form_validation->set_rules("email", "E-mail", "trim|valid_email");
+
+        $this->form_validation->run();
+
+        if ($returnError) {
+            return $this->form_validation->error_array();
+        }
+
+        $return = array();
+        $return["erro"] = $this->form_validation->error_array();
+        $this->output->_mode = MY_Output::OUTPUT_MODE_NORMAL;
+        $this->load->view("jsonresponse", $return);
+    }
+
+   public function exclui(){
+        $mestre = $this->doctrine->em->find("CadMestre", $this->input->get("id"));
+
+        if (is_null($mestre)) {
+            show_error('unknown_registry_error_message');
+        }
+
+        $this->doctrine->em->remove($mestre);
+        $this->doctrine->em->flush();
+        $this->session->set_flashdata(get_class($this) . '_mensagem', 'Mestre excluído com sucesso.');
+		redirect($this->viewPath . '/index');
+   }
+
+    protected function telaFiltro() {
+        return $this->load->view($this->viewPath . "/filter", array(
+            'filtro'=>$this->session->userdata('filtros_' . get_class($this))
+            ), true);
+    }
+
+    public function filter() {
+      $filtros = array();
+
+      if ($this->input->post('nome') && $this->input->post('nome') != '') {
+         $filtros['nome'] = $this->input->post('nome');
+      }
+
+      if ($this->input->post('apelido') && $this->input->post('apelido') != '') {
+         $filtros['apelido'] = $this->input->post('apelido');
+      }
+
+      if ($this->input->post('telefone') && $this->input->post('telefone') != '') {
+         $filtros['telefone'] = $this->input->post('telefone');
+      }
+
+      if ($this->input->post('email') && $this->input->post('email') != '') {
+         $filtros['email'] = $this->input->post('email');
+      }
+
+      $this->session->set_userdata('filtros_' . get_class($this), $filtros);
+      redirect($this->viewPath . '/index');
+    }
+
+    public function clearfilter() {
+        $this->session->set_userdata('filtros_' . get_class($this), array());
+        redirect($this->viewPath . '/index');
     }
 
 
+     protected function filterQueryBuilder() {
+        $filtrosSessao = $this->session->userdata('filtros_' . get_class($this));
+        $class = 'CadMestre';
+
+        $queryBuilder = $this->doctrine->em->createQueryBuilder();
+        $queryBuilder->select("r")->from($class, "r");
+
+        if (!empty($filtrosSessao)) {
+            if (isset($filtrosSessao['nome'])) {
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->like('r.nome', '?1'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(1, '%'.$filtrosSessao['nome'].'%');
+            }
+
+            if (isset($filtrosSessao['apelido'])) {
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->like('r.apelido', '?2'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(2, '%'.$filtrosSessao['apelido'].'%');
+            }
+
+            if (isset($filtrosSessao['telefone'])) {
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->like('r.telefone', '?3'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(3, '%'.$filtrosSessao['telefone'].'%');
+            }
+            if (isset($filtrosSessao['email'])) {
+                $wherex = $queryBuilder->expr()->orx();
+                $wherex->add($queryBuilder->expr()->like('r.email', '?4'));
+                $queryBuilder->andWhere($wherex);
+                $queryBuilder->setParameter(4, '%'.$filtrosSessao['email'].'%');
+            }
+        }
+
+        $query = $queryBuilder->getQuery();
+
+        return $query;
+    }
 }

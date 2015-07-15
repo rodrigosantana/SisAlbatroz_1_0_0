@@ -18,12 +18,13 @@ class Cad_embarcacao_ct extends CI_Controller {
     public function cadembarcacao(){
         // Carrega o BD de modalidades de pesca
         $auto_pesca = $this->doctrine->em->getRepository("AutorizPesca")->findAll();
+        // Carrega BD de Municipios
         $municipios = $this->doctrine->em->getRepository('Municipio')->findAll();
         
-	$this->load->view("mapa_bordo/cad_embarcacao", array(
+	    $this->load->view("mapa_bordo/cad_embarcacao", array(
             "cad_embarcacao" => new Cad_embarcacao(),
             "auto_pesca" => $auto_pesca,
-            "mensagem"=>$this->session->flashdata('salva_embarcacao_ave'),
+            "mensagem"=>$this->session->flashdata('salva_cad_embarcacao'),
             "municipios"=>$municipios)
         );
     }
@@ -64,62 +65,62 @@ class Cad_embarcacao_ct extends CI_Controller {
             array(
                 'field' => 'nome',
                 'label' => 'Nome',
-                'rules' => 'required|max_length[50]'
+                'rules' => 'trim|required|max_length[50]'
             ),
             array(
                 'field' => 'aut_pesca',
                 'label' => 'Autorização de Pesca',
-                'rules' => 'required|max_length[150]'
+                'rules' => 'trim|required|max_length[150]'
             ),
             array(
                 'field' => 'reg_marinha',
                 'label' => 'Registro da Marinha',
-                'rules' => 'required|max_length[30]'
+                'rules' => 'trim|required|max_length[30]'
             ),
             array(
                 'field' => 'reg_mpa',
                 'label' => 'Número do RGP',
-                'rules' => 'required|callback_checkRegMpa|max_length[30]'
+                'rules' => 'trim|required|callback_checkRegMpa|max_length[30]'
             ),
             array(
                 'field' => 'comprimento',
                 'label' => 'Comprimento',
-                'rules' => 'required|numeric|max_length[5]'
+                'rules' => 'trim|numeric|max_length[5]'
             ),
             array(
                 'field' => 'arq_bruta',
                 'label' => 'Arqueação Bruta',
-                'rules' => 'required|numeric|max_length[5]'
+                'rules' => 'trim|numeric|max_length[5]'
             ),
             array(
                 'field' => 'ano_fab',
                 'label' => 'Ano de Fabricação',
-                'rules' => 'required|numeric|max_length[4]'
+                'rules' => 'trim|numeric|max_length[4]'
             ),
             array(
                 'field' => 'mat_casco',
                 'label' => 'Material do Casco',
-                'rules' => 'max_length[50]'
+                'rules' => 'trim|max_length[50]'
             ),
             array(
                 'field' => 'propulsao',
                 'label' => 'Propulsão',
-                'rules' => 'max_length[50]'
+                'rules' => 'trim|max_length[50]'
             ),
             array(
                 'field' => 'pot_motor',
                 'label' => 'Potência do Motor',
-                'rules' => 'numeric|max_length[5]'
+                'rules' => 'trim|numeric|max_length[5]'
             ),
             array(
                 'field' => 'tripulacao',
                 'label' => 'Tripulação Máxima',
-                'rules' => 'numeric|max_length[2]'
+                'rules' => 'trim|numeric|max_length[2]'
             ),
             array(
                 'field' => 'municipio',
                 'label' => 'Município',
-                'rules' => 'required|in_array[' . Utils::findIds( 'id', 'Municipio') . ']'
+                'rules' => 'trim|in_array[' . Utils::findIds( 'id', 'Municipio') . ']'
             )
         );
 

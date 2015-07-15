@@ -1,5 +1,5 @@
 <form class="form-horizontal" role="form" action="<?php echo site_url('especie/filter'); ?>" method="post">
-    
+
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -45,11 +45,11 @@
             </div>
         </div>
     </div>
-        
+
     <div class="row">
         <div class="col-md-12">
             <a href="<?php echo site_url('especie/clearfilter')?>" class="btn btn-default btn_sub pull-right">Limpar filtro</a>
-            <button type="submit" id="btnSub" name="btnSub" class="btn btn-primary btn_sub pull-right" onclick="" style="margin-right: 10px">Filtrar</button>            
+            <button type="submit" id="btnSub" name="btnSub" class="btn btn-primary btn_sub pull-right" onclick="" style="margin-right: 10px">Filtrar</button>
         </div>
     </div>
 </form>

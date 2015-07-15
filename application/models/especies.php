@@ -1,6 +1,6 @@
 <?php
 
-// Criação da entidade para a tabela de aves
+// Criação da entidade para a tabela de espécies
 
 /**
  * @Entity
@@ -13,7 +13,7 @@ class Especies {
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
-     *@var integer $id_aves
+     *@var integer $id
      *
      *@Column(name="id", type="integer")
      *@Id
@@ -47,7 +47,7 @@ class Especies {
     private $nomeCientifico;
 //--------------------------------------------------------------------------------------------------------------------//
 
-    
+
     /**
      * Get id
      *
@@ -98,7 +98,7 @@ class Especies {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
-    
+
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
@@ -109,7 +109,7 @@ class Especies {
     public function getNomeComumBr(){
         return $this->nomeComumBr;
     }
-    
+
     /**
      * Get nomeComumEn
      *
@@ -118,7 +118,7 @@ class Especies {
     public function getNomeComumEn(){
         return $this->nomeComumEn;
     }
-    
+
     /**
      * Get nomeCientifico
      *

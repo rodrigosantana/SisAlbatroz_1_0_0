@@ -2,9 +2,9 @@
     <?php if (isset($mensagem) && $mensagem === true): ?>
         <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible" role="alert" style="margin-top: 20px">
             <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-            <p><strong>Sucesso!</strong><p> 
+            <p><strong>Sucesso!</strong><p>
                 Registro salvo com sucesso.
-        </div>  
+        </div>
     <?php endif; ?>
 
     <div class="row">
@@ -13,11 +13,11 @@
         </div>
     </div>
 
-    <form class="form-horizontal" role="form" id="form" action="<?php echo site_url('especie/salva'); ?>"
-          method="post">
+    <form class="form-horizontal" role="form" id="form" action="<?php echo site_url('especie/salva'); ?>" method="post">
         <input type="hidden" id="id" name="id" value="<?php echo $especie->getId()?>">
+
         <div class="panel panel-sisalbatroz">
-            <div class="panel-heading"></div>    
+            <div class="panel-heading"></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -36,9 +36,9 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="tipo" class="col-md-4 control-label">Tipo *</label>
@@ -64,8 +64,8 @@
                         </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </div>
 

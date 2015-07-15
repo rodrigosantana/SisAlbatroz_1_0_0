@@ -88,7 +88,7 @@ class CadEmbarcacao
     private $tripulacao;
 
     /**
-     * @var \Municipio
+     * @var Municipio
      *
      * @ManyToOne(targetEntity="Municipio")
      * @JoinColumns({

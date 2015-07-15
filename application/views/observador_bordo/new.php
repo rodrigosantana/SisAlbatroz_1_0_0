@@ -76,7 +76,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="mestre" class="col-md-4 control-label">Nome do mestre</label>
+                                        <label for="mestre" class="col-md-4 control-label">Mestre</label>
                                         <div class="col-md-8 div-help">
                                             <select class="select2" style="width: 100%" id="mestre" name="mestre">
                                                 <option></option>

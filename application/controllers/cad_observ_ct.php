@@ -4,26 +4,30 @@ class Cad_observ_ct extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        
+
         $this->output->set_template('sisalbatroz_template');
     }
-    
+
     public function access_map() {
         return array(
-            'cadobserv'=>'create',            
-            'salva'=>'create',            
+            'cadobserv'=>'create',
+            'salva'=>'create',
             );
     }
-    
+
     // Cadastro de observadores de bordo
 
     // Carrega a página inicial com o menu e um array em branco para o BD
     public function cadobserv(){
-        
-        // Cad_ave se refere a classe do model Cad_ave.php
-        $this->load->view("mapa_bordo/cad_observador", array("cad_observador"=>new Cad_observador(), "mensagem"=>$this->session->flashdata('salva_cad_observador')));
-        // Debugger
-        //$this->output->enable_profiler(true);
+
+      $municipios = $this->doctrine->em->getRepository('Municipio')->findAll();
+
+     // Cad_ave se refere a classe do model Cad_ave.php
+     $this->load->view("mapa_bordo/cad_observador", array(
+        "cad_observador"=>new Cad_observador(),
+        "municipios"=>$municipios,
+        "mensagem"=>$this->session->flashdata('salva_cad_observador')
+      ));
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
@@ -48,66 +52,66 @@ class Cad_observ_ct extends CI_Controller {
         $cad_observador ->setTel($this->input->post("tel"));
         $cad_observador ->setSkype($this->input->post("skype"));
         $cad_observador ->setEnd($this->input->post("end"));
-        $cad_observador ->setCidade($this->input->post("cidade"));
-        $cad_observador ->setUf($this->input->post("uf"));
+
+        if ($this->input->post("municipio") && is_numeric($this->input->post("municipio"))) {
+            $cad_observador->setMunicipio($this->doctrine->em->find('Municipio', $this->input->post("municipio")));
+        }
 
         $config = array(
             array(
                 'field' => 'nome',
                 'label' => 'Nome',
-                'rules' => 'required|max_length[50]'
+                'rules' => 'trim|required|max_length[50]'
             ),
             array(
                 'field' => 'cpf',
                 'label' => 'CPF',
-                'rules' => 'required|integer|max_length[11]|callback_checkCpf'
+                'rules' => 'trim|required|integer|max_length[11]|callback_checkCpf'
             ),
             array(
                 'field' => 'rg',
                 'label' => 'RG',
-                'rules' => 'required|integer|max_length[11]'
+                'rules' => 'trim|required|integer|max_length[11]'
             ),
             array(
                 'field' => 'email',
                 'label' => 'E-mail',
-                'rules' => 'required|valid_email|max_length[100]'
+                'rules' => 'trim|required|valid_email|max_length[100]'
             ),
             array(
                 'field' => 'tel',
                 'label' => 'telefone',
-                'rules' => 'required|integer|max_length[50]'
+                'rules' => 'trim|required|integer|max_length[50]'
             ),
             array(
                 'field' => 'skype',
                 'label' => 'Skype',
-                'rules' => 'max_length[50]'
+                'rules' => 'trim|max_length[50]'
             ),
             array(
                 'field' => 'end',
                 'label' => 'Endereço',
-                'rules' => 'required|max_length[200]'
+                'rules' => 'trim|required|max_length[200]'
             ),
             array(
-                'field' => 'cidade',
-                'label' => 'Cidade',
-                'rules' => 'required|max_length[50]'
-            ),
-            array(
-                'field' => 'uf',
-                'label' => 'UF',
-                'rules' => 'required|max_length[2]'
+                'field' => 'municipio',
+                'label' => 'Município',
+                'rules' => 'trim|in_array[' . Utils::findIds( 'id', 'Municipio') . ']'
             ),
         );
 
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view("mapa_bordo/cad_observador", array("cad_observador"=> new Cad_observador()));
+            $this->load->view("mapa_bordo/cad_observador", array(
+               "cad_observador"=> new Cad_observador(),
+               "municipios"=>$this->doctrine->em->getRepository('Municipio')->findAll()
+            ));
         } else {
             $this->doctrine->em->persist($cad_observador);
             $this->doctrine->em->flush();
             $this->session->set_flashdata('salva_cad_observador', true);
-            redirect('cad_observador_ct/cadobservador');
+            redirect('cad_observ_ct/cadobserv');
         }
     }
 //--------------------------------------------------------------------------------------------------------------------//

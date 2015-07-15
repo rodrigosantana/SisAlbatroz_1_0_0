@@ -1,11 +1,11 @@
 <!-- Início do corpo da página -->
 
-<?php if (!empty($mensagem)): ?>    
+<?php if (!empty($mensagem)): ?>
     <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible" role="alert" style="margin-top: 20px">
         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-        <p><strong>Sucesso!</strong><p> 
+        <p><strong>Sucesso!</strong><p>
             <?php echo $mensagem ?>
-    </div>  
+    </div>
 <?php endif; ?>
 
 <div class="row">
@@ -18,11 +18,11 @@
     <input type="hidden" id="id" name="id" value="<?php echo $medicinaConservacao->getId() ?>">
 
     <div class="panel panel-sisalbatroz">
-        <div class="panel-heading"><span><b>Cadastro de viagens</b></span></div>    
+        <div class="panel-heading"><span><b>Cadastro de viagens</b></span></div>
         <div class="panel-body">
 
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#dadosgerais" data-toggle="tab">Dados gerais</a></li>                
+                <li class="active"><a href="#dadosgerais" data-toggle="tab">Dados gerais</a></li>
                 <li><a href="#tab_procedencia" data-toggle="tab">Procedência</a></li>
                 <li><a href="#biometria" data-toggle="tab">Biometria</a></li>
                 <li><a href="#coleta" data-toggle="tab">Coleta de materiais biológicos</a></li>
@@ -450,8 +450,8 @@
                                 <tr>
                                     <th scope="row" class="th-table-checkbox">Muda Asa</th>
                                     <td><input type="checkbox" name="muda_asa" value="true" class="check-sim-nao" <?php echo $medicinaConservacao->getBiometria()->getMudaAsa() === true ? 'checked' : '' ?>></td>
-                                    <td><input type="checkbox" name="muda_asa" value="false" class="check-sim-nao" <?php echo $medicinaConservacao->getBiometria()->getMudaAsa() === false ? 'checked' : '' ?>></td>           
-                                </tr>          
+                                    <td><input type="checkbox" name="muda_asa" value="false" class="check-sim-nao" <?php echo $medicinaConservacao->getBiometria()->getMudaAsa() === false ? 'checked' : '' ?>></td>
+                                </tr>
                                 <tr>
                                     <th scope="row" class="th-table-checkbox">Muda Cauda</th>
                                     <td><input type="checkbox" name="muda_cauda" value="true" class="check-sim-nao" <?php echo $medicinaConservacao->getBiometria()->getMudaCauda() === true ? 'checked' : '' ?>></td>
@@ -477,7 +477,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>             
+                    </div>
 
                 </div>
 
@@ -549,7 +549,7 @@
                                         <option value="<?php echo Utils::MACHO_INCERTEZA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getSexagem() === Utils::MACHO_INCERTEZA ? 'selected' : '' ?>>Macho / Incerteza</option>
                                         <option value="<?php echo Utils::FEMEA_CERTEZA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getSexagem() === Utils::FEMEA_CERTEZA ? 'selected' : '' ?>>Femea / Certeza</option>
                                         <option value="<?php echo Utils::FEMEA_INCERTEZA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getSexagem() === Utils::FEMEA_INCERTEZA ? 'selected' : '' ?>>Femea / Incerteza</option>
-                                        <option value="<?php echo Utils::INDETERMINADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getSexagem() === Utils::INDETERMINADO ? 'selected' : '' ?>>Indeterminado</option>                                        
+                                        <option value="<?php echo Utils::INDETERMINADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getSexagem() === Utils::INDETERMINADO ? 'selected' : '' ?>>Indeterminado</option>
                                     </select>
                                 </div>
                             </div>
@@ -586,7 +586,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
 
                     <fieldset><h3 class="text-center titulo">Parasitas</h3></fieldset>
                     <hr class="hr-sisalbatroz">
@@ -601,9 +601,9 @@
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="piolhos" name="piolhos">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPiolho() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPiolho() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPiolho() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPiolho() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPiolho() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPiolho() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPiolho() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
@@ -615,9 +615,9 @@
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="carrapatos" name="carrapatos">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCarrapato() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCarrapato() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCarrapato() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCarrapato() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCarrapato() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCarrapato() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCarrapato() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
@@ -632,23 +632,23 @@
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="pulgas" name="pulgas">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPulga() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPulga() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPulga() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPulga() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPulga() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPulga() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getPulga() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">    
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="lepadomorpha" class="col-md-3 control-label">Lepadomorpha</label>
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="lepadomorpha" name="lepadomorpha">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLepadomorpha() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLepadomorpha() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLepadomorpha() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLepadomorpha() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLepadomorpha() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLepadomorpha() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLepadomorpha() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
@@ -663,33 +663,33 @@
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="larvas_putrefacao" name="larvas_putrefacao">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLarvasPutrefacao() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLarvasPutrefacao() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLarvasPutrefacao() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLarvasPutrefacao() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLarvasPutrefacao() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLarvasPutrefacao() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getLarvasPutrefacao() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="outro_parasita" class="col-md-3 control-label">Outros</label>
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="outro_parasita" name="outro_parasita">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getOutros() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getOutros() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getOutros() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getOutros() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getOutros() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getOutros() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getOutros() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="outro_parasita_descricao" class="col-md-3 control-label">Outros descrição</label>
+                                <label for="outro_parasita_descricao" class="col-md-3 control-label">Outros</label>
                                 <div class="col-md-9 div-help">
                                     <input type="text" class="form-control" id="outro_parasita_descricao" name="outro_parasita_descricao" value="<?php echo $medicinaConservacao->getColetaMaterialBiologico()->getOutrosDescricao() ?>" maxlength="150">
                                 </div>
@@ -706,9 +706,9 @@
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="nematoides" name="nematoides">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getNematoides() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getNematoides() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getNematoides() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getNematoides() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getNematoides() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getNematoides() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getNematoides() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
@@ -720,9 +720,9 @@
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="acantocefalos" name="acantocefalos">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getAcantocefalos() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getAcantocefalos() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getAcantocefalos() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getAcantocefalos() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getAcantocefalos() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getAcantocefalos() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getAcantocefalos() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
@@ -737,9 +737,9 @@
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="cestoides" name="cestoides">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCestoides() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCestoides() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCestoides() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCestoides() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCestoides() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCestoides() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getCestoides() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
@@ -751,9 +751,9 @@
                                 <div class="col-md-9 div-help">
                                     <select class="select2" style="width: 100%" id="trematoides" name="trematoides">
                                         <option></option>
-                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getTrematoides() === Utils::BAIXA ? 'selected' : '' ?>>1 Cruz</option>
-                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getTrematoides() === Utils::MEDIA ? 'selected' : '' ?>>2 Cruz</option>
-                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getTrematoides() === Utils::ALTA ? 'selected' : '' ?>>3 Cruz</option>
+                                        <option value="<?php echo Utils::BAIXA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getTrematoides() === Utils::BAIXA ? 'selected' : '' ?>>+</option>
+                                        <option value="<?php echo Utils::MEDIA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getTrematoides() === Utils::MEDIA ? 'selected' : '' ?>>++</option>
+                                        <option value="<?php echo Utils::ALTA ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getTrematoides() === Utils::ALTA ? 'selected' : '' ?>>+++</option>
                                         <option value="<?php echo Utils::NAO_INFORMADO ?>" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getTrematoides() === Utils::NAO_INFORMADO ? 'selected' : '' ?>>Não informado</option>
                                     </select>
                                 </div>
@@ -846,7 +846,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
 
                     <fieldset><h4 class="text-center titulo">Histopatológico - Formol 10%</h4></fieldset>
 
@@ -1081,7 +1081,7 @@
                                     <th scope="row" class="th-table-checkbox">Osso</th>
                                     <td><input type="checkbox" name="htp_osso" value="true" class="check-sim-nao" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getHtpOsso() === true ? 'checked' : '' ?>></td>
                                     <td><input type="checkbox" name="htp_osso" value="false" class="check-sim-nao" <?php echo $medicinaConservacao->getColetaMaterialBiologico()->getHtpOsso() === false ? 'checked' : '' ?>></td>
-                                </tr>          
+                                </tr>
 
                             </tbody>
                         </table>
@@ -1144,7 +1144,7 @@
                                 <div class="col-md-10 div-help">
                                     <div class="col-md-3 checkbox"><label><input type="checkbox" class="outra-pesquisa-pena" id="outra_pesquisa_pena_corpo" name="outra_pesquisa_pena[]" value="<?php echo Utils::CORPO ?>" <?php echo in_array(Utils::CORPO, $medicinaConservacao->getOutrasPesquisas()->getPenas()) ? 'checked' : '' ?>>Corpo</label></div>
                                     <div class="col-md-3 checkbox"><label><input type="checkbox" class="outra-pesquisa-pena" id="outra_pesquisa_pena_asa" name="outra_pesquisa_pena[]" value="<?php echo Utils::ASA ?>" <?php echo in_array(Utils::ASA, $medicinaConservacao->getOutrasPesquisas()->getPenas()) ? 'checked' : '' ?>>Asa</label></div>
-                                    <div class="col-md-3 checkbox"><label><input type="checkbox" class="outra-pesquisa-pena" id="outra_pesquisa_pena_nao_coletado" name="outra_pesquisa_pena[]" value="<?php echo Utils::NAO_COLETADO ?>" <?php echo in_array(Utils::NAO_COLETADO, $medicinaConservacao->getOutrasPesquisas()->getPenas()) ? 'checked' : '' ?>>Não coletado</label></div>                                    
+                                    <div class="col-md-3 checkbox"><label><input type="checkbox" class="outra-pesquisa-pena" id="outra_pesquisa_pena_nao_coletado" name="outra_pesquisa_pena[]" value="<?php echo Utils::NAO_COLETADO ?>" <?php echo in_array(Utils::NAO_COLETADO, $medicinaConservacao->getOutrasPesquisas()->getPenas()) ? 'checked' : '' ?>>Não coletado</label></div>
                                 </div>
                             </div>
                         </div>
@@ -1253,9 +1253,9 @@
                             for(var i = 0; i < lista.length; i++) {
                                 var elemento = lista[i];
                                 html += '<option value="'+elemento.id+'">'+elemento.name+'</option>';
-                            }                            
+                            }
                         }
-                        
+
                         $('#lance').html(html);
                     },
                     error: function(xhr, ajaxOptions, thrownError) {

@@ -14,10 +14,6 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/select2/select2.css"/>
         <link href="<?php echo base_url(); ?>assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-        <!--    <!-- CSS do plugin de validação    -->
-        <!--    <link rel="stylesheet" type="text/css" href="--><?php //echo base_url();   ?><!--assets/formvalidation/dist/css/formValidation.css"/>-->
-        <!-- Biblioteca JQuery     -->
-
         <style>
             html {
                 position: relative;
@@ -89,7 +85,7 @@
             .panel-interno-sisalbatroz > .panel-heading > span {
                 color: #FFF;
             }
-            
+
             .panel-sisalbatroz > .panel-heading > span {
                 color: #FFF;
                 font-size: 16px;
@@ -108,24 +104,24 @@
                 background-color: #989998;
                 border-color: #989998;
             }
-            
+
             .row-observador-bordo {
                 margin-top: 10px;
             }
-   
+
             .clickable {
                 cursor: pointer;
                 margin-right: 10px;
-            }    
-            
+            }
+
             .th-table-checkbox {
                 font-size: 14px;
             }
-            
+
             .table-sisalbatroz td {
                 border:none !important;
             }
-            
+
             .table-sisalbatroz th {
                 border:none !important;
             }
@@ -141,13 +137,6 @@
         <script src="<?php echo base_url(); ?>assets/bootbox-master/bootbox.js" type="text/javascript" ></script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.maskMoney.min.js" type="text/javascript" ></script>
         <script src="<?php echo base_url(); ?>assets/js/fieldmanagement.js" type="text/javascript" ></script>
-        
-
-        <!--    <!-- Biblioteca do Plugin de Validação JQuery e classe suporte do Bootstrap    -->
-        <!--    <script src="--><?php //echo base_url();   ?><!--assets/formvalidation/dist/js/formValidation.js"></script>-->
-        <!--    <script src="--><?php //echo base_url();   ?><!--assets/formvalidation/dist/js/framework/bootstrap.js"></script>-->
-        <!--    <!-- Biblioteca de linguagem local para as mensagens de validação do form       -->
-        <!--    <script src="--><?php //echo base_url();   ?><!--assets/formvalidation/dist/js/language/pt_BR.js"></script>-->
 
         <!-- JS dos campos dinâmicos do formulário    -->
         <script src="<?php echo base_url(); ?>assets/js/clone_form.js"></script>
@@ -156,9 +145,9 @@
 
         <script>
             var URL = "<?php echo site_url(); ?>";
-            
-         
-            
+
+
+
         </script>
     </head>
 
@@ -181,7 +170,7 @@
                     CEP 88302-202 - Telefone: (13) 99753-5620 -
                     Responsáveis Técnicos: Rodrigo Sant'Ana | rsantana@projetoalbatroz.org.br e
                     André Santoro | asantoro@projetoalbatroz.org.br<br>
-                    Sistema desenvolvido por: Rodrigo Sant'Ana (rsantana@projetoalbatroz.org.br), 
+                    Sistema desenvolvido por: Rodrigo Sant'Ana (rsantana@projetoalbatroz.org.br),
                     André Santoro (asantoro@projetoalbatroz.org.br) e Tiago Zis (tiagozis@gmail.com)
                 </p>
             </div>

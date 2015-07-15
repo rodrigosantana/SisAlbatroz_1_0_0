@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="lancamento_<?php echo $numero; ?>_lat" class="col-md-4 control-label lb_lance_lat">Latitude (decimal)</label>
+                    <label for="lancamento_<?php echo $numero; ?>_lat" class="col-md-4 control-label lb_lance_lat">Latitude (grau decimal)</label>
                     <div class="col-md-8 div-help">
                         <input type="number" step="any" class="form-control lance_lat" id="lancamento_<?php echo $numero; ?>_lat" name="lancamento[<?php echo $numero; ?>][lat]" value="<?php echo is_null($mbLance->getCoordenada()) ? '' : $mbLance->getCoordenada()->latitudeDecimal ?>">
                     </div>
@@ -54,7 +54,7 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="lancamento_<?php echo $numero; ?>_lng" class="col-md-4 control-label lb_lance_long">Longitude (decimal)
+                    <label for="lancamento_<?php echo $numero; ?>_lng" class="col-md-4 control-label lb_lance_long">Longitude (grau decimal)
                     </label>
                     <div class="col-md-8 div-help">
                         <input type="number" step="any" class="form-control lance_long" id="lancamento_<?php echo $numero; ?>_lng" name="lancamento[<?php echo $numero; ?>][lng]" value="<?php echo is_null($mbLance->getCoordenada()) ? '' : $mbLance->getCoordenada()->longitudeDecimal ?>">

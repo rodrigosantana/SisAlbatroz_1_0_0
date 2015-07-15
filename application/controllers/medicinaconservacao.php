@@ -12,14 +12,14 @@
  * @author Dev
  */
 class MedicinaConservacao extends MY_Controller {
-    
-    public function __construct() {        
+
+    public function __construct() {
         $this->modelClassName = 'MedConservacao';
         $this->viewPath = 'medicina_conservacao';
-        
+
         parent::__construct();
     }
-    
+
     public function access_map() {
         return array(
             'index'=>'view',
@@ -33,47 +33,49 @@ class MedicinaConservacao extends MY_Controller {
             'obterlances'=>'create'
             );
     }
-    
+
     public function novo() {
         $this->formulario(new MedConservacao());
     }
-    
+
     public function edita() {
         $objeto = null;
 
         if ($this->input->get('id') && is_numeric($this->input->get('id'))) {
             $objeto = $this->doctrine->em->find('MedConservacao', $this->input->get('id'));
         }
-        
+
         if (is_null($objeto)) {
             show_error('unknown_registry_error_message');
         }
-        
+
         $this->formulario($objeto);
     }
-    
-    protected function formulario($objeto) {
-        $observadores = $this->doctrine->em->getRepository("CadObservador")->findBy(
-                array(), array('nome' => 'ASC')
-        );        
-        $embarcacoes = $this->doctrine->em->getRepository("CadEmbarcacao")->findBy(
-                array(), array('nome' => 'ASC')
-        );
-        $mestres = $this->doctrine->em->getRepository("CadMestre")->findBy(
-                array(), array('nome' => 'ASC')
-        );
-        
-        $cruzeiros = $this->doctrine->em->getRepository("Cruzeiro")->findAll();
-        
-        $aves = $this->doctrine->em->getRepository("Ave")->findBy(
-                array(), array('nomeCientifico' => 'ASC')
-        );
-        
+
+   protected function formulario($objeto) {
+      $observadores = $this->doctrine->em->getRepository("CadObservador")->findBy(
+         array(), array('nome' => 'ASC')
+      );
+
+      $embarcacoes = $this->doctrine->em->getRepository("CadEmbarcacao")->findBy(
+         array(), array('nome' => 'ASC')
+      );
+
+      $mestres = $this->doctrine->em->getRepository("CadMestre")->findBy(
+         array(), array('nome' => 'ASC')
+      );
+
+      $cruzeiros = $this->doctrine->em->getRepository("Cruzeiro")->findAll();
+
+      $aves = $this->doctrine->em->getRepository("Ave")->findBy(
+         array(), array('nomeCientifico' => 'ASC')
+      );
+
         $lances = (
-                    !is_null($objeto->getCapturaIncidental()) && 
+                    !is_null($objeto->getCapturaIncidental()) &&
                     !is_null($objeto->getCapturaIncidental()->getCruzeiro())
                   ) ? $objeto->getCapturaIncidental()->getCruzeiro()->getDadosAbioticos()->toArray() : array();
-        
+
         $this->load->view($this->viewPath . '/new', array(
             'observadores'=>$observadores,
             'embarcacoes'=>$embarcacoes,
@@ -85,99 +87,99 @@ class MedicinaConservacao extends MY_Controller {
             "mensagem" => $this->session->flashdata('save_medicina_conservacao')
         ));
     }
-    
+
     public function salva() {
 
         if ($this->validation(true) !== false) {
             show_error('generic_error_message');
             return;
         }
-        
+
         $medicinaConservacao = new MedConservacao();
         $isEdita = false;
         $em = $this->doctrine->em;
-        
+
         if ($this->input->post('id') && is_numeric($this->input->post('id'))) {
             $medicinaConservacao = $em->find('MedConservacao', $this->input->post('id'));
-            
+
             if (is_null($medicinaConservacao)) {
                 show_error('unknown_registry_error_message');
             }
-            
+
             $isEdita = true;
         }
-        
+
         //--------- Dados gerais ---------------------------------------------//
         $medicinaConservacao->setEtiqueta(($this->input->post('etiqueta') === '' ? null : $this->input->post('etiqueta')));
         $medicinaConservacao->setEtiquetaAntiga(($this->input->post('etiqueta_antiga') === '' ? null : $this->input->post('etiqueta_antiga')));
         $medicinaConservacao->setEspecie(null);
-        
+
         if ($this->input->post('especie') && is_numeric($this->input->post('especie'))) {
             $especie = $em->find('Ave', $this->input->post('especie'));
-            
+
             if ($especie) {
                 $medicinaConservacao->setEspecie($especie);
             }
         }
-        
+
         $medicinaConservacao->setResponsavel(($this->input->post('responsavel') === '' ? null : $this->input->post('responsavel')));
         $medicinaConservacao->setDataEntrada(Utils::dataToDateTime($this->input->post('data_entrada')));
         $medicinaConservacao->setDataCaptura(Utils::dataToDateTime($this->input->post('data_captura')));
         $medicinaConservacao->setCoordenada(null);
-        
+
         if ($this->input->post('latitude') && $this->input->post('latitude') != '' && $this->input->post('longitude') && $this->input->post('longitude') != '') {
             $medicinaConservacao->setCoordenada(new Geometry(null, $this->input->post('latitude'), $this->input->post('longitude')));
         }
-        
+
         $medicinaConservacao->setAnilha(($this->input->post('anilha') === '' ? null : $this->input->post('anilha')));
         $medicinaConservacao->setPlumagem(Utils::getPlumagem($this->input->post('plumagem')));
         $medicinaConservacao->setProcedencia(Utils::getProcedencia($this->input->post('procedencia')));
         $medicinaConservacao->setProcedenciaOutros(null);
-        
+
         if ($this->input->post('procedencia') == Utils::PROCEDENCIA_OUTROS) {
             $medicinaConservacao->setProcedenciaOutros(($this->input->post('procedencia_outros') === '' ? null : $this->input->post('procedencia_outros')));
         }
         //--------------------------------------------------------------------//
-        
-        
+
+
         //--------- Captura incidental ---------------------------------------//
         $medicinaConservacao->getCapturaIncidental()->setCruzeiro(null);
         $medicinaConservacao->getCapturaIncidental()->setLance(null);
         $medicinaConservacao->getCapturaIncidental()->setInformacao(null);
         $medicinaConservacao->getCapturaIncidental()->setObservador(null);
         $medicinaConservacao->getCapturaIncidental()->setMestre(null);
-        $medicinaConservacao->getCapturaIncidental()->setEmbarcacao(null);        
-        
+        $medicinaConservacao->getCapturaIncidental()->setEmbarcacao(null);
+
         if ($this->input->post('informacao_captura') === 'cruzeiro') {
             $medicinaConservacao->getCapturaIncidental()->setInformacao('cruzeiro');
             if ($this->input->post('cruzeiro') && is_numeric($this->input->post('cruzeiro'))) {
                 $cruzeiro = $em->find('Cruzeiro', $this->input->post('cruzeiro'));
-                if ($cruzeiro) {                    
+                if ($cruzeiro) {
                     $medicinaConservacao->getCapturaIncidental()->setCruzeiro($cruzeiro);
-                    
+
                     if ($this->input->post('cruzeiro') && is_numeric($this->input->post('cruzeiro'))) {
                         $lances = $cruzeiro->getDadosAbioticos()->toArray();
                         $idLance = $this->input->post('lance');
-                        
+
                         foreach ($lances as $value) {
                             if ($value->getId() === (int)$idLance) {
                                 $medicinaConservacao->getCapturaIncidental()->setLance($value);
-                            }                            
+                            }
                         }
                     }
                 }
             }
         } else if ($this->input->post('informacao_captura') === 'externo') {
             $medicinaConservacao->getCapturaIncidental()->setInformacao('externo');
-            
+
             if ($this->input->post('observador') && is_numeric($this->input->post('observador'))) {
                 $medicinaConservacao->getCapturaIncidental()->setObservador($em->find('CadObservador', $this->input->post('observador')));
             }
-            
+
             if ($this->input->post('mestre') && is_numeric($this->input->post('mestre'))) {
                 $medicinaConservacao->getCapturaIncidental()->setMestre($em->find('CadMestre', $this->input->post('mestre')));
             }
-            
+
             if ($this->input->post('embarcacao') && is_numeric($this->input->post('embarcacao'))) {
                 $medicinaConservacao->getCapturaIncidental()->setEmbarcacao($em->find('CadEmbarcacao', $this->input->post('embarcacao')));
             }
@@ -185,8 +187,8 @@ class MedicinaConservacao extends MY_Controller {
         $medicinaConservacao->getCapturaIncidental()->setHistorico(($this->input->post('historico') === '' ? null : $this->input->post('historico')));
         $medicinaConservacao->getCapturaIncidental()->setDescricaoLocalColeta(($this->input->post('descricao_local_coleta') === '' ? null : $this->input->post('descricao_local_coleta')));
         //--------------------------------------------------------------------//
-        
-        
+
+
         //--------- Biometria ------------------------------------------------//
         $medicinaConservacao->getBiometria()->setPeso((is_numeric($this->input->post('peso')) ? (int)$this->input->post('peso') : null));
         $medicinaConservacao->getBiometria()->setComprimento((is_numeric($this->input->post('comprimento_total')) ? (int)$this->input->post('comprimento_total') : null));
@@ -209,18 +211,18 @@ class MedicinaConservacao extends MY_Controller {
         $medicinaConservacao->getBiometria()->setMudaDorso(Utils::valorBooleano($this->input->post('muda_dorso')));
         $medicinaConservacao->getBiometria()->setMudaVentre(Utils::valorBooleano($this->input->post('muda_ventre')));
         //--------------------------------------------------------------------//
-        
-        
-        //--------- Coleta de materiais biológicos ---------------------------//        
+
+
+        //--------- Coleta de materiais biológicos ---------------------------//
         $medicinaConservacao->getColetaMaterialBiologico()->setDataNecropsia(Utils::dataToDateTime($this->input->post('data_necropsia')));
         $medicinaConservacao->getColetaMaterialBiologico()->setLocalNecropsia(($this->input->post('local_necropsia') === '' ? null : $this->input->post('local_necropsia')));
-        
+
         $medicinaConservacao->getColetaMaterialBiologico()->setCondicaoCarcaca(Utils::getCondicaoCarcaca($this->input->post('condicao_carcaca')));
         $medicinaConservacao->getColetaMaterialBiologico()->setAutolise(Utils::getAutolise($this->input->post('autolise')));
         $medicinaConservacao->getColetaMaterialBiologico()->setSexagem(Utils::getSexagem($this->input->post('sexagem')));
         $medicinaConservacao->getColetaMaterialBiologico()->setEmpetrolamento(Utils::getEmpetrolamento($this->input->post('empetrolamento')));
         $medicinaConservacao->getColetaMaterialBiologico()->setCondicaoCorporal(Utils::getCondicaoCorporal($this->input->post('condicao_corporal')));
-        
+
         $medicinaConservacao->getColetaMaterialBiologico()->setPiolho(Utils::getCruz($this->input->post('piolhos')));
         $medicinaConservacao->getColetaMaterialBiologico()->setCarrapato(Utils::getCruz($this->input->post('carrapatos')));
         $medicinaConservacao->getColetaMaterialBiologico()->setPulga(Utils::getCruz($this->input->post('pulgas')));
@@ -232,7 +234,7 @@ class MedicinaConservacao extends MY_Controller {
         $medicinaConservacao->getColetaMaterialBiologico()->setAcantocefalos(Utils::getCruz($this->input->post('acantocefalos')));
         $medicinaConservacao->getColetaMaterialBiologico()->setCestoides(Utils::getCruz($this->input->post('cestoides')));
         $medicinaConservacao->getColetaMaterialBiologico()->setTrematoides(Utils::getCruz($this->input->post('trematoides')));
-        
+
         $medicinaConservacao->getColetaMaterialBiologico()->setAmtEncefalo(Utils::getAmostrasTecido($this->input->post('encefalo')));
         $medicinaConservacao->getColetaMaterialBiologico()->setAmtMedulaOssea(Utils::getAmostrasTecido($this->input->post('medula_ossea')));
         $medicinaConservacao->getColetaMaterialBiologico()->setAmtMusculo(Utils::getAmostrasTecido($this->input->post('musculo')));
@@ -240,8 +242,7 @@ class MedicinaConservacao extends MY_Controller {
         $medicinaConservacao->getColetaMaterialBiologico()->setAmtPulmao(Utils::getAmostrasTecido($this->input->post('pulmao')));
         $medicinaConservacao->getColetaMaterialBiologico()->setAmtBaco(Utils::getAmostrasTecido($this->input->post('baco')));
         $medicinaConservacao->getColetaMaterialBiologico()->setAmtGordura(Utils::getAmostrasTecido($this->input->post('gordura')));
-        
-        
+
         $medicinaConservacao->getColetaMaterialBiologico()->setHtpPele(Utils::valorBooleano($this->input->post('htp_pele')));
         $medicinaConservacao->getColetaMaterialBiologico()->setHtpLingua(Utils::valorBooleano($this->input->post('htp_lingua')));
         $medicinaConservacao->getColetaMaterialBiologico()->setHtpEsofago(Utils::valorBooleano($this->input->post('htp_esofago')));
@@ -280,8 +281,8 @@ class MedicinaConservacao extends MY_Controller {
         $medicinaConservacao->getColetaMaterialBiologico()->setHtpCerebelo(Utils::valorBooleano($this->input->post('htp_cerebelo')));
         $medicinaConservacao->getColetaMaterialBiologico()->setHtpOsso(Utils::valorBooleano($this->input->post('htp_osso')));
         //--------------------------------------------------------------------//
-        
-        
+
+
         //--------- Outras pesquisas -----------------------------------------//
         $medicinaConservacao->getOutrasPesquisas()->setSwabCloaca(Utils::valorBooleano($this->input->post('outra_pesquisa_swab_cloaca')));
         $medicinaConservacao->getOutrasPesquisas()->setSwabCoana(Utils::valorBooleano($this->input->post('outra_pesquisa_swab_coana')));
@@ -291,21 +292,21 @@ class MedicinaConservacao extends MY_Controller {
         $medicinaConservacao->getOutrasPesquisas()->setOutros(($this->input->post('outra_pesquisa_outros') === '' ? null : $this->input->post('outra_pesquisa_outros')));
         $medicinaConservacao->getOutrasPesquisas()->setObservacoes(($this->input->post('outra_pesquisa_observacoes') === '' ? null : $this->input->post('outra_pesquisa_observacoes')));
         //--------------------------------------------------------------------//
-        
+
         $usuario = $em->find("SystemUsers", $this->ezrbac->getCurrentUser()->id);
-        
+
         if ($medicinaConservacao->getId() > 0) {
             $medicinaConservacao->setDataAlteracao(new DateTime());
             $medicinaConservacao->setUsuarioAlteracao($usuario);
         } else {
             $medicinaConservacao->setDataInsercao(new DateTime());
-            $medicinaConservacao->setUsuarioInsercao($usuario);            
+            $medicinaConservacao->setUsuarioInsercao($usuario);
         }
-        
+
         $em->persist($medicinaConservacao);
         $em->flush();
-        
-        $mensagem = 'Registro salvo com sucesso. (Código: ' . $medicinaConservacao->getId() . ')';        
+
+        $mensagem = 'Registro salvo com sucesso. (Código: ' . $medicinaConservacao->getId() . ')';
         if ($isEdita) {
             $this->session->set_flashdata(get_class($this) . '_mensagem', $mensagem);
             redirect(strtolower(get_class($this)) . '/index');
@@ -314,9 +315,9 @@ class MedicinaConservacao extends MY_Controller {
             redirect(strtolower(get_class($this)) . '/novo');
         }
     }
-    
-    
-    public function validation($returnError = false) 
+
+
+    public function validation($returnError = false)
     {
         $this->form_validation->set_rules('etiqueta', "Etiqueta", "trim|required|max_length[100]");
         $this->form_validation->set_rules('etiqueta_antiga', "Etiqueta antiga", "trim|max_length[100]");
@@ -324,7 +325,7 @@ class MedicinaConservacao extends MY_Controller {
         $this->form_validation->set_rules('responsavel', "Responsável", "trim|max_length[255]");
         $this->form_validation->set_rules('data_entrada', "Data de entrada", "trim|date_validation");
         $this->form_validation->set_rules('data_captura', "Data de captura", "trim|date_validation");
-        
+
         if ($this->input->post('longitude') && $this->input->post('longitude') != '' && $this->input->post('latitude') && $this->input->post('latitude') == '') {
             $this->form_validation->set_rules('latitude', "Latitude", "trim|required|valida_latitude");
         } else {
@@ -336,12 +337,12 @@ class MedicinaConservacao extends MY_Controller {
         } else {
             $this->form_validation->set_rules('longitude', "Longitude", "trim|valida_longitude");
         }
-        
+
         $this->form_validation->set_rules('anilha', "Anilha", "trim|max_length[100]");
         $this->form_validation->set_rules('plumagem', "Plumagem", "trim|in_array[".  implode(',', Utils::getPlumagem())."]");
         $this->form_validation->set_rules('procedencia', "Procedência", "trim|in_array[".  implode(',', Utils::getProcedencia())."]");
         $this->form_validation->set_rules('procedencia_outros', "procedencia_outros", "trim|max_length[150]");
-        
+
         //dados gerais
 //        etiqueta
 //        etiqueta_antiga
@@ -355,33 +356,33 @@ class MedicinaConservacao extends MY_Controller {
 //        plumagem
 //        procedencia
 //        procedencia_outros
-        
-        
+
+
         if ($this->input->post('informacao_captura') === 'cruzeiro') {
             if ($this->input->post('cruzeiro') && is_numeric($this->input->post('cruzeiro'))) {
                 $this->form_validation->set_rules('cruzeiro', "Cruzeiro", "trim|in_array[" . Utils::findIds('id', 'Cruzeiro') . "]");
                 $cruzeiro = $this->doctrine->em->find('Cruzeiro', $this->input->post('cruzeiro'));
-                
+
                 if ($cruzeiro) {
                     $ids = array();
                     $lances = $cruzeiro->getDadosAbioticos()->toArray();
-                    
+
                     foreach ($lances as $value) {
                         $ids[] = $value->getId();
                     }
-                    
+
                     $this->form_validation->set_rules('lance', "Lance", "trim|in_array[" . implode(',', $ids) . "]");
                 }
             }
         } else if ($this->input->post('informacao_captura') === 'externo') {
-            $this->form_validation->set_rules('observador', "Observador", "trim|in_array[" . Utils::findIds('idObserv', 'CadObservador') . "]");            
+            $this->form_validation->set_rules('observador', "Observador", "trim|in_array[" . Utils::findIds('idObserv', 'CadObservador') . "]");
             $this->form_validation->set_rules('mestre', "Mestre", "trim|in_array[" . Utils::findIds('idMestre', 'CadMestre') . "]");
             $this->form_validation->set_rules('embarcacao', "Embarcação", "trim|in_array[" . Utils::findIds('idEmbarcacao', 'CadEmbarcacao') . "]");
         }
-        
+
         $this->form_validation->set_rules('historico', "Histórico", "trim");
         $this->form_validation->set_rules('descricao_local_coleta', "Descrição do Local de Coleta", "trim");
-        
+
         //captura
 //        informacao_captura
 //        cruzeiro
@@ -391,8 +392,8 @@ class MedicinaConservacao extends MY_Controller {
 //        embarcacao
 //        historico
 //        descricao_local_coleta
-        
-        
+
+
         $this->form_validation->set_rules('peso', "Peso", "trim|integer");
         $this->form_validation->set_rules('comprimento_total', "Comprimento total", "trim|integer");
         $this->form_validation->set_rules('culmem', "Cúlmem", "trim|integer");
@@ -408,14 +409,14 @@ class MedicinaConservacao extends MY_Controller {
         $this->form_validation->set_rules('comprimento_dedo_sem_unha', "Comprimento do dedo sem unha", "trim|integer");
         $this->form_validation->set_rules('comprimento_dedo_com_unha', "Comprimento do dedo com unha", "trim|integer");
         $this->form_validation->set_rules('envergadura', "Envergadura", "trim|integer");
-        
+
         $this->form_validation->set_rules('muda_asa', 'Muda Asa', 'trim|boolean_validation');
         $this->form_validation->set_rules('muda_cauda', 'Muda Cauda', 'trim|boolean_validation');
         $this->form_validation->set_rules('muda_cabeca', 'Muda Cabeça', 'trim|boolean_validation');
         $this->form_validation->set_rules('muda_dorso', 'Muda Dorso', 'trim|boolean_validation');
         $this->form_validation->set_rules('muda_ventre', 'Muda Ventre', 'trim|boolean_validation');
-        
-        
+
+
         //biometria
 //        peso
 //        comprimento_total
@@ -427,7 +428,7 @@ class MedicinaConservacao extends MY_Controller {
 //        largura_bico_base
 //        comprimento_cabeca
 //        comprimento_asa
-//        comprimento_cauda        
+//        comprimento_cauda
 //        comprimento_tarso
 //        comprimento_dedo_sem_unha
 //        comprimento_dedo_com_unha
@@ -438,11 +439,11 @@ class MedicinaConservacao extends MY_Controller {
 //        muda_cabeca
 //        muda_dorso
 //        muda_ventre
-        
-        
-        
+
+
+
         $this->form_validation->set_rules('data_necropsia', "Data da necropsia", "trim|date_validation");
-        $this->form_validation->set_rules('local_necropsia', "Local da necropsia", "trim");        
+        $this->form_validation->set_rules('local_necropsia', "Local da necropsia", "trim");
         $this->form_validation->set_rules('condicao_carcaca', 'Condição da carcaça', 'trim|in_array[' . implode(',', Utils::getCondicaoCarcaca()) . ']');
         $this->form_validation->set_rules('autolise', 'Autólise', 'trim|in_array[' . implode(',', Utils::getAutolise()) . ']');
         $this->form_validation->set_rules('sexagem', 'Sexagem', 'trim|in_array[' . implode(',', Utils::getSexagem()) . ']');
@@ -466,9 +467,9 @@ class MedicinaConservacao extends MY_Controller {
         $this->form_validation->set_rules('pulmao', 'Pulmão', 'in_array[' . implode(',', Utils::getAmostrasTecido()) . ']');
         $this->form_validation->set_rules('baco', 'Baço', 'in_array[' . implode(',', Utils::getAmostrasTecido()) . ']');
         $this->form_validation->set_rules('gordura', 'Gordura', 'in_array[' . implode(',', Utils::getAmostrasTecido()) . ']');
-        
 
-        
+
+
         //coleta material biologico
 //        data_necropsia
 //        local_necropsia
@@ -510,8 +511,8 @@ class MedicinaConservacao extends MY_Controller {
         $this->form_validation->set_rules('htp_proventriculo', 'Proventrículo', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_ventriculo', 'Ventrículo', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_figado', 'Figado', 'trim|boolean_validation');
-        
-        
+
+
 //        htp_pele
 //        htp_lingua
 //        htp_esofago
@@ -525,8 +526,8 @@ class MedicinaConservacao extends MY_Controller {
 //        htp_proventriculo
 //        htp_ventriculo
 //        htp_figado
-        
-        
+
+
         $this->form_validation->set_rules('htp_vesicula_biliar', 'Vesícula biliar', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_baco', 'Baço', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_duodeno', 'Duodeno', 'trim|boolean_validation');
@@ -541,7 +542,7 @@ class MedicinaConservacao extends MY_Controller {
         $this->form_validation->set_rules('htp_bexiga', 'Bexiga', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_oviduto', 'Oviduto', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_bursa', 'Bursa', 'trim|boolean_validation');
-        
+
 //        htp_vesicula_biliar
 //        htp_baco
 //        htp_duodeno
@@ -556,8 +557,8 @@ class MedicinaConservacao extends MY_Controller {
 //        htp_bexiga
 //        htp_oviduto
 //        htp_bursa
-        
-        
+
+
         $this->form_validation->set_rules('htp_grandes_vasos', 'Grandes vasos', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_saco_aereo', 'Saco aéreo', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_timo', 'Timo', 'trim|boolean_validation');
@@ -568,8 +569,8 @@ class MedicinaConservacao extends MY_Controller {
         $this->form_validation->set_rules('htp_encefalo', 'Encéfalo', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_cerebelo', 'Cerebelo', 'trim|boolean_validation');
         $this->form_validation->set_rules('htp_osso', 'Osso', 'trim|boolean_validation');
-        
-        
+
+
 //        htp_grandes_vasos
 //        htp_saco_aereo
 //        htp_timo
@@ -580,8 +581,8 @@ class MedicinaConservacao extends MY_Controller {
 //        htp_encefalo
 //        htp_cerebelo
 //        htp_osso
-        
-        
+
+
         $this->form_validation->set_rules('outra_pesquisa_swab_cloaca', 'Swab Cloaca', 'trim|boolean_validation');
         $this->form_validation->set_rules('outra_pesquisa_swab_coana', 'Swab Coana', 'trim|boolean_validation');
         $this->form_validation->set_rules('outra_pesquisa_conteudo_estomacal', 'Conteúdo estomacal', 'trim|boolean_validation');
@@ -589,7 +590,7 @@ class MedicinaConservacao extends MY_Controller {
         $this->form_validation->set_rules('outra_pesquisa_pena', 'Penas', 'in_array[' . implode(',', Utils::getPena()) . ']');
         $this->form_validation->set_rules('outra_pesquisa_outros', 'Outros', 'trim');
         $this->form_validation->set_rules('outra_pesquisa_observacoes', 'Observações', 'trim');
-        
+
         //outras pesquisas
             //boolean
 //        outra_pesquisa_swab_cloaca
@@ -600,7 +601,7 @@ class MedicinaConservacao extends MY_Controller {
 //        outra_pesquisa_pena
 //        outra_pesquisa_outros
 //        outra_pesquisa_observacoes
-        
+
         $this->form_validation->run();
 
         if ($returnError) {
@@ -612,74 +613,74 @@ class MedicinaConservacao extends MY_Controller {
         $this->output->_mode = MY_Output::OUTPUT_MODE_NORMAL;
         $this->load->view("jsonresponse", $return);
     }
-    
+
     protected function telaFiltro() {
         $filtro = $this->session->userdata('filtros_' . get_class($this));
-        
+
         $aves = $this->doctrine->em->getRepository("Ave")->findBy(
                 array(), array('nomeCientifico' => 'ASC')
         );
-        
+
         return $this->load->view($this->viewPath . "/filter", array(
             "aves"=>$aves,
             "filtro"=>$filtro
                 ), true
         );
     }
-    
+
     public function filter() {
         $filtros = array();
-        
-        if ($this->input->post('codigo') && is_numeric($this->input->post('codigo'))) {            
+
+        if ($this->input->post('codigo') && is_numeric($this->input->post('codigo'))) {
             $filtros['codigo'] = $this->input->post('codigo');
         }
-        
-        if ($this->input->post('etiqueta') && $this->input->post('etiqueta') != '') {            
+
+        if ($this->input->post('etiqueta') && $this->input->post('etiqueta') != '') {
             $filtros['etiqueta'] = $this->input->post('etiqueta');
         }
-        
-        if ($this->input->post('etiqueta_antiga') && $this->input->post('etiqueta_antiga') != '') {            
+
+        if ($this->input->post('etiqueta_antiga') && $this->input->post('etiqueta_antiga') != '') {
             $filtros['etiqueta_antiga'] = $this->input->post('etiqueta_antiga');
         }
-        
+
         if ($this->input->post('especie') && is_numeric($this->input->post('especie'))) {
             $filtros['especie'] = $this->input->post('especie');
         }
 
-        if ($this->input->post('responsavel') && $this->input->post('responsavel') != '') {            
+        if ($this->input->post('responsavel') && $this->input->post('responsavel') != '') {
             $filtros['responsavel'] = $this->input->post('responsavel');
         }
-        
+
         if ($this->input->post('data_entrada') && !is_null(Utils::dateToDatabaseDate($this->input->post('data_entrada')))) {
             $filtros['data_entrada'] = Utils::dateToDatabaseDate($this->input->post('data_entrada'));
         }
-        
+
         if ($this->input->post('data_captura') && !is_null(Utils::dateToDatabaseDate($this->input->post('data_captura')))) {
             $filtros['data_captura'] = Utils::dateToDatabaseDate($this->input->post('data_captura'));
         }
-        
+
         $this->session->set_userdata('filtros_' . get_class($this), $filtros);
         redirect(strtolower(get_class($this)) . '/index');
     }
-    
+
     public function exclui(){
         $objeto = $this->doctrine->em->find("MedConservacao", $this->input->get("id"));
-        
+
         if (is_null($objeto)) {
             show_error('unknown_registry_error_message');
-        }             
-        
+        }
+
         $this->doctrine->em->remove($objeto);
         $this->doctrine->em->flush();
         $this->session->set_flashdata(get_class($this) . '_mensagem', 'Registro excluído com sucesso.');
 		redirect(strtolower(get_class($this)) . '/index');
     }
-    
+
     public function obterlances() {
         $ret = array();
         if ($this->input->post('cruzeiro') && is_numeric($this->input->post('cruzeiro'))) {
             $cruzeiro = $this->doctrine->em->find('Cruzeiro', $this->input->post('cruzeiro'));
-            
+
             if ($cruzeiro) {
                 $lances = $cruzeiro->getDadosAbioticos()->toArray();
                 foreach ($lances as $value) {
@@ -687,24 +688,24 @@ class MedicinaConservacao extends MY_Controller {
                 }
             }
         }
-        
+
         $return = array();
         $return["data"] = $ret;
         $this->output->_mode = MY_Output::OUTPUT_MODE_NORMAL;
         $this->load->view("jsonresponse", $return);
     }
-    
+
     public function clearfilter() {
         $this->session->set_userdata('filtros_' . get_class($this), array());
         redirect(strtolower(get_class($this)) . '/index');
     }
-    
+
     protected function filterQueryBuilder() {
         $queryBuilder = $this->doctrine->em->createQueryBuilder();
         $queryBuilder->select("r")->from("MedConservacao", "r");
         $filtrosSessao = $this->session->userdata('filtros_' . get_class($this));
-        
-        
+
+
         if (!empty($filtrosSessao)) {
             if (isset($filtrosSessao['codigo'])) {
                 $wherex = $queryBuilder->expr()->orx();
@@ -712,14 +713,14 @@ class MedicinaConservacao extends MY_Controller {
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(1, $filtrosSessao['codigo']);
             }
-            
+
             if (isset($filtrosSessao['etiqueta'])) {
                 $wherex = $queryBuilder->expr()->orx();
                 $wherex->add($queryBuilder->expr()->eq('r.etiqueta', '?2'));
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(2, $filtrosSessao['etiqueta']);
             }
-            
+
             if (isset($filtrosSessao['etiqueta_antiga'])) {
                 $wherex = $queryBuilder->expr()->orx();
                 $wherex->add($queryBuilder->expr()->eq('r.etiquetaAntiga', '?3'));
@@ -734,14 +735,14 @@ class MedicinaConservacao extends MY_Controller {
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(4, $filtrosSessao['especie']);
             }
-            
+
             if (isset($filtrosSessao['responsavel'])) {
                 $wherex = $queryBuilder->expr()->orx();
                 $wherex->add($queryBuilder->expr()->eq('r.responsavel', '?5'));
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(5, $filtrosSessao['responsavel']);
             }
-            
+
             if (isset($filtrosSessao['data_entrada'])) {
                 $wherex = $queryBuilder->expr()->orx();
                 $wherex->add($queryBuilder->expr()->eq('r.dataEntrada', '?6'));
@@ -756,9 +757,9 @@ class MedicinaConservacao extends MY_Controller {
                 $queryBuilder->setParameter(7, $filtrosSessao['data_captura']);
             }
         }
-        
+
         $query = $queryBuilder->getQuery();
-            
+
         return $query;
     }
 }

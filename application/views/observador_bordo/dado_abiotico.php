@@ -102,7 +102,7 @@
         
         
         
-        <h3 class="text-center titulo">Dados do lancamento</h3>
+        <h3 class="text-center titulo">Dados do lançamento</h3>
         <hr class="hr-sisalbatroz">
         <?php echo $this->load->view('observador_bordo/dado_abiotico_complementar', array('numero'=>$numero, 'nome'=>'lancamento', 'objeto'=>$dadoAbiotico->getDadosAbioticosLancamento()), true)?>
         
