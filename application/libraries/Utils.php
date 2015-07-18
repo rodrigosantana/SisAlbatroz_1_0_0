@@ -323,6 +323,59 @@ class Utils {
         return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
     }
     
+    const PARGUEIRA = 'pargueira';
+    const LINHA_DE_MAO = 'linha_de_mao';
+    const ESPINHEL = 'espinhel';
+    
+    public static function getTipoPetrecho($value = null) {
+        $array = array(
+            self::PARGUEIRA,
+            self::LINHA_DE_MAO,
+            self::ESPINHEL
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
+    const FUNDO = 'fundo';
+    const BOIADA = 'boiada';
+    
+    public static function getTipoRede($value = null) {
+        $array = array(
+            self::FUNDO,
+            self::BOIADA
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
+    
+    const INTEGRAL = 'integral'; 
+    const DIURNO = 'diurno'; 
+    const NOTURNO = 'noturno';
+    
+    public static function getRegimeTrabalho($value = null) {
+        $array = array(
+            self::INTEGRAL,
+            self::DIURNO,
+            self::NOTURNO,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
+    const SIMPLES = 'simples'; 
+    const DUPLO = 'duplo'; 
+    
+    public static function getTipoArrasto($value = null) {
+        $array = array(
+            self::SIMPLES,
+            self::DUPLO,
+        );
+        
+        return is_null($value) ? $array : (in_array($value, $array) ? $value : null);
+    }
+    
     public static function findIds($field, $model) {
         $CI = &get_instance();
         

@@ -58,7 +58,7 @@
             
             <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_ave_ct')) :?>
             <div class="col-xs-3 col-md-3">
-                <a href="#" class="thumbnail logo">
+                <a href="<?php echo site_url('entrevistacaisct');?>" class="thumbnail logo">
                     <img src="<?php echo base_url();?>assets/img/PA_logo_ec.jpg" alt="Entrevista de Cais">
                 </a>
             </div>
