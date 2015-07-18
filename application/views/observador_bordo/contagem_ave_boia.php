@@ -4,12 +4,12 @@
     <div class="panel-heading">
         <span id="contagem_ave_boia_span_lance_<?php echo $numero; ?>"><?php echo is_null($contagemAveBoia->getLance()) ? '' : 'Lance #'. $contagemAveBoia->getLance()->getLance() ?></span>
         <a href="javascript:;" class="pull-right panel-close-button-sisalbatroz" id="remove-contagem-ave-boia-<?php echo $numero ?>"><i class="glyphicon glyphicon-remove"></i></a>
-        <?php if (is_null($contagemAveBoia->getId())) :?>        
-            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>            
+        <?php if (is_null($contagemAveBoia->getId())) :?>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         <?php else :?>
             <span class="pull-right clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
         <?php endif;?>
-        
+
     </div>
 
     <div class="panel-body insertaction" style="<?php echo is_null($contagemAveBoia->getId()) ? '' : 'display:none'?>">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="contagem_ave_boia_<?php echo $numero ?>_data" class="col-md-4 control-label">Data</label>
@@ -48,10 +48,10 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
         <div class="row ">
-            
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="contagem_ave_boia_<?php echo $numero; ?>_hora" class="col-md-4 control-label">Hora</label>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="contagem_ave_boia_<?php echo $numero; ?>_temperatura_agua" class="col-md-4 control-label lb_lance">Temperatura da água (°C)</label>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="contagem_ave_boia_<?php echo $numero; ?>_profundidade" class="col-md-4 control-label lb_lance">Profundidade (metros)</label>
@@ -78,20 +78,20 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
-            
+
         <div class="row ">
-            
+
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="contagem_ave_boia_<?php echo $numero; ?>_pressao_atmosferica" class="col-md-4 control-label lb_lance">Pressão atmosférica</label>
+                    <label for="contagem_ave_boia_<?php echo $numero; ?>_pressao_atmosferica" class="col-md-4 control-label lb_lance">Pressão atmosférica (hPa)</label>
                     <div class="col-md-8 div-help">
                         <input type="number" class="form-control" id="contagem_ave_boia_<?php echo $numero; ?>_pressao_atmosferica" name="contagem_ave_boia[<?php echo $numero; ?>][pressao_atmosferica]" value="<?php echo $contagemAveBoia->getPressaoAtmosferica() ?>">
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="contagem_ave_boia_<?php echo $numero; ?>_lat" class="col-md-4 control-label">Latitude (decimal)</label>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="contagem_ave_boia_<?php echo $numero; ?>_lat" class="col-md-4 control-label">Longitude (decimal)</label>
@@ -110,7 +110,7 @@
                 </div>
             </div>
         </div>
-        
+
         <h3 class="text-center titulo">Espécies</h3>
         <hr class="hr-sisalbatroz">
 
@@ -139,7 +139,7 @@
             'addOne': false,
             'isEdit': <?php echo $contagemAveBoia->getContagemAveBoiaEspecie()->count() > 0 ? 'true' : 'false' ?>
         });
-        
+
         $("#contagem_ave_boia_<?php echo $numero ?>_lance").select2({
             placeholder: "Selecione",
             allowClear: true,
@@ -147,13 +147,13 @@
                 return "Nenhum item encontrado";
             }
         });
-        
+
         <?php if (is_null($contagemAveBoia->getId())) :?>
             adicionarLances($("#contagem_ave_boia_<?php echo $numero ?>_lance"));
         <?php endif;?>
-        
+
         $(".select2-container").removeClass('lance-observadorbordo');
-        
+
         $("#contagem_ave_boia_<?php echo $numero ?>_boia_radio").change(function () {
             var idValue = '';
 
@@ -163,20 +163,20 @@
                 idValue = $('#contagem_ave_boia_<?php echo $numero; ?>_id').val();
             }
             alterarBoia($("#contagem_ave_boia_<?php echo $numero ?>_boia_radio").val(), idValue);
-        }); 
+        });
 
         $('#remove-contagem-ave-boia-<?php echo $numero ?>').click(function () {
             alterarBoia(null, $('#contagem_ave_boia_<?php echo $numero; ?>_id').val());
         });
-        
+
         $('#contagem_ave_boia_<?php echo $numero ?>_lance').change(function () {
             var data = $('#contagem_ave_boia_<?php echo $numero ?>_lance').select2('data');
             var text = '';
-            
+
             if (data) {
                 text = 'Lance #' + data.text;
             }
-            
+
             $('#contagem_ave_boia_span_lance_<?php echo $numero; ?>').html(text);
         });
     });

@@ -29,7 +29,7 @@
                         <?php endif;?>
 
                         <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'cad_empresa_ct')) :?>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_empresa_ct/cadempresa');?>">Empresas</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_empresa_ct');?>">Empresas</a></li>
                         <?php endif;?>
 
                         <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'cad_observ_ct')) :?>

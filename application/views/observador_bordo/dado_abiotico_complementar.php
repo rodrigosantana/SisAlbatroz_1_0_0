@@ -127,7 +127,7 @@
         <div class="row ">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento" class="col-md-4 control-label lb_lance">Velocidade do vento (nós)</label>
+                    <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento" class="col-md-4 control-label lb_lance">Velocidade do vento (escala Beaufort)</label>
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][inicio][velocidade_vento]">
                             <option></option>
@@ -152,7 +152,7 @@
         <div class="row ">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_categoria_mar" class="col-md-4 control-label">Categoria do mar</label>
+                    <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_categoria_mar" class="col-md-4 control-label">Categoria do mar (escala Beaufort)</label>
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_categoria_mar" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][inicio][categoria_mar]">
                             <option></option>
@@ -355,7 +355,7 @@
         <div class="row ">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_velocidade_vento" class="col-md-4 control-label lb_lance">Velocidade do vento (nós)</label>
+                    <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_velocidade_vento" class="col-md-4 control-label lb_lance">Velocidade do vento (escala Beaufort)</label>
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_velocidade_vento" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][velocidade_vento]">
                             <option></option>
@@ -380,7 +380,7 @@
         <div class="row ">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_categoria_mar" class="col-md-4 control-label">Categoria do mar</label>
+                    <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_categoria_mar" class="col-md-4 control-label">Categoria do mar (escala Beaufort)</label>
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_categoria_mar" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][categoria_mar]">
                             <option></option>
@@ -430,14 +430,14 @@
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_cobertura_ceu" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][cobertura_ceu]">
                             <option></option>
-                            <option value="1" <?php echo $objeto->getCoberturaCeuFim() === 1 ? 'selected' : ''?>>1 - Céu totalmente limpo</option>
-                            <option value="2" <?php echo $objeto->getCoberturaCeuFim() === 2 ? 'selected' : ''?>>2</option>
-                            <option value="3" <?php echo $objeto->getCoberturaCeuFim() === 3 ? 'selected' : ''?>>3</option>
-                            <option value="4" <?php echo $objeto->getCoberturaCeuFim() === 4 ? 'selected' : ''?>>4</option>
-                            <option value="5" <?php echo $objeto->getCoberturaCeuFim() === 5 ? 'selected' : ''?>>5</option>
-                            <option value="6" <?php echo $objeto->getCoberturaCeuFim() === 6 ? 'selected' : ''?>>6</option>
-                            <option value="7" <?php echo $objeto->getCoberturaCeuFim() === 7 ? 'selected' : ''?>>7</option>
-                            <option value="8" <?php echo $objeto->getCoberturaCeuFim() === 8 ? 'selected' : ''?>>8 - Céu totalmente encoberto</option>
+                            <option value="1" <?php echo $objeto->getCoberturaCeuFim() === 1 ? 'selected' : ''?>>1/8 - Céu totalmente limpo</option>
+                            <option value="2" <?php echo $objeto->getCoberturaCeuFim() === 2 ? 'selected' : ''?>>2/8</option>
+                            <option value="3" <?php echo $objeto->getCoberturaCeuFim() === 3 ? 'selected' : ''?>>3/8</option>
+                            <option value="4" <?php echo $objeto->getCoberturaCeuFim() === 4 ? 'selected' : ''?>>4/8</option>
+                            <option value="5" <?php echo $objeto->getCoberturaCeuFim() === 5 ? 'selected' : ''?>>5/8</option>
+                            <option value="6" <?php echo $objeto->getCoberturaCeuFim() === 6 ? 'selected' : ''?>>6/8</option>
+                            <option value="7" <?php echo $objeto->getCoberturaCeuFim() === 7 ? 'selected' : ''?>>7/8</option>
+                            <option value="8" <?php echo $objeto->getCoberturaCeuFim() === 8 ? 'selected' : ''?>>8/8 - Céu totalmente encoberto</option>
                         </select>
                     </div>
                 </div>
@@ -527,7 +527,7 @@
                 return "Nenhum item encontrado";
             }
         });
-        
+
         $("#dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento").select2({
             placeholder: "Selecione",
             allowClear: true,
@@ -535,8 +535,8 @@
                 return "Nenhum item encontrado";
             }
         });
-        
-        
+
+
         $("#dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_velocidade_vento").select2({
             placeholder: "Selecione",
             allowClear: true,

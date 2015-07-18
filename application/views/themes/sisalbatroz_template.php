@@ -6,7 +6,7 @@
     <head>
         <!-- Informações sobre o texto e caracteres -->
         <meta http-equiv="Content-type" content="text/hetml; charset=UTF-8">
-        <title> Mapa de Bordo </title>
+        <title> SisAlbatroz </title>
         <!-- CSS customizado do form -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css" />
         <!-- CSS do bootstrap    -->

@@ -4,44 +4,47 @@ class Cad_mestre_ct extends MY_Controller {
 
 
     public function __construct() {
+      // Nome do model
         $this->modelClassName = 'CadMestre';
+        //
         $this->viewPath = 'mestre';
 
         parent::__construct();
     }
 
     public function access_map() {
-        return array(
-            'index'=>'view',
-            'filter'=>'view',
-            'clearfilter'=>'view',
-            'novo'=>'create',
-            'edita'=>'edit',
-            'salva'=>'create',
-            'validation'=>'create',
-            'exclui'=>'delete',
-            );
-
+      return array(
+         'index'=>'view',
+         'filter'=>'view',
+         'clearfilter'=>'view',
+         'novo'=>'create',
+         'edita'=>'edit',
+         'salva'=>'create',
+         'validation'=>'create',
+         'exclui'=>'delete',
+         );
     }
-
 
     public function novo() {
         $this->load->view($this->viewPath . "/new", array("mestre" =>new CadMestre()));
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     public function edita() {
         $mestre = null;
 
-        if ($this->input->get('id') && is_numeric($this->input->get('id'))) {
-            $mestre = $this->doctrine->em->find('CadMestre', $this->input->get('id'));
+        if ($this->input->get('idMestre') && is_numeric($this->input->get('idMestre'))) {
+            $mestre = $this->doctrine->em->find('CadMestre', $this->input->get('idMestre'));
         }
 
-        if (is_null($mestre)) {
-            show_error('unknown_registry_error_message');
-        }
+        
+      //   if (is_null($mestre)) {
+      //       show_error('unknown_registry_error_message');
+      //   }
 
         $this->load->view($this->viewPath . "/new", array("mestre" => $mestre));
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     public function salva() {
 
@@ -71,6 +74,7 @@ class Cad_mestre_ct extends MY_Controller {
         $this->session->set_flashdata(get_class($this) . '_mensagem', 'Mestre salvo com sucesso!');
         redirect($this->viewPath . '/index', 'refresh');
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     public function validation($returnError = false) {
         $this->form_validation->set_rules("nome", "Nome", "trim|required|max_length[100]");
@@ -89,25 +93,27 @@ class Cad_mestre_ct extends MY_Controller {
         $this->output->_mode = MY_Output::OUTPUT_MODE_NORMAL;
         $this->load->view("jsonresponse", $return);
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
-   public function exclui(){
-        $mestre = $this->doctrine->em->find("CadMestre", $this->input->get("id"));
-
-        if (is_null($mestre)) {
-            show_error('unknown_registry_error_message');
-        }
-
-        $this->doctrine->em->remove($mestre);
-        $this->doctrine->em->flush();
-        $this->session->set_flashdata(get_class($this) . '_mensagem', 'Mestre excluído com sucesso.');
-		redirect($this->viewPath . '/index');
-   }
-
+   // public function exclui(){
+   //      $mestre = $this->doctrine->em->find("CadMestre", $this->input->get("id"));
+   //
+   //      if (is_null($mestre)) {
+   //          show_error('unknown_registry_error_message');
+   //      }
+   //
+   //      $this->doctrine->em->remove($mestre);
+   //      $this->doctrine->em->flush();
+   //      $this->session->set_flashdata(get_class($this) . '_mensagem', 'Mestre excluído com sucesso.');
+	// 	redirect($this->viewPath . '/index');
+   // }
+//--------------------------------------------------------------------------------------------------------------------//
     protected function telaFiltro() {
         return $this->load->view($this->viewPath . "/filter", array(
             'filtro'=>$this->session->userdata('filtros_' . get_class($this))
             ), true);
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     public function filter() {
       $filtros = array();
@@ -131,12 +137,13 @@ class Cad_mestre_ct extends MY_Controller {
       $this->session->set_userdata('filtros_' . get_class($this), $filtros);
       redirect($this->viewPath . '/index');
     }
+//--------------------------------------------------------------------------------------------------------------------//
 
     public function clearfilter() {
         $this->session->set_userdata('filtros_' . get_class($this), array());
         redirect($this->viewPath . '/index');
     }
-
+//--------------------------------------------------------------------------------------------------------------------//
 
      protected function filterQueryBuilder() {
         $filtrosSessao = $this->session->userdata('filtros_' . get_class($this));

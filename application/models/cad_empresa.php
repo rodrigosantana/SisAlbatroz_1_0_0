@@ -76,6 +76,11 @@ class Cad_empresa {
     private $email;
 //--------------------------------------------------------------------------------------------------------------------//
 
+   public function getIdEmpresa() {
+      return $this->id_empresa;
+   }
+//--------------------------------------------------------------------------------------------------------------------//
+
     /**
      *Set nome
      *
@@ -87,6 +92,11 @@ class Cad_empresa {
         $this->nome=$nome;
         return $this;
     }
+
+   public function getNome() {
+      return $this->nome;
+   }
+
 //--------------------------------------------------------------------------------------------------------------------//
     /**
      * Set Municipio
@@ -136,6 +146,10 @@ class Cad_empresa {
         $this->contato=$contato;
         return $this;
     }
+
+    public function getContato() {
+      return $this->contato;
+   }
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
@@ -149,6 +163,10 @@ class Cad_empresa {
         $this->cargo=$cargo;
         return $this;
     }
+
+    public function getCargo() {
+      return $this->cargo;
+   }
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
@@ -162,6 +180,11 @@ class Cad_empresa {
         $this->tel=$tel;
         return $this;
     }
+
+    public function getTel(){
+      return $this->tel;
+   }
+
 //--------------------------------------------------------------------------------------------------------------------//
 
     /**
@@ -175,13 +198,12 @@ class Cad_empresa {
         $this->email=$email;
         return $this;
     }
+
+    public function getEmail(){
+      return $this->email;
+   }
 //--------------------------------------------------------------------------------------------------------------------//
 
-    public function getIdEmpresa() {
-        return $this->id_empresa;
-    }
 
-    public function getNome() {
-        return $this->nome;
-    }
+
 }

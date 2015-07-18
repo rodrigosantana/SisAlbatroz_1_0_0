@@ -37,6 +37,9 @@ class Especie extends MY_Controller {
             $especie = $this->doctrine->em->find('Especies', $this->input->get('id'));
         }
 
+        var_dump($especie);
+        die();
+
         if (is_null($especie)) {
             show_error('unknown_registry_error_message');
         }

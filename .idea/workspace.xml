@@ -5,34 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27bba3fd-7fac-4519-92a4-b1c13b9e77eb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_embarcacao.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_embarcacao.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_embarcacao_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_embarcacao_ct.php" />
+      <change type="DELETED" beforePath="C:\wamp\www\SisAlbatroz_1_0_0\application\views\mapa_bordo\cad_empresa.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cad_empresa.php" afterPath="$PROJECT_DIR$/application/models/cad_empresa.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_empresa.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_empresa.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_empresa_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_empresa_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_mestre.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_mestre.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_mestre_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_mestre_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/cad_observ_ct.php" afterPath="$PROJECT_DIR$/application/controllers/cad_observ_ct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cad_observador.php" afterPath="$PROJECT_DIR$/application/models/cad_observador.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/cad_observador.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/cad_observador.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cadembarcacao.php" afterPath="$PROJECT_DIR$/application/models/cadembarcacao.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cadmestre.php" afterPath="$PROJECT_DIR$/application/models/cadmestre.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/cadobservador.php" afterPath="$PROJECT_DIR$/application/models/cadobservador.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/observador_bordo/dado_abiotico.php" afterPath="$PROJECT_DIR$/application/views/observador_bordo/dado_abiotico.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/observador_bordo/contagem_ave_boia.php" afterPath="$PROJECT_DIR$/application/views/observador_bordo/contagem_ave_boia.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/observador_bordo/dado_abiotico_complementar.php" afterPath="$PROJECT_DIR$/application/views/observador_bordo/dado_abiotico_complementar.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/especie.php" afterPath="$PROJECT_DIR$/application/controllers/especie.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/especies.php" afterPath="$PROJECT_DIR$/application/models/especies.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/especie/filter.php" afterPath="$PROJECT_DIR$/application/views/especie/filter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/especie/index.php" afterPath="$PROJECT_DIR$/application/views/especie/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/mapa_bordo/mb_lancamento.php" afterPath="$PROJECT_DIR$/application/views/mapa_bordo/mb_lancamento.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/medicinaconservacao.php" afterPath="$PROJECT_DIR$/application/controllers/medicinaconservacao.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/language/portuguese/form_validation_lang.php" afterPath="$PROJECT_DIR$/application/language/portuguese/form_validation_lang.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/menu.php" afterPath="$PROJECT_DIR$/application/views/menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/municipio.php" afterPath="$PROJECT_DIR$/application/models/municipio.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/especie/new.php" afterPath="$PROJECT_DIR$/application/views/especie/new.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/medicina_conservacao/new.php" afterPath="$PROJECT_DIR$/application/views/medicina_conservacao/new.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/observador_bordo/new.php" afterPath="$PROJECT_DIR$/application/views/observador_bordo/new.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/observadorbordo.php" afterPath="$PROJECT_DIR$/application/controllers/observadorbordo.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/themes/sisalbatroz_template.php" afterPath="$PROJECT_DIR$/application/views/themes/sisalbatroz_template.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/sistema_ct.php" afterPath="$PROJECT_DIR$/application/controllers/sistema_ct.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SisMBAlbatroz_CI.iws" />
@@ -87,7 +71,28 @@
     <favorites_list name="SisMBAlbatroz_CI" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="mapa_bordo_ct.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/mapa_bordo_ct.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1260" max-vertical-offset="10680">
+              <caret line="159" column="46" selection-start-line="159" selection-start-column="46" selection-end-line="159" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/mapa_bordo/new.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5070422" vertical-offset="2448" max-vertical-offset="4008">
+              <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -210,7 +215,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -303,6 +307,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -462,7 +467,13 @@
       <option name="project" value="LOCAL" />
       <updated>1435865351472</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Correçoes dos Basilares e pequenas alterações no sistema">
+      <created>1436964646844</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1436964646844</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -487,7 +498,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -495,10 +506,10 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22547974" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17643923" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17963752" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19275825" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -551,7 +562,8 @@
     <MESSAGE value="System update" />
     <MESSAGE value=" System update AS" />
     <MESSAGE value="Mapa de Bordo - Adição de campo sobre ponteira." />
-    <option name="LAST_COMMIT_MESSAGE" value="Mapa de Bordo - Adição de campo sobre ponteira." />
+    <MESSAGE value="Correçoes dos Basilares e pequenas alterações no sistema" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correçoes dos Basilares e pequenas alterações no sistema" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -707,13 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/mapa_bordo_ct.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3612" max-vertical-offset="10680">
-          <caret line="159" column="46" selection-start-line="159" selection-start-column="46" selection-end-line="159" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/sql/schema_sch01_sisalbatroz-11-06-2015.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="77280">
@@ -739,13 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.1280846" vertical-offset="2725" max-vertical-offset="3816">
           <caret line="109" column="35" selection-start-line="109" selection-start-column="35" selection-end-line="109" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mapa_bordo/new.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5076381" vertical-offset="2448" max-vertical-offset="4008">
-          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -896,13 +894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/mapa_bordo/cad_empresa.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5358402" vertical-offset="768" max-vertical-offset="3168">
-          <caret line="51" column="104" selection-start-line="51" selection-start-column="104" selection-end-line="51" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/cad_observ_ct.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32197416" vertical-offset="14" max-vertical-offset="3216">
@@ -914,6 +905,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50293773" vertical-offset="1156" max-vertical-offset="4536">
           <caret line="66" column="33" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/mapa_bordo_ct.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1260" max-vertical-offset="10680">
+          <caret line="159" column="46" selection-start-line="159" selection-start-column="46" selection-end-line="159" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/mapa_bordo/new.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5070422" vertical-offset="2448" max-vertical-offset="4008">
+          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
