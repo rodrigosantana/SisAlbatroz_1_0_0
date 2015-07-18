@@ -133,6 +133,7 @@ $autoload['model'] = array(
     'CadObservador',
     'CadEntrevistador',
     'SystemUsers',
+    'Porto',
     
     'CadIsca',
     'CadMedidaMetigatoria',
@@ -168,6 +169,18 @@ $autoload['model'] = array(
     'McOutrasPesquisas',
     'MedConservacao',
     
+    'Petrecho',
+    'PetrechoArrasto',
+    'PetrechoEspinhel',
+    'PetrechoLinha',
+    'PetrechoRede',
+    'PetrechoRedePano',
+    'EntrevistaCais',
+    'EntrevistaCaisAreaPesca',
+    'EntrevistaCaisCapturaAve',
+    '',
+    '',
+    '',
     
 );
 

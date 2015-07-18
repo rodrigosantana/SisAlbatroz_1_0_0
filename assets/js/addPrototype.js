@@ -44,7 +44,7 @@ var Prototype = {
             
             el.remove();
             if(ptype.elementCount() > 0){
-                $(config.list).children(config.container+':last').find('.insertaction').focus();
+                //$(config.list).children(config.container+':last').find('.insertaction').focus();
             }else{
                 $(config.addButton).focus();
             }
@@ -60,7 +60,7 @@ var Prototype = {
             if ($(evt.target).parents(config.container).length == 1){
                 ptype.removerElemento($(evt.target).parents(config.container));
                 if(ptype.elementCount() > 0){
-                    $(config.list).children(config.container+':last').find('.insertaction').focus();
+                    //$(config.list).children(config.container+':last').find('.insertaction').focus();
                 }else{
                     $(config.addButton).focus();
                 }
@@ -88,12 +88,12 @@ var Prototype = {
                         }); 
 
                         //seta evento de remoção por atalho de teclado
-                        $(this).bind('keydown', 'Ctrl+del', ptype.teclaDelete);
+                        //$(this).bind('keydown', 'Ctrl+del', ptype.teclaDelete);
 
                     }
 
                     //seta evento de adição por atalho de teclado
-                    $(this).bind('keydown', 'Ctrl+insert', ptype.teclaInsert);
+                    //$(this).bind('keydown', 'Ctrl+insert', ptype.teclaInsert);
                 
                 });
             } else {
@@ -113,12 +113,12 @@ var Prototype = {
                         }); 
 
                         //seta evento de remoção por atalho de teclado
-                        $(this).bind('keydown', 'Ctrl+del', ptype.teclaDelete);
+                        //$(this).bind('keydown', 'Ctrl+del', ptype.teclaDelete);
 
                     }
 
                     //seta evento de adição por atalho de teclado
-                    $(this).bind('keydown', 'Ctrl+insert', ptype.teclaInsert);
+                    //$(this).bind('keydown', 'Ctrl+insert', ptype.teclaInsert);
 
                 });
             }
@@ -195,10 +195,10 @@ var Prototype = {
                 }
                 
                 if(!removeKeyboardDeleteShortcut){
-                    list.children(config.container+':last-child').find('.insertaction').bind('keydown', 'Ctrl+del', ptype.teclaDelete); 
+                    //list.children(config.container+':last-child').find('.insertaction').bind('keydown', 'Ctrl+del', ptype.teclaDelete); 
                 }
                 
-                list.children(config.container+':last-child').find('.insertaction').bind('keydown', 'Ctrl+insert', ptype.teclaInsert); 
+                //list.children(config.container+':last-child').find('.insertaction').bind('keydown', 'Ctrl+insert', ptype.teclaInsert); 
                 
                 if (config.onCreate != null){
                     config.onCreate(config.count);
