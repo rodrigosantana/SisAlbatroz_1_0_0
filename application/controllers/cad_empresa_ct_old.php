@@ -1,0 +1,128 @@
+<?php
+
+class Cad_empresa_ct extends CI_Controller
+{
+
+    public function __construct() {
+        parent::__construct();
+
+        $this->output->set_template('sisalbatroz_template');
+    }
+
+    public function access_map() {
+         return array(
+            'cadempresa'=>'create',
+            'salva'=>'create',
+         );
+    }
+
+//  Cadastro de empresas
+    public function cadempresa()
+    {
+        $municipios = $this->doctrine->em->getRepository('Municipio')->findAll();
+
+        $this->load->view("mapa_bordo/cad_empresa", array(
+            "cad_empresa" => new Cad_empresa(),
+            "municipios"=>$municipios,
+            "mensagem"=>$this->session->flashdata('salva_cad_empresa')
+            )
+        );
+    }
+
+//--------------------------------------------------------------------------------------------------------------------//
+
+    public function salva()
+    {
+
+//      Carrega a biblioteca de validação
+        $this->load->library('form_validation');
+//      Modifica os delimitadores da msg de erro de <p></p>
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+        $cad_empresa = new Cad_empresa();
+//      Chama mensagem de sucesso de envio
+        $mensagem = $this->lang->line("salva_sucesso");
+
+//      Salva variáveis enviados por POST do form
+        $cad_empresa->setNome($this->input->post("nome"));
+        $cad_empresa->setEnd($this->input->post("endereco"));
+        $cad_empresa->setContato($this->input->post("contato"));
+        $cad_empresa->setCargo($this->input->post("cargo"));
+        $cad_empresa->setTel($this->input->post("telefone"));
+        $cad_empresa->setEmail($this->input->post("email"));
+
+        if ($this->input->post("municipio") && is_numeric($this->input->post("municipio"))) {
+            $cad_empresa->setMunicipio($this->doctrine->em->find('Municipio', $this->input->post("municipio")));
+        }
+
+//      Array com as variáveis e as regras de validação
+        $config = array(
+            array(
+                'field' => 'nome',
+                'label' => 'Nome',
+                'rules' => 'trim|required|callback_checkNome|max_length[50]'
+            ),
+            array(
+                'field' => 'municipio',
+                'label' => 'Município',
+                'rules' => 'trim|required|in_array[' . Utils::findIds( 'id', 'Municipio') . ']'
+            ),
+            array(
+                'field' => 'endereco',
+                'label' => 'Endereço',
+                'rules' => 'trim|required|max_length[225]'
+            ),
+            array(
+                'field' => 'contato',
+                'label' => 'Contato',
+                'rules' => 'trim|max_length[50]'
+            ),
+            array(
+                'field' => 'cargo',
+                'label' => 'Cargo',
+                'rules' => 'trim|max_length[50]'
+            ),
+            array(
+                'field' => 'tel',
+                'label' => 'Telefone',
+                'rules' => 'trim|max_length[11]'
+            ),
+            array(
+                'field' => 'email',
+                'label' => 'E-mail',
+                'rules' => 'trim|email|max_length[100]'
+            )
+        );
+
+//      Valida as variáveis do array
+        $this->form_validation->set_rules($config);
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view("mapa_bordo/cad_empresa", array(
+               "municipios"=>$this->doctrine->em->getRepository('Municipio')->findAll()
+            ));
+        } else {
+            $this->doctrine->em->persist($cad_empresa);
+            $this->doctrine->em->flush();
+            $this->session->set_flashdata('salva_cad_empresa', true);
+            redirect('cad_empresa_ct/cadempresa');
+        }
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+    // Função para checar se a espécie já existe no BD
+    public function checkNome($check)
+    {
+
+        $checkNome = $this->doctrine->em->getRepository("Cad_empresa")->findOneBy(array("nome" => $check));
+        if ($checkNome == null) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkNome',
+                '<strong style="color:#FE0000">Essa empresa já foi cadastrada.</strong>');
+            return FALSE;
+        }
+    }
+//--------------------------------------------------------------------------------------------------------------------//
+
+}
