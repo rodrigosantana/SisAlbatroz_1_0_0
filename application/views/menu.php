@@ -33,7 +33,7 @@
                         <?php endif;?>
 
                         <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'cad_observ_ct')) :?>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_observ_ct/cadobserv');?>">Observadores</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_observ_ct');?>">Observadores</a></li>
                         <?php endif;?>
 
                         <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'usuario')) :?>
@@ -65,13 +65,13 @@
                         <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'entrevistacaisct')) :?>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('entrevistacaisct');?>">Consulta</a></li>
                         <?php endif;?>
-                        
+
                         <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'entrevistacaisct')) :?>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('entrevistacaisct/novo');?>">Cadastro</a></li>
                         <?php endif;?>
                     </ul>
                 </li>
-                
+
                 <li class="dropdown">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">Observador de Bordo <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -98,8 +98,8 @@
                         <?php endif;?>
                     </ul>
                 </li>
-                
-                
+
+
             </ul>
             <ul class="nav navbar-nav pull-right">
                 <li><a href="<?php echo site_url('sistema_ct/index/rbac/logout');?>">Sair</a></li>

@@ -57,6 +57,16 @@ class CadObservador
      */
     private $endereco;
 
+    /**
+     * @var Municipio
+     *
+     * @ManyToOne(targetEntity="Municipio")
+     * @JoinColumns({
+     *   @JoinColumn(name="municipio", referencedColumnName="id")
+     * })
+     */
+    private $municipio;
+
    /**
    * @var integer
    *
@@ -229,49 +239,26 @@ class CadObservador
     }
 
     /**
-     * Set cidade
+     * Set Municipio
      *
-     * @param string $cidade
-     * @return CadObservador
+     * @param Municipio $municipio
+     * @return CadEmbarcacao
      */
-    public function setCidade($cidade)
+    public function setMunicipio(Municipio $municipio)
     {
-        $this->cidade = $cidade;
+        $this->municipio = $municipio;
 
         return $this;
     }
 
     /**
-     * Get cidade
+     * Get Municipio
      *
      * @return string
      */
-    public function getCidade()
+    public function getMunicipio()
     {
-        return $this->cidade;
-    }
-
-    /**
-     * Set uf
-     *
-     * @param string $uf
-     * @return CadObservador
-     */
-    public function setUf($uf)
-    {
-        $this->uf = $uf;
-
-        return $this;
-    }
-
-    /**
-     * Get uf
-     *
-     * @return string
-     */
-    public function getUf()
-    {
-        return $this->uf;
+        return $this->municipio;
     }
 
     /**

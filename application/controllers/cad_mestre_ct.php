@@ -6,8 +6,8 @@ class Cad_mestre_ct extends MY_Controller {
     public function __construct() {
       // Nome do model
         $this->modelClassName = 'CadMestre';
-        //
-        $this->viewPath = 'mestre';
+
+        $this->viewPath = 'cad_mestre';
 
         parent::__construct();
     }
@@ -37,10 +37,9 @@ class Cad_mestre_ct extends MY_Controller {
             $mestre = $this->doctrine->em->find('CadMestre', $this->input->get('idMestre'));
         }
 
-        
-      //   if (is_null($mestre)) {
-      //       show_error('unknown_registry_error_message');
-      //   }
+        if (is_null($mestre)) {
+            show_error('unknown_registry_error_message');
+        }
 
         $this->load->view($this->viewPath . "/new", array("mestre" => $mestre));
     }
@@ -56,8 +55,8 @@ class Cad_mestre_ct extends MY_Controller {
         $mestre = null;
         $em = $this->doctrine->em;
 
-        if ($this->input->post('id') && is_numeric($this->input->post('id'))) {
-            $mestre = $this->doctrine->em->find('CadMestre', $this->input->post('id'));
+        if ($this->input->post('idMestre') && is_numeric($this->input->post('idMestre'))) {
+            $mestre = $this->doctrine->em->find('CadMestre', $this->input->post('idMestre'));
         }
 
         if (is_null($mestre)) {

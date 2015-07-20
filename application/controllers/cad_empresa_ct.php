@@ -5,7 +5,7 @@ class Cad_empresa_ct extends MY_Controller {
 
     public function __construct() {
         $this->modelClassName = 'Cad_empresa';
-        $this->viewPath = 'empresa';
+        $this->viewPath = 'cad_empresa';
 
         parent::__construct();
     }
@@ -19,7 +19,7 @@ class Cad_empresa_ct extends MY_Controller {
             'edita'=>'edit',
             'salva'=>'create',
             'validation'=>'create',
-            'exclui'=>'delete',
+            'exclui'=>'delete'
             );
 
     }
@@ -37,8 +37,8 @@ class Cad_empresa_ct extends MY_Controller {
     public function edita() {
         $empresa = null;
 
-        if ($this->input->get('id') && is_numeric($this->input->get('id'))) {
-            $empresa = $this->doctrine->em->find('Cad_empresa', $this->input->get('id'));
+        if ($this->input->get('id_empresa') && is_numeric($this->input->get('id_empresa'))) {
+            $empresa = $this->doctrine->em->find('Cad_empresa', $this->input->get('id_empresa'));
         }
 
         if (is_null($empresa)) {
