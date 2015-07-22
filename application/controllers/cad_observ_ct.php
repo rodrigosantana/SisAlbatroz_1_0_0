@@ -1,6 +1,6 @@
 <?php
 
-class Cad_observ_ct extends CI_Controller {
+class Cad_observ_ct extends MY_Controller {
 
     public function __construct() {
       $this->modelClassName = 'CadObservador';
@@ -147,7 +147,7 @@ class Cad_observ_ct extends CI_Controller {
    protected function telaFiltro() {
       $municipios = $this->doctrine->em->getRepository('Municipio')->findAll();
 
-      return $this->load->view($this->ViewPath . '/filte', array(
+      return $this->load->view($this->ViewPath . '/filter', array(
          'municipios' => $municipios,
          'filtro' => $this->session->userdata('filtros_' . get_class($this))
       ), true);

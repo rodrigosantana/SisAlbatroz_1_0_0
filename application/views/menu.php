@@ -20,19 +20,19 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('especie');?>">Espécies</a></li>
                         <?php endif;?>
 
-                        <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'cad_embarcacao_ct')) :?>
+                        <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_embarcacao_ct')) :?>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_embarcacao_ct/cadembarcacao');?>">Embarcações</a></li>
                         <?php endif;?>
 
-                        <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'cad_mestre_ct')) :?>
+                        <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_mestre_ct')) :?>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_mestre_ct');?>">Mestres</a></li>
                         <?php endif;?>
 
-                        <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'cad_empresa_ct')) :?>
+                        <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_empresa_ct')) :?>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_empresa_ct');?>">Empresas</a></li>
                         <?php endif;?>
 
-                        <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'cad_observ_ct')) :?>
+                        <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_observ_ct')) :?>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_observ_ct');?>">Observadores</a></li>
                         <?php endif;?>
 
