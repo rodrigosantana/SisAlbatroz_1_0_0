@@ -188,10 +188,12 @@
                                     <select class="select2" style="width: 100%" id="tipo_petrecho" name="tipo_petrecho">
                                         <option></option>
                                         <option value="petrecho_espinhel" <?php echo $entrevista->getPetrecho() instanceof PetrechoEspinhel ? 'selected' : '' ?>>Espinhel</option>
-                                        <option value="petrecho_linha" <?php echo $entrevista->getPetrecho() instanceof PetrechoLinha ? 'selected' : '' ?>>Linha</option>
-                                        <option value="petrecho_rede" <?php echo $entrevista->getPetrecho() instanceof PetrechoRede ? 'selected' : '' ?>>Rede</option>
-                                        <option value="petrecho_rede_pano" <?php echo $entrevista->getPetrecho() instanceof PetrechoRedePano ? 'selected' : '' ?>>Rede pano</option>
+                                        <option value="petrecho_linha_mao" <?php echo $entrevista->getPetrecho() instanceof PetrechoLinhaMao ? 'selected' : '' ?>>Linha de mão</option>
+                                        <option value="petrecho_cerco" <?php echo $entrevista->getPetrecho() instanceof PetrechoCerco ? 'selected' : '' ?>>Cerco</option>
+                                        <option value="petrecho_emalhe" <?php echo $entrevista->getPetrecho() instanceof PetrechoEmalhe ? 'selected' : '' ?>>Emalhe</option>
                                         <option value="petrecho_arrasto" <?php echo $entrevista->getPetrecho() instanceof PetrechoArrasto ? 'selected' : '' ?>>Arrasto</option>
+                                        <option value="petrecho_vara_isca_viva" <?php echo $entrevista->getPetrecho() instanceof PetrechoVaraIscaViva ? 'selected' : '' ?>>Vara e Isca Viva</option>
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -204,17 +206,20 @@
                             <div id="container_petrecho_espinhel" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoEspinhel ? 'display:block' : 'display:none' ?>">
                                 <?php echo $this->load->view("entrevista_cais/petrecho_espinhel", array('petrechoEspinhel' => $entrevista->getPetrecho()), true); ?>
                             </div>
-                            <div id="container_petrecho_linha" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoLinha ? 'display:block' : 'display:none' ?>">
-                                <?php echo $this->load->view("entrevista_cais/petrecho_linha", array('petrechoLinha' => $entrevista->getPetrecho()), true); ?>
+                            <div id="container_petrecho_linha_mao" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoLinhaMao ? 'display:block' : 'display:none' ?>">
+                                <?php echo $this->load->view("entrevista_cais/petrecho_linha_mao", array('petrechoLinhaMao' => $entrevista->getPetrecho()), true); ?>
                             </div>
-                            <div id="container_petrecho_rede" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoRede ? 'display:block' : 'display:none' ?>">
-                                <?php echo $this->load->view("entrevista_cais/petrecho_rede", array('petrechoRede' => $entrevista->getPetrecho()), true); ?>
+                            <div id="container_petrecho_cerco" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoCerco ? 'display:block' : 'display:none' ?>">
+                                <?php echo $this->load->view("entrevista_cais/petrecho_cerco", array('petrechoCerco' => $entrevista->getPetrecho()), true); ?>
                             </div>
-                            <div id="container_petrecho_rede_pano" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoRedePano ? 'display:block' : 'display:none' ?>">
-                                <?php echo $this->load->view("entrevista_cais/petrecho_rede_pano", array('petrechoRedePano' => $entrevista->getPetrecho()), true); ?>
+                            <div id="container_petrecho_emalhe" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoEmalhe ? 'display:block' : 'display:none' ?>">
+                                <?php echo $this->load->view("entrevista_cais/petrecho_emalhe", array('petrechoEmalhe' => $entrevista->getPetrecho()), true); ?>
                             </div>
                             <div id="container_petrecho_arrasto" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoArrasto ? 'display:block' : 'display:none' ?>">
                                 <?php echo $this->load->view("entrevista_cais/petrecho_arrasto", array('petrechoArrasto' => $entrevista->getPetrecho()), true); ?>
+                            </div>
+                            <div id="container_petrecho_vara_isca_viva" class="petrechos" style="<?php echo $entrevista->getPetrecho() instanceof PetrechoVaraIscaViva ? 'display:block' : 'display:none' ?>">
+                                <?php echo $this->load->view("entrevista_cais/petrecho_vara_isca_viva", array('petrechoVaraIscaViva' => $entrevista->getPetrecho()), true); ?>
                             </div>
                         </div>
                     </div>

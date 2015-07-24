@@ -172,15 +172,14 @@ $autoload['model'] = array(
     'Petrecho',
     'PetrechoArrasto',
     'PetrechoEspinhel',
-    'PetrechoLinha',
-    'PetrechoRede',
-    'PetrechoRedePano',
+    'PetrechoLinhaMao',
+    'PetrechoCerco',
+    'PetrechoEmalhe',
+    'PetrechoVaraIscaViva',    
     'EntrevistaCais',
     'EntrevistaCaisAreaPesca',
     'EntrevistaCaisCapturaAve',
-    '',
-    '',
-    '',
+    
     
 );
 

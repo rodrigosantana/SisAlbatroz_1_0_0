@@ -3,11 +3,11 @@
 /**
  * Petrecho
  *
- * @Table(name="petrecho")
+ * @Table(name="ec_petrecho")
  * @Entity
  * @InheritanceType("JOINED")
  * @DiscriminatorColumn(name="tipo", type="string")
- * @DiscriminatorMap({"petrecho_espinhel" = "PetrechoEspinhel", "petrecho_linha" = "PetrechoLinha", "petrecho_rede" = "PetrechoRede", "petrecho_rede_pano" = "PetrechoRedePano", "petrecho_arrasto" = "PetrechoArrasto"})
+ * @DiscriminatorMap({"petrecho_espinhel" = "PetrechoEspinhel", "petrecho_linha_mao" = "PetrechoLinhaMao", "petrecho_cerco" = "PetrechoCerco", "petrecho_emalhe" = "PetrechoEmalhe", "petrecho_arrasto" = "PetrechoArrasto", "petrecho_vara_isca_viva" = "PetrechoVaraIscaViva"})
  */
 class Petrecho
 {

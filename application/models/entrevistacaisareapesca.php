@@ -3,7 +3,7 @@
 /**
  * EntrevistaCaisAreaPesca
  *
- * @Table(name="entrevista_cais_area_pesca")
+ * @Table(name="ec_area_pesca")
  * @Entity
  */
 class EntrevistaCaisAreaPesca {

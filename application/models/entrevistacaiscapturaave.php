@@ -3,7 +3,7 @@
 /**
  * EntrevistaCaisCapturaAve
  *
- * @Table(name="entrevista_cais_captura_ave")
+ * @Table(name="ec_captura_ave")
  * @Entity
  */
 class EntrevistaCaisCapturaAve {

@@ -168,10 +168,10 @@ class EntrevistaCaisCt extends MY_Controller {
                         $petrecho->setHoraRecolhimentoFim(Utils::timeToDateTime($dados['hora_recolhimento_fim']));
                     }
                 }
-            } else if ($tipoPetrecho == "petrecho_linha") {
-                if ($this->input->post('petrecho_linha')) {
-                    $dados = $this->input->post('petrecho_linha');
-                    $petrecho = new PetrechoLinha();
+            } else if ($tipoPetrecho == "petrecho_linha_mao") {
+                if ($this->input->post('petrecho_linha_mao')) {
+                    $dados = $this->input->post('petrecho_linha_mao');
+                    $petrecho = new PetrechoLinhaMao();
                     
                     if (isset($dados['numero_linhas']) && is_numeric($dados['numero_linhas'])) {
                         $petrecho->setNumeroLinhas((int)$dados['numero_linhas']);
@@ -201,10 +201,10 @@ class EntrevistaCaisCt extends MY_Controller {
                         $petrecho->setOutros($dados['outros']);
                     }
                 }
-            } else if ($tipoPetrecho == "petrecho_rede") {
-                if ($this->input->post('petrecho_rede')) {
-                    $dados = $this->input->post('petrecho_rede');
-                    $petrecho = new PetrechoRede();
+            } else if ($tipoPetrecho == "petrecho_cerco") {
+                if ($this->input->post('petrecho_cerco')) {
+                    $dados = $this->input->post('petrecho_cerco');
+                    $petrecho = new PetrechoCerco();
                     
                     if (isset($dados['comprimento_rede']) && is_numeric($dados['comprimento_rede'])) {
                         $petrecho->setComprimentoRede((int)$dados['comprimento_rede']);
@@ -226,10 +226,10 @@ class EntrevistaCaisCt extends MY_Controller {
                         $petrecho->setTempoEstimadoRecolhimento(Utils::timeToDateTime($dados['tempo_estimado_recolhimento']));
                     }
                 }
-            } else if ($tipoPetrecho == "petrecho_rede_pano") {
-                if ($this->input->post('petrecho_rede_pano')) {
-                    $dados = $this->input->post('petrecho_rede_pano');
-                    $petrecho = new PetrechoRedePano();
+            } else if ($tipoPetrecho == "petrecho_emalhe") {
+                if ($this->input->post('petrecho_emalhe')) {
+                    $dados = $this->input->post('petrecho_emalhe');
+                    $petrecho = new PetrechoEmalhe();
                 
                     if (isset($dados['tipo_rede'])) {
                         $petrecho->setTipoRede($dados['tipo_rede']);
@@ -275,6 +275,31 @@ class EntrevistaCaisCt extends MY_Controller {
                     
                     if (isset($dados['tempo_medio_arrasto'])) {
                         $petrecho->setTempoMedioArrasto(Utils::timeToDateTime($dados['tempo_medio_arrasto']));
+                    }
+                }
+            } else if ($tipoPetrecho == "petrecho_vara_isca_viva") {
+                if ($this->input->post('petrecho_vara_isca_viva')) {
+                    $dados = $this->input->post('petrecho_vara_isca_viva');
+                    $petrecho = new PetrechoVaraIscaViva();
+                    
+                    if (isset($dados['dias_isca']) && is_numeric($dados['dias_isca'])) {
+                        $petrecho->setDiasIsca((int)$dados['dias_isca']);
+                    }
+                    
+                    if (isset($dados['dias_capeando']) && is_numeric($dados['dias_capeando'])) {
+                        $petrecho->setDiasCapeando((int)$dados['dias_capeando']);
+                    }
+                    
+                    if (isset($dados['total_lances']) && is_numeric($dados['total_lances'])) {
+                        $petrecho->setTotalLances((int)$dados['total_lances']);
+                    }
+                    
+                    if (isset($dados['numero_pescadores']) && is_numeric($dados['numero_pescadores'])) {
+                        $petrecho->setNumeroPescadores((int)$dados['numero_pescadores']);
+                    }
+                    
+                    if (isset($dados['boia'])) {
+                        $petrecho->setBoia(Utils::valorBooleano($dados['boia']));
                     }
                 }
             }
@@ -402,33 +427,41 @@ class EntrevistaCaisCt extends MY_Controller {
                 $this->form_validation->set_rules('[petrecho_espinhel][hora_lancamento_fim]', "Hora do lançamento final", "trim|time_validation");
                 $this->form_validation->set_rules('[petrecho_espinhel][hora_recolhimento_inicio]', "Hora do recolhimento inicio", "trim|time_validation");
                 $this->form_validation->set_rules('[petrecho_espinhel][hora_recolhimento_fim]', "Hora do recolhimento final", "trim|time_validation");
-            } else if ($tipoPetrecho == "petrecho_linha") {
-                $this->form_validation->set_rules('[petrecho_linha][numero_linhas]', "Nº de linhas", "trim|integer");
-                $this->form_validation->set_rules('[petrecho_linha][numero_anzois_por_linha]', "Nº de anzóis por linha", "trim|integer");
-                $this->form_validation->set_rules('[petrecho_linha][numero_lances_por_dia]', "Nº de lances por dia", "trim|integer");                    
-                $this->form_validation->set_rules('[petrecho_linha][hora_inicial]', "Hora inicial", "trim|time_validation");
-                $this->form_validation->set_rules('[petrecho_linha][hora_final]', "Hora final", "trim|time_validation");                   
-                $this->form_validation->set_rules('[petrecho_linha][tipo_petrecho_utilizado]', "Tipo de petrecho utilizado", 'trim|in_array[' . implode(',', Utils::getTipoPetrecho()) . ']');
-                $this->form_validation->set_rules('[petrecho_linha][outros]', "Outros", "trim");
-            } else if ($tipoPetrecho == "petrecho_rede") {
-                $this->form_validation->set_rules('[petrecho_rede][comprimento_rede]', "Comp. da rede (m)", "trim|integer");
-                $this->form_validation->set_rules('[petrecho_rede][altura_rede]', "Altura da rede (m)", "trim|integer");
-                $this->form_validation->set_rules('[petrecho_rede][numero_cercos_totais]', "Nº de cercos totais", "trim|integer");
-                $this->form_validation->set_rules('[petrecho_rede][tempo_estimado_cercamento]', "Tempo estimado de cercamento", "trim|time_validation");
-                $this->form_validation->set_rules('[petrecho_rede][tempo_estimado_recolhimento]', "Tempo estimado de recolhimento", "trim|time_validation");                
-            } else if ($tipoPetrecho == "petrecho_rede_pano") {
-                $this->form_validation->set_rules('[petrecho_rede_pano][tipo_rede]', "Rede", 'trim|in_array[' . implode(',', Utils::getTipoRede()) . ']');                
-                $this->form_validation->set_rules('[petrecho_rede_pano][comprimento_pano]', "Comp. do pano (m)", "trim|integer");
-                $this->form_validation->set_rules('[petrecho_rede_pano][altura_pano]', "Altura do pano (m)", "trim|integer");
-                $this->form_validation->set_rules('[petrecho_rede_pano][numero_panos_por_lance]', "Nº de panos por lance", "trim|integer");                
-                $this->form_validation->set_rules('[petrecho_rede_pano][regime_trabalho]', "Regime de trabalho", 'trim|in_array[' . implode(',', Utils::getRegimeTrabalho()) . ']');
-                $this->form_validation->set_rules('[petrecho_rede_pano][tempo_estimado_lancamento]', "Tempo estimado de lançamento", "trim|time_validation");
-                $this->form_validation->set_rules('[petrecho_rede_pano][tempo_estimado_recolhimento]', "Tempo estimado de recolhimento", "trim|time_validation"); 
+            } else if ($tipoPetrecho == "petrecho_linha_mao") {
+                $this->form_validation->set_rules('[petrecho_linha_mao][numero_linhas]', "Nº de linhas", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_linha_mao][numero_anzois_por_linha]', "Nº de anzóis por linha", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_linha_mao][numero_lances_por_dia]', "Nº de lances por dia", "trim|integer");                    
+                $this->form_validation->set_rules('[petrecho_linha_mao][hora_inicial]', "Hora inicial", "trim|time_validation");
+                $this->form_validation->set_rules('[petrecho_linha_mao][hora_final]', "Hora final", "trim|time_validation");                   
+                $this->form_validation->set_rules('[petrecho_linha_mao][tipo_petrecho_utilizado]', "Tipo de petrecho utilizado", 'trim|in_array[' . implode(',', Utils::getTipoPetrecho()) . ']');
+                $this->form_validation->set_rules('[petrecho_linha_mao][outros]', "Outros", "trim");
+            } else if ($tipoPetrecho == "petrecho_cerco") {
+                $this->form_validation->set_rules('[petrecho_cerco][comprimento_rede]', "Comp. da rede (m)", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_cerco][altura_rede]', "Altura da rede (m)", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_cerco][numero_cercos_totais]', "Nº de cercos totais", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_cerco][tempo_estimado_cercamento]', "Tempo estimado de cercamento", "trim|time_validation");
+                $this->form_validation->set_rules('[petrecho_cerco][tempo_estimado_recolhimento]', "Tempo estimado de recolhimento", "trim|time_validation");                
+            } else if ($tipoPetrecho == "petrecho_emalhe") {
+                $this->form_validation->set_rules('[petrecho_emalhe][tipo_rede]', "Rede", 'trim|in_array[' . implode(',', Utils::getTipoRede()) . ']');                
+                $this->form_validation->set_rules('[petrecho_emalhe][comprimento_pano]', "Comp. do pano (m)", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_emalhe][altura_pano]', "Altura do pano (m)", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_emalhe][numero_panos_por_lance]', "Nº de panos por lance", "trim|integer");                
+                $this->form_validation->set_rules('[petrecho_emalhe][regime_trabalho]', "Regime de trabalho", 'trim|in_array[' . implode(',', Utils::getRegimeTrabalho()) . ']');
+                $this->form_validation->set_rules('[petrecho_emalhe][tempo_estimado_lancamento]', "Tempo estimado de lançamento", "trim|time_validation");
+                $this->form_validation->set_rules('[petrecho_emalhe][tempo_estimado_recolhimento]', "Tempo estimado de recolhimento", "trim|time_validation"); 
             } else if ($tipoPetrecho == "petrecho_arrasto") {
                 $this->form_validation->set_rules('[petrecho_arrasto][tipo_arrasto]', "Tipo de arrasto", 'trim|in_array[' . implode(',', Utils::getTipoArrasto()) . ']');
                 $this->form_validation->set_rules('[petrecho_arrasto][numero_arrastos_dia]', "Nº de arrastos por dia", "trim|integer");
                 $this->form_validation->set_rules('[petrecho_arrasto][tempo_medio_arrasto]', "Tempo médio de cada arrasto (h)", "trim|time_validation");
+            } else if ($tipoPetrecho == "petrecho_vara_isca_viva") {
+                $this->form_validation->set_rules('[petrecho_vara_isca_viva][dias_isca]', "Dias na isca", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_vara_isca_viva][dias_capeando]', "Dias capeando", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_vara_isca_viva][total_lances]', "Nº total de lances", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_vara_isca_viva][numero_pescadores]', "Nº de pescadores", "trim|integer");
+                $this->form_validation->set_rules('[petrecho_vara_isca_viva][boia]', "Bóia", "trim|boolean_validation");
             }
+            
+            
         }
         
         $this->form_validation->set_rules('ave_observado', "Foi observado aves durante a operação de pesca", "trim|boolean_validation");

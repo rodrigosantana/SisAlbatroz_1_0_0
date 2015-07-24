@@ -1,12 +1,12 @@
 <?php
 
 /**
- * PetrechoRede
+ * PetrechoCerco
  *
- * @Table(name="petrecho_rede")
+ * @Table(name="ec_petrecho_cerco")
  * @Entity
  */
-class PetrechoRede extends Petrecho {
+class PetrechoCerco extends Petrecho {
 
     /**
      * @var integer

@@ -3,7 +3,7 @@
 /**
  * PetrechoEspinhel
  *
- * @Table(name="petrecho_espinhel")
+ * @Table(name="ec_petrecho_espinhel")
  * @Entity
  */
 class PetrechoEspinhel extends Petrecho
