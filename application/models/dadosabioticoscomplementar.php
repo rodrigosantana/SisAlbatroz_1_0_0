@@ -124,30 +124,30 @@ class DadosAbioticosComplementar
     private $categoriaMarFim;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @Column(name="temperatura_ar_inicio", type="integer", nullable=true)
+     * @Column(name="temperatura_ar_inicio", type="decimal", nullable=true)
      */
     private $temperaturaArInicio;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @Column(name="temperatura_ar_fim", type="integer", nullable=true)
+     * @Column(name="temperatura_ar_fim", type="decimal", nullable=true)
      */
     private $temperaturaArFim;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @Column(name="temperatura_sup_mar_inicio", type="integer", nullable=true)
+     * @Column(name="temperatura_sup_mar_inicio", type="decimal", nullable=true)
      */
     private $temperaturaSupMarInicio;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @Column(name="temperatura_sup_mar_fim", type="integer", nullable=true)
+     * @Column(name="temperatura_sup_mar_fim", type="decimal", nullable=true)
      */
     private $temperaturaSupMarFim;
 
@@ -179,21 +179,21 @@ class DadosAbioticosComplementar
      */
     private $pressaoAtmosfericaFim;
 
-    
+
 
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
 
-   
+
 
     /**
      * Set coordenadaInicio
@@ -211,7 +211,7 @@ class DadosAbioticosComplementar
     /**
      * Get coordenadaInicio
      *
-     * @return geometry 
+     * @return geometry
      */
     public function getCoordenadaInicio()
     {
@@ -234,7 +234,7 @@ class DadosAbioticosComplementar
     /**
      * Get coordenadaFim
      *
-     * @return geometry 
+     * @return geometry
      */
     public function getCoordenadaFim()
     {
@@ -257,7 +257,7 @@ class DadosAbioticosComplementar
     /**
      * Get dataInicio
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataInicio()
     {
@@ -280,7 +280,7 @@ class DadosAbioticosComplementar
     /**
      * Get dataFim
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataFim()
     {
@@ -303,7 +303,7 @@ class DadosAbioticosComplementar
     /**
      * Get profundidadeInicio
      *
-     * @return integer 
+     * @return integer
      */
     public function getProfundidadeInicio()
     {
@@ -326,7 +326,7 @@ class DadosAbioticosComplementar
     /**
      * Get profundidadeFim
      *
-     * @return integer 
+     * @return integer
      */
     public function getProfundidadeFim()
     {
@@ -349,7 +349,7 @@ class DadosAbioticosComplementar
     /**
      * Get rumoInicio
      *
-     * @return string 
+     * @return string
      */
     public function getRumoInicio()
     {
@@ -372,7 +372,7 @@ class DadosAbioticosComplementar
     /**
      * Get rumoFim
      *
-     * @return string 
+     * @return string
      */
     public function getRumoFim()
     {
@@ -395,7 +395,7 @@ class DadosAbioticosComplementar
     /**
      * Get direcaoVentoInicio
      *
-     * @return string 
+     * @return string
      */
     public function getDirecaoVentoInicio()
     {
@@ -418,7 +418,7 @@ class DadosAbioticosComplementar
     /**
      * Get direcaoVentoFim
      *
-     * @return string 
+     * @return string
      */
     public function getDirecaoVentoFim()
     {
@@ -441,7 +441,7 @@ class DadosAbioticosComplementar
     /**
      * Get velocidadeVentoInicio
      *
-     * @return integer 
+     * @return integer
      */
     public function getVelocidadeVentoInicio()
     {
@@ -464,7 +464,7 @@ class DadosAbioticosComplementar
     /**
      * Get velocidadeVentoFim
      *
-     * @return integer 
+     * @return integer
      */
     public function getVelocidadeVentoFim()
     {
@@ -487,7 +487,7 @@ class DadosAbioticosComplementar
     /**
      * Get categoriaMarInicio
      *
-     * @return integer 
+     * @return integer
      */
     public function getCategoriaMarInicio()
     {
@@ -510,7 +510,7 @@ class DadosAbioticosComplementar
     /**
      * Get categoriaMarFim
      *
-     * @return integer 
+     * @return integer
      */
     public function getCategoriaMarFim()
     {
@@ -533,7 +533,7 @@ class DadosAbioticosComplementar
     /**
      * Get temperaturaArInicio
      *
-     * @return integer 
+     * @return integer
      */
     public function getTemperaturaArInicio()
     {
@@ -556,7 +556,7 @@ class DadosAbioticosComplementar
     /**
      * Get temperaturaArFim
      *
-     * @return integer 
+     * @return integer
      */
     public function getTemperaturaArFim()
     {
@@ -579,7 +579,7 @@ class DadosAbioticosComplementar
     /**
      * Get temperaturaSupMarInicio
      *
-     * @return integer 
+     * @return integer
      */
     public function getTemperaturaSupMarInicio()
     {
@@ -602,7 +602,7 @@ class DadosAbioticosComplementar
     /**
      * Get temperaturaSupMarFim
      *
-     * @return integer 
+     * @return integer
      */
     public function getTemperaturaSupMarFim()
     {
@@ -625,7 +625,7 @@ class DadosAbioticosComplementar
     /**
      * Get coberturaCeuInicio
      *
-     * @return integer 
+     * @return integer
      */
     public function getCoberturaCeuInicio()
     {
@@ -648,7 +648,7 @@ class DadosAbioticosComplementar
     /**
      * Get coberturaCeuFim
      *
-     * @return integer 
+     * @return integer
      */
     public function getCoberturaCeuFim()
     {
@@ -671,7 +671,7 @@ class DadosAbioticosComplementar
     /**
      * Get pressaoAtmosfericaInicio
      *
-     * @return integer 
+     * @return integer
      */
     public function getPressaoAtmosfericaInicio()
     {
@@ -694,7 +694,7 @@ class DadosAbioticosComplementar
     /**
      * Get pressaoAtmosfericaFim
      *
-     * @return integer 
+     * @return integer
      */
     public function getPressaoAtmosfericaFim()
     {

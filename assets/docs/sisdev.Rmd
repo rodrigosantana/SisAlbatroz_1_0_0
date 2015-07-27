@@ -1,0 +1,49 @@
+---
+title: "SisDev"
+author: "André Santoro"
+date: "Saturday, July 25, 2015"
+output:
+  html_document:
+    theme: spacelab
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+
+
+## PostgreSQL
+
+### Criação de servidor local
+
+* Servidor padrão utilizando no desenvolvimento. 
+Modificar de acordo com a necessidade 
+* PgAdmin III
+ 
+1. File -> Add Server
+    + Name: PostgreSQL
+    + Host: localhost
+    + Port: 5432
+    + Maintance DB: postgres
+    + Username: postgres
+    + Password: oceano
+    + Store password: TRUE
+    + Group: Servers
+    + Deixar o restante em branco.
+
+### Criação do banco de dados
+
+
+### PostGIS
+* Criando a extensão para trabalhar com o PostIS
+
+```
+CREATE EXTENSION postgis;
+```
+
+### Acesso a schema
+
+```
+ALTER ROLE postgres IN DATABASE sisalbatroz
+  SET search_path = sch01, public;
+```

@@ -13,7 +13,7 @@ class ObservadorBordo extends MY_Controller {
         $this->boias = array();
 
         //Adicionar aqui o id das espécies que permitem a seleção de tipo de indivíduo, juvenil, adulto ou indefinido.
-        $this->especiesEspecificas = array(1,3);
+        $this->especiesEspecificas = array(1,2);
 
         parent::__construct();
     }

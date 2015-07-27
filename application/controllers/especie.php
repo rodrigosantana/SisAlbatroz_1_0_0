@@ -29,6 +29,7 @@ class Especie extends MY_Controller {
     public function novo() {
         $this->load->view($this->viewPath . "/new", array("especie" =>new Especies(), 'types'=>$this->types));
     }
+//-----------------------------------------------------------------------------------------------------------------//
 
     public function edita() {
         $especie = null;
@@ -37,15 +38,13 @@ class Especie extends MY_Controller {
             $especie = $this->doctrine->em->find('Especies', $this->input->get('id'));
         }
 
-        var_dump($especie);
-        die();
-
         if (is_null($especie)) {
             show_error('unknown_registry_error_message');
         }
 
         $this->load->view($this->viewPath . "/new", array("especie" => $especie, 'types'=>$this->types));
     }
+//-----------------------------------------------------------------------------------------------------------------//
 
     public function salva() {
 
