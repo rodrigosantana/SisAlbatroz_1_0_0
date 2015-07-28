@@ -59,6 +59,15 @@ class Utils {
     const PLUMAGEM_JUVENIL = 'juvenil';
     const PLUMAGEM_JUVENIL_EM_MUDA = 'juvenil_em_muda';
     
+    public function getPetrechoMapaBordo($value = null) {
+        $array = array(
+            self::ESPINHEL_FUNDO => 'Espinhel de Fundo',
+            self::ESPINHEL_SUPERFICIE => 'Espinhel de Superfície'
+        );
+        
+        return is_null($value) ? $array : (array_key_exists($value, $array) ? $array[$value]: 'Valor não existe');
+    }
+    
     public static function getPlumagem($value = null) {
         $array = array(
             self::PLUMAGEM_ADULTO,

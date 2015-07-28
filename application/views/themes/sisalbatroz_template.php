@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/select2/select2.css"/>
         <link href="<?php echo base_url(); ?>assets/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="<?php echo base_url();?>assets/openlayers/css/ol.css" type="text/css">
         <style>
             html {
                 position: relative;
@@ -137,7 +137,7 @@
         <script src="<?php echo base_url(); ?>assets/bootbox-master/bootbox.js" type="text/javascript" ></script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.maskMoney.min.js" type="text/javascript" ></script>
         <script src="<?php echo base_url(); ?>assets/js/fieldmanagement.js" type="text/javascript" ></script>
-
+        <script src="<?php echo base_url();?>assets/openlayers/build/ol.js"></script>
         <!-- JS dos campos dinâmicos do formulário    -->
         <script src="<?php echo base_url(); ?>assets/js/clone_form.js"></script>
         <!-- JS para vaidação do formulário    -->

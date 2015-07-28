@@ -341,4 +341,30 @@ class MbGeral {
         $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
         return $collection;
     }
+    
+    public function jsonMap() {
+        $itens = [];
+        
+        foreach ($this->lances as $value) {
+            if (!is_null($value->getCoordenada()) && $value->getCoordenada()->longitudeDecimal != "" && $value->getCoordenada()->latitudeDecimal != "") {
+                $itens[] = array(
+                    'type'=>'Feature',
+                    'id'=>$value->getIdLance(),
+                    'geometry'=>array(
+                        'type'=>'Point',
+                        'coordinates'=> [(double)$value->getCoordenada()->longitudeDecimal, (double)$value->getCoordenada()->latitudeDecimal],                        
+                    ),
+                    'properties'=>array('content'=>
+                            '<h3>Mapa de Bordo</h3>'
+                            .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
+                            .'<strong>Mestre:</strong> '. $this->getMestre()->getNome() .'<br>'
+                            .'<strong>Petrecho:</strong> '. Utils::getPetrechoMapaBordo($this->getPetrecho()) .'<br>'
+                            .'<strong>Lançamento #'.$value->getLance().':</strong> Latitude: '. $value->getCoordenada()->latitudeDecimal .' Longitude: '.$value->getCoordenada()->longitudeDecimal.'<br>'
+                        )
+                );    
+            }
+        }
+        
+        return $itens;
+    }
 }
