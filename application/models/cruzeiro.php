@@ -502,4 +502,87 @@ class Cruzeiro
         $collection = new Doctrine\Common\Collections\ArrayCollection(iterator_to_array($iterator));
         return $collection;
     }
+    
+    public function jsonMap() {
+        $itens = [];
+        
+        foreach ($this->dadosAbioticos as $value) {
+            $lancamento = $value->getDadosAbioticosLancamento();
+            $recolhimento = $value->getDadosAbioticosRecolhimento();
+            
+            if (!is_null($lancamento->getCoordenadaInicio()) && $lancamento->getCoordenadaInicio()->longitudeDecimal != "" && $lancamento->getCoordenadaInicio()->latitudeDecimal != "") {
+                $itens[] = array(
+                    'type'=>'Feature',
+                    'id'=>'lancamento_inicio_' . $this->getId() . '_' . $value->getLance(),
+                    'geometry'=>array(
+                        'type'=>'Point',
+                        'coordinates'=> [(double)$lancamento->getCoordenadaInicio()->longitudeDecimal, (double)$lancamento->getCoordenadaInicio()->latitudeDecimal],                        
+                    ),
+                    'properties'=>array('content'=>
+                            '<h3>Observador de Bordo - Dados abióticos lançamento início</h3>'
+                            .'<strong>Código:</strong> '. $this->getId() .'<br>'
+                            .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
+                            .'<strong>Mestre:</strong> '. $this->getObservador()->getNome() .'<br>'
+                            .'<strong>Lance #'.$value->getLance().':</strong> Latitude: '. $lancamento->getCoordenadaInicio()->latitudeDecimal .' Longitude: '.$lancamento->getCoordenadaInicio()->longitudeDecimal.'<br>'
+                        )
+                );    
+            }
+            
+            if (!is_null($lancamento->getCoordenadaFim()) && $lancamento->getCoordenadaFim()->longitudeDecimal != "" && $lancamento->getCoordenadaFim()->latitudeDecimal != "") {
+                $itens[] = array(
+                    'type'=>'Feature',
+                    'id'=>'lancamento_fim_' . $this->getId() . '_' . $value->getLance(),
+                    'geometry'=>array(
+                        'type'=>'Point',
+                        'coordinates'=> [(double)$lancamento->getCoordenadaFim()->longitudeDecimal, (double)$lancamento->getCoordenadaFim()->latitudeDecimal],                        
+                    ),
+                    'properties'=>array('content'=>
+                            '<h3>Observador de Bordo - Dados abióticos lançamento fim</h3>'
+                            .'<strong>Código:</strong> '. $this->getId() .'<br>'
+                            .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
+                            .'<strong>Mestre:</strong> '. $this->getObservador()->getNome() .'<br>'
+                            .'<strong>Lance #'.$value->getLance().':</strong> Latitude: '. $lancamento->getCoordenadaFim()->latitudeDecimal .' Longitude: '.$lancamento->getCoordenadaFim()->longitudeDecimal.'<br>'
+                        )
+                );    
+            }
+            
+            if (!is_null($recolhimento->getCoordenadaInicio()) && $recolhimento->getCoordenadaInicio()->longitudeDecimal != "" && $recolhimento->getCoordenadaInicio()->latitudeDecimal != "") {
+                $itens[] = array(
+                    'type'=>'Feature',
+                    'id'=>'recolhimento_inicio_' . $this->getId() . '_' . $value->getLance(),
+                    'geometry'=>array(
+                        'type'=>'Point',
+                        'coordinates'=> [(double)$recolhimento->getCoordenadaInicio()->longitudeDecimal, (double)$recolhimento->getCoordenadaInicio()->latitudeDecimal],                        
+                    ),
+                    'properties'=>array('content'=>
+                            '<h3>Observador de Bordo - Dados abióticos recolhimento início</h3>'
+                            .'<strong>Código:</strong> '. $this->getId() .'<br>'
+                            .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
+                            .'<strong>Mestre:</strong> '. $this->getObservador()->getNome() .'<br>'
+                            .'<strong>Lance #'.$value->getLance().':</strong> Latitude: '. $recolhimento->getCoordenadaInicio()->latitudeDecimal .' Longitude: '.$recolhimento->getCoordenadaInicio()->longitudeDecimal.'<br>'
+                        )
+                );    
+            }
+            
+            if (!is_null($recolhimento->getCoordenadaFim()) && $recolhimento->getCoordenadaFim()->longitudeDecimal != "" && $recolhimento->getCoordenadaFim()->latitudeDecimal != "") {
+                $itens[] = array(
+                    'type'=>'Feature',
+                    'id'=>'recolhimento_fim_' . $this->getId() . '_' . $value->getLance(),
+                    'geometry'=>array(
+                        'type'=>'Point',
+                        'coordinates'=> [(double)$recolhimento->getCoordenadaFim()->longitudeDecimal, (double)$recolhimento->getCoordenadaFim()->latitudeDecimal],                        
+                    ),
+                    'properties'=>array('content'=>
+                            '<h3>Observador de Bordo - Dados abióticos recolhimento fim</h3>'
+                            .'<strong>Código:</strong> '. $this->getId() .'<br>'
+                            .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
+                            .'<strong>Mestre:</strong> '. $this->getObservador()->getNome() .'<br>'
+                            .'<strong>Lance #'.$value->getLance().':</strong> Latitude: '. $recolhimento->getCoordenadaFim()->latitudeDecimal .' Longitude: '.$recolhimento->getCoordenadaFim()->longitudeDecimal.'<br>'
+                        )
+                );    
+            }
+        }
+        
+        return $itens;
+    }
 }

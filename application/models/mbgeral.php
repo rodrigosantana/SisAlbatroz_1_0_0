@@ -349,13 +349,14 @@ class MbGeral {
             if (!is_null($value->getCoordenada()) && $value->getCoordenada()->longitudeDecimal != "" && $value->getCoordenada()->latitudeDecimal != "") {
                 $itens[] = array(
                     'type'=>'Feature',
-                    'id'=>$value->getIdLance(),
+                    'id'=>'mapa_bordo_'. $this->getIdMb() . '_' . $value->getIdLance(),
                     'geometry'=>array(
                         'type'=>'Point',
                         'coordinates'=> [(double)$value->getCoordenada()->longitudeDecimal, (double)$value->getCoordenada()->latitudeDecimal],                        
                     ),
                     'properties'=>array('content'=>
                             '<h3>Mapa de Bordo</h3>'
+                            .'<strong>Código:</strong> '. $this->getIdMb() .'<br>'
                             .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
                             .'<strong>Mestre:</strong> '. $this->getMestre()->getNome() .'<br>'
                             .'<strong>Petrecho:</strong> '. Utils::getPetrechoMapaBordo($this->getPetrecho()) .'<br>'

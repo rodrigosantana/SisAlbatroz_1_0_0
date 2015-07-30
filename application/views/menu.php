@@ -43,7 +43,6 @@
                         <?php if ($this->ezrbac->hasAccess(Utils::CREATE, 'tipousuario')) :?>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('tipousuario');?>">Tipo de Usuário</a></li>
                         <?php endif;?>
-
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -99,7 +98,7 @@
                     </ul>
                 </li>
 
-
+                <li class=""><a href="<?php echo site_url('mapa');?>">Mapa</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
                 <li><a href="<?php echo site_url('sistema_ct/index/rbac/logout');?>">Sair</a></li>

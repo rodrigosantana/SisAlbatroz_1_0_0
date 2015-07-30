@@ -44,26 +44,52 @@
 #popup-content {
     min-width: 330px;
 }
-    
+
+.map-tools {
+    float: right;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
 </style>
 
 <div class="row">
     <div class="col-md-12">
-        <div id="map" class="map" style="height: 100%; width: 100%"></div>
+        <div id="map" class="map" style="height: 86%; width: 100%"></div>
         <div id="popup" class="ol-popup">
             <a href="#" id="popup-closer" class="ol-popup-closer"></a>
             <div id="popup-content"></div>
         </div>
+        
+        
+        <li class="dropdown map-tools">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="glyphicon glyphicon-cog" style="font-size: 26px; color: #504F4F;"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" style="min-width: 260px; padding: 0px;">
+                <li>
+                    <div class="panel panel-default" style="margin-bottom: 0px">
+                        <div class="panel-heading">Dados provenientes de:</div>
+                        <div class="panel-body">
+                            <label><input type="checkbox" value="mapa_bordo" class="map-check-data"> Mapa de Bordo</label>
+                            <label><input type="checkbox" value="observador_bordo" class="map-check-data"> Observador de Bordo</label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        
     </div>
 </div>
 
 <script>
-
-
     var container = document.getElementById('popup');
     var content = document.getElementById('popup-content');
     var closer = document.getElementById('popup-closer');
-
+    var layersList = [];
+    var layersStyle = {};
+    
     var overlay = new ol.Overlay(({
         element: container,
         autoPan: true,
@@ -78,35 +104,6 @@
         return false;
     };
 
-
-    var image = new ol.style.Circle({
-        radius: 5,
-        fill: new ol.style.Fill({color: '#bada55'}),
-        stroke: new ol.style.Stroke({color: 'red', width: 1})
-    });
-
-    var styles = {
-        'Point': [new ol.style.Style({
-                image: image
-            })]
-    };
-
-    var styleFunction = function(feature, resolution) {
-        return styles[feature.getGeometry().getType()];
-    };
-
-    var geojsonObject = <?php echo $points ?>;
-
-    var vectorSource = new ol.source.Vector({
-        features: (new ol.format.GeoJSON()).readFeatures(geojsonObject)
-    });
-
-    var vectorLayer = new ol.layer.Vector({
-        source: vectorSource,
-        style: styleFunction
-    });
-
-
     var map = new ol.Map({
         layers: [
             new ol.layer.Tile({
@@ -116,8 +113,7 @@
                         'LAYERS': 'ne:NE1_HR_LC_SR_W_DR'
                     }
                 })
-            }),
-            vectorLayer
+            })
         ],
         overlays: [overlay],
         target: 'map',
@@ -142,49 +138,110 @@
                 });
 
         if (feature) {
-            console.log(feature);
-            
+            console.log(feature);            
             var geometry = feature.getGeometry();
             var coordinate = geometry.getCoordinates();
             content.innerHTML = feature.get('content');
             overlay.setPosition(coordinate);
-            
-            
-            
-            
-//            var html = '<h1>' + feature.get('content') + '<h1>';
-//
-//            var popup = new ol.Popup.AnchoredBubble(
-//                    'myPopup',
-//                    lonlat,
-//                    new OpenLayers.Size(150, 60),
-//                    html,
-//                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
-//            false
-//                    );
-//
-//            feature.popup = popup;
-//            map.addPopup(popup);
-//
-//            console.log(feature.get('content'));
         }
-
-
     });
 
 
-    $(document).ready(function() {
-        console.log(geojsonObject);
+    $(document).ready(function() {  
+        
+        layersStyle = {
+            
+                'mapa_bordo': [new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 5,
+                        fill: new ol.style.Fill({color: 'blue'}),
+                        stroke: new ol.style.Stroke({color: 'black', width: 1})
+                    })
+                })],
+                'observador_bordo': [new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 5,
+                        fill: new ol.style.Fill({color: 'red'}),
+                        stroke: new ol.style.Stroke({color: 'black', width: 1})
+                    })
+                })]            
+        };
+        
+        $('.map-check-data').click(function (event) {
+            var itens = $('.map-check-data:checked');
+            var data = '';
+            var v = '';
+            
+            for(var i = 0; i < itens.length; i++) {
+                var component = itens[i];
+                data += v + $(component).val();
+                v = ',';
+            }
+            
+            blockWindow();
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: '<?php echo site_url('mapa/getdata'); ?>',
+                dataType: "json",
+                data: {data: data},
+                success: function(res) {
+                    unblockWindow();
+                    $(closer).click();
+                    $.each(layersList, function(i, value) {
+                        try {
+                            map.removeLayer(value.layer);
+                        } catch(error) {
+                            console.log(error);
+                        }
+                    });
+                    
+                    layersList = [];
+                    
+                    if (res.data) {
+                        var layers = res.data;
+                        $.each(layers, function (i, value){
+                            try {
+                                var vectorLayer = new ol.layer.Vector({
+                                    source: new ol.source.Vector({
+                                        features: (new ol.format.GeoJSON()).readFeatures(value.data)
+                                    }),
+                                    style: layersStyle[value.type]
+                                });
 
-
-
-
+                                map.addLayer(vectorLayer);                            
+                                layersList.push({type:value.type, layer:vectorLayer});
+                            } catch(error) {
+                                console.log(error);
+                            }
+                        });
+                    }
+                    
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    unblockWindow();
+                    alert('Erro ao obter os lances.');
+                },
+                async: true
+            });
+        });
     });
 
 
-
-
-
+    function findStyle(type) {
+        var style;
+        console.log(type);
+        $.each(layersStyle, function(i, value){
+            console.log(value.type);
+            if (value.type == type) {
+                style = value;
+            }
+        });
+        
+        console.log(style);
+        
+        return style;
+    }
 
 
 </script>
