@@ -20,6 +20,7 @@ class Mapa_bordo_ct extends MY_Controller {
             'salva'=>'create',
             'validation'=>'create',
             'exclui'=>'delete',
+            'visualiza'=>'view'
             );
     }
 
@@ -47,8 +48,21 @@ class Mapa_bordo_ct extends MY_Controller {
         $this->formulario($mbGeral);
     }
 
+    public function visualiza() {
+        $mbGeral = null;
+
+        if ($this->input->get('id') && is_numeric($this->input->get('id'))) {
+            $mbGeral = $this->doctrine->em->find('MbGeral', $this->input->get('id'));
+        }
+        
+        if (is_null($mbGeral)) {
+            show_error('unknown_registry_error_message');
+        }
+
+        $this->formulario($mbGeral, true);
+    }
 //--------------------------------------------------------------------------------------------------------------------//
-    protected function formulario($mbGeral) {
+    protected function formulario($mbGeral, $isView = false) {
 
         $embarcacoes = $this->doctrine->em->getRepository("CadEmbarcacao")->findBy(
                 array(), array('nome' => 'ASC')
@@ -76,7 +90,8 @@ class Mapa_bordo_ct extends MY_Controller {
             "aves" => $aves,
             "iscas" => $iscas,
             "medidasMetigatorias" => $medidasMetigatorias,
-            "mensagem" => $this->session->flashdata('save_mapa_bordo'))
+            "mensagem" => $this->session->flashdata('save_mapa_bordo'),
+            "isView"=>$isView)
         );
     }
 

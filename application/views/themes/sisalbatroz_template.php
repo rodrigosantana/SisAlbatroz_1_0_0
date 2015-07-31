@@ -192,6 +192,16 @@
                     $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
                 }
             });
+            
+            <?php if ($isView === true) :?>
+            $('.glyphicon-remove').parent().remove();
+            $('.glyphicon-plus').parent().remove();
+            $('.glyphicon-remove').parent().remove();
+            $('input').attr('disabled', true);
+            $('.select2').select2('disable', true);
+            $('textarea').attr('disabled', true);
+            $('select').attr('disabled', true);
+            <?php endif;?>
         });
     </script>
 </html>

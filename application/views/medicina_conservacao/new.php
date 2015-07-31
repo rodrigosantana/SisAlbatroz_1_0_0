@@ -1176,10 +1176,16 @@
         </div>
     </div>
 
+    <?php if($isView === false):?>
     <div class="col-sm-12 col-md-12" style="margin-bottom: 20px">
         <button type="button" id="btnSub" name="btnSub" class="btn btn-primary btn-lg btn_sub" onclick="return validation('medicinaconservacao', this)">Salvar</button>
         <a href="<?php echo site_url('medicinaconservacao') ?>" class="btn btn-default btn-lg btn_sub">Cancelar</a>
     </div>
+    <?php else:?>
+    <div class="col-sm-12 col-md-12" style="margin-bottom: 20px">
+        <a href="<?php echo site_url('medicinaconservacao') ?>" class="btn btn-default btn-lg btn_sub">Retornar</a>
+    </div>
+    <?php endif;?>
 </form>
 
 

@@ -503,12 +503,14 @@ class Cruzeiro
         return $collection;
     }
     
-    public function jsonMap() {
+    public function jsonMap($url = '') {
         $itens = [];
         
         foreach ($this->dadosAbioticos as $value) {
             $lancamento = $value->getDadosAbioticosLancamento();
             $recolhimento = $value->getDadosAbioticosRecolhimento();
+            
+            $urlView = !empty($url) ? ' <a href="'.$url.'?id='.$this->getId().'" href="javascript:;" title="Visualizar" style="font-size: 18px;" target="_blank"><i class="glyphicon glyphicon-eye-open"></i></a>' : '';
             
             if (!is_null($lancamento->getCoordenadaInicio()) && $lancamento->getCoordenadaInicio()->longitudeDecimal != "" && $lancamento->getCoordenadaInicio()->latitudeDecimal != "") {
                 $itens[] = array(
@@ -519,7 +521,7 @@ class Cruzeiro
                         'coordinates'=> [(double)$lancamento->getCoordenadaInicio()->longitudeDecimal, (double)$lancamento->getCoordenadaInicio()->latitudeDecimal],                        
                     ),
                     'properties'=>array('content'=>
-                            '<h3>Observador de Bordo - Dados abióticos lançamento início</h3>'
+                            '<h3>Observador de Bordo - Dados abióticos lançamento início'.$urlView.'</h3>'
                             .'<strong>Código:</strong> '. $this->getId() .'<br>'
                             .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
                             .'<strong>Mestre:</strong> '. $this->getObservador()->getNome() .'<br>'
@@ -537,7 +539,7 @@ class Cruzeiro
                         'coordinates'=> [(double)$lancamento->getCoordenadaFim()->longitudeDecimal, (double)$lancamento->getCoordenadaFim()->latitudeDecimal],                        
                     ),
                     'properties'=>array('content'=>
-                            '<h3>Observador de Bordo - Dados abióticos lançamento fim</h3>'
+                            '<h3>Observador de Bordo - Dados abióticos lançamento fim'.$urlView.'</h3>'
                             .'<strong>Código:</strong> '. $this->getId() .'<br>'
                             .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
                             .'<strong>Mestre:</strong> '. $this->getObservador()->getNome() .'<br>'
@@ -555,7 +557,7 @@ class Cruzeiro
                         'coordinates'=> [(double)$recolhimento->getCoordenadaInicio()->longitudeDecimal, (double)$recolhimento->getCoordenadaInicio()->latitudeDecimal],                        
                     ),
                     'properties'=>array('content'=>
-                            '<h3>Observador de Bordo - Dados abióticos recolhimento início</h3>'
+                            '<h3>Observador de Bordo - Dados abióticos recolhimento início'.$urlView.'</h3>'
                             .'<strong>Código:</strong> '. $this->getId() .'<br>'
                             .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
                             .'<strong>Mestre:</strong> '. $this->getObservador()->getNome() .'<br>'
@@ -573,7 +575,7 @@ class Cruzeiro
                         'coordinates'=> [(double)$recolhimento->getCoordenadaFim()->longitudeDecimal, (double)$recolhimento->getCoordenadaFim()->latitudeDecimal],                        
                     ),
                     'properties'=>array('content'=>
-                            '<h3>Observador de Bordo - Dados abióticos recolhimento fim</h3>'
+                            '<h3>Observador de Bordo - Dados abióticos recolhimento fim'.$urlView.'</h3>'
                             .'<strong>Código:</strong> '. $this->getId() .'<br>'
                             .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
                             .'<strong>Mestre:</strong> '. $this->getObservador()->getNome() .'<br>'

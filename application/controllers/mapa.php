@@ -47,9 +47,11 @@ class Mapa extends MY_Controller {
             
             foreach ($data as $value) {
                 if ($value == 'mapa_bordo') {
-                    $retorno[] = array('type'=>'mapa_bordo', 'data'=>$this->getGeoJsonData('MbGeral'));                    
+                    $url = $this->ezrbac->hasAccess(Utils::VIEW, 'mapa_bordo_ct') ? site_url('mapa_bordo_ct/visualiza') : '';
+                    $retorno[] = array('type'=>'mapa_bordo', 'data'=>$this->getGeoJsonData('MbGeral', $url));                    
                 } else if ($value == 'observador_bordo') {                    
-                    $retorno[] = array('type'=>'observador_bordo', 'data'=>$this->getGeoJsonData('Cruzeiro'));
+                    $url = $this->ezrbac->hasAccess(Utils::VIEW, 'observadorbordo') ? site_url('observadorbordo/visualiza') : '';
+                    $retorno[] = array('type'=>'observador_bordo', 'data'=>$this->getGeoJsonData('Cruzeiro', $url));
                 }
             }
         }
@@ -60,7 +62,7 @@ class Mapa extends MY_Controller {
         $this->load->view("jsonresponse", $return);
     }
     
-    private function getGeoJsonData($class) {
+    private function getGeoJsonData($class, $url) {
         $list = $this->doctrine->em->getRepository($class)->findAll();
         $retorno = array(
             'type'=>'FeatureCollection',
@@ -72,7 +74,7 @@ class Mapa extends MY_Controller {
         );
 
         foreach ($list as $value) {
-            $retorno['features'] = array_merge($retorno['features'], $value->jsonMap());
+            $retorno['features'] = array_merge($retorno['features'], $value->jsonMap($url));
         }
         
         return $retorno;

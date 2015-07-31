@@ -342,8 +342,9 @@ class MbGeral {
         return $collection;
     }
     
-    public function jsonMap() {
+    public function jsonMap($url = '') {
         $itens = [];
+        $urlView = !empty($url) ? ' <a href="'.$url.'?id='.$this->getIdMb().'" href="javascript:;" title="Visualizar" style="font-size: 18px;" target="_blank"><i class="glyphicon glyphicon-eye-open"></i></a>' : '';
         
         foreach ($this->lances as $value) {
             if (!is_null($value->getCoordenada()) && $value->getCoordenada()->longitudeDecimal != "" && $value->getCoordenada()->latitudeDecimal != "") {
@@ -355,7 +356,7 @@ class MbGeral {
                         'coordinates'=> [(double)$value->getCoordenada()->longitudeDecimal, (double)$value->getCoordenada()->latitudeDecimal],                        
                     ),
                     'properties'=>array('content'=>
-                            '<h3>Mapa de Bordo</h3>'
+                            '<h3>Mapa de Bordo'.$urlView.'</h3>'
                             .'<strong>Código:</strong> '. $this->getIdMb() .'<br>'
                             .'<strong>Embarcação:</strong> '. $this->getEmbarcacao()->getNome() .'<br>'
                             .'<strong>Mestre:</strong> '. $this->getMestre()->getNome() .'<br>'

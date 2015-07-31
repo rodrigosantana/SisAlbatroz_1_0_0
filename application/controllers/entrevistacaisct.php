@@ -19,6 +19,7 @@ class EntrevistaCaisCt extends MY_Controller {
             'salva'=>'create',
             'validation'=>'create',
             'exclui'=>'delete',
+            'visualiza'=>'view'
             );
     }
 
@@ -39,8 +40,22 @@ class EntrevistaCaisCt extends MY_Controller {
 
         $this->formulario($entrevistaCais);
     }
+    
+    public function visualiza() {
+        $entrevistaCais = null;
 
-    protected function formulario($entrevistaCais) {
+        if ($this->input->get('id') && is_numeric($this->input->get('id'))) {
+            $entrevistaCais = $this->doctrine->em->find('EntrevistaCais', $this->input->get('id'));
+        }
+        
+        if (is_null($entrevistaCais)) {
+            show_error('unknown_registry_error_message');
+        }
+
+        $this->formulario($entrevistaCais, true);
+    }
+
+    protected function formulario($entrevistaCais, $isView = false) {
 
         $embarcacoes = $this->doctrine->em->getRepository("CadEmbarcacao")->findBy(
                 array(), array('nome' => 'ASC')
@@ -69,7 +84,8 @@ class EntrevistaCaisCt extends MY_Controller {
             "municipios"=>$municipios,
             "portos"=>$portos,
             "responsaveis"=>$responsaveis,
-            "mensagem" => $this->session->flashdata('save_entrevista_cais'))
+            "mensagem" => $this->session->flashdata('save_entrevista_cais'),
+            "isView"=>$isView)            
         );
     }
 

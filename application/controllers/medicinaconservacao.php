@@ -30,7 +30,8 @@ class MedicinaConservacao extends MY_Controller {
             'salva'=>'create',
             'validation'=>'create',
             'exclui'=>'delete',
-            'obterlances'=>'create'
+            'obterlances'=>'create',
+            'visualiza'=>'view'
             );
     }
 
@@ -51,8 +52,22 @@ class MedicinaConservacao extends MY_Controller {
 
         $this->formulario($objeto);
     }
+    
+    public function visualiza() {
+        $objeto = null;
 
-   protected function formulario($objeto) {
+        if ($this->input->get('id') && is_numeric($this->input->get('id'))) {
+            $objeto = $this->doctrine->em->find('MedConservacao', $this->input->get('id'));
+        }
+
+        if (is_null($objeto)) {
+            show_error('unknown_registry_error_message');
+        }
+
+        $this->formulario($objeto, true);
+    }
+
+   protected function formulario($objeto, $isView = false) {
       $observadores = $this->doctrine->em->getRepository("CadObservador")->findBy(
          array(), array('nome' => 'ASC')
       );
@@ -84,7 +99,8 @@ class MedicinaConservacao extends MY_Controller {
             'aves'=>$aves,
             'medicinaConservacao'=>$objeto,
             'lances'=>$lances,
-            "mensagem" => $this->session->flashdata('save_medicina_conservacao')
+            "mensagem" => $this->session->flashdata('save_medicina_conservacao'),
+            "isView"=>$isView
         ));
     }
 

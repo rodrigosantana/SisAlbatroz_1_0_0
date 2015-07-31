@@ -29,6 +29,7 @@ class ObservadorBordo extends MY_Controller {
             'validation'=>'create',
             'validaproducaopesqueira'=>'create',
             'exclui'=>'delete',
+            'visualiza'=>'view',
             );
     }
 
@@ -50,8 +51,22 @@ class ObservadorBordo extends MY_Controller {
 
         $this->formulario($objeto);
     }
+    
+    public function visualiza() {
+        $objeto = null;
 
-    protected function formulario($objeto) {
+        if ($this->input->get('id') && is_numeric($this->input->get('id'))) {
+            $objeto = $this->doctrine->em->find('Cruzeiro', $this->input->get('id'));
+        }
+
+        if (is_null($objeto)) {
+            show_error('unknown_registry_error_message');
+        }
+
+        $this->formulario($objeto, true);
+    }
+
+    protected function formulario($objeto, $isView = false) {
         $observadores = $this->doctrine->em->getRepository("CadObservador")->findBy(
                 array(), array('nome' => 'ASC')
         );
@@ -96,8 +111,6 @@ class ObservadorBordo extends MY_Controller {
                 $listaBoias[] = array('id'=>$boia->getId(), 'value'=>$boia->getBoiaRadio());
                 $boias[] = $boia;
             }
-
-
         }
 
         //echo '<pre>'; var_dump($aves);die;
@@ -117,7 +130,8 @@ class ObservadorBordo extends MY_Controller {
                 'boias'=>$boias,
                 'listaLances'=>json_encode($listaLances),
                 'listaBoias'=>json_encode($listaBoias),
-                'especiesEspecificas'=>$this->especiesEspecificas
+                'especiesEspecificas'=>$this->especiesEspecificas,
+                'isView'=>$isView
             )
         );
     }

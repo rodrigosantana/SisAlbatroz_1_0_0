@@ -21,7 +21,7 @@
                         <?php endif;?>
 
                         <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_embarcacao_ct')) :?>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_embarcacao_ct/cadembarcacao');?>">Embarcações</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?php echo site_url('cad_embarcacao_ct');?>">Embarcações</a></li>
                         <?php endif;?>
 
                         <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'cad_mestre_ct')) :?>

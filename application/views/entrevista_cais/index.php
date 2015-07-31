@@ -49,11 +49,15 @@
 
                                 <div class="btn-group" role="group" aria-label="...">
                                     <?php if ($this->ezrbac->hasAccess(Utils::EDIT, 'entrevistacaisct')) :?>
-                                    <a href="<?php echo site_url('entrevistacaisct/edita') . '?id=' . $entrevista->getId() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                                        <a href="<?php echo site_url('entrevistacaisct/edita') . '?id=' . $entrevista->getId() ?>" class="btn btn-primary" title="Editar" style="font-size: 18px;"><i class="glyphicon glyphicon-pencil"></i></a>
                                     <?php endif;?>
                                         
+                                    <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'entrevistacaisct')) :?>
+                                        <a href="<?php echo site_url('entrevistacaisct/visualiza') . '?id=' . $entrevista->getId() ?>" href="javascript:;" class="btn btn-primary" title="Visualizar" style="font-size: 18px;"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                    <?php endif;?>
+                                    
                                     <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'entrevistacaisct')) :?>
-                                    <a  onclick="exclui(<?php echo $entrevista->getId() ?>)" href="javascript:;" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+                                        <a  onclick="exclui(<?php echo $entrevista->getId() ?>)" href="javascript:;" class="btn btn-danger" title="Excluir" style="font-size: 18px;"><i class="glyphicon glyphicon-trash"></i></a>
                                     <?php endif;?>
                                 </div>
                             </td>

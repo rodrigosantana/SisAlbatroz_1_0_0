@@ -368,7 +368,7 @@ class CadEmbarcacao
      * @param Municipio $municipio
      * @return CadEmbarcacao
      */
-    public function setMunicipio(Municipio $municipio)
+    public function setMunicipio(Municipio $municipio = null)
     {
         $this->municipio = $municipio;
     

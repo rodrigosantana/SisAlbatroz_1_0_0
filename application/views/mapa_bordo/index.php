@@ -47,12 +47,18 @@
 
                                 <div class="btn-group" role="group" aria-label="...">
                                     <?php if ($this->ezrbac->hasAccess(Utils::EDIT, 'mapa_bordo_ct')) :?>
-                                    <a href="<?php echo site_url('mapa_bordo_ct/edita') . '?id=' . $mapa_bordo->getIdMb() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                                    <a href="<?php echo site_url('mapa_bordo_ct/edita') . '?id=' . $mapa_bordo->getIdMb() ?>" class="btn btn-primary" title="Editar" style="font-size: 18px;"><i class="glyphicon glyphicon-pencil"></i></a>
                                     <?php endif;?>
-                                        
+                                    
+                                    <?php if ($this->ezrbac->hasAccess(Utils::VIEW, 'mapa_bordo_ct')) :?>
+                                    <a href="<?php echo site_url('mapa_bordo_ct/visualiza') . '?id=' . $mapa_bordo->getIdMb() ?>" href="javascript:;" class="btn btn-primary" title="Visualizar" style="font-size: 18px;"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                    <?php endif;?>
+                                    
                                     <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'mapa_bordo_ct')) :?>
-                                    <a  onclick="exclui(<?php echo $mapa_bordo->getIdMb() ?>)" href="javascript:;" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+                                    <a  onclick="exclui(<?php echo $mapa_bordo->getIdMb() ?>)" href="javascript:;" class="btn btn-danger" title="Excluir" style="font-size: 18px;"><i class="glyphicon glyphicon-trash"></i></a>
                                     <?php endif;?>
+                                    
+                                    
                                 </div>
                             </td>
                         </tr>
