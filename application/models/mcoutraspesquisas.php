@@ -133,5 +133,17 @@ class McOutrasPesquisas {
         $this->observacoes = $observacoes;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'swabCloaca' => $this->swabCloaca,
+            'swabCoana' => $this->swabCoana,
+            'conteudoEstomacal' => $this->conteudoEstomacal,
+            'sangueCardiaco' => $this->sangueCardiaco,
+            'penas' => $this->penas,
+            'outros' => $this->outros,
+            'observacoes' => $this->observacoes
+        );
+        
+        return $data;
+    }
 }

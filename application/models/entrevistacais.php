@@ -374,4 +374,51 @@ class EntrevistaCais {
     public function getCapturasAves() {
         return $this->capturasAves;
     }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'responsavelCampo' => $this->responsavelCampo == null ? null : $this->responsavelCampo->getId(),
+            'data' => $this->data == null ? null : $this->data->format('Y-m-d'),
+            'empresa' => $this->empresa == null ? null : $this->empresa->getIdEmpresa(),
+            'municipio' => $this->municipio == null ? null : $this->municipio->getId(),
+            'embarcacao' => $this->embarcacao == null ? null : $this->embarcacao->getIdEmbarcacao(),
+            'portoSaida' => $this->portoSaida == null ? null : $this->portoSaida->getId(),
+            'dataSaida' => $this->dataSaida == null ? null : $this->dataSaida->format('Y-m-d'),
+            'horaSaida' => $this->horaSaida == null ? null : $this->horaSaida->format('H:i:s'),
+            'dataChegada' => $this->dataChegada == null ? null : $this->dataChegada->format('Y-m-d'),
+            'horaChegada' => $this->horaChegada == null ? null : $this->horaChegada->format('H:i:s'),
+            'diasMar' => $this->diasMar,
+            'diasPesca' => $this->diasPesca,
+            'petrecho' => $this->petrecho == null ? null : $this->petrecho->toArray(),
+            'aveObservado' => $this->aveObservado,
+            'aveAtrapalhou' => $this->aveAtrapalhou,
+            'usuarioInsercao'=> $this->usuarioInsercao == null ? null : $this->usuarioInsercao->getId(),
+            'usuarioAlteracao'=> $this->usuarioAlteracao == null ? null : $this->usuarioAlteracao->getId(),
+            'dataInsercao'=> $this->dataInsercao == null ? null : $this->dataInsercao->format('Y-m-d H:i:s'),
+            'dataAlteracao'=> $this->dataAlteracao == null ? null : $this->dataAlteracao->format('Y-m-d H:i:s'),
+            'areasPesca' => array(),
+            'capturasAves' => array()
+        );
+        
+        $areas = $this->areasPesca->toArray();
+        $listaAreas = array();
+        
+        foreach ($areas as $value) {
+            $listaAreas[] = $value->toArray();
+        }
+        
+        $data['areasPesca'] = $listaAreas;
+        
+        $capturas = $this->capturasAves->toArray();        
+        $listaCapturas = array();
+        
+        foreach ($capturas as $value) {
+            $listaCapturas[] = $value->toArray();
+        }
+        
+        $data['capturasAves'] = $listaCapturas;
+        
+        return $data;
+    }
 }

@@ -104,4 +104,16 @@ class EntrevistaCaisAreaPesca {
     }
 
 
+    public function toArray() {
+        $data = array(
+            'nome' => $this->nome,
+            'id' => $this->id,
+            'profundidadeInicial' => $this->profundidadeInicial,
+            'profundidadeFinal' => $this->profundidadeFinal,
+            'entrevistaCais' => $this->entrevistaCais->getId()
+        );
+        
+        return $data;
+    }
+    
 }

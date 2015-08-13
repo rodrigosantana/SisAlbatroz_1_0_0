@@ -16,7 +16,7 @@ class McColetaMaterialBiologico {
     private $id;
 
     /**
-     * @var \DateTyme
+     * @var date
      * @Column(name="data_necropsia", type="date")
      */
     private $dataNecropsia;
@@ -705,7 +705,7 @@ class McColetaMaterialBiologico {
         return $this->htpOsso;
     }
 
-    public function setDataNecropsia(DateTyme $dataNecropsia = null) {
+    public function setDataNecropsia($dataNecropsia = null) {
         $this->dataNecropsia = $dataNecropsia;
     }
 
@@ -981,5 +981,72 @@ class McColetaMaterialBiologico {
         $this->htpOsso = $htpOsso;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'dataNecropsia' => $this->dataNecropsia == null ? null : $this->dataNecropsia->format('Y-m-d'),
+            'localNecropsia' => $this->localNecropsia,
+            'condicaoCarcaca' => $this->condicaoCarcaca,
+            'autolise' => $this->autolise,
+            'sexagem' => $this->sexagem,
+            'empetrolamento' => $this->empetrolamento,
+            'condicaoCorporal' => $this->condicaoCorporal,
+            'piolho' => $this->piolho,
+            'carrapato' => $this->carrapato,
+            'pulga' => $this->pulga,
+            'lepadomorpha' => $this->lepadomorpha,
+            'larvasPutrefacao' => $this->larvasPutrefacao,
+            'outros' => $this->outros,
+            'outrosDescricao' => $this->outrosDescricao,
+            'nematoides' => $this->nematoides,
+            'acantocefalos' => $this->acantocefalos,
+            'cestoides' => $this->cestoides,
+            'trematoides' => $this->trematoides,
+            'amtEncefalo' => $this->amtEncefalo,
+            'amtMedulaOssea' => $this->amtMedulaOssea,
+            'amtMusculo' => $this->amtMusculo,
+            'amtFigado' => $this->amtFigado,
+            'amtPulmao' => $this->amtPulmao,
+            'amtBaco' => $this->amtBaco,
+            'amtGordura' => $this->amtGordura,
+            'htpPele' => $this->htpPele,
+            'htpLingua' => $this->htpLingua,
+            'htpEsofago' => $this->htpEsofago,
+            'htpIngluvio' => $this->htpIngluvio,
+            'htpTireoide' => $this->htpTireoide,
+            'htpParatireoide' => $this->htpParatireoide,
+            'htpSiringe' => $this->htpSiringe,
+            'htpTraqueia' => $this->htpTraqueia,
+            'htpPulmao' => $this->htpPulmao,
+            'htpCoracao' => $this->htpCoracao,
+            'htpProventriculo' => $this->htpProventriculo,
+            'htpVentriculo' => $this->htpVentriculo,
+            'htpFigado' => $this->htpFigado,
+            'htpVesiculaBiliar' => $this->htpVesiculaBiliar,
+            'htpBaco' => $this->htpBaco,
+            'htpDuodeno' => $this->htpDuodeno,
+            'htpJejuno' => $this->htpJejuno,
+            'htpIleoCecoColon' => $this->htpIleoCecoColon,
+            'htpPancreas' => $this->htpPancreas,
+            'htpCloaca' => $this->htpCloaca,
+            'htpRim' => $this->htpRim,
+            'htpAdrenais' => $this->htpAdrenais,
+            'htpUreter' => $this->htpUreter,
+            'htpGonada' => $this->htpGonada,
+            'htpBexiga' => $this->htpBexiga,
+            'htpOviduto' => $this->htpOviduto,
+            'htpBursa' => $this->htpBursa,
+            'htpGrandesVasos' => $this->htpGrandesVasos,
+            'htpSacoAereo' => $this->htpSacoAereo,
+            'htpTimo' => $this->htpTimo,
+            'htpMusculoEsqueletico' => $this->htpMusculoEsqueletico,
+            'htpMedulaOssea' => $this->htpMedulaOssea,
+            'htpOlho' => $this->htpOlho,
+            'htpGldSal' => $this->htpGldSal,
+            'htpEncefalo' => $this->htpEncefalo,
+            'htpCerebelo' => $this->htpCerebelo,
+            'htpOsso' => $this->htpOsso
+        );
+        
+        return $data;
+    }
 }

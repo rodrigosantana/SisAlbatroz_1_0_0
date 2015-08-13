@@ -504,7 +504,7 @@ class Cruzeiro
     }
     
     public function jsonMap($url = '') {
-        $itens = [];
+        $itens = array();
         
         foreach ($this->dadosAbioticos as $value) {
             $lancamento = $value->getDadosAbioticosLancamento();
@@ -518,7 +518,7 @@ class Cruzeiro
                     'id'=>'lancamento_inicio_' . $this->getId() . '_' . $value->getLance(),
                     'geometry'=>array(
                         'type'=>'Point',
-                        'coordinates'=> [(double)$lancamento->getCoordenadaInicio()->longitudeDecimal, (double)$lancamento->getCoordenadaInicio()->latitudeDecimal],                        
+                        'coordinates'=> array((double)$lancamento->getCoordenadaInicio()->longitudeDecimal, (double)$lancamento->getCoordenadaInicio()->latitudeDecimal),                        
                     ),
                     'properties'=>array('content'=>
                             '<h3>Observador de Bordo - Dados abióticos lançamento início'.$urlView.'</h3>'
@@ -536,7 +536,7 @@ class Cruzeiro
                     'id'=>'lancamento_fim_' . $this->getId() . '_' . $value->getLance(),
                     'geometry'=>array(
                         'type'=>'Point',
-                        'coordinates'=> [(double)$lancamento->getCoordenadaFim()->longitudeDecimal, (double)$lancamento->getCoordenadaFim()->latitudeDecimal],                        
+                        'coordinates'=> array((double)$lancamento->getCoordenadaFim()->longitudeDecimal, (double)$lancamento->getCoordenadaFim()->latitudeDecimal),                        
                     ),
                     'properties'=>array('content'=>
                             '<h3>Observador de Bordo - Dados abióticos lançamento fim'.$urlView.'</h3>'
@@ -554,7 +554,7 @@ class Cruzeiro
                     'id'=>'recolhimento_inicio_' . $this->getId() . '_' . $value->getLance(),
                     'geometry'=>array(
                         'type'=>'Point',
-                        'coordinates'=> [(double)$recolhimento->getCoordenadaInicio()->longitudeDecimal, (double)$recolhimento->getCoordenadaInicio()->latitudeDecimal],                        
+                        'coordinates'=> array((double)$recolhimento->getCoordenadaInicio()->longitudeDecimal, (double)$recolhimento->getCoordenadaInicio()->latitudeDecimal),                        
                     ),
                     'properties'=>array('content'=>
                             '<h3>Observador de Bordo - Dados abióticos recolhimento início'.$urlView.'</h3>'
@@ -572,7 +572,7 @@ class Cruzeiro
                     'id'=>'recolhimento_fim_' . $this->getId() . '_' . $value->getLance(),
                     'geometry'=>array(
                         'type'=>'Point',
-                        'coordinates'=> [(double)$recolhimento->getCoordenadaFim()->longitudeDecimal, (double)$recolhimento->getCoordenadaFim()->latitudeDecimal],                        
+                        'coordinates'=> array((double)$recolhimento->getCoordenadaFim()->longitudeDecimal, (double)$recolhimento->getCoordenadaFim()->latitudeDecimal),                        
                     ),
                     'properties'=>array('content'=>
                             '<h3>Observador de Bordo - Dados abióticos recolhimento fim'.$urlView.'</h3>'
@@ -587,4 +587,78 @@ class Cruzeiro
         
         return $itens;
     }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'dataSaida' => $this->dataSaida == null ? null : $this->dataSaida->format('Y-m-d'),
+            'dataChegada' => $this->dataChegada == null ? null : $this->dataChegada->format('Y-m-d'),
+            'observacao' => $this->observacao,
+            'financiador' => $this->financiador == null ? null : $this->financiador->getId(),
+            'empresa' => $this->empresa == null ? null : $this->empresa->getIdEmpresa(),
+            'mestre' => $this->mestre == null ? null : $this->mestre->getIdMestre(),
+            'embarcacao' => $this->embarcacao == null ? null : $this->embarcacao->getIdEmbarcacao(),
+            'observador' => $this->observador == null ? null : $this->observador->getIdObserv(),
+            
+            'producoesPesqueiras' => array(),
+            'dadosAbioticos' => array(),
+            'contagemPorSol' => array(),
+            'capturaIncidental' => array(),
+            'contagemAveBoia' => array(),
+            
+            'usuarioInsercao'=> $this->usuarioInsercao == null ? null : $this->usuarioInsercao->getId(),
+            'usuarioAlteracao'=> $this->usuarioAlteracao == null ? null : $this->usuarioAlteracao->getId(),
+            'dataInsercao'=> $this->dataInsercao == null ? null : $this->dataInsercao->format('Y-m-d H:i:s'),
+            'dataAlteracao'=> $this->dataAlteracao == null ? null : $this->dataAlteracao->format('Y-m-d H:i:s'),
+        );
+        
+        $producoes = $this->producoesPesqueiras->toArray();
+        $listaProducoes = array();
+        
+        foreach ($producoes as $value) {
+            $listaProducoes[] = $value->toArray();
+        }
+        
+        $data['producoesPesqueiras'] = $listaProducoes;
+        
+        $dadosAbioticos = $this->dadosAbioticos->toArray();
+        $listaDados = array();
+        
+        foreach ($dadosAbioticos as $value) {
+            $listaDados[] = $value->toArray();
+        }
+        
+        $data['dadosAbioticos'] = $listaDados;
+        
+        $contagens = $this->contagemPorSol->toArray();
+        $listaContagem = array();
+        
+        foreach ($contagens as $value) {
+            $listaContagem[] = $value->toArray();
+        }
+        
+        $data['contagemPorSol'] = $listaContagem;
+        
+        
+        $capturas = $this->capturaIncidental->toArray();
+        $listaCaptura = array();
+        
+        foreach ($capturas as $value) {
+            $listaCaptura[] = $value->toArray();
+        }
+        
+        $data['capturaIncidental'] = $listaCaptura;
+        
+        $contagensAvesBoia = $this->contagemAveBoia->toArray();
+        $listaContagemAveBoia = array();
+        
+        foreach ($contagensAvesBoia as $value) {
+            $listaContagemAveBoia[] = $value->toArray();
+        }
+        
+        $data['contagemAveBoia'] = $listaContagemAveBoia;
+        
+        return $data;
+    }
+    
 }

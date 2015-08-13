@@ -73,7 +73,7 @@ class CadObservador
    * @Column(name="id_observ", type="integer")
    * @Id
    * @GeneratedValue(strategy="SEQUENCE")
-   * @SequenceGenerator(sequenceName="cad_observador_seq", allocationSize=1, initialValue=1)
+   * @SequenceGenerator(sequenceName="cad_observ_seq", allocationSize=1, initialValue=1)
    */
    private $idObserv;
 
@@ -244,7 +244,7 @@ class CadObservador
      * @param Municipio $municipio
      * @return CadEmbarcacao
      */
-    public function setMunicipio(Municipio $municipio)
+    public function setMunicipio(Municipio $municipio = null)
     {
         $this->municipio = $municipio;
 

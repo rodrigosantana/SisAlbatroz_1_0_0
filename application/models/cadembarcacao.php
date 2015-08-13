@@ -20,13 +20,6 @@ class CadEmbarcacao
     /**
      * @var string
      *
-     * @Column(name="autorizacao_pesca", type="string", length=150, nullable=false)
-     */
-    private $autorizacaoPesca;
-
-    /**
-     * @var string
-     *
      * @Column(name="reg_marinha", type="string", length=30, nullable=false)
      */
     private $regMarinha;
@@ -96,6 +89,16 @@ class CadEmbarcacao
      * })
      */
     private $municipio;
+    
+    /**
+     * @var AutorizPesca
+     *
+     * @ManyToOne(targetEntity="AutorizPesca")
+     * @JoinColumns({
+     *   @JoinColumn(name="autorizacao_pesca_id", referencedColumnName="id_auto_pesca")
+     * })
+     */
+    private $autorizacaoPesca;
 
     /**
      * @var integer
@@ -130,29 +133,6 @@ class CadEmbarcacao
     public function getNome()
     {
         return $this->nome;
-    }
-
-    /**
-     * Set autorizacaoPesca
-     *
-     * @param string $autorizacaoPesca
-     * @return CadEmbarcacao
-     */
-    public function setAutorizacaoPesca($autorizacaoPesca)
-    {
-        $this->autorizacaoPesca = $autorizacaoPesca;
-    
-        return $this;
-    }
-
-    /**
-     * Get autorizacaoPesca
-     *
-     * @return string 
-     */
-    public function getAutorizacaoPesca()
-    {
-        return $this->autorizacaoPesca;
     }
 
     /**
@@ -384,6 +364,31 @@ class CadEmbarcacao
     {
         return $this->municipio;
     }
+    
+    
+    /**
+     * Set AutorizPesca
+     *
+     * @param AutorizPesca $autorizacaoPesca
+     * @return CadEmbarcacao
+     */
+    public function setAutorizacaoPesca(AutorizPesca $autorizacaoPesca = null)
+    {
+        $this->autorizacaoPesca = $autorizacaoPesca;
+    
+        return $this;
+    }
+
+    /**
+     * Get AutorizPesca
+     *
+     * @return AutorizPesca 
+     */
+    public function getAutorizacaoPesca()
+    {
+        return $this->autorizacaoPesca;
+    }
+    
 
     /**
      * Get idEmbarcacao

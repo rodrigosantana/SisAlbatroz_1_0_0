@@ -465,4 +465,56 @@ class MbLance {
         return $this->capturas;
     }
 
+    public function toArray() {
+        $data = array(
+            'lance' =>  $this->lance,
+            'data' => $this->data == null ? null : $this->data->format('Y-m-d'),
+            'anzois' => $this->anzois,
+            'coordenada' => $this->coordenada == null ? null : array('latitude'=>$this->coordenada->latitudeDecimal, 'longitude'=>$this->coordenada->longitudeDecimal),
+            'horaInicial' => $this->horaInicial == null ? null : $this->horaInicial->format('H:i:s'),
+            'horaFinal' => $this->horaFinal == null ? null : $this->horaFinal->format('H:i:s'),
+            'mmUso' => $this->mmUso,
+            'ponteiraPeso' => $this->ponteiraPeso,
+            'ponteiraDistancia' => $this->ponteiraDistancia,
+            'aveCapt' => $this->aveCapt,
+            'idLance' => $this->idLance,
+            'mbGeral' => $this->mbGeral->getIdMb(),
+            'idMm'=>array(),
+            'idIsca'=>array(),
+            'capturas'=>array()
+        );
+
+        if ($this->idMm) {
+            $lista = $this->idMm->toArray();
+            $listaMm = array();
+            
+            foreach ($lista as $value) {
+                $listaMm[] = $value->getIdMedidaMetigatoria();
+            }
+            
+            $data['idMm'] = $listaMm;
+        }
+        
+        if ($this->idIsca) {
+            $lista = $this->idIsca->toArray();
+            $listaIsca = array();
+            
+            foreach ($lista as $value) {
+                $listaIsca[] = $value->getIdIsca();
+            }
+            
+            $data['idIsca'] = $listaIsca;
+        }
+    
+        $capturas = $this->capturas->toArray();
+        $lista = array();
+        
+        foreach ($capturas as $captura) {
+            $lista[] = $captura->toArray();
+        }
+        
+        $data['capturas'] = $lista;
+        
+        return $data;
+    }
 }

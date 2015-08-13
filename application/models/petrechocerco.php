@@ -92,5 +92,16 @@ class PetrechoCerco extends Petrecho {
         $this->tempoEstimadoRecolhimento = $tempoEstimadoRecolhimento;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'id' => parent::getId(),
+            'comprimentoRede' => $this->comprimentoRede,
+            'alturaRede' => $this->alturaRede,
+            'numeroCercosTotais' => $this->numeroCercosTotais,            
+            'tempoEstimadoCercamento' => $this->tempoEstimadoCercamento == null ? null : $this->tempoEstimadoCercamento->format('H:i:s'),
+            'tempoEstimadoRecolhimento' => $this->tempoEstimadoRecolhimento == null ? null : $this->tempoEstimadoRecolhimento->format('H:i:s'),
+        );
+        
+        return $data;
+    }
 }

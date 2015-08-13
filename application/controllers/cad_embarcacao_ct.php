@@ -6,7 +6,6 @@ class Cad_embarcacao_ct extends MY_Controller {
         $this->modelClassName = 'CadEmbarcacao';
         $this->viewPath = 'cad_embarcacao';
         parent::__construct();
-        $this->output->set_template('sisalbatroz_template');
     }
 
    public function access_map() {
@@ -79,9 +78,9 @@ class Cad_embarcacao_ct extends MY_Controller {
       if(is_null($cad_embarcacao)) {
          show_error('unknown_registry_error_message');
       }
-
+      
       $cad_embarcacao->setNome($this->input->post("nome"));
-      $cad_embarcacao->setAutorizacaoPesca($this->input->post("aut_pesca"));
+      $cad_embarcacao->setAutorizacaoPesca($em->find('AutorizPesca',$this->input->post("aut_pesca")));
       $cad_embarcacao->setRegMarinha($this->input->post("reg_marinha"));
       $cad_embarcacao->setRegMpa($this->input->post("reg_mpa"));      
       
@@ -136,7 +135,7 @@ class Cad_embarcacao_ct extends MY_Controller {
 
    public function validation($returnError = false){
       $this->form_validation->set_rules('nome', 'Nome', 'trim|required|max_length[150]');
-      $this->form_validation->set_rules('aut_pesca', 'Autorização de Pesca', "trim|required|in_array[" . Utils::findIds('modalidade', 'AutorizPesca') . "]");
+      $this->form_validation->set_rules('aut_pesca', 'Autorização de Pesca', "trim|required|in_array[" . Utils::findIds('id_auto_pesca', 'AutorizPesca') . "]");
       $this->form_validation->set_rules('reg_marinha', 'Registro da Marinha', 'trim|required');
       $this->form_validation->set_rules('reg_mpa', 'Número do RGP', 'trim|required');
       $this->form_validation->set_rules('comprimento', 'Comprimento ', 'trim');
@@ -159,26 +158,13 @@ class Cad_embarcacao_ct extends MY_Controller {
       $this->output->_mode = MY_Output::OUTPUT_MODE_NORMAL;
       $this->load->view('jsonresponse', $return);
    }
-//--------------------------------------------------------------------------------------------------------------------//
-
-   public function exclui(){
-      $observador = $this->doctrine->em->find(CadObservador, $find->input->get('idObserv'));
-
-      if(is_null($observador)) {
-         show_error('unknown_registry_error_message');
-      }
-
-      $this->doctrine->em->remove($observador);
-      $this->doctrine->em->flush();
-      $this->session->set_flashdata(get_cladd($this) . '_mensagem', 'Observador excluído com sucesso.');
-      redirect($this->viewPath . '/index');
-   }
+   
 //--------------------------------------------------------------------------------------------------------------------//
 
     // Função para checar se a espécie já existe no BD
     public function checkCpf($check){
 
-        $checkCpf = $this->doctrine->em->getRepository("Cad_observador")->findOneBy(array("cpf" => $check));
+        $checkCpf = $this->doctrine->em->getRepository("CadObservador")->findOneBy(array("cpf" => $check));
         if ($checkCpf == null){
             return TRUE;
         } else {
@@ -189,125 +175,90 @@ class Cad_embarcacao_ct extends MY_Controller {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
-//   protected function telaFiltro() {
-//      $municipios = $this->doctrine->em->getRepository('Municipio')->findAll();
-//
-//      return $this->load->view($this->viewPath . '/filter', array(
-//         'municipios' => $municipios,
-//         'filtro' => $this->session->userdata('filtros_' . get_class($this))
-//      ), true);
-//   }
+   protected function telaFiltro() {
+      $auto_pesca = $this->doctrine->em->getRepository("AutorizPesca")->findAll();
+
+      return $this->load->view($this->viewPath . '/filter', array(
+         'auto_pesca' => $auto_pesca,
+         'filtro' => $this->session->userdata('filtros_' . get_class($this))
+      ), true);
+   }
 //--------------------------------------------------------------------------------------------------------------------//
 
-//   public function filter() {
-//      $filtros = array();
-//
-//      if ($this->input->post('nome') && $this->input->post('nome') != '') {
-//         $filtros['nome'] = $this->input->post('nome');
-//      }
-//
-//      if ($this->input->post('cpf') && $this->input->post('cpf') != '') {
-//         $filtros['cpf'] = $this->input->post('cpf');
-//      }
-//
-//      if ($this->input->post('rg') && $this->input->post('rg') != '') {
-//         $filtros['rg'] = $this->input->post('rg');
-//      }
-//
-//      if ($this->input->post('email') && $this->input->post('email') != '') {
-//         $filtros['email'] = $this->input->post('email');
-//      }
-//
-//      if ($this->input->post('tel') && $this->input->post('tel') != '') {
-//         $filtros['tel'] = $this->input->post('tel');
-//      }
-//
-//      if ($this->input->post('skype') && $this->input->post('skype') != '') {
-//         $filtros['skype'] = $this->input->post('skype');
-//      }
-//
-//      if ($this->input->post('end') && $this->input->post('end') != '') {
-//         $filtros['end'] = $this->input->post('end');
-//      }
-//
-//      if ($this->input->post('municipio') && is_numeric($this->input->post('municipio'))) {
-//         $filtros['municipio'] = $this->input->post('municipio');
-//      }
-//
-//      $this->session->user_userdata('filtros_' . get_class($this), array());
-//      redirect($this->viewPath . '/index');
-//   }
+   public function filter() {
+      $filtros = array();
+
+      if ($this->input->post('nome') && $this->input->post('nome') != '') {
+         $filtros['nome'] = $this->input->post('nome');
+      }
+
+      if ($this->input->post('aut_pesca') && is_numeric($this->input->post('aut_pesca'))) {
+         $filtros['aut_pesca'] = $this->input->post('aut_pesca');
+      }
+
+      if ($this->input->post('reg_marinha') && $this->input->post('reg_marinha') != '') {
+         $filtros['reg_marinha'] = $this->input->post('reg_marinha');
+      }
+
+      if ($this->input->post('reg_mpa') && $this->input->post('reg_mpa') != '') {
+         $filtros['reg_mpa'] = $this->input->post('reg_mpa');
+      }
+      
+      $this->session->set_userdata('filtros_' . get_class($this), $filtros);
+      redirect(strtolower(get_class($this)) . '/index');
+   }
+   
 //--------------------------------------------------------------------------------------------------------------------//
 
-//   public function clearfilter() {
-//      $this->session->set_userdata('filtros_' . get_class($this), array());
-//      redirect($this->viewPath . '/index');
-//   }
+   public function clearfilter() {
+      $this->session->set_userdata('filtros_' . get_class($this), array());
+      redirect(strtolower(get_class($this)) . '/index');
+   }
+   
 //--------------------------------------------------------------------------------------------------------------------//
 
-//   protected function filterQueryBuilder() {
-//      $filtrosSessao = $this->session->userdata('filtros_' . get_class($this));
-//      $class = 'CadObservador';
-//
-//      $queryBuilder = $this->doctrine->em->createQueryBuilder();
-//      $queryBuilder->select("r")->from($class, "r");
-//
-//      if (!empty($filtrosSessao)) {
-//         if (isset($filtrosSessao['nome'])) {
-//             $wherex = $queryBuilder->expr()->orx();
-//             $wherex->add($queryBuilder->expr()->like('r.nome', '?1'));
-//             $queryBuilder->andWhere($wherex);
-//             $queryBuilder->setParameter(1, '%'.$filtrosSessao['nome'].'%');
-//         }
-//         if (isset($filtrosSessao['cpf'])) {
-//             $wherex = $queryBuilder->expr()->orx();
-//             $wherex->add($queryBuilder->expr()->like('r.cpf', '?2'));
-//             $queryBuilder->andWhere($wherex);
-//             $queryBuilder->setParameter(2, '%'.$filtrosSessao['cpf'].'%');
-//         }
-//         if (isset($filtrosSessao['rg'])) {
-//             $wherex = $queryBuilder->expr()->orx();
-//             $wherex->add($queryBuilder->expr()->like('r.rg', '?3'));
-//             $queryBuilder->andWhere($wherex);
-//             $queryBuilder->setParameter(3, '%'.$filtrosSessao['rg'].'%');
-//         }
-//         if (isset($filtrosSessao['tel'])) {
-//             $wherex = $queryBuilder->expr()->orx();
-//             $wherex->add($queryBuilder->expr()->like('r.tel', '?4'));
-//             $queryBuilder->andWhere($wherex);
-//             $queryBuilder->setParameter(4, '%'.$filtrosSessao['tel'].'%');
-//         }
-//         if (isset($filtrosSessao['skype'])) {
-//             $wherex = $queryBuilder->expr()->orx();
-//             $wherex->add($queryBuilder->expr()->like('r.skype', '?5'));
-//             $queryBuilder->andWhere($wherex);
-//             $queryBuilder->setParameter(5, '%'.$filtrosSessao['skype'].'%');
-//         }
-//         if (isset($filtrosSessao['email'])) {
-//             $wherex = $queryBuilder->expr()->orx();
-//             $wherex->add($queryBuilder->expr()->like('r.email', '?6'));
-//             $queryBuilder->andWhere($wherex);
-//             $queryBuilder->setParameter(6, '%'.$filtrosSessao['email'].'%');
-//         }
-//         if (isset($filtrosSessao['end'])) {
-//             $wherex = $queryBuilder->expr()->orx();
-//             $wherex->add($queryBuilder->expr()->like('r.end', '?7'));
-//             $queryBuilder->andWhere($wherex);
-//             $queryBuilder->setParameter(7, '%'.$filtrosSessao['end'].'%');
-//         }
-//         if (isset($filtrosSessao['municipio'])) {
-//            $queryBuilder->join("r.municipio", "et");
-//            $wherex = $queryBuilder->expr()->orx();
-//            $wherex->add($queryBuilder->expr()->eq('et.id', '?8'));
-//            $queryBuilder->andWhere($wherex);
-//            $queryBuilder->setParameter(8, $filtrosSessao['municipio']);
-//         }
-//      }
-//
-//      $query = $queryBuilder->getQuery();
-//      return $query;
-//
-//   }
+   protected function filterQueryBuilder() {
+      $filtrosSessao = $this->session->userdata('filtros_' . get_class($this));
+      $class = 'CadEmbarcacao';
+
+      $queryBuilder = $this->doctrine->em->createQueryBuilder();
+      $queryBuilder->select("r")->from($class, "r");
+
+      if (!empty($filtrosSessao)) {
+         if (isset($filtrosSessao['nome'])) {
+             $wherex = $queryBuilder->expr()->orx();
+             $wherex->add($queryBuilder->expr()->like('r.nome', '?1'));
+             $queryBuilder->andWhere($wherex);
+             $queryBuilder->setParameter(1, '%'.$filtrosSessao['nome'].'%');
+         }
+         
+         if (isset($filtrosSessao['aut_pesca'])) {
+            $queryBuilder->join("r.autorizacaoPesca", "et");
+            $wherex = $queryBuilder->expr()->orx();
+            $wherex->add($queryBuilder->expr()->eq('et.id_auto_pesca', '?2'));
+            $queryBuilder->andWhere($wherex);
+            $queryBuilder->setParameter(2, $filtrosSessao['aut_pesca']);
+         }
+         
+         if (isset($filtrosSessao['reg_marinha'])) {
+             $wherex = $queryBuilder->expr()->orx();
+             $wherex->add($queryBuilder->expr()->like('r.regMarinha', '?3'));
+             $queryBuilder->andWhere($wherex);
+             $queryBuilder->setParameter(3, '%'.$filtrosSessao['reg_marinha'].'%');
+         }
+         if (isset($filtrosSessao['reg_mpa'])) {
+             $wherex = $queryBuilder->expr()->orx();
+             $wherex->add($queryBuilder->expr()->like('r.regMpa', '?4'));
+             $queryBuilder->andWhere($wherex);
+             $queryBuilder->setParameter(4, '%'.$filtrosSessao['reg_mpa'].'%');
+         }
+         
+      }
+
+      $query = $queryBuilder->getQuery();
+      return $query;
+
+   }
 
 
 

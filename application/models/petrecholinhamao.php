@@ -122,5 +122,19 @@ class PetrechoLinhaMao extends Petrecho {
         $this->outros = $outros;
     }
 
+    public function toArray() {
+        $data = array(
+            'id' => parent::getId(),
+            'numeroLinhas' => $this->numeroLinhas,
+            'numeroAnzoisPorLinha' => $this->numeroAnzoisPorLinha,
+            'numeroLancesPorDia' => $this->numeroLancesPorDia,            
+            'horaInicial' => $this->horaInicial == null ? null : $this->horaInicial->format('H:i:s'),
+            'horaFinal' => $this->horaFinal == null ? null : $this->horaFinal->format('H:i:s'),
+            'tipoPetrechoUtilizado' => $this->tipoPetrechoUtilizado,
+            'outros' => $this->outros,
+        );
+        
+        return $data;
+    }
 
 }

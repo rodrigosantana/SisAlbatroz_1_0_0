@@ -3,7 +3,7 @@
 /**
  * ContagemAveBoia
  *
- * @Table(name="contagem_ave_boia")
+ * @Table(name="cr_contagem_ave_boia")
  * @Entity
  */
 class ContagemAveBoia
@@ -293,5 +293,31 @@ class ContagemAveBoia
     
     public function getContagemAveBoiaEspecie() {
         return $this->contagemAveBoiaEspecie;
+    }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'lance' => $this->lance == null ? null : $this->lance->getId(),
+            'boiaRadio' => $this->boiaRadio,
+            'dataHora' => $this->dataHora == null ? null : $this->dataHora->format('Y-m-d H:i:s'),
+            'temperaturaAgua' => $this->temperaturaAgua,
+            'profundidade' => $this->profundidade,
+            'pressaoAtmosferica' => $this->pressaoAtmosferica,
+            'coordenada' => $this->coordenada == null ? null : array('latitude'=>$this->coordenada->latitudeDecimal, 'longitude'=>$this->coordenada->longitudeDecimal),
+            'cruzeiro' => $this->cruzeiro->getId(),
+            'contagemAveBoiaEspecie' => array()
+        );
+        
+        $especies = $this->contagemAveBoiaEspecie->toArray();
+        $lista = array();
+        
+        foreach ($especies as $value) {
+            $lista[] = $value->toArray();
+        }
+        
+        $data['contagemAveBoiaEspecie'] = $lista;
+        
+        return $data;
     }
 }

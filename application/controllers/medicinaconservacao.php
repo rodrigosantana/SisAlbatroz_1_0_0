@@ -310,8 +310,10 @@ class MedicinaConservacao extends MY_Controller {
         //--------------------------------------------------------------------//
 
         $usuario = $em->find("SystemUsers", $this->ezrbac->getCurrentUser()->id);
-
+        $acao = 'salva';
+        
         if ($medicinaConservacao->getId() > 0) {
+            $acao = 'edita';
             $medicinaConservacao->setDataAlteracao(new DateTime());
             $medicinaConservacao->setUsuarioAlteracao($usuario);
         } else {
@@ -322,6 +324,25 @@ class MedicinaConservacao extends MY_Controller {
         $em->persist($medicinaConservacao);
         $em->flush();
 
+        try {
+            $userData = $this->session->all_userdata();
+            $objeto = new LogSistema();
+            $objeto->setDataHora(new DateTime());
+            $objeto->setUsuario($usuario);
+            $objeto->setController(get_class($this));
+            $objeto->setAcao($acao);        
+            $objeto->setIp($userData["ip_address"]);
+            $dadosRequisicao = $this->input->post();
+            $objeto->setDadosRequisicao($dadosRequisicao);
+            $objeto->setDadosSalvos($medicinaConservacao->toArray());
+
+            $this->doctrine->em->persist($objeto);
+            $this->doctrine->em->flush();
+        } catch (Exception $exc) {
+            show_error('log_system_error_message');
+            return;
+        }
+        
         $mensagem = 'Registro salvo com sucesso. (Código: ' . $medicinaConservacao->getId() . ')';
         if ($isEdita) {
             $this->session->set_flashdata(get_class($this) . '_mensagem', $mensagem);

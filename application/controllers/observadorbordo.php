@@ -588,8 +588,10 @@ class ObservadorBordo extends MY_Controller {
         }
 
         $usuario = $this->doctrine->em->find("SystemUsers", $this->ezrbac->getCurrentUser()->id);
-
+        $acao = 'salva';
+        
         if ($cruzeiro->getId() > 0) {
+            $acao = 'edita';
             $cruzeiro->setDataAlteracao(new DateTime());
             $cruzeiro->setUsuarioAlteracao($usuario);
         } else {
@@ -599,7 +601,26 @@ class ObservadorBordo extends MY_Controller {
 
         $this->doctrine->em->persist($cruzeiro);
         $this->doctrine->em->flush();
+        
+        try {
+            $userData = $this->session->all_userdata();
+            $objeto = new LogSistema();
+            $objeto->setDataHora(new DateTime());
+            $objeto->setUsuario($usuario);
+            $objeto->setController(get_class($this));
+            $objeto->setAcao($acao);        
+            $objeto->setIp($userData["ip_address"]);
+            $dadosRequisicao = $this->input->post();
+            $objeto->setDadosRequisicao($dadosRequisicao);
+            $objeto->setDadosSalvos($cruzeiro->toArray());
 
+            $this->doctrine->em->persist($objeto);
+            $this->doctrine->em->flush();
+        } catch (Exception $exc) {
+            show_error('log_system_error_message');
+            return;
+        }
+        
         $mensagem = 'Registro salvo com sucesso. (Código: ' . $cruzeiro->getId() . ')';
         if ($isEdita) {
             $this->session->set_flashdata(get_class($this) . '_mensagem', $mensagem);

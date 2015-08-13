@@ -50,12 +50,8 @@
 
                                 <div class="btn-group" role="group" aria-label="...">
                                     <?php if ($this->ezrbac->hasAccess(Utils::EDIT, 'cad_empresa_ct')) :?>
-                                    <a href="<?php echo site_url('cad_empresa_ct/edita') . '?id=' . $empresa->getIdEmpresa() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                                    <a href="<?php echo site_url('cad_empresa_ct/edita') . '?id_empresa=' . $empresa->getIdEmpresa() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                                     <?php endif;?>
-                                    <!--  Botão de Excluir deletado para impedir que seja entrada e cause problema no sistema-->
-                                    <!-- <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'cad_empresa_ct')) :?>
-                                    <a  onclick="exclui(<?php echo $empresa->getIdEmpresa() ?>)" href="javascript:;" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
-                                    <?php endif;?> -->
                                 </div>
                             </td>
                         </tr>
@@ -82,16 +78,3 @@
       </div>
    </div>
 </div>
-
-<!-- Botão de Excluir removido para impedir erro no banco de dados-->
-<!-- <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'cad_empresa_ct')) :?>
-<script>
-function exclui(id) {
-    bootbox.confirm("Tem certeza que deseja excluir o registro?", function(result) {
-        if (result) {
-            document.location.href = '<?php echo site_url('cad_empresa_ct/exclui') . '?id='?>' + id;
-        }
-    });
-}
-</script>
-<?php endif;?> -->

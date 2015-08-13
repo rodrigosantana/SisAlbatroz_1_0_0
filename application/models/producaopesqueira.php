@@ -2,7 +2,7 @@
 /**
  * ProducaoPesqueira
  *
- * @Table(name="producao_pesqueira")
+ * @Table(name="cr_producao_pesqueira")
  * @Entity
  */
 class ProducaoPesqueira
@@ -148,5 +148,26 @@ class ProducaoPesqueira
     
     public function getEspecies() {
         return $this->especies;
+    }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'lance' => $this->lance == null ? null : $this->lance->getId(),
+            'boiaRadio' => $this->boiaRadio == null ? null : $this->boiaRadio->getId(),
+            'cruzeiro' => $this->cruzeiro == null ? null : $this->cruzeiro->getId(),
+            'especies' => array()
+        );
+    
+        $especies = $this->especies->toArray();
+        $lista = array();
+        
+        foreach ($especies as $value) {
+            $lista[] = $value->toArray();
+        }
+        
+        $data['especies'] = $lista;
+        
+        return $data;
     }
 }

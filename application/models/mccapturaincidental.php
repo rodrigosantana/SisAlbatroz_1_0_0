@@ -158,4 +158,18 @@ class McCapturaIncidental {
         $this->descricaoLocalColeta = $descricaoLocalColeta;
     }
 
+    public function toArray() {
+        $data = array(
+            'informacao' => $this->informacao,
+            'cruzeiro' => $this->cruzeiro == null ? null : $this->cruzeiro->getId(),
+            'lance' => $this->lance == null ? null : $this->lance->getId(),
+            'observador' => $this->observador == null ? null : $this->observador->getIdObserv(),
+            'mestre' => $this->mestre == null ? null : $this->mestre->getIdMestre(),
+            'embarcacao' => $this->embarcacao == null ? null : $this->embarcacao->getIdEmbarcacao(),
+            'historico' => $this->historico,
+            'descricaoLocalColeta' => $this->descricaoLocalColeta
+        );
+        
+        return $data;
+    }
 }

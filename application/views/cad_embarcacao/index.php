@@ -37,7 +37,7 @@
                     <?php foreach ($lista as $embarcacao): ?>
                         <tr>
                             <td class="text-center"> <?php echo $embarcacao->getNome() ?> </td>
-                            <td class="text-center"> <?php echo $embarcacao->getAutorizacaoPesca() ?> </td>
+                            <td class="text-center"> <?php echo $embarcacao->getAutorizacaoPesca()->getDescricao() ?> </td>
                             <td class="text-center"> <?php echo $embarcacao->getRegMarinha() ?> </td>
                             <td class="text-center"> <?php echo $embarcacao->getRegMpa() ?> </td>                            
 
@@ -47,10 +47,7 @@
                                     <?php if ($this->ezrbac->hasAccess(Utils::EDIT, 'Cad_embarcacao_ct')) :?>
                                     <a href="<?php echo site_url('Cad_embarcacao_ct/edita') . '?id=' . $embarcacao->getIdEmbarcacao() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                                     <?php endif;?>
-                                    <!--  Botão de Excluir deletado para impedir que seja entrada e cause problema no sistema-->
-                                    <!-- <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'Cad_embarcacao_ct')) :?>
-                                    <a  onclick="exclui(<?php echo $embarcacao->getIdEmbarcacao() ?>)" href="javascript:;" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
-                                    <?php endif;?> -->
+                                    
                                 </div>
                             </td>
                         </tr>
@@ -77,16 +74,3 @@
       </div>
    </div>
 </div>
-
-<!-- Botão de Excluir removido para impedir erro no banco de dados--> -->
-<!-- <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'Cad_embarcacao_ct')) :?>
-<script>
-function exclui(id) {
-    bootbox.confirm("Tem certeza que deseja excluir o registro?", function(result) {
-        if (result) {
-            document.location.href = '<?php echo site_url('Cad_embarcacao_ct/exclui') . '?id='?>' + id;
-        }
-    });
-}
-</script>
-<?php endif;?> -->

@@ -193,7 +193,7 @@
                 }
             });
             
-            <?php if ($isView === true) :?>
+            <?php if (isset($isView) && $isView === true) :?>
             $('.glyphicon-remove').parent().remove();
             $('.glyphicon-plus').parent().remove();
             $('.glyphicon-remove').parent().remove();

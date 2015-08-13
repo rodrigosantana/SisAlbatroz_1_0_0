@@ -337,5 +337,35 @@ class MedConservacao {
     public function getDataAlteracao() {
         return $this->dataAlteracao;
     }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'etiqueta' => $this->etiqueta,
+            'etiquetaAntiga' => $this->etiquetaAntiga,
+            'especie' => $this->especie == null ? null : $this->especie->getId(),
+            'responsavel' => $this->responsavel,
+            'dataEntrada' => $this->dataEntrada == null ? null : $this->dataEntrada->format('Y-m-d'),
+            'dataCaptura' => $this->dataCaptura == null ? null : $this->dataCaptura->format('Y-m-d'),
+            'coordenada' => $this->coordenada == null ? null : array('latitude'=>$this->coordenada->latitudeDecimal, 'longitude'=>$this->coordenada->longitudeDecimal),
+            'anilha' => $this->anilha,
+            'plumagem' => $this->plumagem,
+            'procedencia' => $this->procedencia,
+            'procedenciaOutros' => $this->procedenciaOutros,
+            
+            'capturaIncidental' => $this->capturaIncidental == null ? null : $this->capturaIncidental->toArray(),
+            'biometria' =>  $this->biometria == null ? null : $this->biometria->toArray(),
+            'coletaMaterialBiologico' =>  $this->coletaMaterialBiologico == null ? null : $this->coletaMaterialBiologico->toArray(),
+            'outrasPesquisas' =>  $this->outrasPesquisas == null ? null : $this->outrasPesquisas->toArray(),
+            
+            'usuarioInsercao'=> $this->usuarioInsercao == null ? '' : $this->usuarioInsercao->getId(),
+            'usuarioAlteracao'=> $this->usuarioAlteracao == null ? '' : $this->usuarioAlteracao->getId(),
+            'dataInsercao'=> $this->dataInsercao == null ? null : $this->dataInsercao->format('Y-m-d H:i:s'),
+            'dataAlteracao'=> $this->dataAlteracao == null ? null : $this->dataAlteracao->format('Y-m-d H:i:s'),
+            
+        );
+        
+        return $data; 
+    }
 
 }

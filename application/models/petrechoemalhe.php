@@ -122,5 +122,21 @@ class PetrechoEmalhe extends Petrecho {
         $this->tempoEstimadoRecolhimento = $tempoEstimadoRecolhimento;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'id' => parent::getId(),
+            'tipoRede' => $this->tipoRede,
+            'comprimentoPano' => $this->comprimentoPano,
+            'alturaPano' => $this->alturaPano,
+            'numeroPanosPorLance' => $this->numeroPanosPorLance,
+            'regimeTrabalho' => $this->regimeTrabalho,
+            'tempoEstimadoLancamento' => $this->tempoEstimadoLancamento == null ? null : $this->tempoEstimadoLancamento->format('H:i:s'),
+            'tempoEstimadoRecolhimento' => $this->tempoEstimadoRecolhimento == null ? null : $this->tempoEstimadoRecolhimento->format('H:i:s'),
+        );
+        
+        return $data;
+    }
+    
+    
+    
 }

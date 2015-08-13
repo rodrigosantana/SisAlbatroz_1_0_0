@@ -78,6 +78,14 @@ class EntrevistaCaisCapturaAve {
         $this->especie = $especie;
     }
 
-
-
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'quantidade' => $this->quantidade,
+            'especie' => $this->especie == null ? null : $this->especie->getId(),
+            'entrevistaCais' => $this->entrevistaCais->getId()
+        );
+        
+        return $data;
+    }
 }

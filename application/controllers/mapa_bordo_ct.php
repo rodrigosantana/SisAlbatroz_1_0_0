@@ -180,7 +180,10 @@ class Mapa_bordo_ct extends MY_Controller {
                         $mbLance->setMmUso($value['mm_uso']);
                     }
 
-                    $mbLance->setAveCapt(Utils::valorBooleano($value['ave_capt']));
+                    if (isset($value['ave_capt'])) {
+                        $mbLance->setAveCapt(Utils::valorBooleano($value['ave_capt']));
+                    }
+                    
                     $mbLance->getIdMm()->clear();
                     $mbLance->getIdIsca()->clear();
 
@@ -226,7 +229,10 @@ class Mapa_bordo_ct extends MY_Controller {
             }
         }
         
+        $acao = 'salva';
+        
         if ($mbGeral->getIdMb() > 0) {
+            $acao = 'edita';
             $mbGeral->setDataAlteracao(new DateTime());
             $mbGeral->setUsuarioAlteracao($usuario);
         } else {
@@ -234,10 +240,34 @@ class Mapa_bordo_ct extends MY_Controller {
             $mbGeral->setUsuarioInsercao($usuario);            
         }
         
+        
+        
         $this->doctrine->em->persist($mbGeral);
         $this->doctrine->em->flush();
 
-        
+        try {
+            $userData = $this->session->all_userdata();
+            $objeto = new LogSistema();
+            $objeto->setDataHora(new DateTime());
+            $objeto->setUsuario($usuario);
+            $objeto->setController(get_class($this));
+            $objeto->setAcao($acao);        
+            $objeto->setIp($userData["ip_address"]);
+            $dadosRequisicao = $this->input->post();
+            $objeto->setDadosRequisicao($dadosRequisicao);
+            $objeto->setDadosSalvos($mbGeral->toArray());
+
+            $this->doctrine->em->persist($objeto);
+            $this->doctrine->em->flush();
+        } catch (Exception $exc) {
+            show_error('log_system_error_message');
+            return;
+        }
+
+
+
+
+
         $mensagem = 'Registro salvo com sucesso. (Código: ' . $mbGeral->getIdMb() . ')';
         if ($isEdita) {
             $this->session->set_flashdata(get_class($this) . '_mensagem', $mensagem);

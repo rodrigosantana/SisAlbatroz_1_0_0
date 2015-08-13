@@ -343,7 +343,7 @@ class MbGeral {
     }
     
     public function jsonMap($url = '') {
-        $itens = [];
+        $itens = array();
         $urlView = !empty($url) ? ' <a href="'.$url.'?id='.$this->getIdMb().'" href="javascript:;" title="Visualizar" style="font-size: 18px;" target="_blank"><i class="glyphicon glyphicon-eye-open"></i></a>' : '';
         
         foreach ($this->lances as $value) {
@@ -353,7 +353,7 @@ class MbGeral {
                     'id'=>'mapa_bordo_'. $this->getIdMb() . '_' . $value->getIdLance(),
                     'geometry'=>array(
                         'type'=>'Point',
-                        'coordinates'=> [(double)$value->getCoordenada()->longitudeDecimal, (double)$value->getCoordenada()->latitudeDecimal],                        
+                        'coordinates'=> array((double)$value->getCoordenada()->longitudeDecimal, (double)$value->getCoordenada()->latitudeDecimal),                        
                     ),
                     'properties'=>array('content'=>
                             '<h3>Mapa de Bordo'.$urlView.'</h3>'
@@ -368,5 +368,31 @@ class MbGeral {
         }
         
         return $itens;
+    }
+    
+    public function toArray() {
+        $data = array (
+            'dataSaida'=> ($this->dataSaida == null ? null : $this->dataSaida->format('Y-m-d')),
+            'dataChegada'=> ($this->dataChegada == null ? null : $this->dataChegada->format('Y-m-d')),
+            'observacao'=> $this->observacao,
+            'petrecho'=> $this->petrecho,
+            'idMb'=> $this->idMb,
+            'entrevistador'=> $this->entrevistador == null ? null : $this->entrevistador->getId(),
+            'mestre'=> $this->mestre == null ? null : $this->mestre->getIdMestre(),
+            'embarcacao'=> $this->embarcacao == null ? null : $this->embarcacao->getIdEmbarcacao(),            
+            'usuarioInsercao'=> $this->usuarioInsercao == null ? '' : $this->usuarioInsercao->getId(),
+            'usuarioAlteracao'=> $this->usuarioAlteracao == null ? '' : $this->usuarioAlteracao->getId(),
+            'dataInsercao'=> $this->dataInsercao == null ? null : $this->dataInsercao->format('Y-m-d H:i:s'),
+            'dataAlteracao'=> $this->dataAlteracao == null ? null : $this->dataAlteracao->format('Y-m-d H:i:s'),
+            'lances'=>array()
+        );
+        
+        $lances = $this->lances->toArray();
+        
+        foreach ($lances as $lance) {
+            $data['lances'][] = $lance->toArray();
+        }
+        
+        return $data;
     }
 }

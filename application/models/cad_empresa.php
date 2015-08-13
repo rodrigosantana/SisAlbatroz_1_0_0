@@ -104,7 +104,7 @@ class Cad_empresa {
      * @param Municipio $municipio
      * @return Cad_empresa
      */
-    public function setMunicipio(Municipio $municipio)
+    public function setMunicipio(Municipio $municipio = null)
     {
         $this->municipio = $municipio;
 
@@ -132,6 +132,10 @@ class Cad_empresa {
     {
         $this->end=$end;
         return $this;
+    }
+    
+    public function getEnd() {
+        return $this->end;
     }
 //--------------------------------------------------------------------------------------------------------------------//
 

@@ -7,7 +7,7 @@
 /**
  * ContagemPorSol
  *
- * @Table(name="contagem_por_sol")
+ * @Table(name="cr_contagem_por_sol")
  * @Entity
  */
 class ContagemPorSol
@@ -388,5 +388,34 @@ class ContagemPorSol
     
     public function getContagemPorSolIndice() {
         return $this->contagemPorSolIndice;
+    }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'data' => $this->data == null ? null : $this->data->format('Y-m-d'),
+            'horaPorSol' => $this->horaPorSol == null ? '' : $this->horaPorSol->format('H:i:s'),
+            'coordenada' => $this->coordenada == null ? null : array('latitude'=>$this->coordenada->latitudeDecimal, 'longitude'=>$this->coordenada->longitudeDecimal),
+            'lance' => $this->lance == null ? null : $this->lance->getId(),
+            'toriline' => $this->toriline,
+            'iscaTingida' => $this->iscaTingida,
+            'observacao' => $this->observacao,
+            'indice' => $this->indice,
+            'hora' => $this->hora == null ? null : $this->hora->format('H:i:s'),
+            'total' => $this->total,
+            'cruzeiro' => $this->cruzeiro->getId(),
+            'contagemPorSolIndice' => array()
+        );
+        
+        $contagensIndice = $this->contagemPorSolIndice->toArray();
+        $lista = array();
+        
+        foreach ($contagensIndice as $value) {
+            $lista[] = $value->toArray();
+        }
+        
+        $data['contagemPorSolIndice'] = $lista;
+        
+        return $data;
     }
 }

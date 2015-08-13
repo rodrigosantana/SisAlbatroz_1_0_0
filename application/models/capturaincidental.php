@@ -2,7 +2,7 @@
 /**
  * CapturaIncidental
  *
- * @Table(name="captura_incidental")
+ * @Table(name="cr_captura_incidental")
  * @Entity
  */
 class CapturaIncidental
@@ -206,5 +206,28 @@ class CapturaIncidental
     
     public function getCapturaIncidentalEspecie() {
         return $this->capturaIncidentalEspecie;
+    }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'lance' => $this->lance == null ? null : $this->lance->getId(),
+            'data' => $this->data == null ? null : $this->data->format('Y-m-d'),
+            'boiaRadio' => $this->boiaRadio == null ? null : $this->boiaRadio->getId(),
+            'coordenada' => $this->coordenada == null ? null : array('latitude'=>$this->coordenada->latitudeDecimal, 'longitude'=>$this->coordenada->longitudeDecimal),
+            'cruzeiro' => $this->cruzeiro->getId(),
+            'capturaIncidentalEspecie' => array()
+        );
+        
+        $especies = $this->capturaIncidentalEspecie->toArray();
+        $lista = array();
+        
+        foreach ($especies as $value) {
+            $lista[] = $value->toArray();
+        }
+        
+        $data['capturaIncidentalEspecie'] = $lista;
+        
+        return $data;
     }
 }

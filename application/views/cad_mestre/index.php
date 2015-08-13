@@ -46,14 +46,8 @@
 
                                 <div class="btn-group" role="group" aria-label="...">
                                     <?php if ($this->ezrbac->hasAccess(Utils::EDIT, 'cad_mestre_ct')) :?>
-                                    <a href="<?php echo site_url('Cad_mestre_ct/edita') . '?id=' . $mestre->getIdMestre() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                                    <a href="<?php echo site_url('Cad_mestre_ct/edita') . '?idMestre=' . $mestre->getIdMestre() ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                                     <?php endif;?>
-
-                                    <!--
-                                    <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'cad_mestre_ct')) :?>
-                                    <a  onclick="exclui(<?php echo $mestre->getIdMestre() ?>)" href="javascript:;" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
-                                    <?php endif;?> -->
-
                                 </div>
                             </td>
                         </tr>
@@ -81,16 +75,3 @@
     </div>
 </div>
 
-
-
-<!-- <?php if ($this->ezrbac->hasAccess(Utils::DELETE, 'cad_mestre_ct')) :?>
-<script>
-function exclui(id) {
-    bootbox.confirm("Tem certeza que deseja excluir o registro?", function(result) {
-        if (result) {
-            document.location.href = '<?php echo site_url('cad_mestre_ct/exclui') . '?id='?>' + id;
-        }
-    });
-}
-</script>
-<?php endif;?> -->

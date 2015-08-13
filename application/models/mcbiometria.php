@@ -303,5 +303,30 @@ class McBiometria {
         $this->mudaVentre = $mudaVentre;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'peso' => $this->peso,
+            'comprimento' => $this->comprimento,
+            'culmem' => $this->culmem,
+            'narinaCulmem' => $this->narinaCulmem,
+            'alturaBicoBase' => $this->alturaBicoBase,
+            'alturaMinimaBico' => $this->alturaMinimaBico,
+            'alturaBicoUnguis' => $this->alturaBicoUnguis,
+            'larguraBicoBase' => $this->larguraBicoBase,
+            'comprimentoCabeca' => $this->comprimentoCabeca,
+            'comprimentoAsa' => $this->comprimentoAsa,
+            'comprimentoCauda' => $this->comprimentoCauda,
+            'comprimentoTarso' => $this->comprimentoTarso,            
+            'comprimentoDedoSemUnha' => $this->comprimentoDedoSemUnha,
+            'comprimentoDedoComUnha' => $this->comprimentoDedoComUnha,
+            'envergadura' => $this->envergadura,
+            'mudaAsa' => $this->mudaAsa,
+            'mudaCauda' => $this->mudaCauda,
+            'mudaCabeca' => $this->mudaCabeca,            
+            'mudaDorso' => $this->mudaDorso,
+            'mudaVentre' => $this->mudaVentre,
+        );
+        
+        return $data;
+    }
 }

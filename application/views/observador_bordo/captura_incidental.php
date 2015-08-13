@@ -70,7 +70,7 @@
                 <div class="form-group">
                     <label for="captura_incidental_<?php echo $numero; ?>_lat" class="col-md-4 control-label">Longitude (decimal)</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" step="any" class="form-control" id="captura_incidental_<?php echo $numero; ?>_lat" name="captura_incidental[<?php echo $numero; ?>][lng]" value="<?php echo is_null($capturaIncidental->getCoordenada()) ? '' : $capturaIncidental->getCoordenada()->latitudeDecimal ?>">
+                        <input type="number" step="any" class="form-control" id="captura_incidental_<?php echo $numero; ?>_lat" name="captura_incidental[<?php echo $numero; ?>][lng]" value="<?php echo is_null($capturaIncidental->getCoordenada()) ? '' : $capturaIncidental->getCoordenada()->longitudeDecimal ?>">
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
         <h3 class="text-center titulo">Espécies</h3>
         <hr class="hr-sisalbatroz">
 
-        <div id="captura_incidental_especie_container_<?php echo $numero ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/captura_incidental_especie", array('capturaIncidentalEspecie' => new CapturaIncidentalEspecie(), "numero" => $numero, 'aves' => $aves), true)); ?>">
+        <div id="captura_incidental_especie_container_<?php echo $numero ?>" data-prototype="<?php echo htmlspecialchars($this->load->view("observador_bordo/captura_incidental_especie", array('capturaIncidentalEspecie' => new CapturaIncidentalEspecie(), 'indexCapturaIncidentalEspecie'=>'$$numero2$$', "numero" => $numero, 'aves' => $aves), true)); ?>">
             <?php
             $lista = $capturaIncidental->getCapturaIncidentalEspecie();
             

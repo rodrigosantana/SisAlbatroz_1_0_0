@@ -3,7 +3,7 @@
 // Criação da entidade para a tabela de aves
 
 /**
- * @Table(name="autoriz_pesca")
+ * @Table(name="cad_autoriz_pesca")
  * @Entity
  */
 class AutorizPesca {
@@ -60,4 +60,7 @@ class AutorizPesca {
     }
 //--------------------------------------------------------------------------------------------------------------------//
 
+    public function getId() {
+        return $this->id_auto_pesca;
+    }
 }

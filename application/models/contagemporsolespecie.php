@@ -7,7 +7,7 @@
 /**
  * ContagemPorSolEspecie
  *
- * @Table(name="contagem_por_sol_especie")
+ * @Table(name="cr_contagem_por_sol_especie")
  * @Entity
  */
 class ContagemPorSolEspecie
@@ -146,5 +146,15 @@ class ContagemPorSolEspecie
         return $this;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'quantidade' => $this->quantidade,
+            'tipoIndividuo' => $this->tipoIndividuo,
+            'especie' => $this->especie == null ? null : $this->especie->getId(),
+            'contagemPsi' => $this->contagemPsi->getId()
+        );
+        
+        return $data;
+    }
 }

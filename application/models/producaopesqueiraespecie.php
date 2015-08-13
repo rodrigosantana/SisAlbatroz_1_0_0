@@ -7,7 +7,7 @@
 /**
  * ProducaoPesqueiraEspecie
  *
- * @Table(name="producao_pesqueira_especie", indexes={@Index(name="IDX_258E1E88FF0814ED", columns={"especie"}), @Index(name="IDX_258E1E88AC05902B", columns={"producao_pesqueira"})})
+ * @Table(name="cr_producao_pesqueira_especie", indexes={@Index(name="IDX_258E1E88FF0814ED", columns={"especie"}), @Index(name="IDX_258E1E88AC05902B", columns={"producao_pesqueira"})})
  * @Entity
  */
 class ProducaoPesqueiraEspecie
@@ -158,5 +158,19 @@ class ProducaoPesqueiraEspecie
     public function getProducaoPesqueira()
     {
         return $this->producaoPesqueira;
+    }
+    
+    
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'quantidade' => $this->quantidade,
+            'predacao' => $this->predacao,
+            'especie' => $this->especie->getId(),
+            'producaoPesqueira' => $this->producaoPesqueira->getId()
+        );
+        
+        return $data;
     }
 }

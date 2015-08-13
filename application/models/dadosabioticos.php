@@ -7,7 +7,7 @@
 /**
  * DadosAbioticos
  *
- * @Table(name="dados_abioticos", indexes={@Index(name="IDX_A0CEBD378856C0F0", columns={"especie_alvo"}), @Index(name="IDX_A0CEBD374F970F73", columns={"tipo_isca"}), @Index(name="IDX_A0CEBD3723C64D0C", columns={"cruzeiro"})})
+ * @Table(name="cr_dados_abioticos", indexes={@Index(name="IDX_A0CEBD378856C0F0", columns={"especie_alvo"}), @Index(name="IDX_A0CEBD374F970F73", columns={"tipo_isca"}), @Index(name="IDX_A0CEBD3723C64D0C", columns={"cruzeiro"})})
  * @Entity
  */
 class DadosAbioticos
@@ -62,7 +62,7 @@ class DadosAbioticos
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ManyToMany(targetEntity="CadIsca", orphanRemoval=false)
-     * @JoinTable(name="dados_abioticos_isca",
+     * @JoinTable(name="cr_dados_abioticos_isca",
      *   joinColumns={
      *     @JoinColumn(name="id_dados_abioticos", referencedColumnName="id")
      *   },
@@ -88,7 +88,7 @@ class DadosAbioticos
     /**
      * @var \DadosAbioticosLancamento
      *
-     * @OneToOne(targetEntity="DadosAbioticosComplementar", cascade={"all"})
+     * @OneToOne(targetEntity="DadosAbioticosLancamento", cascade={"all"})
      * @JoinColumns({
      *   @JoinColumn(name="dado_lancamento", referencedColumnName="id")
      * })
@@ -328,5 +328,29 @@ class DadosAbioticos
     public function __toJson() {
         return array('id'=>$this->id, 'name'=>$this->lance);
     }
-    
+ 
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'lance' => $this->lance,
+            'anzois' => $this->anzois,
+            'regPeso' => $this->regPeso,
+            'toriline' => $this->toriline,
+            'iscaTingida' => $this->iscaTingida,
+            'iscas' => array(),
+            'cruzeiro' => $this->cruzeiro->getId(),
+            'dadosAbioticosLancamento' => $this->dadosAbioticosLancamento->toArray(),
+            'dadosAbioticosRecolhimento' => $this->dadosAbioticosRecolhimento->toArray(),
+        );
+
+        $iscas = $this->iscas->toArray();
+        $lista = array();
+        
+        foreach ($iscas as $value) {
+            $lista[] = $value->getIdIsca();
+        }
+        $data['iscas'] = $lista;
+        
+        return $data;
+    }    
 }

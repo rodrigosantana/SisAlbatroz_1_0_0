@@ -72,8 +72,14 @@
                     <div class="panel panel-default" style="margin-bottom: 0px">
                         <div class="panel-heading">Dados provenientes de:</div>
                         <div class="panel-body">
-                            <label><input type="checkbox" value="mapa_bordo" class="map-check-data"> Mapa de Bordo</label>
-                            <label><input type="checkbox" value="observador_bordo" class="map-check-data"> Observador de Bordo</label>
+                            <div>
+                            <label>Mapa de Bordo</label><br>
+                            <label style="margin-left: 20px; font-weight: normal;"><input type="checkbox" value="mapa_bordo" class="map-check-data"> Lances</label><br>
+                            <label style="margin-left: 20px; font-weight: normal;"><input type="checkbox" value="mapa_bordo_captura" class="map-check-data"> Lances com captura</label>                            
+                            
+                            <label>Observador de Bordo</label><br>
+                            <label style="margin-left: 20px; font-weight: normal;"><input type="checkbox" value="observador_bordo" class="map-check-data"> Lances</label><br>
+                            <label style="margin-left: 20px; font-weight: normal;"><input type="checkbox" value="observador_bordo_captura" class="map-check-data"> Capturas</label>
                         </div>
                     </div>
                 </li>
@@ -138,19 +144,32 @@
                 });
 
         if (feature) {
-            console.log(feature);            
             var geometry = feature.getGeometry();
             var coordinate = geometry.getCoordinates();
             content.innerHTML = feature.get('content');
             overlay.setPosition(coordinate);
         }
     });
+    
+    map.on('pointermove', function(e) {
+        var pixel = map.getEventPixel(e.originalEvent);
+        var hit = map.hasFeatureAtPixel(pixel);
+        map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
 
 
     $(document).ready(function() {  
         
         layersStyle = {
-            
+                'mapa_bordo_captura':[new ol.style.Style({
+                    image: new ol.style.Icon(({
+                        anchor: [0.5, 0.5],
+                        anchorXUnits: 'fraction',
+                        anchorYUnits: 'fraction',
+                        opacity: 1,
+                        src: '<?php echo base_url(); ?>assets/img/cruz_azul.png'
+                    }))
+                })],
                 'mapa_bordo': [new ol.style.Style({
                     image: new ol.style.Circle({
                         radius: 5,
@@ -164,66 +183,72 @@
                         fill: new ol.style.Fill({color: 'red'}),
                         stroke: new ol.style.Stroke({color: 'black', width: 1})
                     })
-                })]            
+                })],
+                'observador_bordo_captura':[new ol.style.Style({
+                    image: new ol.style.Icon(({
+                        anchor: [0.7, 0.7],
+                        anchorXUnits: 'fraction',
+                        anchorYUnits: 'fraction',
+                        opacity: 1,
+                        src: '<?php echo base_url(); ?>assets/img/cruz_vermelha.png'
+                    }))
+                })],
         };
         
         $('.map-check-data').click(function (event) {
-            var itens = $('.map-check-data:checked');
-            var data = '';
-            var v = '';
+            var element = event.target;
+            var elementValue = element.value;
             
-            for(var i = 0; i < itens.length; i++) {
-                var component = itens[i];
-                data += v + $(component).val();
-                v = ',';
-            }
-            
-            blockWindow();
-            $.ajax({
-                type: "POST",
-                cache: false,
-                url: '<?php echo site_url('mapa/getdata'); ?>',
-                dataType: "json",
-                data: {data: data},
-                success: function(res) {
-                    unblockWindow();
-                    $(closer).click();
-                    $.each(layersList, function(i, value) {
-                        try {
-                            map.removeLayer(value.layer);
-                        } catch(error) {
-                            console.log(error);
-                        }
-                    });
-                    
-                    layersList = [];
-                    
-                    if (res.data) {
-                        var layers = res.data;
-                        $.each(layers, function (i, value){
-                            try {
-                                var vectorLayer = new ol.layer.Vector({
-                                    source: new ol.source.Vector({
-                                        features: (new ol.format.GeoJSON()).readFeatures(value.data)
-                                    }),
-                                    style: layersStyle[value.type]
-                                });
+            if (element.checked) {
+                blockWindow();
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: '<?php echo site_url('mapa/getdata'); ?>',
+                    dataType: "json",
+                    data: {data: elementValue},
+                    success: function(res) {
+                        unblockWindow();
+                        $(closer).click();
 
-                                map.addLayer(vectorLayer);                            
-                                layersList.push({type:value.type, layer:vectorLayer});
-                            } catch(error) {
-                                console.log(error);
-                            }
-                        });
+                        if (res.data) {
+                            var layers = res.data;
+                            $.each(layers, function (i, value){
+                                try {
+                                    var vectorLayer = new ol.layer.Vector({
+                                        source: new ol.source.Vector({
+                                            features: (new ol.format.GeoJSON()).readFeatures($.parseJSON(value.data))
+                                        }),
+                                        style: layersStyle[value.type]
+                                    });
+
+                                    map.addLayer(vectorLayer);                            
+                                    layersList.push({type:value.type, layer:vectorLayer});
+                                } catch(error) {
+                                    console.log(error);
+                                }
+                            });
+                        }
+
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        unblockWindow();
+                        alert('Erro ao obter os lances.');
+                    },
+                    async: true
+                });
+            } else {
+                $.each(layersList, function(i, value) {
+                    try {
+                        if (value && elementValue == value.type) {
+                            layersList.splice(i, 1);
+                            map.removeLayer(value.layer);
+                        }
+                    } catch(error) {
+                        console.log(error);
                     }
-                    
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    unblockWindow();
-                    alert('Erro ao obter os lances.');
-                },
-                async: true
-            });
+                });
+            }
         });
     });
 

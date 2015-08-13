@@ -127,4 +127,15 @@ class MbCaptura
     {
         return $this->idLance;
     }
+    
+    public function toArray() {
+        $data = array(
+            'idAve' => $this->idAve == null ? '' : $this->idAve->getId(),
+            'quantidade' => $this->quantidade,
+            'idCapt' => $this->idCapt,
+            'idLance' => $this->idLance->getIdLance()
+        );
+        
+        return $data;
+    }
 }

@@ -110,65 +110,47 @@ $autoload['language'] = array('i18n');
 */
 
 $autoload['model'] = array(
+    'LogSistema',
     'CadFinanciador',
-    'CadEspecie',
-    'Cad_embarcacao',
-    'Cad_mestre',
     'Cad_empresa',
-    'Cad_ave',
-    'Cad_observador',
     'Users',
     'AutorizPesca',
-    'Mb_isca',
-    'Mb_lance',
-    'Mb_captura',
-    'Mb_geral',
     'Municipio',
     'UserRole',
     'UserAccessMap',
-    
-    'CadAves',
     'CadMestre',
     'CadEmbarcacao',
     'CadObservador',
     'CadEntrevistador',
     'SystemUsers',
     'Porto',
-    
     'CadIsca',
     'CadMedidaMetigatoria',
     'MbGeral',
     'MbCaptura',
     'MbLance',
-    
     'Cruzeiro',
     'ProducaoPesqueira',
     'ProducaoPesqueiraEspecie',
-    
     'DadosAbioticos',
     'DadosAbioticosComplementar',
     'DadosAbioticosLancamento',
     'DadosAbioticosRecolhimento',
-    
     'ContagemPorSol',
     'ContagemPorSolIndice',
     'ContagemPorSolEspecie',
     'CapturaIncidental',
     'CapturaIncidentalEspecie',
-    
     'ContagemAveBoia',
     'ContagemAveBoiaEspecie',
-    
     'Especies',
     'Pescado',
     'Ave',    
-    
     'McCapturaIncidental',
     'McColetaMaterialBiologico',
     'McBiometria',
     'McOutrasPesquisas',
     'MedConservacao',
-    
     'Petrecho',
     'PetrechoArrasto',
     'PetrechoEspinhel',
@@ -179,8 +161,6 @@ $autoload['model'] = array(
     'EntrevistaCais',
     'EntrevistaCaisAreaPesca',
     'EntrevistaCaisCapturaAve',
-    
-    
 );
 
 

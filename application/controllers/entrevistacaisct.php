@@ -389,8 +389,10 @@ class EntrevistaCaisCt extends MY_Controller {
         }
         
         $usuario = $em->find("SystemUsers", $this->ezrbac->getCurrentUser()->id);
+        $acao = 'salva';
         
         if ($entrevista->getId() > 0) {
+            $acao = 'edita';
             $entrevista->setDataAlteracao(new DateTime());
             $entrevista->setUsuarioAlteracao($usuario);
         } else {
@@ -398,9 +400,30 @@ class EntrevistaCaisCt extends MY_Controller {
             $entrevista->setUsuarioInsercao($usuario);            
         }
         
+        
+        
         $em->persist($entrevista);
         $em->flush();
 
+        try {
+            $userData = $this->session->all_userdata();
+            $objeto = new LogSistema();
+            $objeto->setDataHora(new DateTime());
+            $objeto->setUsuario($usuario);
+            $objeto->setController(get_class($this));
+            $objeto->setAcao($acao);        
+            $objeto->setIp($userData["ip_address"]);
+            $dadosRequisicao = $this->input->post();
+            $objeto->setDadosRequisicao($dadosRequisicao);
+            $objeto->setDadosSalvos($entrevista->toArray());
+
+            $em->persist($objeto);
+            $em->flush();
+        } catch (Exception $exc) {
+            show_error('log_system_error_message');
+            return;
+        }
+        
         
         $mensagem = 'Registro salvo com sucesso. (Código: ' . $entrevista->getId() . ')';
         if ($isEdita) {

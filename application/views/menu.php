@@ -98,7 +98,7 @@
                     </ul>
                 </li>
 
-                <li class=""><a href="<?php echo site_url('mapa');?>">Mapa</a></li>
+                <li class=""><a href="<?php echo site_url('mapa');?>">Mapa Interativo</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
                 <li><a href="<?php echo site_url('sistema_ct/index/rbac/logout');?>">Sair</a></li>

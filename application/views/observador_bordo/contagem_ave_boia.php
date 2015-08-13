@@ -105,7 +105,7 @@
                 <div class="form-group">
                     <label for="contagem_ave_boia_<?php echo $numero; ?>_lat" class="col-md-4 control-label">Longitude (decimal)</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" step="any" class="form-control" id="contagem_ave_boia_<?php echo $numero; ?>_lat" name="contagem_ave_boia[<?php echo $numero; ?>][lng]" value="<?php echo is_null($contagemAveBoia->getCoordenada()) ? '' : $contagemAveBoia->getCoordenada()->latitudeDecimal ?>">
+                        <input type="number" step="any" class="form-control" id="contagem_ave_boia_<?php echo $numero; ?>_lat" name="contagem_ave_boia[<?php echo $numero; ?>][lng]" value="<?php echo is_null($contagemAveBoia->getCoordenada()) ? '' : $contagemAveBoia->getCoordenada()->longitudeDecimal ?>">
                     </div>
                 </div>
             </div>

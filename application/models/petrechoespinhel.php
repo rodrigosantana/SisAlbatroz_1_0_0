@@ -155,5 +155,20 @@ class PetrechoEspinhel extends Petrecho
         $this->horaRecolhimentoFim = $horaRecolhimentoFim;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'id' => parent::getId(),
+            'numeroEspinheis' => $this->numeroEspinheis,
+            'numeroAnzois' => $this->numeroAnzois,            
+            'numeroLances' => $this->numeroLances,            
+            'lightStick' => $this->lightStick,
+            'toriline' => $this->toriline,
+            'horaLancamentoInicio' => $this->horaLancamentoInicio == null ? null : $this->horaLancamentoInicio->format('H:i:s'),
+            'horaLancamentoFim' => $this->horaLancamentoFim == null ? null : $this->horaLancamentoFim->format('H:i:s'),
+            'horaRecolhimentoInicio' => $this->horaRecolhimentoInicio == null ? null : $this->horaRecolhimentoInicio->format('H:i:s'),
+            'horaRecolhimentoFim' => $this->horaRecolhimentoFim == null ? null : $this->horaRecolhimentoFim->format('H:i:s'),
+        );
+        
+        return $data;
+    }
 }

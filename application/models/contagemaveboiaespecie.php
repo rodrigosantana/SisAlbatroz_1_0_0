@@ -3,7 +3,7 @@
 /**
  * ContagemAveBoiaEspecie
  *
- * @Table(name="contagem_ave_boia_especie")
+ * @Table(name="cr_contagem_ave_boia_especie")
  * @Entity
  */
 class ContagemAveBoiaEspecie
@@ -124,5 +124,16 @@ class ContagemAveBoiaEspecie
     public function getContagemAveBoia()
     {
         return $this->contagemAveBoia;
+    }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'quantidade' => $this->quantidade,
+            'especie' => $this->especie == null ? null : $this->especie->getId(),
+            'contagemAveBoia' => $this->contagemAveBoia->getId()
+        );
+        
+        return $data;
     }
 }

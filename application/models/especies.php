@@ -7,7 +7,7 @@
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="tipo", type="string")
  * @DiscriminatorMap({"aves" = "Ave", "pescado" = "Pescado"})
- * @Table(name="especie")
+ * @Table(name="cad_especie")
  */
 class Especies {
 //--------------------------------------------------------------------------------------------------------------------//

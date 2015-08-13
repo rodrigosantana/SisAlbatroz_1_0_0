@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @Table(name="municipio")
+ * @Table(name="cad_municipio")
  * @Entity
  */
 class Municipio {

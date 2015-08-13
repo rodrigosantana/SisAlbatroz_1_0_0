@@ -89,5 +89,16 @@ class PetrechoVaraIscaViva extends Petrecho
         return $this;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'id' => parent::getId(),
+            'diasIsca' => $this->diasIsca,            
+            'diasCapeando' => $this->diasCapeando,
+            'totalLances' => $this->totalLances,
+            'numeroPescadores' => $this->numeroPescadores,
+            'boia' => $this->boia
+        );
+        
+        return $data;
+    }
 }

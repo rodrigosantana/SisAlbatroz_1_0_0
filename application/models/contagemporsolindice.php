@@ -2,7 +2,7 @@
 /**
  * ContagemPorSol
  *
- * @Table(name="contagem_por_sol_indice")
+ * @Table(name="cr_contagem_por_sol_indice")
  * @Entity
  */
 class ContagemPorSolIndice
@@ -170,5 +170,27 @@ class ContagemPorSolIndice
     
     public function getContagemPorSolEspecie() {
         return $this->contagemPorSolEspecie;
+    }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'indice' => $this->indice,
+            'hora' => $this->hora == null ? null : $this->hora->format('H:i:s'),
+            'total' => $this->total,
+            'contagemPorSol' => $this->contagemPorSol->getId(),
+            'contagemPorSolEspecie' => array()
+        );
+        
+        $contagens = $this->contagemPorSolEspecie->toArray();
+        $lista = array();
+        
+        foreach ($contagens as $value) {
+            $lista[] = $value->toArray();
+        }
+        
+        $data['contagemPorSolEspecie'] = $lista;
+        
+        return $data;
     }
 }

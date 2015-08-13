@@ -17,7 +17,8 @@
                  <select class="select2" name="municipio" id="municipio">
                      <option></option>
                      <?php foreach ($municipios as $municipio) :?>
-                        <option value ="<?php echo $municipio->getId()?>"> <?php echo $municipio->__toString()?> </option>
+                        <?php $selected = (!empty($filtro['municipio']) && (int)$filtro['municipio'] == $municipio->getId()) ? 'selected' : '' ?>
+                        <option value ="<?php echo $municipio->getId()?>" <?php echo $selected?>> <?php echo $municipio->__toString()?> </option>
                      <?php endforeach;?>
                   </select>
              </div>

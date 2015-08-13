@@ -1,29 +1,9 @@
 <div class="container-fluid">
-    <?php if (isset($mensagem) && $mensagem === true): ?>
-        <div class="col-md-4 col-md-offset-4 alert alert-success alert-dismissible" role="alert" style="margin-top: 20px">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-            <p><strong>Sucesso!</strong><p>
-                Registro salvo com sucesso.
-        </div>
-    <?php endif; ?>
-
     <div class="row">
         <div class="col-md-12">
             <h2 class="text-left titulo">Cadastro de Embarcação</h2>
         </div>
     </div>
-
-    <?php if (validation_errors() != '') : ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-6 col-md-offset-3 alert alert-danger alert-dismissible" role="alert" style="margin-top: 20px">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                    <p><strong>Erro!</strong><p>
-                        <?php echo validation_errors(); ?>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
 
     <form class="form-horizontal" role="form" id="form" method="post" action="<?php echo base_url(); ?>index.php/cad_embarcacao_ct/salva">
         <input type="hidden" id="id_embarcacao" name="id_embarcacao" value="<?php echo $embarcacao->getIdEmbarcacao()?>">
@@ -47,8 +27,8 @@
                                 <select class="select2" name="aut_pesca" id="aut_pesca">
                                     <option></option>
                                     <?php foreach ($auto_pesca as $autorizPesca): ?>
-                                        <?php $selected = ($embarcacao->getAutorizacaoPesca() === $autorizPesca->getModalidade()) ? 'selected' : '' ?>
-                                        <option value="<?php echo $autorizPesca->getModalidade() ?>" <?php echo $selected ?>><?php echo $autorizPesca->getDescricao() ?></option>
+                                        <?php $selected = (!is_null($embarcacao->getAutorizacaoPesca()) && $embarcacao->getAutorizacaoPesca()->getId() === $autorizPesca->getId()) ? 'selected' : '' ?>
+                                        <option value="<?php echo $autorizPesca->getId() ?>" <?php echo $selected ?>><?php echo $autorizPesca->getDescricao() ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

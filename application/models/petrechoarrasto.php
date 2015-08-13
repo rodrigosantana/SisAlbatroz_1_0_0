@@ -62,5 +62,14 @@ class PetrechoArrasto extends Petrecho {
         $this->tempoMedioArrasto = $tempoMedioArrasto;
     }
 
-
+    public function toArray() {
+        $data = array(
+            'id' => parent::getId(),
+            'tipoArrasto' => $this->tipoArrasto,
+            'numeroArrastosDia' => $this->numeroArrastosDia,
+            'tempoMedioArrasto' => $this->tempoMedioArrasto,
+        );
+        
+        return $data;
+    }
 }

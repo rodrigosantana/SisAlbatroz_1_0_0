@@ -7,7 +7,7 @@
 /**
  * DadosAbioticosComplementar
  *
- * @Table(name="dados_abioticos_complementar")
+ * @Table(name="cr_dados_abioticos_complementar")
  * @Entity
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="tipo", type="smallint")
@@ -699,5 +699,35 @@ class DadosAbioticosComplementar
     public function getPressaoAtmosfericaFim()
     {
         return $this->pressaoAtmosfericaFim;
+    }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'coordenadaInicio' => $this->coordenadaInicio == null ? null : array('latitude'=>$this->coordenadaInicio->latitudeDecimal, 'longitude'=>$this->coordenadaInicio->longitudeDecimal),
+            'coordenadaFim' => $this->coordenadaFim == null ? null : array('latitude'=>$this->coordenadaFim->latitudeDecimal, 'longitude'=>$this->coordenadaFim->longitudeDecimal),
+            'dataInicio' => $this->dataInicio == null ? null : $this->dataInicio->format('Y-m-d H:i:s'), 
+            'dataFim' => $this->dataFim == null ? null : $this->dataFim->format('Y-m-d H:i:s'),
+            'profundidadeInicio' => $this->profundidadeInicio,
+            'profundidadeFim' => $this->profundidadeFim,
+            'rumoInicio' => $this->rumoInicio,
+            'rumoFim' => $this->rumoFim,
+            'direcaoVentoInicio' => $this->direcaoVentoInicio,
+            'direcaoVentoFim' => $this->direcaoVentoFim,
+            'velocidadeVentoInicio' => $this->velocidadeVentoInicio,
+            'velocidadeVentoFim' => $this->velocidadeVentoFim,
+            'categoriaMarInicio' => $this->categoriaMarInicio,
+            'categoriaMarFim' => $this->categoriaMarFim,
+            'temperaturaArInicio' => $this->temperaturaArInicio,
+            'temperaturaArFim' => $this->temperaturaArFim,
+            'temperaturaSupMarInicio' => $this->temperaturaSupMarInicio,
+            'temperaturaSupMarFim' => $this->temperaturaSupMarFim,
+            'coberturaCeuInicio' => $this->coberturaCeuInicio,
+            'coberturaCeuFim' => $this->coberturaCeuFim,
+            'pressaoAtmosfericaInicio' => $this->pressaoAtmosfericaInicio,
+            'pressaoAtmosfericaFim' => $this->pressaoAtmosfericaFim
+        );
+        
+        return $data;
     }
 }

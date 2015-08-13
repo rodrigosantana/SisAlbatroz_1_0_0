@@ -2,7 +2,7 @@
 /**
  * CapturaIncidentalEspecie
  *
- * @Table(name="captura_incidental_especie")
+ * @Table(name="cr_captura_incidental_especie")
  * @Entity
  */
 class CapturaIncidentalEspecie
@@ -122,5 +122,16 @@ class CapturaIncidentalEspecie
     public function getCapturaIncidental()
     {
         return $this->capturaIncidental;
+    }
+    
+    public function toArray() {
+        $data = array(
+            'id' => $this->id,
+            'etiqueta' => $this->etiqueta,
+            'especie' => $this->especie == null ? null : $this->especie->getId(),
+            'capturaIncidental' => $this->capturaIncidental->getId()
+        );
+        
+        return $data;
     }
 }

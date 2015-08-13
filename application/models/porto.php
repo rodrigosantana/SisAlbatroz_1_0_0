@@ -3,7 +3,7 @@
 /**
  * Porto
  *
- * @Table(name="porto")
+ * @Table(name="cad_porto")
  * @Entity
  */
 class Porto
