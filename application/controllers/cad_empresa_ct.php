@@ -59,8 +59,8 @@ class Cad_empresa_ct extends MY_Controller {
         $empresa = new Cad_empresa();
         $em = $this->doctrine->em;
 
-        if ($this->input->post('id') && is_numeric($this->input->post('id'))) {
-            $empresa = $this->doctrine->em->find('Cad_empresa', $this->input->post('id'));
+        if ($this->input->post('id_empresa') && is_numeric($this->input->post('id_empresa'))) {
+            $empresa = $this->doctrine->em->find('Cad_empresa', $this->input->post('id_empresa'));
         }
 
         if (is_null($empresa)) {
