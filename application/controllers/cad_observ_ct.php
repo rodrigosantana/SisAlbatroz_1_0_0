@@ -79,11 +79,11 @@ class Cad_observ_ct extends MY_Controller {
         $observador->setTelefone($this->input->post("tel"));
         $observador->setEndereco($this->input->post("end"));
         $observador->setSkype(null);
-        
+
         if ($this->input->post("skype") && $this->input->post("skype") != '') {
             $observador->setSkype($this->input->post("skype"));
-        } 
-        
+        }
+
         if ($this->input->post("municipio") && is_numeric($this->input->post("municipio"))) {
             $observador->setMunicipio($this->doctrine->em->find('Municipio', $this->input->post("municipio")));
         } else {
@@ -121,13 +121,13 @@ class Cad_observ_ct extends MY_Controller {
         $this->load->view('jsonresponse', $return);
     }
 
-    
+
 
 //--------------------------------------------------------------------------------------------------------------------//
     // Função para checar se a espécie já existe no BD
     public function checkCpf($check, $value) {
         $checkCpf = $this->doctrine->em->getRepository("CadObservador")->findOneBy(array("cpf"=>$check));
-        
+
         if (($checkCpf == null) || $checkCpf->getIdObserv() === (int)$value) {
             return TRUE;
         } else {
@@ -195,21 +195,21 @@ class Cad_observ_ct extends MY_Controller {
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(1, '%' . $filtrosSessao['nome'] . '%');
             }
-            
+
             if (isset($filtrosSessao['skype'])) {
                 $wherex = $queryBuilder->expr()->orx();
                 $wherex->add($queryBuilder->expr()->like('r.skype', '?5'));
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(5, '%' . $filtrosSessao['skype'] . '%');
             }
-            
+
             if (isset($filtrosSessao['email'])) {
                 $wherex = $queryBuilder->expr()->orx();
                 $wherex->add($queryBuilder->expr()->like('r.email', '?6'));
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(6, '%' . $filtrosSessao['email'] . '%');
             }
-            
+
             if (isset($filtrosSessao['municipio'])) {
                 $queryBuilder->join("r.municipio", "et");
                 $wherex = $queryBuilder->expr()->orx();

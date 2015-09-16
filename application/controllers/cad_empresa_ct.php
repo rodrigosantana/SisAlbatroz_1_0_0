@@ -35,6 +35,7 @@ class Cad_empresa_ct extends MY_Controller {
 
     public function edita() {
         $empresa = null;
+        $municipios = $this->doctrine->em->getRepository('Municipio')->findAll();
 
         if ($this->input->get('id_empresa') && is_numeric($this->input->get('id_empresa'))) {
             $empresa = $this->doctrine->em->find('Cad_empresa', $this->input->get('id_empresa'));
@@ -44,7 +45,9 @@ class Cad_empresa_ct extends MY_Controller {
             show_error('unknown_registry_error_message');
         }
 
-        $this->load->view($this->viewPath . "/new", array("empresa" => $empresa));
+        $this->load->view($this->viewPath . "/new", array(
+           "municipios" => $municipios,
+           "empresa" => $empresa));
     }
 
 //--------------------------------------------------------------------------------------------------------------------//
@@ -73,7 +76,7 @@ class Cad_empresa_ct extends MY_Controller {
         $empresa->setCargo(null);
         $empresa->setTel(null);
         $empresa->setEmail(null);
-        
+
         if ($this->input->post('contato') && $this->input->post('contato') !== "") {
             $empresa->setContato($this->input->post('contato'));
         }
@@ -221,7 +224,7 @@ class Cad_empresa_ct extends MY_Controller {
                 $queryBuilder->andWhere($wherex);
                 $queryBuilder->setParameter(5, '%' . $filtrosSessao['email'] . '%');
             }
-            
+
             if (isset($filtrosSessao['contato'])) {
                 $wherex = $queryBuilder->expr()->orx();
                 $wherex->add($queryBuilder->expr()->like('r.contato', '?6'));

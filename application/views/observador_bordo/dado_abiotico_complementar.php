@@ -407,7 +407,7 @@
                 <div class="form-group">
                     <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_temperatura_ar" class="col-md-4 control-label lb_lance">Temperatura do ar (°C)</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_temperatura_ar" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][temperatura_ar]" value="<?php echo $objeto->getTemperaturaArFim() ?>">
+                        <input type="number" step="any" class="form-control" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_temperatura_ar" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][temperatura_ar]" value="<?php echo $objeto->getTemperaturaArFim() ?>">
                     </div>
                 </div>
             </div>
@@ -417,7 +417,7 @@
                 <div class="form-group">
                     <label for="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_temperatura_sup_mar" class="col-md-4 control-label lb_lance">Temperatura sup. mar (°C)</label>
                     <div class="col-md-8 div-help">
-                        <input type="number" class="form-control" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_temperatura_sup_mar" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][temperatura_sup_mar]" value="<?php echo $objeto->getTemperaturaSupMarFim() ?>">
+                        <input type="number" step="any" class="form-control" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_fim_temperatura_sup_mar" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][fim][temperatura_sup_mar]" value="<?php echo $objeto->getTemperaturaSupMarFim() ?>">
                     </div>
                 </div>
             </div>

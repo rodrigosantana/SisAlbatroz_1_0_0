@@ -23,7 +23,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="base" class="col-md-4 control-label">Município:</label>
+                            <label for="base" class="col-md-4 control-label">Município*</label>
                             <div class="col-md-8 div-help">
                                 <select class="select2" name="municipio" id="municipio">
                                     <option></option>
@@ -39,7 +39,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="end" class="col-md-4 control-label">Endereço:</label>
+                            <label for="end" class="col-md-4 control-label">Endereço</label>
                             <div class="col-md-8 div-help">
                                 <input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo $empresa->getEnd(); ?>">
                             </div>
@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="contato" class="col-md-4 control-label">Contato:</label>
+                            <label for="contato" class="col-md-4 control-label">Contato</label>
                             <div class="col-md-8 div-help">
                                 <input type="text" class="form-control" id="contato" name="contato" placeholder="Pessoa de contato na empresa" value="<?php echo $empresa->getContato(); ?>">
                             </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="cargo" class="col-md-4 control-label">Cargo:</label>
+                            <label for="cargo" class="col-md-4 control-label">Cargo</label>
                             <div class="col-md-8 div-help">
                                 <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Ex: RH, Segurança, Secretária" value="<?php echo $empresa->getCargo(); ?>">
                             </div>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="telefone" class="col-md-4 control-label">Telefone:</label>
+                            <label for="telefone" class="col-md-4 control-label">Telefone</label>
                             <div class="col-md-8 div-help">
                                 <input type="text" maxlength="11" class="form-control" id="telefone" name="telefone" value="<?php echo $empresa->getTel(); ?>">
                             </div>
@@ -77,7 +77,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="email" class="col-md-4 control-label">E-mail:</label>
+                            <label for="email" class="col-md-4 control-label">E-mail</label>
                             <div class="col-md-8 div-help">
                                 <input type="email" class="form-control" id="email" name="email" value="<?php echo $empresa->getEmail(); ?>">
                             </div>

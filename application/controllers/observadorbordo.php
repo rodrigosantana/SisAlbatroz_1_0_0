@@ -13,10 +13,10 @@ class ObservadorBordo extends MY_Controller {
         $this->boias = array();
 
         //Adicionar aqui o id das espécies que permitem a seleção de tipo de indivíduo, juvenil, adulto ou indefinido.
-        $this->especiesEspecificas = array(1,2);
+        $this->especiesEspecificas = array(4,5);
 
         parent::__construct();
-    }
+}
 
     public function access_map() {
         return array(
@@ -51,7 +51,7 @@ class ObservadorBordo extends MY_Controller {
 
         $this->formulario($objeto);
     }
-    
+
     public function visualiza() {
         $objeto = null;
 
@@ -291,19 +291,19 @@ class ObservadorBordo extends MY_Controller {
                         }
 
                         if (!empty($valueInicio['temperatura_ar'])) {
-                            $object->setTemperaturaArInicio((int)$valueInicio['temperatura_ar']);
+                            $object->setTemperaturaArInicio((double)$valueInicio['temperatura_ar']);
                         }
 
                         if (!empty($valueFim['temperatura_ar'])) {
-                            $object->setTemperaturaArFim((int)$valueFim['temperatura_ar']);
+                            $object->setTemperaturaArFim((double)$valueFim['temperatura_ar']);
                         }
 
                         if (!empty($valueInicio['temperatura_sup_mar'])) {
-                            $object->setTemperaturaSupMarInicio((int)$valueInicio['temperatura_sup_mar']);
+                            $object->setTemperaturaSupMarInicio((double)$valueInicio['temperatura_sup_mar']);
                         }
 
                         if (!empty($valueFim['temperatura_sup_mar'])) {
-                            $object->setTemperaturaSupMarFim((int)$valueFim['temperatura_sup_mar']);
+                            $object->setTemperaturaSupMarFim((double)$valueFim['temperatura_sup_mar']);
                         }
 
                         if (!empty($valueInicio['cobertura_ceu'])) {
@@ -589,7 +589,7 @@ class ObservadorBordo extends MY_Controller {
 
         $usuario = $this->doctrine->em->find("SystemUsers", $this->ezrbac->getCurrentUser()->id);
         $acao = 'salva';
-        
+
         if ($cruzeiro->getId() > 0) {
             $acao = 'edita';
             $cruzeiro->setDataAlteracao(new DateTime());
@@ -601,14 +601,14 @@ class ObservadorBordo extends MY_Controller {
 
         $this->doctrine->em->persist($cruzeiro);
         $this->doctrine->em->flush();
-        
+
         try {
             $userData = $this->session->all_userdata();
             $objeto = new LogSistema();
             $objeto->setDataHora(new DateTime());
             $objeto->setUsuario($usuario);
             $objeto->setController(get_class($this));
-            $objeto->setAcao($acao);        
+            $objeto->setAcao($acao);
             $objeto->setIp($userData["ip_address"]);
             $dadosRequisicao = $this->input->post();
             $objeto->setDadosRequisicao($dadosRequisicao);
@@ -620,7 +620,7 @@ class ObservadorBordo extends MY_Controller {
             show_error('log_system_error_message');
             return;
         }
-        
+
         $mensagem = 'Registro salvo com sucesso. (Código: ' . $cruzeiro->getId() . ')';
         if ($isEdita) {
             $this->session->set_flashdata(get_class($this) . '_mensagem', $mensagem);

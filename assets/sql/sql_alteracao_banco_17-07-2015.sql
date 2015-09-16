@@ -1,9 +1,9 @@
-﻿CREATE SEQUENCE entrevista_cais_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+CREATE SEQUENCE entrevista_cais_seq
+   START WITH 1
+   INCREMENT BY 1
+   NO MINVALUE
+   NO MAXVALUE
+   CACHE 1;
 
 CREATE SEQUENCE porto_seq
     START WITH 1

@@ -10,7 +10,7 @@
         <div class="panel panel-sisalbatroz">
             <div class="panel-heading"></div>
             <div class="panel-body">
-                
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="registro" class="col-md-4 control-label">Registro da Marinha *</label>
                             <div class="col-md-8 div-help">
-                                <input type="number" class="form-control" id="reg_marinha" name="reg_marinha" value="<?php echo $embarcacao->getRegMarinha(); ?>">
+                                <input type="text" class="form-control" id="reg_marinha" name="reg_marinha" value="<?php echo $embarcacao->getRegMarinha(); ?>">
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label for="rgp" class="col-md-4 control-label">Número do RGP *</label>
                             <div class="col-md-8 div-help">
-                                <input type="number" class="form-control" id="reg_mpa" name="reg_mpa" value="<?php echo $embarcacao->getRegMpa(); ?>">
+                                <input type="text" class="form-control" id="reg_mpa" name="reg_mpa" value="<?php echo $embarcacao->getRegMpa(); ?>">
                             </div>
                         </div>
                     </div>
@@ -86,9 +86,9 @@
                             <div class="col-md-8 div-help">
                                 <select class="select2" name="mat_casco" id="mat_casco">
                                     <option></option>
-                                    <option value ="aço" <?php echo $embarcacao->getMatCasco() == 'aço' ? 'selected' : '' ?>Aço</option>
-                                    <option value ="fibra_vidro" <?php echo $embarcacao->getMatCasco() == 'fibra_vidro' ? 'selected' : '' ?>>Fibra de Vidro</option>
-                                    <option value ="madeira" <?php echo $embarcacao->getMatCasco() == 'madeira' ? 'selected' : '' ?>>Madeira</option>
+                                    <option value ="aço" <?php echo $embarcacao->getMatCasco() == 'Aço' ? 'selected' : '' ?>>Aço</option>
+                                    <option value ="fibra_vidro" <?php echo $embarcacao->getMatCasco() == 'Fibra_vidro' ? 'selected' : '' ?>>Fibra de Vidro</option>
+                                    <option value ="madeira" <?php echo $embarcacao->getMatCasco() == 'Madeira' ? 'selected' : '' ?>>Madeira</option>
                                 </select>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                             <div class="col-md-8 div-help">
                                 <select class="select2" name="propulsao" id="propulsao">
                                     <option></option>
-                                    <option value ="motor" <?php echo $embarcacao->getPropulsao() == 'motor' ? 'selected' : '' ?>>Motor</option>
+                                    <option value ="motor" <?php echo $embarcacao->getPropulsao() == 'Motor' ? 'selected' : '' ?>>Motor</option>
                                 </select>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                                 <select class="select2" name="municipio" id="municipio">
                                     <option></option>
                                     <?php foreach ($municipios as $municipio) :?>
-                                    <?php $selected = (!is_null($embarcacao->getMunicipio()) && $embarcacao->getMunicipio()->getId() === $municipio->getId()) ? 'selected' : '' ?>
+                                    <?php $selected = (!is_null($embarcacao->getMunicipio()) && $embarcacao->getMunicipio()->getId() == $municipio->getId()) ? 'selected' : '' ?>
                                     <option value ="<?php echo $municipio->getId()?>" <?php echo $selected?>><?php echo $municipio->__toString()?></option>
                                     <?php endforeach;?>
                                 </select>

@@ -59,7 +59,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            <label class="col-md-4 control-label">Tipo de petrechos utilizados para a viagem:</label>
+            <label class="col-md-4 control-label">Tipos de petrechos utilizados para a viagem:</label>
             <div class="col-md-8 div-help">
                 <div class="col-md-2 checkbox"><label><input type="checkbox" name="petrecho_linha_mao[tipo_petrecho_utilizado][]" value="<?php echo Utils::PARGUEIRA ?>" <?php echo in_array(Utils::PARGUEIRA, $petrechoLinhaMao->getTipoPetrechoUtilizado())? 'checked' : '' ?>>Pargueira</label></div>
                 <div class="col-md-3 checkbox"><label><input type="checkbox" name="petrecho_linha_mao[tipo_petrecho_utilizado][]" value="<?php echo Utils::LINHA_DE_MAO ?>" <?php echo in_array(Utils::LINHA_DE_MAO, $petrechoLinhaMao->getTipoPetrechoUtilizado()) ? 'checked' : '' ?>>Linha de mão</label></div>
