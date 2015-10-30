@@ -135,9 +135,9 @@ class Mapa extends MY_Controller {
                                 '<strong>Código:</strong> '||mb_lance.mb_geral||'<br>'||
                                 '<strong>Embarcação:</strong> '||cad_embarcacao.nome||'<br>'||
                                 '<strong>Mestre:</strong> '||cad_mestre.nome||'<br>'||
-                                '<strong>Petrecho:</strong> '||(case  when mb_geral.petrecho = 1 then 'Espinhel de Superfície' when mb_geral.petrecho = 2 then 'Espinhel de Fundo' end )||'<br>'||
+                                '<strong>Petrecho:</strong> '||(case  when mb_geral.petrecho = 1 then 'Espinhel de Superfície' when mb_geral.petrecho = 2 then 'Espinhel de Fundo' else 'outro' end )||'<br>'||
                                 '<strong>Lançamento #'||mb_lance.lance||':</strong> Latitude: '||st_y(mb_lance.coordenada)||' Longitude: '||st_x(mb_lance.coordenada)||'<br>'||
-                                '\"}}' 
+                                '\"}}'
                                  AS json
                             FROM
                                     mb_lance	     
@@ -145,9 +145,9 @@ class Mapa extends MY_Controller {
                             LEFT JOIN cad_embarcacao on cad_embarcacao.id_embarcacao = mb_geral.embarcacao
                             LEFT JOIN cad_mestre ON cad_mestre.id_mestre = mb_geral.mestre
                             WHERE mb_lance.coordenada IS NOT NULL AND (SELECT count(*) FROM mb_captura WHERE mb_captura.id_lance = mb_lance.id_lance) = 0";
-                    
-                    
-                    $stmt = $conn->executeQuery($sql);                    
+
+
+                    $stmt = $conn->executeQuery($sql);
                     $stmt->execute();                    
                     $retorno = $this->getDataFromSQL($stmt, $value);
                     
@@ -160,7 +160,7 @@ class Mapa extends MY_Controller {
                                 '<strong>Código:</strong> '||mb_lance.mb_geral||'<br>'||
                                 '<strong>Embarcação:</strong> '||cad_embarcacao.nome||'<br>'||
                                 '<strong>Mestre:</strong> '||cad_mestre.nome||'<br>'||
-                                '<strong>Petrecho:</strong> '||(case  when mb_geral.petrecho = 1 then 'Espinhel de Superfície' when mb_geral.petrecho = 2 then 'Espinhel de Fundo' end )||'<br>'||
+                                '<strong>Petrecho:</strong> '||(case  when mb_geral.petrecho = 1 then 'Espinhel de Superfície' when mb_geral.petrecho = 2 then 'Espinhel de Fundo' else 'outro' end )||'<br>'||
                                 '<strong>Lançamento #'||mb_lance.lance||':</strong> Latitude: '||st_y(mb_lance.coordenada)||' Longitude: '||st_x(mb_lance.coordenada)||'<br>'||
                                 '<strong>Aves capturadas:</strong><br>'||
                                 (
@@ -170,7 +170,7 @@ class Mapa extends MY_Controller {
                                         FROM 
                                             mb_captura 
                                         LEFT JOIN 
-                                            especie on especie.id = mb_captura.id_ave
+                                            cad_especie especie on especie.id = mb_captura.id_ave
                                         WHERE 
                                             mb_captura.id_lance = mb_lance.id_lance 
                                         AND 
@@ -207,11 +207,11 @@ class Mapa extends MY_Controller {
                                 '\"}}' 
                                  AS json
 
-                        FROM dados_abioticos
+                        FROM cr_dados_abioticos dados_abioticos
                         LEFT JOIN cruzeiro ON cruzeiro.id = dados_abioticos.cruzeiro 
                         LEFT JOIN cad_embarcacao ON cad_embarcacao.id_embarcacao = cruzeiro.embarcacao
                         LEFT JOIN cad_observador ON cad_observador.id_observ = cruzeiro.observador
-                        LEFT JOIN dados_abioticos_complementar ON dados_abioticos_complementar.id = dados_abioticos.dado_lancamento
+                        LEFT JOIN cr_dados_abioticos_complementar dados_abioticos_complementar ON dados_abioticos_complementar.id = dados_abioticos.dado_lancamento
                         WHERE dados_abioticos_complementar.coordenada_inicio IS NOT null";
                     
                     $stmt = $conn->executeQuery($sql);                    
@@ -235,9 +235,9 @@ class Mapa extends MY_Controller {
                                     SELECT 
                                         '<smal style=''font-size: 13px;''><i>'||especie.nome_cientifico|| '</i>' || ' ('|| especie.nome_comum_br ||')</smal>' 
                                     FROM 
-                                        captura_incidental_especie 
+                                        cr_captura_incidental_especie captura_incidental_especie
                                     LEFT JOIN 
-                                        especie on especie.id = captura_incidental_especie.especie
+                                        cad_especie especie on especie.id = captura_incidental_especie.especie
                                     WHERE 
                                         captura_incidental_especie.captura_incidental = captura_incidental.id 
                                     AND 
@@ -249,11 +249,11 @@ class Mapa extends MY_Controller {
                             ||'\"}}' 
                              AS json
 
-                    FROM captura_incidental
+                    FROM cr_captura_incidental captura_incidental
                     LEFT JOIN cruzeiro ON cruzeiro.id = captura_incidental.cruzeiro 
                     LEFT JOIN cad_embarcacao ON cad_embarcacao.id_embarcacao = cruzeiro.embarcacao
                     LEFT JOIN cad_observador ON cad_observador.id_observ = cruzeiro.observador
-                    LEFT JOIN dados_abioticos ON dados_abioticos.id = captura_incidental.lance
+                    LEFT JOIN cr_dados_abioticos dados_abioticos ON dados_abioticos.id = captura_incidental.lance
                     WHERE captura_incidental.coordenada IS NOT null";
                     
                     $stmt = $conn->executeQuery($sql);                    

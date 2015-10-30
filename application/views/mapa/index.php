@@ -204,7 +204,7 @@
                 $.ajax({
                     type: "POST",
                     cache: false,
-                    url: '<?php echo site_url('mapa/getdata'); ?>',
+                    url: '<?php echo site_url('mapa/getdata')."?t=".time(); ?>',
                     dataType: "json",
                     data: {data: elementValue},
                     success: function(res) {
@@ -214,6 +214,7 @@
                         if (res.data) {
                             var layers = res.data;
                             $.each(layers, function (i, value){
+                                console.log(value.data);
                                 try {
                                     var vectorLayer = new ol.layer.Vector({
                                         source: new ol.source.Vector({

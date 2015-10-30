@@ -53,7 +53,8 @@ $db['default']['username'] = 'postgres';
 //$db['default']['password'] = 'zisdev';
 $db['default']['password'] = 'oceano';
 $db['default']['database'] = 'sisalbatroz';
-$db['default']['port'] = '5432';
+// Porta alterada de 5432 para 5431 *AS*
+$db['default']['port'] = '5431';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
