@@ -144,8 +144,8 @@
 
 
         <div class="col-sm-12 col-md-12" style="margin-bottom: 20px">
-            <button type="button" id="btnSub" name="btnSub" class="btn btn-primary btn-lg btn_sub" onclick="return validation('Cad_embarcacao_ct', this)">Salvar</button>
-            <a href="<?php echo site_url('Cad_embarcacao_ct') ?>" class="btn btn-default btn-lg btn_sub">Cancelar</a>
+            <button type="button" id="btnSub" name="btnSub" class="btn btn-primary btn-lg btn_sub" onclick="return validation('cad_embarcacao_ct', this)">Salvar</button>
+            <a href="<?php echo site_url('cad_embarcacao_ct') ?>" class="btn btn-default btn-lg btn_sub">Cancelar</a>
         </div>
     </form>
 </div>
