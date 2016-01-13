@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="mestre" class="col-md-3 control-label">Nome *</label>
+                            <label for="mestre" class="col-md-3 control-label">Nome</label>
                             <div class="col-md-9 div-help">
                                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do mestre" value="<?php echo $mestre->getNome(); ?>">
                             </div>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="apelido" class="col-md-3 control-label">Apelido</label>
+                            <label for="apelido" class="col-md-3 control-label">Apelido *</label>
                             <div class="col-md-9 div-help">
                                 <input type="text" class="form-control" id="apelido" name="apelido" placeholder="Caso não tenha, repetir no nome" value="<?php echo $mestre->getApelido(); ?>">
                             </div>
