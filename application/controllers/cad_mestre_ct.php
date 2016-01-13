@@ -84,8 +84,8 @@ class Cad_mestre_ct extends MY_Controller {
 //--------------------------------------------------------------------------------------------------------------------//
 
     public function validation($returnError = false) {
-        $this->form_validation->set_rules("nome", "Nome", "trim|required|max_length[100]");
-        $this->form_validation->set_rules("apelido", "Apelido", "trim|max_length[100]");
+        $this->form_validation->set_rules("nome", "Nome", "trim|max_length[100]");
+        $this->form_validation->set_rules("apelido", "Apelido", "trim|required|max_length[100]");
         $this->form_validation->set_rules("telefone", "Telefone", "trim|max_length[11]");
         $this->form_validation->set_rules("email", "E-mail", "trim|valid_email");
 
