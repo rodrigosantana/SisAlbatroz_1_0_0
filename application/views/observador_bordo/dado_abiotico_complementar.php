@@ -131,6 +131,7 @@
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_velocidade_vento" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][inicio][velocidade_vento]">
                             <option></option>
+                            <option value="0" <?php echo $objeto->getVelocidadeVentoInicio() === 0 ? 'selected' : ''?>>0</option>
                             <option value="1" <?php echo $objeto->getVelocidadeVentoInicio() === 1 ? 'selected' : ''?>>1</option>
                             <option value="2" <?php echo $objeto->getVelocidadeVentoInicio() === 2 ? 'selected' : ''?>>2</option>
                             <option value="3" <?php echo $objeto->getVelocidadeVentoInicio() === 3 ? 'selected' : ''?>>3</option>
@@ -156,6 +157,7 @@
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_categoria_mar" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][inicio][categoria_mar]">
                             <option></option>
+                            <option value="0" <?php echo $objeto->getCategoriaMarInicio() === 0 ? 'selected' : ''?>>0</option>
                             <option value="1" <?php echo $objeto->getCategoriaMarInicio() === 1 ? 'selected' : ''?>>1</option>
                             <option value="2" <?php echo $objeto->getCategoriaMarInicio() === 2 ? 'selected' : ''?>>2</option>
                             <option value="3" <?php echo $objeto->getCategoriaMarInicio() === 3 ? 'selected' : ''?>>3</option>
@@ -202,7 +204,8 @@
                     <div class="col-md-8 div-help">
                         <select class="select2" style="width: 100%" id="dado_abiotico_<?php echo $numero; ?>_<?php echo $nome; ?>_inicio_cobertura_ceu" name="dado_abiotico[<?php echo $numero; ?>][<?php echo $nome; ?>][inicio][cobertura_ceu]">
                             <option></option>
-                            <option value="1" <?php echo $objeto->getCoberturaCeuInicio() === 1 ? 'selected' : ''?>>1/8 - Céu totalmente limpo</option>
+                             <option value="0" <?php echo $objeto->getCoberturaCeuInicio() === 0 ? 'selected' : ''?>>0/8 - Céu totalmente limpo</option>
+                            <option value="1" <?php echo $objeto->getCoberturaCeuInicio() === 1 ? 'selected' : ''?>>1/8</option>
                             <option value="2" <?php echo $objeto->getCoberturaCeuInicio() === 2 ? 'selected' : ''?>>2/8</option>
                             <option value="3" <?php echo $objeto->getCoberturaCeuInicio() === 3 ? 'selected' : ''?>>3/8</option>
                             <option value="4" <?php echo $objeto->getCoberturaCeuInicio() === 4 ? 'selected' : ''?>>4/8</option>
